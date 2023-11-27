@@ -32,14 +32,22 @@ Hate working out alone? Make new friends while playing your favorite sports with
   - ☑️ Users
   - ☑️ Events
 - ✅ Wiki README
+- ☑️ Splash Page
+  - ☑️ User Log In
+  - ☑️ User Sign Up
 
 ### Day 2: Tuesday 11/28
 - ☑️ Events Index
+  - ☑️ Filter Community Bar
+  - ☑️ Filter Sidebar
+  - ☑️ Map View
 - ☑️ Events Show
 - ☑️ User Profile
+- ☑️ NavBar
 
 ### Day 3: Wednesday 11/29
-- ☑️ 
+- ☑️ Events Create
+- ☑️ Google Maps API Integration
 
 ### Day 4: Thursday 11/30
 - ☑️ 
