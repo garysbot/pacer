@@ -4,6 +4,7 @@ Hate working out alone? Make new friends while playing your favorite sports with
 <br>(🚧 Work in Progress! 🚧)<br>
 [Visit the Pacer Live Demo]()
 <br>(🚧 Work in Progress! 🚧)
+<br>
 
 ## Features
 1. User Auth
@@ -15,12 +16,16 @@ Hate working out alone? Make new friends while playing your favorite sports with
 6. Social Metrics & Stats for Events
 7. Friends & DM's
 8. Events Posts
+<br>
+
 
 ## Tech Stack
 - MongoDB
 - ExpressJS
 - React.js
 - Node.js
+
+<br>
 
 ## Timeline
 
