@@ -32,4 +32,20 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.post('/', requireUser, validateEventInput, async (req, res, next) => {
+  try {
+    const newEvent = new Event({
+      text: req.body.text,
+      author: req.user._id
+    });
+
+    let event = await newEvent.save();
+    event = await event.populate('author', '_id username');
+    return res.json(event);
+  }
+  catch(err) {
+    next(err);
+  }
+});
+
 module.exports = router;
