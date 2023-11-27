@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 
-function SignupForm () {
+function SignupForm ({ onSuccess }) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -48,6 +48,7 @@ function SignupForm () {
     };
 
     dispatch(signup(user)); 
+    onSuccess();
   }
 
   return (
