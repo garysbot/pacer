@@ -41,8 +41,6 @@ app.use(
   })
 );
 
-
-
 app.use('/api/users', usersRouter);
 app.use('/api/events', eventsRouter);
 app.use('/api/csrf', csrfRouter);

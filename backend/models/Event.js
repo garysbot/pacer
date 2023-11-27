@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const eventSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   eventName:{ 
-    type:String,
+    type: String,
     required: true
   },
   description: {
@@ -19,17 +20,47 @@ const eventSchema = new Schema({
     required: true
   },
   dateTime: {
+    type: Date,
+    required: true
+  },
+  difficulty: {
     type: String,
     required: true
   },
-  type: String,
-  difficulty: String,
-  maxGroupSize: Number,
-  attending: Array,
-  longitude: Number,
-  latitude: Number
-
-
+  eventType: {
+    type: String,
+    required: true
+  },
+  maxGroupSize: {
+    type: Number,
+    required: true
+  },
+  attendees: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
+  ],
+  maybes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
+  ],
+  longitude: {
+    type: Number,
+    required: true
+  },
+  latitude: {
+    type: Number,
+    required: true
+  },
+  eventPrivacy: {
+    type: Boolean,
+    required: true
+  }
 }, {
   timestamps: true
 });
