@@ -1,17 +1,17 @@
 .section-container {
   width: 100%;
-  height: 22rem;
+  height: 28rem;
   /* Temp Border For Positioning */
-  /* border-width: 1px; */
-  /* border-color: red; */
-  /* border-style: solid; */
+  border-width: 1px;
+  border-color: red;
+  border-style: solid;
   padding: 2rem;
 }
 
 .video-background {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 28rem;
   overflow: hidden;
 }
 
@@ -25,4 +25,13 @@
   width: auto;
   height: auto;
   z-index: -1;
+}
+
+.video-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #f4FFFD
 }
