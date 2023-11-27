@@ -43,8 +43,8 @@ router.post('/events', requireUser, validateEventInput, async (req, res, next) =
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: req.body.lng,
-      latitude: req.body.lat
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     });
 
     let event = await newEvent.save();
