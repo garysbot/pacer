@@ -10,7 +10,8 @@
 }
 
 html {
-  background: radial-gradient(circle, rgba(81,187,254,1) 0%, rgba(250,76,76,1) 100%); 
+  background: radial-gradient(circle, rgba(81,187,254,1) 0%, rgba(250,76,76,1) 100%);
+  /* color: white;  */
 }
 
 h1 {
@@ -55,21 +56,17 @@ button {
   margin: 0.25rem;
   border-radius: 3rem;
   border-style: solid;
-  border-color: #89FC00;
+  border-color: #F4FFFD;
   border-width: 3px;
   background-color: transparent;
-  color: #89FC00;
+  color: #F4FFFD;
   transition: border-color 0.3s ease, color 0.3s ease;
-  font-family: 'Inter';
-  font-weight: 400;
+  font-family: 'Lexend';
 }
 
 button:hover {
-  border-color: white;
-  color: white;
-}
-
-button:hover {
+  border-color: #89FC00;
+  color: #89FC00;
   box-shadow: none;
 }
 

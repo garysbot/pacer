@@ -15,9 +15,10 @@ function SplashPage() {
         </div>
 
         <div className='section-container'>
-          <h1>Hello from MainPage</h1>
-          <h3>Subhead</h3>
-          <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
+          <div className='section-content'>
+            <h1>Find your workout buddy</h1>
+            <p>With communities across running, cycling, swimming and more.</p>
+          </div>
         </div>
 
         <div className='section-container'>

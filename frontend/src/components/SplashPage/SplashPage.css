@@ -1,13 +1,3 @@
-.section-container {
-  width: 100%;
-  height: 28rem;
-  /* Temp Border For Positioning */
-  border-width: 1px;
-  border-color: red;
-  border-style: solid;
-  padding: 2rem;
-}
-
 .video-background {
   position: relative;
   width: 100%;
@@ -34,4 +24,24 @@
   justify-content: center;
   height: 100%;
   color: #f4FFFD
+}
+
+.section-container {
+  width: 100%;
+  height: 28rem;
+  /* Temp Border For Positioning */
+  border-width: 1px;
+  border-color: red;
+  border-style: solid;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}  
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
