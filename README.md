@@ -34,7 +34,9 @@ Hate working out alone? Make new friends while playing your favorite sports with
 - ✅ Wiki README
 
 ### Day 2: Tuesday 11/28
-- ☑️ 
+- ☑️ Events Index
+- ☑️ Events Show
+- ☑️ User Profile
 
 ### Day 3: Wednesday 11/29
 - ☑️ 
