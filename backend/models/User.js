@@ -19,7 +19,7 @@ const userSchema = new Schema({
     required: true
   },
   dateOfBirth: {
-    type: String,
+    type: Date,
     required: true
   },
   gender: {
@@ -27,14 +27,26 @@ const userSchema = new Schema({
     required: true
   },
   height: {
-    type: String,
+    type: Integer,
     required: false
   },
   weight: {
-    type: String,
+    type: Integer,
     required: false
   },
   friends: {
+    type: Array,
+    required: true
+  },
+  primarySport: {
+    type: Object,
+    required: true
+  },
+  secondarySports: {
+    type: Array,
+    required: false
+  },
+  eventsAttended: {
     type: Array,
     required: true
   }
