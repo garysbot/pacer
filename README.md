@@ -6,6 +6,7 @@ Hate working out alone? Make new friends while playing your favorite sports with
 <br>(🚧 Work in Progress! 🚧)
 <br>
 
+
 ## Features
 1. User Auth
 2. Events (CRUD)
