@@ -5,7 +5,7 @@ import { Switch } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes.js';
 import NavBar from './components/NavBar/NavBar';
 
-import Splash from './components/Splash/Splash.js';
+import SplashPage from './components/SplashPage/SplashPage.js';
 import Tweets from './components/Tweets/TweetBox.js';
 import Profile from './components/Profile/Profile';
 import TweetCompose from './components/Tweets/TweetCompose';
@@ -24,7 +24,7 @@ function App() {
     <>
       <NavBar />
       <Switch>
-        <AuthRoute exact path="/" component={Splash} />
+        <AuthRoute exact path="/" component={SplashPage} />
 
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}

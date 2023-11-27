@@ -46,15 +46,15 @@ function NavBar () {
 
     if (loggedIn) {
       return (
-        <div className="links-nav">
+        <nav className='navbar'>
           <Link to='/'><h1>Pacer</h1></Link>
           <Link to={'/discover'}><h2>Discover</h2></Link>
           <span onClick={logoutUser} className="auth-buttons">Logout</span>
-        </div>
+        </nav>
       );
     } else {
       return (
-        <div className="links-auth">
+        <nav className='navbar'>
           <Link to='/'><h1>Pacer</h1></Link>
           <Link to={'/discover'}><h2>Discover</h2></Link>
           <div id="nav-sign-in-and-sign-up">
@@ -70,7 +70,7 @@ function NavBar () {
               <LoginForm onSuccess={handleSignInSuccess} />
             </Modal>
           </div>
-        </div>
+        </nav>
       );
     }
   }
