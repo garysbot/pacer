@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
+import "./NavBar.css"
+import SignupForm from '../SessionForms/SignupForm';
+import LoginForm from '../SessionForms/LoginForm';
+import { useState } from 'react';
+import Modal from '../../context/Modal';
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -11,21 +16,60 @@ function NavBar () {
       dispatch(logout());
   }
 
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false);
+
+  const openSignUpModal = () => {
+    setShowSignUpModal(true);
+  };
+
+  const closeSignUpModal = () => {
+    setShowSignUpModal(false);
+  };
+
+  const openSignInModal = () => {
+    setShowSignInModal(true);
+  };
+
+  const closeSignInModal = () => {
+    setShowSignInModal(false);
+  };
+
   const getLinks = () => {
+    const handleSignUpSuccess = () => {
+      closeSignUpModal();
+    };
+  
+    const handleSignInSuccess = () => {
+      closeSignInModal();
+    };
+
     if (loggedIn) {
       return (
         <div className="links-nav">
-          <Link to={'/tweets'}>All Tweets</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link>
-          <button onClick={logoutUser}>Logout</button>
+          <Link to='/'><h1>Pacer</h1></Link>
+          <Link to={'/discover'}><h2>Discover</h2></Link>
+          <span onClick={logoutUser} className="auth-buttons">Logout</span>
         </div>
       );
     } else {
       return (
         <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+          <Link to='/'><h1>Pacer</h1></Link>
+          <Link to={'/discover'}><h2>Discover</h2></Link>
+          <div id="nav-sign-in-and-sign-up">
+            <span onClick={openSignUpModal} className="auth-buttons">Sign Up</span>
+            <span>&nbsp;/&nbsp;</span>
+            <span onClick={openSignInModal} className="auth-buttons">Log In</span>
+
+            <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+              <SignupForm onSuccess={handleSignUpSuccess} />
+            </Modal>
+
+            <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
+              <LoginForm onSuccess={handleSignInSuccess} />
+            </Modal>
+          </div>
         </div>
       );
     }
@@ -33,8 +77,9 @@ function NavBar () {
 
   return (
     <>
-      <h1>Chirper</h1>
-      { getLinks() }
+      <div id="nav">
+        { getLinks() }
+      </div>
     </>
   );
 }
