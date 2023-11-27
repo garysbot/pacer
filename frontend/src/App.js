@@ -9,6 +9,7 @@ import Splash from './components/Splash/Splash.js';
 import Tweets from './components/Tweets/TweetBox.js';
 import Profile from './components/Profile/Profile';
 import TweetCompose from './components/Tweets/TweetCompose';
+import Discovery from './components/Discovery.js';
 
 import { getCurrentUser } from './store/session';
 
@@ -25,7 +26,7 @@ function App() {
       <NavBar />
       <Switch>
         <AuthRoute exact path="/" component={Splash} />
-
+        <AuthRoute exact path="/discovery" component={Discovery}/>
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
         {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}

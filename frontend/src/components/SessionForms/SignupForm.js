@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function SignupForm ({ onSuccess }) {
+  const history = useHistory()
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [dateOfBirth, setDateOfBirth] = useState()
+  const [gender, setGender] = useState()
+  const [primarySport, setPrimarySport] = useState()
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -42,21 +49,42 @@ function SignupForm ({ onSuccess }) {
   const handleSubmit = e => {
     e.preventDefault();
     const user = {
+      firstName,
+      lastName,
+      dateOfBirth,
+      primarySport,
+      gender,
       email,
       username,
       password
     };
-
+    console.log(user)
+    debugger
     dispatch(signup(user)); 
     onSuccess();
+    history.push("/discovery")
   }
 
   return (
     <form className="session-form" onSubmit={handleSubmit}>
       <h2>Sign Up Form</h2>
       <div className="errors">{errors?.email}</div>
+      <div className='firstlast name'>
+        <label>
+          <input type='text'
+            placeholder='First Name'
+            onChange={(e)=>setFirstName(e.target.value)}
+          />
+        </label>
+        <label>
+          <input type='text'
+            placeholder='Last Name'
+            onChange={(e)=>setLastName(e.target.value)}
+          />
+        </label>
+      </div>
       <label>
-        <span>Email</span>
+        {/* <span>Email</span> */}
         <input type="text"
           value={email}
           onChange={update('email')}
@@ -65,7 +93,7 @@ function SignupForm ({ onSuccess }) {
       </label>
       <div className="errors">{errors?.username}</div>
       <label>
-        <span>Username</span>
+        {/* <span>Username</span> */}
         <input type="text"
           value={username}
           onChange={update('username')}
@@ -74,7 +102,7 @@ function SignupForm ({ onSuccess }) {
       </label>
       <div className="errors">{errors?.password}</div>
       <label>
-        <span>Password</span>
+        {/* <span>Password</span> */}
         <input type="password"
           value={password}
           onChange={update('password')}
@@ -85,13 +113,30 @@ function SignupForm ({ onSuccess }) {
         {password !== password2 && 'Confirm Password field must match'}
       </div>
       <label>
-        <span>Confirm Password</span>
+        {/* <span>Confirm Password</span> */}
         <input type="password"
           value={password2}
           onChange={update('password2')}
           placeholder="Confirm Password"
         />
       </label>
+      <section className='dateOfBirth'>
+        <input type='date'
+          onChange={(e)=>setDateOfBirth(e.target.value)}
+        />
+      </section>
+      <section className='gender'>
+        Male
+        <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
+        Female
+        <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
+      </section>
+      <section className='primary sport'>
+        <input type='text'
+          onChange={(e)=>setPrimarySport(e.target.value)}
+          placeholder='Primary Sport'
+        />
+      </section>
       <input
         type="submit"
         value="Sign Up"
