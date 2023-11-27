@@ -34,9 +34,9 @@ Hate working out alone? Make new friends while playing your favorite sports with
 - ✅ User Auth
   - ✅ Frontend
   - ☑️ Backend
-- ☑️ Database Tables
-  - ☑️ Users
-  - ☑️ Events
+- ✅ Database Tables
+  - ✅ Users
+  - ✅ Events
 - ✅ Wiki README
 - ✅ Splash Page
   - ✅ User Log In
