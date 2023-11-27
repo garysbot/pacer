@@ -1,8 +1,88 @@
 /* TODO Add site wide styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Lexend:wght@700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+html {
+  background: radial-gradient(circle, rgba(81,187,254,1) 0%, rgba(250,76,76,1) 100%); 
+}
+
+h1 {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1rem;
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+p {
+  font-size: 1rem;
+  font-family: 'Inter';
+  font-weight: 300;
+}
+
+span {
+  font-size: 1rem;
+  font-family: 'Inter';
+  font-weight: 300;
+}
+
+footer {
+  font-size: 1rem;
+  font-family: 'Inter';
+  font-weight: 300;
+}
+
+button {
+  width: 6rem;
+  height: 2rem;
+  margin: 0.25rem;
+  border-radius: 3rem;
+  border-style: solid;
+  border-color: #89FC00;
+  border-width: 3px;
+  background-color: transparent;
+  color: #89FC00;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+button:hover {
+  border-color: white;
+  color: white;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
 form > .errors {
   color: red;
   font-size: 0.875em;
   height: 15px;
   display: flex;
   align-items: center;
+}
+
+a {
+ color: white;
+ text-decoration: none;
+ cursor: pointer; 
 }

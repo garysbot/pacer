@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { logout } from '../../store/session';
-import "./NavBar.css"
 import SignupForm from '../SessionForms/SignupForm';
 import LoginForm from '../SessionForms/LoginForm';
-import { useState } from 'react';
 import Modal from '../../context/Modal';
+import "./NavBar.css"
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
@@ -18,6 +18,7 @@ function NavBar () {
 
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [navOpacity, setNavOpacity] = useState(1);
 
   const openSignUpModal = () => {
     setShowSignUpModal(true);
@@ -35,33 +36,44 @@ function NavBar () {
     setShowSignInModal(false);
   };
 
-  const getLinks = () => {
-    const handleSignUpSuccess = () => {
-      closeSignUpModal();
-    };
+  const handleSignUpSuccess = () => {
+    closeSignUpModal();
+  };
+
+  const handleSignInSuccess = () => {
+    closeSignInModal();
+  };
+
+  const handleScroll = () => {
+    const newOpacity = Math.max(0.75 - window.scrollY / window.innerHeight, 0);
+    setNavOpacity(newOpacity);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   
-    const handleSignInSuccess = () => {
-      closeSignInModal();
-    };
-
-    if (loggedIn) {
-      return (
-        <div className="links-nav">
+  return (
+    <>
+      <div className='nav-container'>
+        <div className='navbar' style={{ backgroundColor: `rgba(233, 88, 95, ${navOpacity})` }}>
+          {/* Pacer Logo Home Link */}
           <Link to='/'><h1>Pacer</h1></Link>
           <Link to={'/discover'}><h2>Discover</h2></Link>
-          <span onClick={logoutUser} className="auth-buttons">Logout</span>
-        </div>
-      );
-    } else {
-      return (
-        <div className="links-auth">
-          <Link to='/'><h1>Pacer</h1></Link>
-          <Link to={'/discover'}><h2>Discover</h2></Link>
-          <div id="nav-sign-in-and-sign-up">
-            <span onClick={openSignUpModal} className="auth-buttons">Sign Up</span>
-            <span>&nbsp;/&nbsp;</span>
-            <span onClick={openSignInModal} className="auth-buttons">Log In</span>
-
+          <div id="nav-auth">
+            {
+              loggedIn ? (
+                <>
+                  <button onClick={logoutUser} className='auth-buttons'>Logout</button>
+                </>
+              ) : (
+                <>
+                  <button onClick={openSignUpModal} className="auth-buttons">SIGN UP</button>
+                  <button onClick={openSignInModal} className="auth-buttons">LOGIN</button>
+                </>
+              )
+            }
             <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
               <SignupForm onSuccess={handleSignUpSuccess} />
             </Modal>
@@ -71,14 +83,6 @@ function NavBar () {
             </Modal>
           </div>
         </div>
-      );
-    }
-  }
-
-  return (
-    <>
-      <div id="nav">
-        { getLinks() }
       </div>
     </>
   );
