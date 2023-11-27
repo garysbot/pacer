@@ -49,6 +49,10 @@ const userSchema = new Schema({
   eventsAttended: {
     type: Array,
     required: true
+  },
+  userPrivacy: {
+    type: Boolean,
+    required: true
   }
 }, {
   timestamps: true

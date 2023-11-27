@@ -27,6 +27,10 @@ const validateRegisterInput = [
   check('primarySport')
     .exists({ checkFalsy: true })
     .withMessage('Must select a Primary Sport'),
+  check('eventPrivacy')
+    .exists({ checkFalsy: true })
+    .isBoolean(),
+  
     
   handleValidationErrors
 ];
