@@ -27,11 +27,11 @@ const userSchema = new Schema({
     required: true
   },
   height: {
-    type: Integer,
+    type: Number,
     required: false
   },
   weight: {
-    type: Integer,
+    type: Number,
     required: false
   },
   friends: {
