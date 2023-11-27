@@ -24,10 +24,10 @@ const eventSchema = new Schema({
   },
   type: String,
   difficulty: String,
-  maxGroupSize: Integer,
+  maxGroupSize: Number,
   attending: Array,
-  longitude: Integer,
-  latitude: Integer
+  longitude: Number,
+  latitude: Number
 
 
 }, {
