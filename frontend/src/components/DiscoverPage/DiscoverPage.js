@@ -8,8 +8,7 @@ export default function DiscoverPage(props){
     const [filterContainerOpen, setFilterContainerOpen] = useState(false);
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
-    const events = Object.values(eventsObj)
-
+    const events = Object.values(eventsObj);
     useEffect(() => {
         dispatch(fetchEvents());
     }, [dispatch])
@@ -40,35 +39,37 @@ export default function DiscoverPage(props){
                             events.map(event =>    
                                 (
                                     <>
-                                        <p>event.name</p>
+                                        <p></p>
+
+                                        <div className="event-container">
+                                            <div className="event-content">
+                                                <div className="event-header">
+                                                    <h3>{event.eventName}</h3>
+                                                    <div className="event-icons">
+                                                        <p className="sport-label">🏃🏻‍♂️</p>
+                                                    </div>
+                                                </div>
+                
+                                                <div className="date-time-location">
+                                                    <p>{event.dateTime}</p>
+                                                    <p>{event.locationName}</p>
+                                                    <p>{event.difficulty}</p>
+                                                    <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
+                                                </div>
+                                                <div className="event-description">
+                                                    {event.description}
+                                                </div>
+                                            </div>
+                                            
+                                            <div className="event-mini-map-container">
+                                                <img src='/static/temp-map.png' alt='map' />                            
+                                            </div>
+                                        </div>
                                     </>
                                 )
                             )
                         }
-                        <div className="event-container">
-                            <div className="event-content">
-                                <div className="event-header">
-                                    <h3>Event Name</h3>
-                                    <div className="event-icons">
-                                        <p className="sport-label">🏃🏻‍♂️</p>
-                                    </div>
-                                </div>
- 
-                                <div className="date-time-location">
-                                    <p>Tuesday 11/28/23</p>
-                                    <p>Prospect Park</p>
-                                    <p>Expert</p>
-                                    <p>08 / 12 Attendees</p>
-                                </div>
-                                <div className="event-description">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                </div>
-                            </div>
-                            
-                            <div className="event-mini-map-container">
-                                <img src='/static/temp-map.png' alt='map' />                            
-                            </div>
-                        </div>
+                        
 
 
 
