@@ -1,0 +1,77 @@
+.discover-parent-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  color: #F4FFFD;
+}
+
+.filter-container {
+  width: 20%;
+  padding: 1rem;
+}
+
+.index-container {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.index-header {
+  margin-bottom: 1rem;
+}
+
+
+.event-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border-style: solid; */
+  /* border-width: 2px; */
+  /* border-color: red; */
+  margin: 0.5rem 0rem;
+}
+
+.event-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-header h3 {
+  font-size: 1.5rem;
+}
+
+.event-icons {
+  width: 3rem;
+  height: 1.75rem;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  margin: 0.25rem 0rem;
+}
+
+.sport-label {
+  font-size: 1rem;
+}
+
+.date-time-location {
+  display: flex;
+  gap: 1rem;
+}
+
+.date-time-location p {
+  font-size: 0.75rem;
+  font-family: 'Lexend';
+}
+
+.event-description {
+  margin: 1rem 0rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+}

@@ -61,27 +61,37 @@ function NavBar () {
           {/* Pacer Logo Home Link */}
           <Link to='/'><h1 className='logo'>Pacer</h1></Link>
           <Link to={'/discover'}><h3 className='discover'>Discover</h3></Link>
-          <div id="nav-auth">
+          
             {
               loggedIn ? (
                 <>
-                  <button onClick={logoutUser} className='auth-buttons'>Logout</button>
+                  <div id="nav-auth">
+                    <button onClick={logoutUser} className='auth-buttons'>Logout</button>
+                    <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+                      <SignupForm onSuccess={handleSignUpSuccess} />
+                    </Modal>
+
+                    <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
+                      <LoginForm onSuccess={handleSignInSuccess} />
+                    </Modal>
+                  </div>
                 </>
               ) : (
                 <>
-                  <button onClick={openSignUpModal} className="auth-buttons">Sign Up</button>
-                  <button onClick={openSignInModal} className="auth-buttons">Login</button>
+                  <div id="nav-auth">
+                    <button onClick={openSignUpModal} className="auth-buttons">Sign Up</button>
+                    <button onClick={openSignInModal} className="auth-buttons">Login</button>
+                    <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+                      <SignupForm onSuccess={handleSignUpSuccess} />
+                    </Modal>
+
+                    <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
+                      <LoginForm onSuccess={handleSignInSuccess} />
+                    </Modal>
+                  </div>
                 </>
               )
             }
-            <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
-              <SignupForm onSuccess={handleSignUpSuccess} />
-            </Modal>
-
-            <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
-              <LoginForm onSuccess={handleSignInSuccess} />
-            </Modal>
-          </div>
         </div>
       </div>
     </>
