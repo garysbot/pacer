@@ -5,7 +5,7 @@ const Event = mongoose.model('Event')
 const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validations/events')
 
-router.get('/events', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const events = await Event.find()
                               .populate("owner", "_id")
@@ -17,7 +17,7 @@ router.get('/events', async (req, res) => {
   }
 });
 
-router.get('/events/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id)
                              .populate("owner", "_id");
@@ -31,7 +31,7 @@ router.get('/events/:id', async (req, res, next) => {
   }
 });
 
-router.post('/events', requireUser, validateEventInput, async (req, res, next) => {
+router.post('/', requireUser, validateEventInput, async (req, res, next) => {
   try {
     const newEvent = new Event({
       owner: req.user._id,
@@ -56,7 +56,7 @@ router.post('/events', requireUser, validateEventInput, async (req, res, next) =
   }
 });
 
-router.patch('/events/:id', requireUser, validateEventInput, async (req, res, next) => {
+router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => {
   try {
     const eventId = req.params.id;
     const userId = req.user._id;
@@ -105,7 +105,7 @@ router.patch('/events/:id', requireUser, validateEventInput, async (req, res, ne
   }
 });
 
-router.delete('/events/:id', requireUser, async (req, res, next) => {
+router.delete('/:id', requireUser, async (req, res, next) => {
   try {
     const eventId = req.params.id;
     const userId = req.user._id;
