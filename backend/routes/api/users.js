@@ -17,27 +17,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/:id', async function(req, res,next) {
-  try {
-    const userId = req.params.id;
 
-    // Validate if the provided ID is a valid ObjectId
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ message: 'Invalid user ID' });
-    }
-
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
 
 router.put('/:id', async (req, res) => {
   try {
@@ -172,6 +152,28 @@ router.post('/login', validateLoginInput, async (req, res, next) => {
     }
     return res.json(await loginUser(user));
   })(req, res, next);
+});
+
+router.get('/:id', async function(req, res,next) {
+  try {
+    const userId = req.params.id;
+
+    // Validate if the provided ID is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 module.exports = router;
