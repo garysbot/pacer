@@ -4,11 +4,9 @@ import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes.js';
 import NavBar from './components/NavBar/NavBar';
-<<<<<<< HEAD
+
 import Footer from './components/Footer/Footer';
-=======
 import EventForm from './components/EventForm/EventForm.js';
->>>>>>> frontend
 
 import SplashPage from './components/SplashPage/SplashPage.js';
 import DiscoveryPage from './components/DiscoveryPage/Discovery.js';

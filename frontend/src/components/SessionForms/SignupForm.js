@@ -170,12 +170,11 @@ function SignupForm ({ onSuccess }) {
   };
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
+    <form className='session-form' onSubmit={handleSubmit}>
       <h2>{step === 1 ? 'Sign Up Form' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
       <div className="errors">{errors?.email}</div>
       {step === 1 && (
         <>
-          <div className='firstlast name'>
             <label>
               <input type='text'
                 value={firstName}
@@ -183,6 +182,7 @@ function SignupForm ({ onSuccess }) {
                 onChange={update('firstname')}
               />
             </label>
+            <br/>
             <label>
               <input type='text'
                 value={lastName}
@@ -190,7 +190,7 @@ function SignupForm ({ onSuccess }) {
                 onChange={update('lastname')}
               />
             </label>
-          </div>
+            <br/>
           <label>
             {/* <span>Email</span> */}
             <input type="text"
@@ -346,7 +346,7 @@ function SignupForm ({ onSuccess }) {
             .filter((sport) => sport !== primarySport)
             .map((sport) => (
               <label key={sport}>
-                <input
+                <input className='sport-list-input'
                   type="checkbox"
                   value={sport}
                   checked={selectedSports.includes(sport)}
