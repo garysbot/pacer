@@ -17,6 +17,82 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/:id', async function(req, res,next) {
+  try {
+    const userId = req.params.id;
+
+    // Validate if the provided ID is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updatedUserData = req.body; // Assuming the updated data is sent in the request body
+
+    // Validate if the provided ID is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    // Find the user by ID and update the data
+    const updatedUser = await User.findByIdAndUpdate(userId, updatedUserData, {
+      new: true, // Return the updated user
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+router.patch('/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updatedUserData = req.body; // Assuming the updated data is sent in the request body
+
+    // Validate if the provided ID is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    // Find the user by ID and update the data
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: updatedUserData }, // Use $set to update only the specified fields
+      { new: true } // Return the updated user
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 router.get('/current', restoreUser, (req, res) => {
   if (!isProduction) {
     // In development, allow React server to gain access to the CSRF token
