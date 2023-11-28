@@ -60,9 +60,6 @@ function SignupForm ({ onSuccess }) {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
-        break;
       case 'password':
         setState = setPassword;
         break;
@@ -126,7 +123,7 @@ function SignupForm ({ onSuccess }) {
         primarySport,
         gender,
         email,
-        username,
+        // username,
         password,
         selectedSports,
       };
@@ -171,12 +168,11 @@ function SignupForm ({ onSuccess }) {
   };
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
+    <form className='session-form' onSubmit={handleSubmit}>
       <h2>{step === 1 ? 'Sign Up Form' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
       <div className="errors">{errors?.email}</div>
       {step === 1 && (
         <>
-          <div className='firstlast name'>
             <label>
               <input type='text'
                 value={firstName}
@@ -184,6 +180,7 @@ function SignupForm ({ onSuccess }) {
                 onChange={update('firstname')}
               />
             </label>
+            <br/>
             <label>
               <input type='text'
                 value={lastName}
@@ -191,22 +188,13 @@ function SignupForm ({ onSuccess }) {
                 onChange={update('lastname')}
               />
             </label>
-          </div>
+            <br/>
           <label>
             {/* <span>Email</span> */}
             <input type="text"
               value={email}
               onChange={update('email')}
               placeholder="Email"
-            />
-          </label>
-          <div className="errors">{errors?.username}</div>
-          <label>
-            {/* <span>Username</span> */}
-            <input type="text"
-              value={username}
-              onChange={update('username')}
-              placeholder="Username"
             />
           </label>
           <div className="errors">{errors?.password}</div>
@@ -285,32 +273,36 @@ function SignupForm ({ onSuccess }) {
           type="button"
           value="Next"
           onClick={handleNext}
-          disabled={!email || !username || !password || password !== password2}
+          disabled={!email || !password || password !== password2}
         />
       )}
       {step === 2 && (
         <>
           {/* Render checkboxes for primary sports */}
-          {sportsList.map((sport) => (
-            <div key={sport} className="sport-option">
-              <label>
-                <input
-                  type="checkbox"
-                  value={sport}
-                  checked={primarySport.sport === sport}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setPrimarySport({ sport, experienceLevel: '' });
-                    } else {
-                      setPrimarySport({});
-                    }
-                  }}
-                />
-                {sport}
-              </label>
-            </div>
-          ))}
-          <div className="experience-level-radio">
+          <div className='primary-sport-div'>
+            {sportsList.map((sport) => (
+              <div key={sport} className="sport-option">
+                <label>
+                  <input
+                    type="checkbox"
+                    value={sport}
+                    checked={primarySport.sport === sport}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setPrimarySport({ sport, experienceLevel: '' });
+                      } else {
+                        setPrimarySport({});
+                      }
+                    }}
+                  />
+                  {sport}
+                </label>
+              </div>
+            ))}
+
+          </div>
+          {/* <h1>Select your Experience Level</h1> */}
+          <div className="experience-level-radio-div">
             {experienceLevels.map((level) => (
               <label key={level}>
                 <input
@@ -343,20 +335,22 @@ function SignupForm ({ onSuccess }) {
       {step === 3 && (
         <>
           {/* Render buttons for secondary sports */}
-          {sportsList
-            .filter((sport) => sport !== primarySport)
-            .map((sport) => (
-              <label key={sport}>
-                <input
-                  type="checkbox"
-                  value={sport}
-                  checked={selectedSports.includes(sport)}
-                  onChange={() => handleSportSelection(sport)}
-                />
-                {sport}
-              </label>
-            ))
-          }
+          <div className='secondary-sport-list-div'>
+            {sportsList
+              .filter((sport) => sport !== primarySport)
+              .map((sport) => (
+                <label key={sport} className='secondary-sport-list-input-label'>
+                  <input 
+                    type="checkbox"
+                    value={sport}
+                    checked={selectedSports.includes(sport)}
+                    onChange={() => handleSportSelection(sport)}
+                  />
+                  {sport}
+                </label>
+              ))
+            }
+          </div>
           <input type="submit" value="Sign Up" />
         </>
       )}
