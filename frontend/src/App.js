@@ -25,7 +25,7 @@ function App() {
   return loaded && (
     <>
       <NavBar />
-      <EventForm/>
+      {/* <EventForm/> */}
       <Switch>
         <AuthRoute exact path="/" component={Splash} />
         <AuthRoute exact path="/discovery" component={Discovery}/>
