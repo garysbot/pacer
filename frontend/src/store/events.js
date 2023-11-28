@@ -51,12 +51,12 @@ export const fetchEvents = () => async dispatch =>{
 
 export const composeEvent = data => async dispatch => {
   try {
-    const res = await jwtFetch('/api/tweets/', {
+    const res = await jwtFetch('/api/events/', {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    const tweet = await res.json();
-    dispatch(receiveNewEvent(tweet));
+    const event = await res.json();
+    dispatch(receiveNewEvent(event));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -73,6 +73,7 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
     case RECEIVE_EVENT_ERRORS:
       return action.errors;
     case RECEIVE_NEW_EVENT:
+      return {...state, [action.event._id]: action.event}
     case CLEAR_EVENT_ERRORS:
       return nullErrors;
     default:
