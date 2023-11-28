@@ -2,15 +2,36 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import "./SignupForm.css"
 
 function SignupForm ({ onSuccess }) {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  
+  let date = new Date();
   const history = useHistory()
   const [step, setStep] = useState(1);
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
-  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [day, setDay] = useState(date.getDate());
+  const [month, setMonth] = useState(months[date.getMonth()]);
+  const [year, setYear] = useState(date.getFullYear());
+  const [birthday, setBirthday] = useState(date);
   const [gender, setGender] = useState('')
-  const [primarySport, setPrimarySport] = useState('')
+  const [primarySport, setPrimarySport] = useState({});
+  const [experienceLevel, setExperienceLevel] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -83,6 +104,7 @@ function SignupForm ({ onSuccess }) {
     'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
     'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
   ]
+  const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,12 +115,13 @@ function SignupForm ({ onSuccess }) {
     } else if (step === 2) {
       // Set primary sport and proceed to step 3
       handleNext();
+      setPrimarySport({ sport: primarySport.sport, experienceLevel });
     } else if (step === 3) {
       // Perform signup and dispatch
       const user = {
         firstName,
         lastName,
-        dateOfBirth,
+        birthday,
         primarySport,
         gender,
         email,
@@ -111,6 +134,39 @@ function SignupForm ({ onSuccess }) {
       onSuccess();
       history.push('/discovery');
     }
+  };
+
+  
+  const generateYearOptions = () => {
+    const arr = [];
+    const startYear = 1905;
+    const endYear = new Date().getFullYear();
+    for (let i = endYear; i >= startYear; i--) {
+        arr.push(<option value={i}>{i}</option>);
+    }
+    return arr;
+  };
+
+  const generateDayOptions = () => {
+      const arr = [];
+      const startDay = 1;
+      const endDay = 31;
+      for (let i = startDay; i <= endDay; i++) {
+          arr.push(<option value={i}>{i}</option>);
+      }
+      return arr;
+  };
+
+  const generateMonthOptions = () => {
+      const arr = [];
+      for (let i = 0; i < months.length; i++) {
+          arr.push(<option value={months[i]}>{months[i]}</option>);
+      }
+      return arr;
+  };
+
+  const handleExperienceLevel = (level) => {
+    setExperienceLevel(level);
   };
 
   return (
@@ -172,17 +228,42 @@ function SignupForm ({ onSuccess }) {
               placeholder="Confirm Password"
             />
           </label>
-          <section className='dateOfBirth'>
-            <input type='date'
-              onChange={(e)=>setDateOfBirth(e.target.value)}
-            />
-          </section>
-          <section className='gender'>
-            Male
-            <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
-            Female
-            <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
-          </section>
+          
+          <div className="sign-up-birthday-field">
+            <label>Birthday</label>
+            <select
+                name='month'
+                onChange={(e) => {setMonth(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                value={month}
+            >
+                {generateMonthOptions()}
+            </select>
+            <select
+                name='day'
+                onChange={(e) => {setDay(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                value={day}
+            >
+                {generateDayOptions()}
+            </select>
+            <select
+                name='year'
+                onChange={(e) => {setYear(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                value={year}
+            >
+                {generateYearOptions()}
+            </select>
+          </div>
+          <div className="sign-up-gender-field">
+            <label>Gender</label>
+            <section className='gender'>
+              Male
+              <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
+              Female
+              <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
+              Other
+              <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
+            </section>
+          </div>
         </>
       )}
       {/* <section className='primary sport'>
@@ -192,9 +273,11 @@ function SignupForm ({ onSuccess }) {
         />
       </section> */}
       {step > 1 && (
-        <button type="button" onClick={handleBack}>
-          Back
-        </button>
+        <div id="sign-up-back-button">
+          <button type="button" onClick={handleBack}>
+            Back
+          </button>
+        </div>
       )}
       {step === 1 && (
         <input
@@ -206,20 +289,51 @@ function SignupForm ({ onSuccess }) {
       )}
       {step === 2 && (
         <>
-          {/* Render buttons for primary sports */}
+          {/* Render checkboxes for primary sports */}
           {sportsList.map((sport) => (
-            <button
-              key={sport}
-              onClick={() => {
-                setPrimarySport(sport);
-                handleNext();
-              }}
-            >
-              {sport}
-            </button>
+            <div key={sport} className="sport-option">
+              <label>
+                <input
+                  type="checkbox"
+                  value={sport}
+                  checked={primarySport.sport === sport}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setPrimarySport({ sport, experienceLevel: '' });
+                    } else {
+                      setPrimarySport({});
+                    }
+                  }}
+                />
+                {sport}
+              </label>
+            </div>
           ))}
+          <div className="experience-level-radio">
+            {experienceLevels.map((level) => (
+              <label key={level}>
+                <input
+                  type="radio"
+                  value={level}
+                  checked={primarySport.experienceLevel === level}
+                  onChange={() =>
+                    setPrimarySport({ ...primarySport, experienceLevel: level })
+                  }
+                />
+                {level}
+              </label>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={handleNext}
+            disabled={!primarySport.sport || !primarySport.experienceLevel}
+          >
+            Next
+          </button>
         </>
       )}
+
       {/* <input
         type="submit"
         value="Sign Up"
