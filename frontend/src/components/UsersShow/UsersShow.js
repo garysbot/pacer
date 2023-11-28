@@ -7,20 +7,9 @@ import { useParams } from "react-router-dom";
 
 export default function UsersShow(){
 
-    const dispatch = useDispatch();
-    const { userId } = useParams();
-    // const userId = useSelector(state => state.user.id); 
-
-    useEffect(() => {
-        if (userId) {
-            dispatch(fetch(userId)); 
-        }
-    }, [dispatch, userId]);
-
     return (
         <>
             <p>hello</p>
-            <p>user.firstName</p>
         </>
     )
 }
