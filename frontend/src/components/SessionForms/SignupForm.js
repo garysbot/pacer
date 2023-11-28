@@ -121,7 +121,7 @@ function SignupForm ({ onSuccess }) {
       const user = {
         firstName,
         lastName,
-        birthday,
+        dateOfBirth: birthday,
         primarySport,
         gender,
         email,

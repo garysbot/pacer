@@ -51,7 +51,7 @@ const userSchema = new Schema({
     required: true
   },
   userPrivacy: {
-    type: Boolean,
+    type: String,
     required: true
   }
 }, {

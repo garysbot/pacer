@@ -60,7 +60,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
     primarySport: req.body.primarySport,
-    userPrivacy: false,
+    userPrivacy: "none",
     friends: [],
     eventsAttended: []
   });
