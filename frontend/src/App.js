@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes.js';
 import NavBar from './components/NavBar/NavBar';
@@ -15,6 +15,7 @@ import { getCurrentUser } from './store/session';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
@@ -25,8 +26,8 @@ function App() {
       <NavBar />
       {/* <EventForm/> */}
       <Switch>
-        <AuthRoute exact path="/discover" component={DiscoverPage}/>
-        <AuthRoute exact path="/" component={SplashPage} />
+        <Route exact path="/discover" component={DiscoverPage}/>
+        <Route exact path="/" component={SplashPage} />
 
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}

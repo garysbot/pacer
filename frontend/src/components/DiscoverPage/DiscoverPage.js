@@ -35,7 +35,15 @@ export default function DiscoverPage(props){
                             <p className="sport-label">Weight Lifting 🏋️</p>
                             <p className="sport-label">Tennis 🎾</p>
                         </div>
-
+                        {
+                            events.map(event => {   
+                                (
+                                    <>
+                                        <p>event.name</p>
+                                    </>
+                                )
+                            })
+                        }
                         <div className="event-container">
                             <div className="event-content">
                                 <div className="event-header">

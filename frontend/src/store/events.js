@@ -8,12 +8,12 @@ const RECEIVE_EVENT_ERRORS = "events/RECEIVE_EVENT_ERRORS";
 const CLEAR_EVENT_ERRORS = "events/CLEAR_EVENT_ERRORS";
 
 
-const recieveEvents = events =>({
+const receiveEvents = events =>({
     type: RECEIVE_EVENTS,
     events
 })
 
-const recieveEvent = event =>({
+const receiveEvent = event =>({
     type: RECEIVE_EVENT,
     event
 })
@@ -39,7 +39,7 @@ export const fetchEvents = () => async dispatch =>{
     try {
         const res = await jwtFetch ('/api/events');
         const events = await res.json();
-        dispatch(recieveEvents(events));
+        dispatch(receiveEvents(events));
     } catch (err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
@@ -84,6 +84,7 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECEIVE_EVENTS:
+      debugger
       return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
       return { ...state, new: action.event};
