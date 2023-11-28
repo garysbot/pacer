@@ -9,6 +9,8 @@ export default function DiscoverPage(props){
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
     const events = Object.values(eventsObj);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
     useEffect(() => {
         dispatch(fetchEvents());
     }, [dispatch])
@@ -39,8 +41,6 @@ export default function DiscoverPage(props){
                             events.map(event =>    
                                 (
                                     <>
-                                        <p></p>
-
                                         <div className="event-container">
                                             <div className="event-content">
                                                 <div className="event-header">
@@ -49,9 +49,8 @@ export default function DiscoverPage(props){
                                                         <p className="sport-label">🏃🏻‍♂️</p>
                                                     </div>
                                                 </div>
-                
                                                 <div className="date-time-location">
-                                                    <p>{event.dateTime}</p>
+                                                    {/* <p>{new Date(event.dateTime)}</p> */}
                                                     <p>{event.locationName}</p>
                                                     <p>{event.difficulty}</p>
                                                     <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
@@ -60,7 +59,6 @@ export default function DiscoverPage(props){
                                                     {event.description}
                                                 </div>
                                             </div>
-                                            
                                             <div className="event-mini-map-container">
                                                 <img src='/static/temp-map.png' alt='map' />                            
                                             </div>
@@ -69,13 +67,7 @@ export default function DiscoverPage(props){
                                 )
                             )
                         }
-                        
-
-
-
                     </div>
-                        
-
                 </div>
             </main>
         </>

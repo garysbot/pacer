@@ -41,24 +41,26 @@
 
 .event-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   border-style: solid;
   padding: 1rem;
   border-width: 1px;
   border-color: #9c9c9c;
   margin: 0.5rem 0rem;
-  width: 100%;
+  width: 80%;
   height: 18rem;
   border-radius: 1rem;
 }
 
-.event-text {
+.event-content {
   width: 80%;
 }
 
 .event-header {
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .event-header h3 {

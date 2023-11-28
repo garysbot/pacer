@@ -61,10 +61,10 @@ function NavBar () {
               ) : (
                 <>
                   <button onClick={() => openModal('signup')} className="auth-buttons">
-                    SIGN UP
+                    Sign Up
                   </button>
                   <button onClick={() => openModal('signin')} className="auth-buttons">
-                    LOGIN
+                    Login
                   </button>
                 </>
               )
