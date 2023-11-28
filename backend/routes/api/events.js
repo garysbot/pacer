@@ -6,14 +6,68 @@ const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validations/events')
 
 router.get('/', async (req, res) => {
+  // try {
+  //   const events = await Event.find()
+  //                             .populate("owner", "_id")
+  //                             .sort({ createdAt: -1 });
+  //   return res.json(events);
+  // }
+  // catch(err) {
+  //   return res.json([]);
+  // }
   try {
-    const events = await Event.find()
-                              .populate("owner", "_id")
-                              .sort({ createdAt: -1 });
-    return res.json(events);
-  }
-  catch(err) {
-    return res.json([]);
+    const eventsWithUsers = await Event.aggregate([
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'owner',
+          foreignField: '_id',
+          as: 'ownerDetails',
+        },
+      },
+      {
+        $unwind: '$ownerDetails',
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'attendees',
+          foreignField: '_id',
+          as: 'attendeesDetails',
+        },
+      },
+      {
+        $unwind: '$attendeesDetails',
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'maybes',
+          foreignField: '_id',
+          as: 'maybesDetails',
+        },
+      },
+      {
+        $unwind: '$maybesDetails',
+      },
+      {
+        $project: {
+          eventName: 1,
+          eventDate: 1,
+          'ownerDetails.firstName': 1,
+          'ownerDetails.lastName': 1,
+          'attendeesDetails.firstName': 1,
+          'attendeesDetails.lastName': 1,
+          'maybesDetails.firstName': 1,
+          'maybesDetails.lastName': 1,
+        },
+      },
+    ]);
+
+    res.status(200).json(eventsWithUsers);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 

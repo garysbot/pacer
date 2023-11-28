@@ -28,7 +28,7 @@ if (!isProduction) {
   // Enable CORS only in development because React will be on the React
   // development server (http://localhost:3000). (In production, the Express 
   // server will serve the React files statically.)
-  app.use(cors());
+  app.use(cors({origin: 'http://localhost:5001', credentials: true,}));
 }
 
 app.use(
