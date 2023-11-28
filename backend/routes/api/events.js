@@ -35,12 +35,21 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', requireUser, validateEventInput, async (req, res, next) => {
   try {
     const newEvent = new Event({
-      text: req.body.text,
-      author: req.user._id
+      owner: req.body.owner,
+      eventName: req.body.eventName,
+      locationName: req.body.locationName,
+      description: req.body.description,
+      dateTime: req.body.dateTime,
+      type: req.body.type,
+      difficulty: "easy",
+      maxGroupSize: req.body.maxGroupSize,
+      attending: [],
+      longitude: 0,
+      latitude: 0
     });
 
     let event = await newEvent.save();
-    event = await event.populate('author', '_id username');
+    event = await event.populate('owner', '_id username');
     return res.json(event);
   }
   catch(err) {

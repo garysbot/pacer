@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes.js';
 import NavBar from './components/NavBar/NavBar';
+import EventForm from './components/EventForm/EventForm.js';
 
 import Splash from './components/Splash/Splash.js';
 import Tweets from './components/Tweets/TweetBox.js';
@@ -24,6 +25,7 @@ function App() {
   return loaded && (
     <>
       <NavBar />
+      <EventForm/>
       <Switch>
         <AuthRoute exact path="/" component={Splash} />
         <AuthRoute exact path="/discovery" component={Discovery}/>
