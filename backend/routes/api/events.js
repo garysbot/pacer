@@ -31,35 +31,38 @@ router.get('/', async (req, res) => {
       {
         $lookup: {
           from: 'users',
-          localField: 'attendees',
-          foreignField: '_id',
+          let: { attendees: '$attendees' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ['$_id', '$$attendees'] },
+              },
+            },
+          ],
           as: 'attendeesDetails',
         },
       },
       {
-        $unwind: '$attendeesDetails',
-      },
-      {
         $lookup: {
           from: 'users',
-          localField: 'maybes',
-          foreignField: '_id',
+          let: { maybes: '$maybes' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ['$_id', '$$maybes'] },
+              },
+            },
+          ],
           as: 'maybesDetails',
         },
-      },
-      {
-        $unwind: '$maybesDetails',
       },
       {
         $project: {
           eventName: 1,
           eventDate: 1,
-          'ownerDetails.firstName': 1,
-          'ownerDetails.lastName': 1,
-          'attendeesDetails.firstName': 1,
-          'attendeesDetails.lastName': 1,
-          'maybesDetails.firstName': 1,
-          'maybesDetails.lastName': 1,
+          ownerDetails: 1,
+          attendeesDetails: 1,
+          maybesDetails: 1,
         },
       },
     ]);
