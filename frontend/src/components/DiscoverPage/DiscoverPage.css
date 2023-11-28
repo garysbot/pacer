@@ -6,6 +6,10 @@
   color: #F4FFFD;
 }
 
+.discover-parent-container p {
+  color: #F4FFFD;
+}
+
 .filter-container {
   width: 20%;
   padding: 1rem;
@@ -36,7 +40,6 @@
   font-size: 0.75rem;
   padding: 0.5rem;
   border-radius: 3px;
-  color: black;
 }
 
 .event-container {
@@ -80,6 +83,7 @@
 
 .sport-label {
   font-size: 1rem;
+  color: white;
 }
 
 .date-time-location {
