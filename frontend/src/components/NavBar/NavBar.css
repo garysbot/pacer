@@ -18,7 +18,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: #ff5964;
+    /* background-color: #ff5964; */
     transition: background-color 0.3s;
 }
 
@@ -30,4 +30,15 @@
 
 .logo {
     font-size: 2rem;
+}
+
+.discover {
+    font-family: 'Lexend', sans-serif;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    color: #F4FFFD;
+}
+
+.discover:hover {
+    border-color: #89FC00;
+    color: #89FC00;
 }

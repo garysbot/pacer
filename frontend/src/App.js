@@ -7,7 +7,7 @@ import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 
 import SplashPage from './components/SplashPage/SplashPage.js';
-import DiscoveryPage from './components/DiscoveryPage/Discovery.js';
+import DiscoverPage from './components/DiscoverPage/DiscoverPage.js';
 
 import { getCurrentUser } from './store/session';
 
@@ -23,7 +23,7 @@ function App() {
     <>
       <NavBar />
       <Switch>
-        <AuthRoute exact path="/discovery" component={DiscoveryPage}/>
+        <AuthRoute exact path="/discover" component={DiscoverPage}/>
         <AuthRoute exact path="/" component={SplashPage} />
 
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}

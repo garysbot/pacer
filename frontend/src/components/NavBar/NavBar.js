@@ -60,7 +60,7 @@ function NavBar () {
         <div className='navbar' style={{ backgroundColor: `rgba(233, 88, 95, ${navOpacity})` }}>
           {/* Pacer Logo Home Link */}
           <Link to='/'><h1 className='logo'>Pacer</h1></Link>
-          <Link to={'/discover'}><h3>Discover</h3></Link>
+          <Link to={'/discover'}><h3 className='discover'>Discover</h3></Link>
           <div id="nav-auth">
             {
               loggedIn ? (
