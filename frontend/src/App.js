@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes.js';
 import NavBar from './components/NavBar/NavBar';
+
 import Footer from './components/Footer/Footer';
 import EventForm from './components/EventForm/EventForm.js';
 
