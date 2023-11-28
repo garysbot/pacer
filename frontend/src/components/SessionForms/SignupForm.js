@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import './Forms.css'
 
 function SignupForm ({ onSuccess }) {
   const history = useHistory()
