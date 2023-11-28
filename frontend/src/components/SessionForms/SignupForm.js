@@ -59,9 +59,6 @@ function SignupForm ({ onSuccess }) {
       case 'email':
         setState = setEmail;
         break;
-      case 'username':
-        setState = setUsername;
-        break;
       case 'password':
         setState = setPassword;
         break;
@@ -125,7 +122,7 @@ function SignupForm ({ onSuccess }) {
         primarySport,
         gender,
         email,
-        username,
+        // username,
         password,
         selectedSports,
       };
@@ -197,15 +194,6 @@ function SignupForm ({ onSuccess }) {
               value={email}
               onChange={update('email')}
               placeholder="Email"
-            />
-          </label>
-          <div className="errors">{errors?.username}</div>
-          <label>
-            {/* <span>Username</span> */}
-            <input type="text"
-              value={username}
-              onChange={update('username')}
-              placeholder="Username"
             />
           </label>
           <div className="errors">{errors?.password}</div>
@@ -284,32 +272,36 @@ function SignupForm ({ onSuccess }) {
           type="button"
           value="Next"
           onClick={handleNext}
-          disabled={!email || !username || !password || password !== password2}
+          disabled={!email || !password || password !== password2}
         />
       )}
       {step === 2 && (
         <>
           {/* Render checkboxes for primary sports */}
-          {sportsList.map((sport) => (
-            <div key={sport} className="sport-option">
-              <label>
-                <input
-                  type="checkbox"
-                  value={sport}
-                  checked={primarySport.sport === sport}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setPrimarySport({ sport, experienceLevel: '' });
-                    } else {
-                      setPrimarySport({});
-                    }
-                  }}
-                />
-                {sport}
-              </label>
-            </div>
-          ))}
-          <div className="experience-level-radio">
+          <div className='primary-sport-div'>
+            {sportsList.map((sport) => (
+              <div key={sport} className="sport-option">
+                <label>
+                  <input
+                    type="checkbox"
+                    value={sport}
+                    checked={primarySport.sport === sport}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setPrimarySport({ sport, experienceLevel: '' });
+                      } else {
+                        setPrimarySport({});
+                      }
+                    }}
+                  />
+                  {sport}
+                </label>
+              </div>
+            ))}
+
+          </div>
+          {/* <h1>Select your Experience Level</h1> */}
+          <div className="experience-level-radio-div">
             {experienceLevels.map((level) => (
               <label key={level}>
                 <input
@@ -342,20 +334,22 @@ function SignupForm ({ onSuccess }) {
       {step === 3 && (
         <>
           {/* Render buttons for secondary sports */}
-          {sportsList
-            .filter((sport) => sport !== primarySport)
-            .map((sport) => (
-              <label key={sport}>
-                <input className='sport-list-input'
-                  type="checkbox"
-                  value={sport}
-                  checked={selectedSports.includes(sport)}
-                  onChange={() => handleSportSelection(sport)}
-                />
-                {sport}
-              </label>
-            ))
-          }
+          <div className='secondary-sport-list-div'>
+            {sportsList
+              .filter((sport) => sport !== primarySport)
+              .map((sport) => (
+                <label key={sport} className='secondary-sport-list-input-label'>
+                  <input 
+                    type="checkbox"
+                    value={sport}
+                    checked={selectedSports.includes(sport)}
+                    onChange={() => handleSportSelection(sport)}
+                  />
+                  {sport}
+                </label>
+              ))
+            }
+          </div>
           <input type="submit" value="Sign Up" />
         </>
       )}
