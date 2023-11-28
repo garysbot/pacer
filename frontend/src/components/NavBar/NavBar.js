@@ -16,32 +16,23 @@ function NavBar () {
       dispatch(logout());
   }
 
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
   const [navOpacity, setNavOpacity] = useState(1);
 
-  const openSignUpModal = () => {
-    setShowSignUpModal(true);
+  const openModal = (modalType) => {
+    setShowModal(modalType);
   };
 
-  const closeSignUpModal = () => {
-    setShowSignUpModal(false);
-  };
-
-  const openSignInModal = () => {
-    setShowSignInModal(true);
-  };
-
-  const closeSignInModal = () => {
-    setShowSignInModal(false);
+  const closeModal = () => {
+    setShowModal(null);
   };
 
   const handleSignUpSuccess = () => {
-    closeSignUpModal();
+    closeModal();
   };
 
   const handleSignInSuccess = () => {
-    closeSignInModal();
+    closeModal();
   };
 
   const handleScroll = () => {
@@ -60,38 +51,32 @@ function NavBar () {
         <div className='navbar' style={{ backgroundColor: `rgba(233, 88, 95, ${navOpacity})` }}>
           {/* Pacer Logo Home Link */}
           <Link to='/'><h1 className='logo'>Pacer</h1></Link>
-          <Link to={'/discover'}><h3 className='discover'>Discover</h3></Link>
-          
+          <Link to={'/discover'}><h3>Discover</h3></Link>
+          <div id="nav-auth">
             {
               loggedIn ? (
                 <>
-                  <div id="nav-auth">
-                    <button onClick={logoutUser} className='auth-buttons'>Logout</button>
-                    <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
-                      <SignupForm onSuccess={handleSignUpSuccess} />
-                    </Modal>
-
-                    <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
-                      <LoginForm onSuccess={handleSignInSuccess} />
-                    </Modal>
-                  </div>
+                  <button onClick={logoutUser} className='auth-buttons'>Logout</button>
                 </>
               ) : (
                 <>
-                  <div id="nav-auth">
-                    <button onClick={openSignUpModal} className="auth-buttons">Sign Up</button>
-                    <button onClick={openSignInModal} className="auth-buttons">Login</button>
-                    <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
-                      <SignupForm onSuccess={handleSignUpSuccess} />
-                    </Modal>
-
-                    <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
-                      <LoginForm onSuccess={handleSignInSuccess} />
-                    </Modal>
-                  </div>
+                  <button onClick={() => openModal('signup')} className="auth-buttons">
+                    SIGN UP
+                  </button>
+                  <button onClick={() => openModal('signin')} className="auth-buttons">
+                    LOGIN
+                  </button>
                 </>
               )
             }
+            <Modal isOpen={showModal === 'signup'} onClose={closeModal}>
+              <SignupForm onSuccess={handleSignUpSuccess} />
+            </Modal>
+
+            <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
+              <LoginForm onSuccess={handleSignInSuccess} />
+            </Modal>
+          </div>
         </div>
       </div>
     </>
