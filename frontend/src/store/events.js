@@ -86,7 +86,7 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECEIVE_EVENTS:
-      debugger
+      // debugger
       return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
       return { ...state, new: action.event};

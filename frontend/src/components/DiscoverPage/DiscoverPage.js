@@ -6,8 +6,9 @@ import { fetchEvents } from "../../store/events";
 
 export default function DiscoverPage(props){
     const [filterContainerOpen, setFilterContainerOpen] = useState(false);
-    const events = useSelector(state => state.events);
+    const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
+    const events = Object.values(eventsObj)
 
     useEffect(() => {
         dispatch(fetchEvents());
@@ -35,15 +36,15 @@ export default function DiscoverPage(props){
                             <p className="sport-label">Weight Lifting 🏋️</p>
                             <p className="sport-label">Tennis 🎾</p>
                         </div>
-                        {/* {
-                            events.map(event => {   
+                        {
+                            events.map(event =>    
                                 (
                                     <>
                                         <p>event.name</p>
                                     </>
                                 )
-                            })
-                        } */}
+                            )
+                        }
                         <div className="event-container">
                             <div className="event-content">
                                 <div className="event-header">
