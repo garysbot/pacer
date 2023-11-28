@@ -16,32 +16,23 @@ function NavBar () {
       dispatch(logout());
   }
 
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
   const [navOpacity, setNavOpacity] = useState(1);
 
-  const openSignUpModal = () => {
-    setShowSignUpModal(true);
+  const openModal = (modalType) => {
+    setShowModal(modalType);
   };
 
-  const closeSignUpModal = () => {
-    setShowSignUpModal(false);
-  };
-
-  const openSignInModal = () => {
-    setShowSignInModal(true);
-  };
-
-  const closeSignInModal = () => {
-    setShowSignInModal(false);
+  const closeModal = () => {
+    setShowModal(null);
   };
 
   const handleSignUpSuccess = () => {
-    closeSignUpModal();
+    closeModal();
   };
 
   const handleSignInSuccess = () => {
-    closeSignInModal();
+    closeModal();
   };
 
   const handleScroll = () => {
@@ -69,16 +60,20 @@ function NavBar () {
                 </>
               ) : (
                 <>
-                  <button onClick={openSignUpModal} className="auth-buttons">Sign Up</button>
-                  <button onClick={openSignInModal} className="auth-buttons">Login</button>
+                  <button onClick={() => openModal('signup')} className="auth-buttons">
+                    SIGN UP
+                  </button>
+                  <button onClick={() => openModal('signin')} className="auth-buttons">
+                    LOGIN
+                  </button>
                 </>
               )
             }
-            <Modal isOpen={showSignUpModal} onClose={closeSignUpModal}>
+            <Modal isOpen={showModal === 'signup'} onClose={closeModal}>
               <SignupForm onSuccess={handleSignUpSuccess} />
             </Modal>
 
-            <Modal isOpen={showSignInModal} onClose={closeSignInModal}>
+            <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
               <LoginForm onSuccess={handleSignInSuccess} />
             </Modal>
           </div>

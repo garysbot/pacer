@@ -26,11 +26,11 @@ function LoginForm ({ onSuccess }) {
   }
 
   return (
-    <form className="session-form" onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <h2>Log In Form</h2>
       <div className="errors">{errors?.email}</div>
       <label>
-        <span>Email</span>
+        {/* <span>Email</span> */}
         <input type="text"
           value={email}
           onChange={update('email')}
@@ -39,7 +39,7 @@ function LoginForm ({ onSuccess }) {
       </label>
       <div className="errors">{errors?.password}</div>
       <label>
-        <span>Password</span>
+        {/* <span>Password</span> */}
         <input type="password"
           value={password}
           onChange={update('password')}
