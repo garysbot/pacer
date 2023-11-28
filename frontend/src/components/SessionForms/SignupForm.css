@@ -1,0 +1,25 @@
+.session-form {
+    width: 1000px;
+    max-height: 90vh;
+}
+
+.sport-option {
+    width: 33%;
+    /* box-sizing: border-box; */
+    display: inline-block;
+}
+
+/* .sport-option button {
+    color: pink;
+    border-color: pink;
+    width: 90%;
+}
+
+.sport-option button:disabled {
+    background-color: pink;
+    color: white;
+} */
+
+.sign-up-back-button {
+    width: 100%;
+}
