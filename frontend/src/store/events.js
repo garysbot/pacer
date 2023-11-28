@@ -3,9 +3,9 @@ import { RECEIVE_USER_LOGOUT } from "./session";
 
 const RECEIVE_EVENTS = "events/RECIEVE_EVENTS"
 const RECEIVE_EVENT = "events/RECIEVE_EVENT"
-const RECEIVE_NEW_EVENT = "tweets/RECEIVE_NEW_EVENT";
-const RECEIVE_EVENT_ERRORS = "tweets/RECEIVE_EVENT_ERRORS";
-const CLEAR_EVENT_ERRORS = "tweets/CLEAR_EVENT_ERRORS";
+const RECEIVE_NEW_EVENT = "events/RECEIVE_NEW_EVENT";
+const RECEIVE_EVENT_ERRORS = "events/RECEIVE_EVENT_ERRORS";
+const CLEAR_EVENT_ERRORS = "events/CLEAR_EVENT_ERRORS";
 
 
 const recieveEvents = events =>({
@@ -18,9 +18,9 @@ const recieveEvent = event =>({
     event
 })
 
-const receiveNewEvent = tweet => ({
+const receiveNewEvent = event => ({
   type: RECEIVE_NEW_EVENT,
-  tweet
+  event
 });
 
 
@@ -51,12 +51,12 @@ export const fetchEvents = () => async dispatch =>{
 
 export const composeEvent = data => async dispatch => {
   try {
-    const res = await jwtFetch('/api/tweets/', {
+    const res = await jwtFetch('/api/events/', {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    const tweet = await res.json();
-    dispatch(receiveNewEvent(tweet));
+    const event = await res.json();
+    dispatch(receiveNewEvent(event));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -83,9 +83,9 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECEIVE_EVENTS:
-      return { ...state, all: action.tweets, new: undefined};
+      return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
-      return { ...state, new: action.tweet};
+      return { ...state, new: action.event};
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
     default:

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './DiscoverPage.css'
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents } from "../../store/events";
 
 export default function DiscoverPage(props){
+    const [filterContainerOpen, setFilterContainerOpen] = useState(false);
+    const events = useSelector(state => state.events);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchEvents());
+    }, [dispatch])
+
     return (
         <>
             <main>
