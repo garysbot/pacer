@@ -11,11 +11,11 @@ const eventSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
+  locationName: {
     type: String,
     required: true
   },
-  locationName: {
+  description: {
     type: String,
     required: true
   },

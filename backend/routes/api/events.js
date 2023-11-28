@@ -31,6 +31,7 @@ router.get('/events/:id', async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 router.post('/events', requireUser, validateEventInput, async (req, res, next) => {
   try {
     const newEvent = new Event({
@@ -49,6 +50,26 @@ router.post('/events', requireUser, validateEventInput, async (req, res, next) =
 
     let event = await newEvent.save();
     event = await event.populate('owner', '_id');
+=======
+router.post('/', requireUser, validateEventInput, async (req, res, next) => {
+  try {
+    const newEvent = new Event({
+      owner: req.body.owner,
+      eventName: req.body.eventName,
+      locationName: req.body.locationName,
+      description: req.body.description,
+      dateTime: req.body.dateTime,
+      type: req.body.type,
+      difficulty: "easy",
+      maxGroupSize: req.body.maxGroupSize,
+      attending: [],
+      longitude: 0,
+      latitude: 0
+    });
+
+    let event = await newEvent.save();
+    event = await event.populate('owner', '_id username');
+>>>>>>> frontend
     return res.json(event);
   }
   catch(err) {
@@ -56,6 +77,7 @@ router.post('/events', requireUser, validateEventInput, async (req, res, next) =
   }
 });
 
+<<<<<<< HEAD
 router.patch('/events/:id', requireUser, validateEventInput, async (req, res, next) => {
   try {
     const eventId = req.params.id;
@@ -138,4 +160,6 @@ router.delete('/events/:id', requireUser, async (req, res, next) => {
   }
 });
 
+=======
+>>>>>>> frontend
 module.exports = router;
