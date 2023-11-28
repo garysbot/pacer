@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import "./SignupForm.css"
+import './Forms.css'
 
 function SignupForm ({ onSuccess }) {
   const months = [

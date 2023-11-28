@@ -59,8 +59,11 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     lastName: req.body.lastName,
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
+    height: req.body.height,
+    weight: req.body.weight,
     primarySport: req.body.primarySport,
-    userPrivacy: "none",
+    secondarySports: req.body.secondarySports || [],
+    userPrivacy: "false",
     friends: [],
     eventsAttended: []
   });

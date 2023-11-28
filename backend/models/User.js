@@ -44,7 +44,7 @@ const userSchema = new Schema({
   },
   secondarySports: {
     type: Array,
-    required: false
+    required: true
   },
   eventsAttended: {
     type: Array,
