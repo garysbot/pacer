@@ -14,6 +14,7 @@ export default function EventsShow(){
     }, [dispatch, id]);
 
     const selectedEvent = useSelector((state) => state.events.all[id]);
+    const currentUser = useSelector((state) => state.session.user)
 
     const timeConverter = (dateTime) => {
         const date = new Date(dateTime);
@@ -24,6 +25,34 @@ export default function EventsShow(){
             <p className="date-time"> {selectedEvent?.locationName} - {formattedDate} {formattedTime}</p>
         )
     }
+
+    const [attending, setAttending] = useState(false);
+    const [interested, setInterested] = useState(false);
+  
+    const handleAttendEvent = () => {
+      if (attending) {
+        setAttending(false);
+        setInterested(false);
+      } else {
+        setAttending(true);
+        if (interested) {
+          setInterested(false);
+        }
+      }
+    };
+    
+    const handleInterestedInEvent = () => {
+      if (interested) {
+        setInterested(false);
+        setAttending(false);
+      } else {
+        setInterested(true);
+        if (attending) {
+          setAttending(false);
+        }
+      }
+    };
+    
 
   const [showAttendees, setShowAttendees] = useState(true);
   const attendeesCount = selectedEvent?.attendees.length || 0;
@@ -142,7 +171,7 @@ export default function EventsShow(){
 
     return (
         <>
-            <p id="event-edit">Edit Event</p>
+            {currentUser?._id === selectedEvent?.ownerDetails._id && <p id="event-edit">Edit Event</p>}
             <div className="name-box">  
                 <p>{selectedEvent?.eventName}</p>
             </div>
@@ -155,7 +184,25 @@ export default function EventsShow(){
                 <p>{renderAttendees()}</p>
                 <p>{renderMaybes()}</p>
             </div>
-
+            
+            {currentUser?._id !== selectedEvent?.ownerDetails._id && (
+              <div className="join-event">
+                <button
+                  onClick={handleAttendEvent}
+                  style={{ backgroundColor: attending ? 'green' : 'transparent' }}
+                  disabled={attending && !interested}
+                >
+                  {attending ? 'Attending Event !!' : 'Attend Event'}
+                </button>
+                <button
+                  onClick={handleInterestedInEvent}
+                  style={{ backgroundColor: interested ? 'green' : 'transparent' }}
+                  disabled={interested && !attending}
+                >
+                  {interested ? 'Interested in Going' : 'Interested in Event?'}
+                </button>
+              </div>
+            )}
         </>
     )
 }
