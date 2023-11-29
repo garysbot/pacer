@@ -6,7 +6,7 @@ function SplashPage() {
       <main>
         <div className='video-background'>
           <video autoPlay loop muted playsInline>
-            <source src='../../static/splash-vid-1.mp4' type="video/mp4"/>
+            <source src='../../static/splash-vid-3.mp4' type="video/mp4"/>
           </video>
           <div className='video-overlay'>
             <h1>Exercising is lonely af</h1>
