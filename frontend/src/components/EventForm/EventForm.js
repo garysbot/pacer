@@ -77,9 +77,15 @@ export default function EventForm({props}){
                 </label>
                 <br/>
                 <label>
-                    When is the event2 taking place?
+                    When is the event taking place?
                     <br/>
                     <input className='event-form-text-input' type="date" onChange={(e)=>setDateTime(e.target.value)}/>
+                </label>
+                <br/>
+                <label>
+                    What time is it happening?
+                    <br/>
+                    <input type="time"/>
                 </label>
                 <br/>       
                 <label>
