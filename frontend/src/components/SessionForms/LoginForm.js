@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, clearSessionErrors } from '../../store/session';
-import './Forms.css'
+import './LoginForm.css'
 
 function LoginForm ({ onSuccess }) {
   const [email, setEmail] = useState('');
@@ -28,30 +28,37 @@ function LoginForm ({ onSuccess }) {
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <h2>Log In to Pacer</h2>
-      <div className="errors">{errors?.email}</div>
+      <div className='login-form-header'>
+        <h2>👋🏼 Welcome back!</h2>
+      </div>
+
       <label>
-        {/* <span>Email</span> */}
         <input type="text"
           value={email}
           onChange={update('email')}
-          placeholder="Email"
+          placeholder="Email address"
+          className='input-field'
         />
+        <div className="errors">{errors?.email}</div>
       </label>
-      <div className="errors">{errors?.password}</div>
+
       <label>
-        {/* <span>Password</span> */}
         <input type="password"
           value={password}
           onChange={update('password')}
           placeholder="Password"
+          className='input-field'
         />
+        <div className="errors">{errors?.password}</div>
       </label>
+
       <input
         type="submit"
-        value="Log In"
+        value="Login"
         disabled={!email || !password}
+        className='submit-field'
       />
+
     </form>
   );
 }

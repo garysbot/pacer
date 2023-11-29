@@ -141,7 +141,7 @@ export default function EventForm({props}){
                 </label>
                 <br/>  
                 <label>
-                    please provide a description for this event
+                    When is the event2 taking place?
                     <br/>
                     <textarea
                         className='event-form-text-input'
@@ -151,7 +151,7 @@ export default function EventForm({props}){
                         maxLength={1000}
                     />
                 </label>
-                <br/>     
+                <br/>       
                 <label>
                     What is the maximum group size for this event?
                     {/* ⁡⁢⁣⁢the built-in number input looks like shit on the frontend⁡ */}

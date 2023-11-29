@@ -70,12 +70,14 @@ button:hover {
   box-shadow: none;
 }
 
-form > .errors {
-  color: red;
-  font-size: 0.875em;
+form .errors {
+  color: #FF5964;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
   height: 15px;
   display: flex;
   align-items: center;
+  margin-left: 0.25rem;
 }
 
 a {
