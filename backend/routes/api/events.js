@@ -109,7 +109,7 @@ router.get('/:id', async (req, res) => {
     const eventWithUsers = await Event.aggregate([
       {
         $match: {
-          _id: mongoose.Types.ObjectId(eventId),
+          _id: mongoose.Types.ObjectId.createFromHexString(eventId),
         },
       },
       {
