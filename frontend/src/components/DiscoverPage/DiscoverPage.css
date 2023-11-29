@@ -1,7 +1,8 @@
 .discover-parent-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  justify-content: center;
   padding: 1rem;
   color: #F4FFFD;
 }
@@ -11,13 +12,13 @@
 }
 
 .filter-container {
-  width: 20%;
+  width: 15%;
   padding: 1rem;
 }
 
 .index-container {
   height: 100%;
-  width: 80%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -151,6 +152,7 @@
 .date-time-location p {
   font-size: 0.75rem;
   font-family: 'Lexend';
+  opacity: 0.75;
 }
 
 .event-description {

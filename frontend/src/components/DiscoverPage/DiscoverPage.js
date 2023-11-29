@@ -35,6 +35,13 @@ export default function DiscoverPage(props){
                         <form>                           
                             <h3>Filter</h3>
                             <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
+                            <p>Primary Sport</p>
                         </form>
                     </div>
                     <div className="index-container">
