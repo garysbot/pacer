@@ -151,7 +151,7 @@ const generateRandomEvent = (usersArray) => {
     dateTime: randomDate,
     difficulty: getRandomElement(['Beginner', 'Intermediate', 'Advanced']),
     eventType: getRandomElement(sports),
-    maxGroupSize: 25,
+    maxGroupSize: faker.datatype.number({ min: 2, max: 100 }),
     attendees: attendees,
     maybes: maybes,
     longitude: faker.datatype.number({ min: -74.05, max: -73.75, precision: 0.000001 }),

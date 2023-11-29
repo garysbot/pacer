@@ -17,6 +17,8 @@
     font-family: 'Lexend', sans-serif;
     margin-top: 1rem;
     margin-left: 92%;
+    color: white;
+    cursor: pointer;
 }
 
 .event-info {
