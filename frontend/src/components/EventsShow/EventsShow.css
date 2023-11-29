@@ -10,14 +10,14 @@
     font-size: 3rem;
     margin-bottom: 1rem;
     font-family: 'Lexend', sans-serif;
-    color: white;
+    color: #F4FFFD;
 }
 
 #event-edit {
     font-family: 'Lexend', sans-serif;
     margin-top: 1rem;
     margin-left: 92%;
-    color: white;
+    color: #F4FFFD;
     cursor: pointer;
 }
 
@@ -30,7 +30,7 @@
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
-    color: white;
+    color: #F4FFFD;
 }
 
 .attendee-circle {
@@ -38,7 +38,7 @@
     width: 2.5rem; 
     height: 2.5rem; 
     border-radius: 50%;
-    background-color: white;
+    background-color: #F4FFFD;
     margin-top: 1rem; 
     margin-right: 1rem;
   }
@@ -52,7 +52,7 @@
     content: attr(data-name);
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
-    color: white;
+    color: #F4FFFD;
     padding: .25rem;
     border-radius: .25rem;
     font-size: 1rem;
@@ -62,3 +62,25 @@
     white-space: nowrap;
     z-index: 999;
 }
+
+
+
+.join-event button {
+    width: 12rem;
+    height: 2rem;
+    margin: 0.25rem;
+    border-radius: 3rem;
+    border-style: solid;
+    border-color: #F4FFFD;
+    border-width: 3px;
+    background-color: transparent;
+    color: #F4FFFD;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    font-family: 'Lexend';
+  }
+  
+.join-event button:hover {
+    border-color: #89FC00;
+    color: #89FC00;
+    box-shadow: none;
+  }
