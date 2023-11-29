@@ -47,7 +47,7 @@ export default function EventsShow(){
             <span onClick={handleArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
                 {attendeesCount} Attending <span style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
                 <div className="attendees-list" style={{ display: showAttendees ? "block" : "none" }}>
-                {selectedEvent[eventKey]?.attendees.slice(0, 5).map((attendee, index) => (
+                {selectedEvent[eventKey]?.attendeesDetails.slice(0, 5).map((attendee, index) => (
                     <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
                 ))}
                 </div>
@@ -56,7 +56,7 @@ export default function EventsShow(){
       } else {
         const chunks = [];
         for (let i = 0; i < attendeesCount; i += 5) {
-          chunks.push(selectedEvent[eventKey]?.attendees.slice(i, i + 5));
+          chunks.push(selectedEvent[eventKey]?.attendeesDetails.slice(i, i + 5));
         }
 
         return (
@@ -79,7 +79,7 @@ export default function EventsShow(){
         <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
           {attendeesCount} Attending
           <div className="attendees-list">
-            {selectedEvent[eventKey]?.attendees.map((attendee, index) => (
+            {selectedEvent[eventKey]?.attendeesDetails.map((attendee, index) => (
               <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default function EventsShow(){
             <span onClick={handleDownArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
                 {maybesCount} Interested <span style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
                 <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
-                {selectedEvent[eventKey]?.maybes.slice(0, 5).map((maybes, index) => (
+                {selectedEvent[eventKey]?.maybesDetails.slice(0, 5).map((maybes, index) => (
                     <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
                 ))}
                 </div>
@@ -113,7 +113,7 @@ export default function EventsShow(){
       } else {
         const chunks = [];
         for (let i = 0; i < maybesCount; i += 5) {
-          chunks.push(selectedEvent[eventKey]?.maybes.slice(i, i + 5));
+          chunks.push(selectedEvent[eventKey]?.maybesDetails.slice(i, i + 5));
         }
 
         return (
@@ -136,7 +136,7 @@ export default function EventsShow(){
         <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
           {maybesCount} Interested
           <div className="maybes-list">
-            {selectedEvent[eventKey]?.maybes.map((maybes, index) => (
+            {selectedEvent[eventKey]?.maybesDetails.map((maybes, index) => (
               <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
             ))}
           </div>
