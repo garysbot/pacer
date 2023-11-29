@@ -6,6 +6,8 @@ const RECEIVE_EVENT = "events/RECIEVE_EVENT"
 const RECEIVE_NEW_EVENT = "events/RECEIVE_NEW_EVENT";
 const RECEIVE_EVENT_ERRORS = "events/RECEIVE_EVENT_ERRORS";
 const CLEAR_EVENT_ERRORS = "events/CLEAR_EVENT_ERRORS";
+const UPDATE_EVENT = "events/UPDATE_EVENT";
+const DELETE_EVENT = "events/DELETE_EVENT";
 
 
 const receiveEvents = events =>({
@@ -18,11 +20,20 @@ const receiveEvent = event =>({
     event
 })
 
+const updateEvent = event => ({
+  type: UPDATE_EVENT,
+  event
+});
+
+const deleteEvent = eventId => ({
+  type: DELETE_EVENT,
+  eventId
+});
+
 const receiveNewEvent = event => ({
   type: RECEIVE_NEW_EVENT,
   event
 });
-
 
 const receiveErrors = errors => ({
   type: RECEIVE_EVENT_ERRORS,
@@ -42,7 +53,6 @@ export const fetchEvents = () => async dispatch =>{
         dispatch(receiveEvents(events));
         console.log(events);
     } catch (err) {
-      console.log("hi");
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
         dispatch(receiveErrors(resBody.errors));
@@ -59,6 +69,49 @@ export const composeEvent = data => async dispatch => {
     });
     const event = await res.json();
     dispatch(receiveNewEvent(event));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+export const updateEventThunk = (eventId, data) => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/events/${eventId}`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+    const event = await res.json();
+    dispatch(updateEvent(event));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+export const deleteEventThunk = eventId => async dispatch => {
+  try {
+    await jwtFetch(`/api/events/${eventId}`, {
+      method: 'DELETE'
+    });
+    dispatch(deleteEvent(eventId));
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      return dispatch(receiveErrors(resBody.errors));
+    }
+  }
+};
+
+export const getEventThunk = eventId => async dispatch => {
+  try {
+    const res = await jwtFetch(`/api/events/${eventId}`);
+    const event = await res.json();
+    dispatch(receiveEvent(event));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -86,10 +139,16 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECEIVE_EVENTS:
-      // debugger
       return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
       return { ...state, new: action.event};
+    case UPDATE_EVENT:
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
+    case DELETE_EVENT:
+      const { [action.eventId]: deletedEvent, ...rest } = state.all;
+      return { ...state, all: rest, new: undefined };
+    case GET_EVENT:
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
     case RECEIVE_USER_LOGOUT:
       return { ...state, user: {}, new: undefined }
     default:
