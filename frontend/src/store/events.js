@@ -142,7 +142,16 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECEIVE_EVENTS:
-      return { ...state, all: action.events, new: undefined};
+      const allEventsArray = action.events;
+  
+      // Transform the array into an object with _id as the key
+      const allEventsObject = allEventsArray.reduce((accumulator, event) => {
+        accumulator[event._id] = event;
+        return accumulator;
+      }, {});
+
+      return { ...state, all: allEventsObject, new: undefined };
+      // return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
       return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
     case UPDATE_EVENT:

@@ -24,7 +24,7 @@ export default function DiscoverPage(props){
 
     useEffect(() => {
         dispatch(fetchEvents());
-    }, [dispatch])
+    }, [dispatch, history])
 
 
     function handleFilter(eventType){
