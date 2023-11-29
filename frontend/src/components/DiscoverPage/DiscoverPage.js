@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import './DiscoverPage.css'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../store/events";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function DiscoverPage(props){
     const history = useHistory()
@@ -112,34 +112,34 @@ export default function DiscoverPage(props){
                         {
                             events.map((event, index) =>    
                                 (
-                                    // <div key={index}>{event.id}</div>
-                                    <div key={index} className="event-container">
-                                        <div className="event-content">
-                                            <div className="event-header">
-                                                <h3>{event.eventName}</h3>
-                                                <div className="event-subheader">
-                                                    <p className="sport-icon">🏃🏻‍♂️</p>
-                                                    <p className="event-subheader-difficulty">Intermediate</p>
+                                    <Link to={`/events/${event._id}`}>
+                                        <div key={index} className="event-container">
+                                            <div className="event-content">
+                                                <div className="event-header">
+                                                    <h3>{event.eventName}</h3>
+                                                    <div className="event-subheader">
+                                                        <p className="sport-icon">🏃🏻‍♂️</p>
+                                                        <p className="event-subheader-difficulty">{event.difficulty}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="date-time-location">
+                                                    { timeConverter(event.dateTime) }
+                                                    <p>{event.locationName}</p>
+                                                    <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
+                                                </div>
+                                                <div className="event-description">
+                                                    {event.description}
                                                 </div>
                                             </div>
-                                            <div className="date-time-location">
-                                                { timeConverter(event.dateTime) }
-                                                <p>{event.locationName}</p>
-                                                <p>{event.difficulty}</p>
-                                                <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
-                                            </div>
-                                            <div className="event-description">
-                                                {event.description}
+                                            <div className="event-mini-map-container">
+                                                <img
+                                                    src={`https://maps.googleapis.com/maps/api/staticmap?center=${event?.latitude},${event?.longitude}&zoom=12&size=400x400&markers=color:red%7Clabel:A%7C${event?.latitude},${event?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
+                                                    alt="map"
+                                                />
+                                                {/* <img src='/static/temp-map.png' alt='map' /> */}
                                             </div>
                                         </div>
-                                        <div className="event-mini-map-container">
-                                            <img
-                                                src={`https://maps.googleapis.com/maps/api/staticmap?center=${event?.latitude},${event?.longitude}&zoom=12&size=400x400&markers=color:red%7Clabel:A%7C${event?.latitude},${event?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
-                                                alt="map"
-                                            />
-                                            {/* <img src='/static/temp-map.png' alt='map' /> */}
-                                        </div>
-                                    </div>
+                                    </Link>
                                 )
                             )
                         }
