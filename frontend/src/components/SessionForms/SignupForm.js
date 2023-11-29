@@ -130,7 +130,7 @@ function SignupForm ({ onSuccess }) {
 
       dispatch(signup(user));
       onSuccess();
-      history.push('/discovery');
+      history.push('/discover');
     }
   };
 

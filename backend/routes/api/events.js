@@ -223,8 +223,8 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: 3,
-      latitude: 3
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     });
     debugger
     let event = await newEvent.save();
@@ -265,8 +265,8 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: req.body.lng,
-      latitude: req.body.lat
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     };
 
     const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {

@@ -3,6 +3,12 @@ import { useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { composeEvent } from "../../store/events";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react";
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from "react-places-autocomplete";
 import "./EventForm.css"
 
 export default function EventForm({props}){
@@ -16,72 +22,136 @@ export default function EventForm({props}){
     ];
     const difficulties = ["Beginner", "Intermediate", "Advanced"]
 
-
-
-
-
-
-
     const dispatch = useDispatch()
     const owner = useSelector(store => store.session.user._id)
     const [eventName, setEventName] = useState('')
-    const [locationName, setLocationName] = useState('')
     const [description, setDescription] = useState('')
-    const [dateTime, setDateTime] = useState('')
+    // const [dateTime, setDateTime] = useState('')
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
     const [eventType, setEventType] = useState('')
     const [difficulty, setDifficulty] = useState()
     const [maxGroupSize, setMaxGroupSize] = useState(0)
-    // const [attending, setAttending] = useState([])
-    // ⁡⁣⁣⁢set longitude and latitude for later
-    // ⁡⁣⁣⁢make sure to add functionality for attendees⁡⁡
+    const [selectedAddress, setSelectedAddress] = useState("");
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [locationName, setLocationName] = useState("");
+    // const [event, setEvent] = useState({});
+  
+    const handleSelect = async (address) => {
+      try {
+        const results = await geocodeByAddress(address);
+        const latLng = await getLatLng(results[0]);
+        setSelectedAddress(address);
+        setLatitude(latLng.lat);
+        setLongitude(latLng.lng);
+        setLocationName(results[0].formatted_address);
+      } catch (error) {
+        console.error("Error selecting address", error);
+      }
+    };
+  
+    const history = useHistory();
+    async function handleSubmit(e) {
+        e.preventDefault();
     
-    function handleSubmit(e){
-        e.preventDefault()
+        // Format the date and time before creating the event
+        const formattedDateTime = `${date} ${time}`;
+    
         const newEvent = {
-            owner,
-            eventName,
-            locationName,
-            description,
-            dateTime,
-            eventType,
-            difficulty,
-            maxGroupSize
-        }
-        dispatch(composeEvent(newEvent))
-        console.log(newEvent)
-
+          owner,
+          eventName,
+          description,
+          locationName,
+          dateTime: formattedDateTime,
+          difficulty,
+          eventType, 
+          maxGroupSize,
+          latitude,
+          longitude,
+          eventPrivacy: false
+        };
+    
+        // const event = await dispatch(composeEvent(newEvent));
+        // history.push(`events/${event._id}`);
+        const event = await dispatch(composeEvent(newEvent));
+        redirectToShow(event);
     }
-    // ⁡⁢⁣⁢for future groupSizing functionality⁡
-    function addToMaxGroupSize(){
 
+    const redirectToShow = (event) => {
+        history.push(`events/${event._id}`);
     }
+
+    const handleDescriptionChange = (e) => {
+        // Limit the description to 1000 characters
+        setDescription(e.target.value.slice(0, 1000));
+    };
+    
     return (
         <div id="event-form-div">
             <form id="event-form-form">
                 <label>
-                    What is the name of this event?
+                    Give your event a name
                     <br/>
                     <input className='event-form-text-input' type="text" onChange={(e)=>setEventName(e.target.value)}/>
                 </label>
                 <br/>
                 <label>
-                    What is the location of this event?
+                    Where is this event taking place?
                     <br/>
-                    <input className='event-form-text-input' type="text" onChange={(e)=> setLocationName(e.target.value)}/>
+                    <PlacesAutocomplete
+                        value={selectedAddress}
+                        onChange={setSelectedAddress}
+                        onSelect={handleSelect}
+                    >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                            <input
+                            className="event-form-text-input"
+                            {...getInputProps({
+                                placeholder: "Enter location...",
+                            })}
+                            />
+                            <div>
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion) => (
+                                <div {...getSuggestionItemProps(suggestion)}>
+                                {suggestion.description}
+                                </div>
+                            ))}
+                            </div>
+                        </div>
+                        )}
+                    </PlacesAutocomplete>
                 </label>
                 <br/>
+                <label>
+                    When is the event taking place?
+                    <br />
+                    <input
+                        className="event-form-text-input"
+                        type="date"
+                        onChange={(e) => setDate(e.target.value)}
+                    />
+                    <input
+                        className="event-form-text-input"
+                        type="time"
+                        onChange={(e) => setTime(e.target.value)}
+                    />
+                </label>
+                <br/>  
                 <label>
                     please provide a description for this event
                     <br/>
-                    <input className='event-form-text-input' type="text" onChange={(e)=>setDescription(e.target.value)}/>
+                    <textarea
+                        className='event-form-text-input'
+                        value={description}
+                        onChange={handleDescriptionChange}
+                        rows={4} // You can adjust the number of rows as needed
+                        maxLength={1000}
+                    />
                 </label>
-                <br/>
-                <label>
-                    When is the event2 taking place?
-                    <br/>
-                    <input className='event-form-text-input' type="date" onChange={(e)=>setDateTime(e.target.value)}/>
-                </label>
-                <br/>       
+                <br/>     
                 <label>
                     What is the maximum group size for this event?
                     {/* ⁡⁢⁣⁢the built-in number input looks like shit on the frontend⁡ */}
@@ -91,26 +161,32 @@ export default function EventForm({props}){
                 </label>
                 <br/>
                 <label>
-                    What type of event is this?
+                    What type of activity?
                     <br/>
-                    <select onChange={(e)=>setEventType(e.target.value)}>
-                        {allowedEventTypes.map((type)=>{
-                            return (
-                                <option value={type}>{type}</option>
-                            )
-                        })}
+                    <select onChange={(e) => setEventType(e.target.value)}>
+                        <option value="" disabled selected>
+                            Please select an activity
+                        </option>
+                        {allowedEventTypes.map((type) => (
+                            <option key={type} value={type}>
+                                {type}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <br/>
                 <label>
-                    What is the difficulty of this event?
+                    What is the relative difficulty of this event?
                     <br/>
-                    <select onChange={(e)=>setDifficulty(e.target.value)}>
-                        {difficulties.map((d)=>{
-                            return (
-                                <option value={d}>{d}</option>
-                            )
-                        })}
+                    <select onChange={(e) => setDifficulty(e.target.value)}>
+                        <option value="" disabled selected>
+                            Please select a difficulty level
+                        </option>
+                        {difficulties.map((d) => (
+                            <option key={d} value={d}>
+                                {d}
+                            </option>
+                        ))}
                     </select>
                 </label>
 
