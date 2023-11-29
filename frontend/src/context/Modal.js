@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import '../components/SessionForms/Forms.css'
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
