@@ -9,8 +9,8 @@ import "./NavBar.css"
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
+  const loggedInUser = useSelector(state=>state.session.user)
   const dispatch = useDispatch();
-  
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
@@ -56,6 +56,7 @@ function NavBar () {
             {
               loggedIn ? (
                 <>
+                  <Link to={`/users/${loggedInUser._id}`}>Profile</Link>
                   <button onClick={logoutUser} className='auth-buttons'>Logout</button>
                 </>
               ) : (
