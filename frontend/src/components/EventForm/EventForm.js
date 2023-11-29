@@ -141,7 +141,7 @@ export default function EventForm({props}){
                 </label>
                 <br/>  
                 <label>
-                    When is the event2 taking place?
+                    Provide a description for the event
                     <br/>
                     <textarea
                         className='event-form-text-input'
