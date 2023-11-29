@@ -63,7 +63,12 @@
     z-index: 999;
 }
 
-
+.join-event {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
 
 .join-event button {
     width: 12rem;
@@ -80,7 +85,7 @@
   }
   
 .join-event button:hover {
-    border-color: #89FC00;
-    color: #89FC00;
+    border-color: green;
+    /* color: green; */
     box-shadow: none;
   }

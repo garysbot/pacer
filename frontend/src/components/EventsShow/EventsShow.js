@@ -189,14 +189,14 @@ export default function EventsShow(){
               <div className="join-event">
                 <button
                   onClick={handleAttendEvent}
-                  style={{ backgroundColor: attending ? 'green' : 'transparent' }}
+                  style={{ backgroundColor: attending ? '#89FC00' : 'transparent', color: attending ? 'green' : '#F4FFFD' }}
                   disabled={attending && !interested}
                 >
                   {attending ? 'Attending Event !!' : 'Attend Event'}
                 </button>
                 <button
                   onClick={handleInterestedInEvent}
-                  style={{ backgroundColor: interested ? 'green' : 'transparent' }}
+                  style={{ backgroundColor: interested ? '#89FC00' : 'transparent', color: interested ? 'green' : '#F4FFFD' }}
                   disabled={interested && !attending}
                 >
                   {interested ? 'Interested in Going' : 'Interested in Event?'}
