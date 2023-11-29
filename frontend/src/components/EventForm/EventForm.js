@@ -14,7 +14,7 @@ export default function EventForm({props}){
         'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
         'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
     ];
-    const difficulties = ["Easy", "Medium", "Advanced"]
+    const difficulties = ["Beginner", "Intermediate", "Advanced"]
 
 
 

@@ -31,7 +31,7 @@ const validateEventInput = [
         .withMessage('Event date must be in the future'),
     check('difficulty')
         .exists({ checkFalsy: true })
-        .isIn("beginner, intermediate, advanced")
+        .isIn("Beginner, Intermediate, Advanced")
         .withMessage('Event must have a difficulty level'),
     check('eventType')
         .exists({ checkFalsy: true })
@@ -46,16 +46,18 @@ const validateEventInput = [
     // check('eventPrivacy')
     //     .exists({ checkFalsy: true })
     //     .isBoolean(),
-    check('longitude')
-        .exists({ checkFalsy: true })
-        .withMessage('Longitude is required')
-        .isFloat({ min: -180, max: 180 })
-        .withMessage('Longitude must be a valid number between -180 and 180'),
-    check('latitude')
-        .exists({ checkFalsy: true })
-        .withMessage('Latitude is required')
-        .isFloat({ min: -90, max: 90 })
-        .withMessage('Latitude must be a valid number between -90 and 90'),
+
+
+    // check('longitude')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage('Longitude is required')
+    //     .isFloat({ min: -180, max: 180 })
+    //     .withMessage('Longitude must be a valid number between -180 and 180'),
+    // check('latitude')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage('Latitude is required')
+    //     .isFloat({ min: -90, max: 90 })
+    //     .withMessage('Latitude must be a valid number between -90 and 90'),
     
   handleValidationErrors
 ];
