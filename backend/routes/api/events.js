@@ -133,18 +133,9 @@ router.get('/:id', async (req, res) => {
                 $expr: { $in: ['$_id', '$$attendees'] },
               },
             },
-            {
-              $group: {
-                _id: '$_id',
-                attendees: { $push: '$$ROOT' },
-              },
-            },
           ],
           as: 'attendeesDetails',
         },
-      },
-      {
-        $unwind: '$attendeesDetails',
       },
       {
         $lookup: {
@@ -156,18 +147,9 @@ router.get('/:id', async (req, res) => {
                 $expr: { $in: ['$_id', '$$maybes'] },
               },
             },
-            {
-              $group: {
-                _id: '$_id',
-                maybes: { $push: '$$ROOT' },
-              },
-            },
           ],
           as: 'maybesDetails',
         },
-      },
-      {
-        $unwind: '$maybesDetails',
       },
       {
         $project: {
@@ -178,8 +160,8 @@ router.get('/:id', async (req, res) => {
           difficulty: 1,
           eventType: 1,
           maxGroupSize: 1,
-          attendees: '$attendeesDetails.attendees',
-          maybes: '$maybesDetails.maybes',
+          attendees: 1,
+          maybes: 1,
           longitude: 1,
           latitude: 1,
           eventPrivacy: 1,
@@ -188,6 +170,30 @@ router.get('/:id', async (req, res) => {
             firstName: '$ownerDetails.firstName',
             lastName: '$ownerDetails.lastName',
             // Add other owner details as needed
+          },
+          attendeesDetails: {
+            $map: {
+              input: '$attendeesDetails',
+              as: 'attendee',
+              in: {
+                _id: '$$attendee._id',
+                firstName: '$$attendee.firstName',
+                lastName: '$$attendee.lastName',
+                // Add other attendee details as needed
+              },
+            },
+          },
+          maybesDetails: {
+            $map: {
+              input: '$maybesDetails',
+              as: 'maybe',
+              in: {
+                _id: '$$maybe._id',
+                firstName: '$$maybe.firstName',
+                lastName: '$$maybe.lastName',
+                // Add other maybe details as needed
+              },
+            },
           },
         },
       },
@@ -217,8 +223,8 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: 3,
-      latitude: 3
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     });
     debugger
     let event = await newEvent.save();
@@ -259,8 +265,8 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: req.body.lng,
-      latitude: req.body.lat
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     };
 
     const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {

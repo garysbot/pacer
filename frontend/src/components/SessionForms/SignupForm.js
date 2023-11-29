@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signup, clearSessionErrors } from '../../store/session';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import "./SignupForm.css"
-import './Forms.css'
 
 function SignupForm ({ onSuccess }) {
   const months = [
@@ -130,7 +129,7 @@ function SignupForm ({ onSuccess }) {
 
       dispatch(signup(user));
       onSuccess();
-      history.push('/discovery');
+      history.push('/discover');
     }
   };
 
@@ -168,7 +167,7 @@ function SignupForm ({ onSuccess }) {
   };
 
   return (
-    <form className='session-form' onSubmit={handleSubmit}>
+    <form className='signup-form' onSubmit={handleSubmit}>
       <h2>{step === 1 ? 'Sign Up Form' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
       <div className="errors">{errors?.email}</div>
       {step === 1 && (

@@ -70,6 +70,7 @@ export const composeEvent = data => async dispatch => {
     });
     const event = await res.json();
     dispatch(receiveNewEvent(event));
+    return event;
   } catch(err) {
     // debugger
     const resBody = await err.json();
@@ -143,7 +144,7 @@ const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) =>
     case RECEIVE_EVENTS:
       return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
-      return { ...state, new: action.event};
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
     case UPDATE_EVENT:
       return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
     case DELETE_EVENT:
