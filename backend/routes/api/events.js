@@ -205,9 +205,10 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', requireUser, validateEventInput, async (req, res, next) => {
+  // debugger
   try {
     const newEvent = new Event({
-      owner: req.user._id,
+      owner: req.body.owner,
       eventName: req.body.eventName,
       description: req.body.description,
       locationName: req.body.locationName,
@@ -216,15 +217,16 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
-      longitude: req.body.longitude,
-      latitude: req.body.latitude
+      longitude: 3,
+      latitude: 3
     });
-
+    debugger
     let event = await newEvent.save();
     event = await event.populate('owner', '_id');
     return res.json(event);
   }
   catch(err) {
+    debugger
     next(err);
   }
 });

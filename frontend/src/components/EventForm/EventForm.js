@@ -3,19 +3,38 @@ import { useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { composeEvent } from "../../store/events";
+import "./EventForm.css"
 
 export default function EventForm({props}){
+    // ⁡⁢⁣⁣allowed event types⁡⁡
+    const allowedEventTypes = [
+        'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming', 'Yoga', 'Gym (Fitness)',
+        'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football', 'Hiking', 'Bowling', 'Water Sports', 'Ping Pong',
+        'Golf', 'Pickleball', 'Rock Climbing', 'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee',
+        'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
+        'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
+    ];
+    const difficulties = ["Easy", "Medium", "Advanced"]
+
+
+
+
+
+
+
     const dispatch = useDispatch()
     const owner = useSelector(store => store.session.user._id)
     const [eventName, setEventName] = useState('')
     const [locationName, setLocationName] = useState('')
     const [description, setDescription] = useState('')
     const [dateTime, setDateTime] = useState('')
-    const [type, setType] = useState('')
+    const [eventType, setEventType] = useState('')
     const [difficulty, setDifficulty] = useState()
-    const [maxGroupSize, setMaxGroupSize] = useState()
+    const [maxGroupSize, setMaxGroupSize] = useState(0)
     // const [attending, setAttending] = useState([])
-    // ⁡⁣⁣⁢set longitude and latitude for later⁡
+    // ⁡⁣⁣⁢set longitude and latitude for later
+    // ⁡⁣⁣⁢make sure to add functionality for attendees⁡⁡
+    
     function handleSubmit(e){
         e.preventDefault()
         const newEvent = {
@@ -24,48 +43,78 @@ export default function EventForm({props}){
             locationName,
             description,
             dateTime,
-            type,
+            eventType,
             difficulty,
-
+            maxGroupSize
         }
         dispatch(composeEvent(newEvent))
-
-
         console.log(newEvent)
+
+    }
+    // ⁡⁢⁣⁢for future groupSizing functionality⁡
+    function addToMaxGroupSize(){
+
     }
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div id="event-form-div">
+            <form id="event-form-form">
                 <label>
                     What is the name of this event?
-                    <input type="text" onChange={(e)=>setEventName(e.target.value)}/>
+                    <br/>
+                    <input className='event-form-text-input' type="text" onChange={(e)=>setEventName(e.target.value)}/>
                 </label>
                 <br/>
                 <label>
                     What is the location of this event?
-                    <input type="text" onChange={(e)=> setLocationName(e.target.value)}/>
+                    <br/>
+                    <input className='event-form-text-input' type="text" onChange={(e)=> setLocationName(e.target.value)}/>
                 </label>
                 <br/>
                 <label>
                     please provide a description for this event
-                    <input type="text" onChange={(e)=>setDescription(e.target.value)}/>
+                    <br/>
+                    <input className='event-form-text-input' type="text" onChange={(e)=>setDescription(e.target.value)}/>
                 </label>
                 <br/>
                 <label>
                     When is the event2 taking place?
-                    <input type="date" onChange={(e)=>setDateTime(e.target.value)}/>
+                    <br/>
+                    <input className='event-form-text-input' type="date" onChange={(e)=>setDateTime(e.target.value)}/>
                 </label>
                 <br/>       
                 <label>
                     What is the maximum group size for this event?
-                    <input type="number" onChange={(e)=>setDifficulty(e.target.value)}/>
+                    {/* ⁡⁢⁣⁢the built-in number input looks like shit on the frontend⁡ */}
+                    {/* ⁡⁢⁣⁢I fully intend on changing it later⁡ - rob */}
+                    <br/>
+                    <input className='event-form-text-input' type="number" onChange={(e)=>setMaxGroupSize(e.target.value)}/>
                 </label>
                 <br/>
                 <label>
                     What type of event is this?
-                    <input type="text" onChange={(e)=>setType(e.target.value)}/>
+                    <br/>
+                    <select onChange={(e)=>setEventType(e.target.value)}>
+                        {allowedEventTypes.map((type)=>{
+                            return (
+                                <option value={type}>{type}</option>
+                            )
+                        })}
+                    </select>
                 </label>
-                <input type="submit" value="Create Event!"/>
+                <br/>
+                <label>
+                    What is the difficulty of this event?
+                    <br/>
+                    <select onChange={(e)=>setDifficulty(e.target.value)}>
+                        {difficulties.map((d)=>{
+                            return (
+                                <option value={d}>{d}</option>
+                            )
+                        })}
+                    </select>
+                </label>
+
+                <button id="form-submit" onClick={handleSubmit}> Create Event!</button>
             </form>
         </div>
     )

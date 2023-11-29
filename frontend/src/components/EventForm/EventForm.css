@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@700&family=Nunito:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+#event-form-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#event-form-form{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+#form-submit{
+    width: 100%;
+}
+
+#form-submit:hover{
+    cursor: pointer;
+    background-color: white;
+}
+
+label{
+    font-family: 'Lexend';
+    color: white;
+    /* margin: 10px */
+}
+
+select{
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    border-width: 4px;
+    border-color: #ff5964;
+    background-color: #ffffff;
+    color: #000000;
+    border-style: outset;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+}
+
+.event-form-text-input{
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    border-width: 4px;
+    border-color: #ff5964;
+    background-color: #ffffff;
+    color: #000000;
+    border-style: outset;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+    /* font-family: 'Lexend'; */
+}
+.event-form-text-input:focus{
+    outline: none;
+}
+
+input[type=number]{
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    font-size: 20px;
+    border-width: 4px;
+    border-color: #ff5964;
+    background-color: #ffffff;
+    color: #000000;
+    border-style: outset;
+    border-radius: 30px;
+    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+
+
+
+

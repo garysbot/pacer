@@ -3,8 +3,10 @@ import './DiscoverPage.css'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../store/events";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function DiscoverPage(props){
+    const history = useHistory()
     const [filterContainerOpen, setFilterContainerOpen] = useState(false);
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
@@ -25,7 +27,6 @@ export default function DiscoverPage(props){
                             <p>Primary Sport</p>
                         </form>
                     </div>
-
                     <div className="index-container">
                         <div className="index-header">
                             <h2>Find an event near you</h2>
@@ -37,6 +38,11 @@ export default function DiscoverPage(props){
                             <p className="sport-label">Weight Lifting 🏋️</p>
                             <p className="sport-label">Tennis 🎾</p>
                         </div>
+                        <button id="event-create-button"
+                            onClick={()=>history.push("/event-form")}
+                        >
+                            Create an event!
+                        </button>
                         {
                             events.map(event =>    
                                 (
