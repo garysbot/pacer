@@ -31,6 +31,7 @@ function App() {
       <Switch>
         <Route exact path="/discover" component={DiscoverPage}/>
         <Route exact path="/" component={SplashPage} />
+        <Route exact path="/events/:id" component={EventsShow}/>
         <Route exact path="/users/:id" component={UsersShow}/>
         <Route exact path="/event-form" component={EventForm}/>
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
