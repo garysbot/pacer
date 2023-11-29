@@ -1,10 +1,65 @@
 .signup-form {
+    background: radial-gradient(circle, rgba(137,252,0,0.351707887113764) 0%, rgba(81,187,254,0.7786741792485955) 100%);
+    background: linear-gradient(67deg, rgba(137,252,0,1) 0%, rgba(81,187,254,1) 100%);
     width: 32rem;
-    height: 32rem;
-    max-height: 90vh;
-    border: 2px solid rgba(250,76,76,1);
-    border-radius: 5px;
-    padding: 10px;
+    height: 40rem;
+    border-style: none;
+    border-radius: 3rem;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.signup-form-header {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.signup-form-header h2 {
+    color: #F4FFFD;
+}
+
+.signup-form p {
+    font-size: 1rem;
+    color: #F4FFFD;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 400;
+}
+
+.signup-form span {
+    font-size: 1rem;
+    color: #F4FFFD;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+}
+
+.signup-form input::placeholder {
+    color: #F4FFFD
+}
+
+.select-field, .select-field option {
+    color: #F4FFFD; /* White color */
+}
+
+
+.select-field {
+    background-color: transparent;
+    border-style: solid;
+    border-color: #F4FFFD;
+    font-size: 1rem;
+    width: 12rem;
+}
+
+.date {
+    width: 5rem;
+}
+
+.year {
+    width: 6rem;
 }
 
 .primary-sport-div{
@@ -76,4 +131,48 @@
 
 #sign-up-back-button {
     width: 100%;
+}
+
+.field-row-container {
+    display: flex;
+    gap: 1rem;
+    margin: 0.5rem 0rem;
+    width: 100%;
+    justify-content: center;
+    height: 4rem;
+}
+
+
+.field-container {
+    display: flex;
+}
+
+.email-field {
+    background-color: transparent;
+    border-style: solid;
+    border-color: #F4FFFD;
+    border-radius: 3rem;
+    height: 2.25rem;
+    width: 25rem;
+    margin: 0.25rem 0rem;
+    /* padding-inline-start: 0.75rem; */
+    padding-left: 0.75rem;
+    font-family: 'Nunito', sans-serif;
+    color: #F4FFFD;
+}
+
+.gender-row-container {
+    display: flex;
+    gap: 1rem;
+    /* width: 100%; */
+}
+
+.gender-option {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.sign-up-gender-field {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
