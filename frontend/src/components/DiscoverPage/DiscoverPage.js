@@ -87,7 +87,14 @@ export default function DiscoverPage(props){
                         <div className="index-header">
                             <h2>Find an event near you</h2>
                         </div>
-                        <div className="sport-filter-container">
+                        <div 
+                            className="sport-filter-container"
+                            ref={sportFilterContainerRef}
+                            onMouseDown={onMouseDown}
+                            onMouseMove={onMouseMove}
+                            onMouseUp={onMouseUpOrLeave}
+                            onMouseLeave={onMouseUpOrLeave}
+                            >
                             <p onClick={()=>setRenderedEvents(events)}>Remove Filters</p>
                             {sportsWithEmojis.map((sport)=>{
                                 return (
@@ -98,24 +105,6 @@ export default function DiscoverPage(props){
                                     </p>
                                 )
                             })}
-                        <div 
-                            className="sport-filter-container"
-                            ref={sportFilterContainerRef}
-                            onMouseDown={onMouseDown}
-                            onMouseMove={onMouseMove}
-                            onMouseUp={onMouseUpOrLeave}
-                            onMouseLeave={onMouseUpOrLeave}
-                            >
-                                <p className="sport-label">Running 🏃🏻‍♂️</p>
-                                <p className="sport-label">Basketball 🏀</p>
-                                <p className="sport-label">Weight Lifting 🏋️</p>
-                                <p className="sport-label">Tennis 🎾</p>
-                                <p className="sport-label">Volleyball 🏐</p>
-                                <p className="sport-label">Soccer ⚽️</p>
-                                <p className="sport-label">Biking 🚴‍♀️</p>
-                                <p className="sport-label">Pickleball 🥒</p>
-                                <p className="sport-label">Yoga 🧘‍♀️</p>
-                                <p className="sport-label">Walking 🚶</p>
                         </div>
                         <button id="event-create-button"
                             onClick={()=>history.push("/event-form")}
@@ -157,7 +146,6 @@ export default function DiscoverPage(props){
                                 )
                             )
                         }
-                    </div>
                 </div>
                 </div>
             </main>
