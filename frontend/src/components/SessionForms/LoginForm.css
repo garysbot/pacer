@@ -2,7 +2,7 @@
   background: radial-gradient(circle, rgba(137,252,0,0.351707887113764) 0%, rgba(81,187,254,0.7786741792485955) 100%);
   background: linear-gradient(67deg, rgba(137,252,0,1) 0%, rgba(81,187,254,1) 100%);
   width: 32rem;
-  height: 18rem;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,4 +59,12 @@ input::placeholder {
   box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
   -webkit-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
   -moz-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 400;
+  margin-left: 0.25rem;
+  margin-bottom: 0.25rem;
 }
