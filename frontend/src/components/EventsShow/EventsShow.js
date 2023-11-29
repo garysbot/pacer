@@ -31,7 +31,7 @@ export default function EventsShow(){
         )
     }
 
-  const [showAttendees, setShowAttendees] = useState(false);
+  const [showAttendees, setShowAttendees] = useState(true);
   const attendeesCount = selectedEvent[eventKey]?.attendees.length || 0;
 
   const handleArrowToggle = () => {
@@ -88,7 +88,7 @@ export default function EventsShow(){
     }
   };
 
-  const [showMaybes, setShowMaybes] = useState(false);
+  const [showMaybes, setShowMaybes] = useState(true);
   const maybesCount = selectedEvent[eventKey]?.maybes.length || 0;
 
   const handleDownArrowToggle = () => {
