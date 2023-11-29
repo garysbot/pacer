@@ -1,5 +1,6 @@
-.session-form {
-    width: 50vw;
+.signup-form {
+    width: 32rem;
+    height: 32rem;
     max-height: 90vh;
     border: 2px solid rgba(250,76,76,1);
     border-radius: 5px;
