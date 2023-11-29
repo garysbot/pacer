@@ -211,7 +211,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', requireUser, validateEventInput, async (req, res, next) => {
-  // debugger
   try {
     const newEvent = new Event({
       owner: req.body.owner,
@@ -224,18 +223,77 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       maxGroupSize: req.body.maxGroupSize,
       eventPrivacy: req.body.eventPrivacy || false,
       longitude: req.body.longitude,
-      latitude: req.body.latitude
+      latitude: req.body.latitude,
     });
-    debugger
+
     let event = await newEvent.save();
-    event = await event.populate('owner', '_id');
-    return res.json(event);
-  }
-  catch(err) {
-    debugger
+
+    // Populate owner, attendees, and maybes fields
+    event = await Event.populate(event, [
+      { path: 'owner', select: '_id firstName lastName' },
+      { path: 'attendees', select: '_id firstName lastName' },
+      { path: 'maybes', select: '_id firstName lastName' },
+    ]);
+
+    // Prepare the response object with the desired structure
+    const responseEvent = {
+      _id: event._id,
+      eventName: event.eventName,
+      locationName: event.locationName,
+      description: event.description,
+      dateTime: event.dateTime,
+      difficulty: event.difficulty,
+      eventType: event.eventType,
+      maxGroupSize: event.maxGroupSize,
+      attendees: event.attendees.map(attendee => ({
+        _id: attendee._id,
+        firstName: attendee.firstName,
+        lastName: attendee.lastName,
+      })),
+      maybes: event.maybes.map(maybe => ({
+        _id: maybe._id,
+        firstName: maybe.firstName,
+        lastName: maybe.lastName,
+      })),
+      longitude: event.longitude,
+      latitude: event.latitude,
+      eventPrivacy: event.eventPrivacy,
+      ownerDetails: {
+        _id: event.owner._id,
+        firstName: event.owner.firstName,
+        lastName: event.owner.lastName,
+      },
+      attendeesDetails: await Promise.all(
+        event.attendees.map(async attendeeId => {
+          const user = await User.findById(attendeeId);
+          return {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            // Add other user details as needed
+          };
+        })
+      ),
+      maybesDetails: await Promise.all(
+        event.maybes.map(async maybeId => {
+          const user = await User.findById(maybeId);
+          return {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            // Add other user details as needed
+          };
+        })
+      ),
+    };
+
+    res.status(200).json(responseEvent);
+  } catch (err) {
+    console.error(err);
     next(err);
   }
 });
+
 
 router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => {
   try {
