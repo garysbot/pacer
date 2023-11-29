@@ -31,7 +31,7 @@
 .sport-filter-container {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   overflow: hidden;
 }
 .sport-filter-container p {
@@ -45,14 +45,23 @@
 .event-container {
   display: flex;
   align-items: center;
-  border-style: solid;
+  /* border-style: solid; */
   padding: 1rem;
-  border-width: 1px;
-  border-color: #9c9c9c;
+  /* border-width: 1px; */
+  /* border-color: #9c9c9c; */
   margin: 0.5rem 0rem;
   width: 80%;
   height: 18rem;
   border-radius: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.event-container:hover {
+  /* width: 80%; */
+  /* height: 18.025rem; */
+  box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
 }
 
 .event-content {
@@ -70,25 +79,63 @@
   font-size: 1.5rem;
 }
 
-.event-icons {
+.event-subheader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;  
+  
+}
+
+.event-subheader-difficulty {
+  font-size: 0.75rem;
+  font-family: 'Lexend';
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.sport-icon {
   width: 3rem;
-  height: 1.75rem;
-  background-color: aqua;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 3rem;
   margin: 0.25rem 0rem;
+  position: relative; /* Needed for absolute positioning of pseudo-element */
+  z-index: 0;
+
+  /* Bottom gradient layer */
+  background: linear-gradient(63deg, rgba(81,187,254,1) 0%, rgba(137,252,0,1) 100%);
 }
 
-.sport-label {
-  font-size: 1rem;
-  color: white;
+.sport-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* Inherit the border radius */
+  z-index: -1;
+  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
+
+.sport-icon:hover::before {
+  opacity: 1;
+}
+
+/* 
+.sport-label:hover {
+  box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+} */
 
 .date-time-location {
   display: flex;
   gap: 1rem;
+  margin: 0.50rem 0rem;
 }
 
 .date-time-location p {
@@ -101,10 +148,18 @@
   font-family: 'Nunito', sans-serif;
   font-weight: 400;
   font-size: 1rem;
-  width: 90%;
+  width: 80%;
 }
 
 .event-mini-map-container img {
   height: auto;
   width: 10rem;
+  border-radius: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.event-mini-map-container img:hover {
+  box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
 }
