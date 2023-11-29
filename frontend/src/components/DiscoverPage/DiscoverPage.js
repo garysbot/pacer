@@ -87,22 +87,12 @@ export default function DiscoverPage(props){
                                 <p className="sport-label">Basketball 🏀</p>
                                 <p className="sport-label">Weight Lifting 🏋️</p>
                                 <p className="sport-label">Tennis 🎾</p>
-                                <p className="sport-label">Running 🏃🏻‍♂️</p>
-                                <p className="sport-label">Basketball 🏀</p>
-                                <p className="sport-label">Weight Lifting 🏋️</p>
-                                <p className="sport-label">Tennis 🎾</p>
-                                <p className="sport-label">Running 🏃🏻‍♂️</p>
-                                <p className="sport-label">Basketball 🏀</p>
-                                <p className="sport-label">Weight Lifting 🏋️</p>
-                                <p className="sport-label">Tennis 🎾</p>
-                                <p className="sport-label">Running 🏃🏻‍♂️</p>
-                                <p className="sport-label">Basketball 🏀</p>
-                                <p className="sport-label">Weight Lifting 🏋️</p>
-                                <p className="sport-label">Tennis 🎾</p>
-                                <p className="sport-label">Running 🏃🏻‍♂️</p>
-                                <p className="sport-label">Basketball 🏀</p>
-                                <p className="sport-label">Weight Lifting 🏋️</p>
-                                <p className="sport-label">Tennis 🎾</p>
+                                <p className="sport-label">Volleyball 🏐</p>
+                                <p className="sport-label">Soccer ⚽️</p>
+                                <p className="sport-label">Biking 🚴‍♀️</p>
+                                <p className="sport-label">Pickleball 🥒</p>
+                                <p className="sport-label">Yoga 🧘‍♀️</p>
+                                <p className="sport-label">Walking 🚶</p>
                         </div>
                         <button id="event-create-button"
                             onClick={()=>history.push("/event-form")}
@@ -120,6 +110,7 @@ export default function DiscoverPage(props){
                                                     <div className="event-subheader">
                                                         <p className="sport-icon">🏃🏻‍♂️</p>
                                                         <p className="event-subheader-difficulty">{event.difficulty}</p>
+                                                        <p className="event-subheader-host">with {`${event.ownerDetails.firstName} ${event.ownerDetails.lastName}`}</p>
                                                     </div>
                                                 </div>
                                                 <div className="date-time-location">

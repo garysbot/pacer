@@ -121,6 +121,12 @@
   text-transform: uppercase;
 }
 
+.event-subheader-host {
+  font-size: 0.75rem;
+  font-family: 'Lexend';
+  
+}
+
 .sport-icon {
   width: 3rem;
   display: flex;
