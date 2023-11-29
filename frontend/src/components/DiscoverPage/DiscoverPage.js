@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import './DiscoverPage.css'
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../store/events";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -26,6 +25,33 @@ export default function DiscoverPage(props){
             <p className="date-time">{formattedDate} {formattedTime}</p>
         )
     }
+    // ! For sport-filter-container horizontal mouse scroll
+    // Ref for the container and state for drag-scrolling
+    const sportFilterContainerRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+
+    // Mouse down handler
+    const onMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - sportFilterContainerRef.current.offsetLeft);
+        setScrollLeft(sportFilterContainerRef.current.scrollLeft);
+    };
+
+    // Mouse move handler
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - sportFilterContainerRef.current.offsetLeft;
+        const walk = (x - startX) * 3; // Scroll-fastness
+        sportFilterContainerRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    // Mouse up and leave handlers
+    const onMouseUpOrLeave = () => {
+        setIsDragging(false);
+    };
 
     return (
         <>
@@ -49,11 +75,34 @@ export default function DiscoverPage(props){
                             <h2>Find an event near you</h2>
                         </div>
 
-                        <div className="sport-filter-container">
-                            <p className="sport-label">Running 🏃🏻‍♂️</p>
-                            <p className="sport-label">Basketball 🏀</p>
-                            <p className="sport-label">Weight Lifting 🏋️</p>
-                            <p className="sport-label">Tennis 🎾</p>
+                        <div 
+                            className="sport-filter-container"
+                            ref={sportFilterContainerRef}
+                            onMouseDown={onMouseDown}
+                            onMouseMove={onMouseMove}
+                            onMouseUp={onMouseUpOrLeave}
+                            onMouseLeave={onMouseUpOrLeave}
+                            >
+                                <p className="sport-label">Running 🏃🏻‍♂️</p>
+                                <p className="sport-label">Basketball 🏀</p>
+                                <p className="sport-label">Weight Lifting 🏋️</p>
+                                <p className="sport-label">Tennis 🎾</p>
+                                <p className="sport-label">Running 🏃🏻‍♂️</p>
+                                <p className="sport-label">Basketball 🏀</p>
+                                <p className="sport-label">Weight Lifting 🏋️</p>
+                                <p className="sport-label">Tennis 🎾</p>
+                                <p className="sport-label">Running 🏃🏻‍♂️</p>
+                                <p className="sport-label">Basketball 🏀</p>
+                                <p className="sport-label">Weight Lifting 🏋️</p>
+                                <p className="sport-label">Tennis 🎾</p>
+                                <p className="sport-label">Running 🏃🏻‍♂️</p>
+                                <p className="sport-label">Basketball 🏀</p>
+                                <p className="sport-label">Weight Lifting 🏋️</p>
+                                <p className="sport-label">Tennis 🎾</p>
+                                <p className="sport-label">Running 🏃🏻‍♂️</p>
+                                <p className="sport-label">Basketball 🏀</p>
+                                <p className="sport-label">Weight Lifting 🏋️</p>
+                                <p className="sport-label">Tennis 🎾</p>
                         </div>
                         <button id="event-create-button"
                             onClick={()=>history.push("/event-form")}
