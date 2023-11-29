@@ -168,61 +168,89 @@ function SignupForm ({ onSuccess }) {
 
   return (
     <form className='signup-form' onSubmit={handleSubmit}>
-      <h2>{step === 1 ? 'Sign Up Form' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
-      <div className="errors">{errors?.email}</div>
+      <div className='signup-form-header'>
+        <h2>{step === 1 ? '🫶 Signup' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
+      </div>
+
       {step === 1 && (
         <>
-            <label>
-              <input type='text'
-                value={firstName}
-                placeholder='First Name'
-                onChange={update('firstname')}
-              />
-            </label>
-            <br/>
-            <label>
-              <input type='text'
-                value={lastName}
-                placeholder='Last Name'
-                onChange={update('lastname')}
-              />
-            </label>
-            <br/>
-          <label>
-            {/* <span>Email</span> */}
-            <input type="text"
-              value={email}
-              onChange={update('email')}
-              placeholder="Email"
-            />
-          </label>
-          <div className="errors">{errors?.password}</div>
-          <label>
-            {/* <span>Password</span> */}
-            <input type="password"
-              value={password}
-              onChange={update('password')}
-              placeholder="Password"
-            />
-          </label>
-          <div className="errors">
-            {password !== password2 && 'Confirm Password field must match'}
+          <div className='field-row-container'>
+            <div className='field-container'>
+              <label>
+                <p className='field-label'>First Name</p>
+                <input type='text'
+                  value={firstName}
+                  placeholder='First Name'
+                  onChange={update('firstname')}
+                  className='input-field'
+                />
+              </label>
+            </div>
+            <div className='field-container'>
+              <label>
+                <p className='field-label'>Last Name</p>
+                <input type='text'
+                  value={lastName}
+                  placeholder='Last Name'
+                  onChange={update('lastname')}
+                  className='input-field'
+                />
+              </label>
+            </div>
           </div>
-          <label>
-            {/* <span>Confirm Password</span> */}
-            <input type="password"
-              value={password2}
-              onChange={update('password2')}
-              placeholder="Confirm Password"
-            />
-          </label>
-          
+
+          <div className='field-row-container'>
+            <div className='field-container'>
+              <label>
+                <p className='field-label'>Email</p>
+                <input type="text"
+                  value={email}
+                  onChange={update('email')}
+                  placeholder="Email"
+                  className='email-field'
+                />
+                <div className="errors">{errors?.email}</div>
+              </label>
+            </div>
+          </div>
+
+          <div className='field-row-container'>
+            <div className='field-container'>
+              <label>
+                <p className='field-label'>Password</p>
+                <input type="password"
+                  value={password}
+                  onChange={update('password')}
+                  placeholder="Password"
+                  className='input-field'
+                />
+                <div className="errors">{errors?.password}</div>
+              </label>
+            </div>
+
+            <div className='field-container'>
+              <label>
+                <p className='field-label'>Confirm Password</p>
+                <input type="password"
+                  value={password2}
+                  onChange={update('password2')}
+                  placeholder="Confirm Password"
+                  className='input-field'
+                />
+              </label>
+              <div className="errors">
+                {password !== password2 && 'Confirm Password field must match'}
+              </div>
+            </div>
+          </div>
+
           <div className="sign-up-birthday-field">
-            <label>Birthday</label>
+            <p className='field-label'>Birthday</p>
             <select
                 name='month'
                 onChange={(e) => {setMonth(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
                 value={month}
+                className='select-field'
             >
                 {generateMonthOptions()}
             </select>
@@ -230,6 +258,7 @@ function SignupForm ({ onSuccess }) {
                 name='day'
                 onChange={(e) => {setDay(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
                 value={day}
+                className='select-field date'
             >
                 {generateDayOptions()}
             </select>
@@ -237,23 +266,32 @@ function SignupForm ({ onSuccess }) {
                 name='year'
                 onChange={(e) => {setYear(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
                 value={year}
+                className='select-field year'
             >
                 {generateYearOptions()}
             </select>
           </div>
+          
           <div className="sign-up-gender-field">
-            <label>Gender</label>
-            <section className='gender'>
-              Male
-              <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
-              Female
-              <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
-              Other
-              <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
-            </section>
+            <p className='field-label'>Gender</p>
+            <div className='gender-row-container'>
+              <div className='gender-option'>
+                <span>Male</span>
+                <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
+              </div>
+              <div className='gender-option'>
+                <span>Female</span>
+                <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
+              </div>
+              <div className='gender-option'>
+                <span>Other</span>
+                <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
+              </div>
+            </div>
           </div>
         </>
       )}
+
       {/* <section className='primary sport'>
         <input type='text'
           onChange={(e)=>setPrimarySport(e.target.value)}

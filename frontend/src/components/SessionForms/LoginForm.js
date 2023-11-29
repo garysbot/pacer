@@ -33,6 +33,7 @@ function LoginForm ({ onSuccess }) {
       </div>
 
       <label>
+        <p className='field-label'>Email:</p>
         <input type="text"
           value={email}
           onChange={update('email')}
@@ -43,6 +44,7 @@ function LoginForm ({ onSuccess }) {
       </label>
 
       <label>
+        <p className='field-label'>Password:</p>
         <input type="password"
           value={password}
           onChange={update('password')}
