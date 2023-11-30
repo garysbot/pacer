@@ -55,7 +55,7 @@ function NavBar () {
           </div>
           
           <div className='nav-links'>
-            <Link to={'/discover'}><h3>Discover</h3></Link>
+            <Link to={'/discover'}><h3 className='glowing-border'>Discover</h3></Link>
             <Link to={'/discover'}><h3>About</h3></Link>
           </div>
 
