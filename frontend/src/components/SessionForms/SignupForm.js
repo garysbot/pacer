@@ -168,13 +168,13 @@ function SignupForm ({ onSuccess }) {
 
   return (
     <form className='signup-form' onSubmit={handleSubmit}>
-      <div className='signup-form-header'>
-        <h2>{step === 1 ? '🫶 Signup' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
-      </div>
+      <div className='signup-form-content'>
+        <div className='signup-form-header'>
+          <h2>{step === 1 ? '🫶 Signup' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
+        </div>
 
-      {step === 1 && (
-        <>
-          <div className='field-row-container'>
+        {step === 1 && (
+          <>
             <div className='field-container'>
               <label>
                 <p className='field-label'>First Name</p>
@@ -197,9 +197,7 @@ function SignupForm ({ onSuccess }) {
                 />
               </label>
             </div>
-          </div>
 
-          <div className='field-row-container'>
             <div className='field-container'>
               <label>
                 <p className='field-label'>Email</p>
@@ -207,14 +205,12 @@ function SignupForm ({ onSuccess }) {
                   value={email}
                   onChange={update('email')}
                   placeholder="Email"
-                  className='email-field'
+                  className='input-field'
                 />
                 <div className="errors">{errors?.email}</div>
               </label>
             </div>
-          </div>
 
-          <div className='field-row-container'>
             <div className='field-container'>
               <label>
                 <p className='field-label'>Password</p>
@@ -242,155 +238,163 @@ function SignupForm ({ onSuccess }) {
                 {password !== password2 && 'Confirm Password field must match'}
               </div>
             </div>
-          </div>
 
-          <div className="sign-up-birthday-field">
-            <p className='field-label'>Birthday</p>
-            <select
-                name='month'
-                onChange={(e) => {setMonth(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
-                value={month}
-                className='select-field'
-            >
-                {generateMonthOptions()}
-            </select>
-            <select
-                name='day'
-                onChange={(e) => {setDay(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
-                value={day}
-                className='select-field date'
-            >
-                {generateDayOptions()}
-            </select>
-            <select
-                name='year'
-                onChange={(e) => {setYear(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
-                value={year}
-                className='select-field year'
-            >
-                {generateYearOptions()}
-            </select>
-          </div>
-          
-          <div className="sign-up-gender-field">
-            <p className='field-label'>Gender</p>
-            <div className='gender-row-container'>
-              <div className='gender-option'>
-                <span>Male</span>
-                <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
-              </div>
-              <div className='gender-option'>
-                <span>Female</span>
-                <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
-              </div>
-              <div className='gender-option'>
-                <span>Other</span>
-                <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
+            <div className="sign-up-birthday-field">
+              <p className='field-label'>Birthday</p>
+
+              <div className='field-row-container'>
+                <select
+                    name='month'
+                    onChange={(e) => {setMonth(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    value={month}
+                    className='select-field month'
+                >
+                    {generateMonthOptions()}
+                </select>
+                <select
+                    name='day'
+                    onChange={(e) => {setDay(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    value={day}
+                    className='select-field date'
+                >
+                    {generateDayOptions()}
+                </select>
+                <select
+                    name='year'
+                    onChange={(e) => {setYear(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    value={year}
+                    className='select-field year'
+                >
+                    {generateYearOptions()}
+                </select>
               </div>
             </div>
-          </div>
-        </>
-      )}
-
-      {/* <section className='primary sport'>
-        <input type='text'
-          onChange={(e)=>setPrimarySport(e.target.value)}
-          placeholder='Primary Sport'
-        />
-      </section> */}
-      {step > 1 && (
-        <div id="sign-up-back-button">
-          <button type="button" onClick={handleBack}>
-            Back
-          </button>
-        </div>
-      )}
-      {step === 1 && (
-        <input
-          type="button"
-          value="Next"
-          onClick={handleNext}
-          disabled={!email || !password || password !== password2}
-        />
-      )}
-      {step === 2 && (
-        <>
-          {/* Render checkboxes for primary sports */}
-          <div className='primary-sport-div'>
-            {sportsList.map((sport) => (
-              <div key={sport} className="sport-option">
-                <label>
-                  <input
-                    type="checkbox"
-                    value={sport}
-                    checked={primarySport.sport === sport}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setPrimarySport({ sport, experienceLevel: '' });
-                      } else {
-                        setPrimarySport({});
-                      }
-                    }}
-                  />
-                  {sport}
-                </label>
+            
+            <div className="sign-up-gender-field">
+              <p className='field-label'>Gender</p>
+              <div className='field-row-container'>
+                <div className='gender-option'>
+                  <span>Male</span>
+                  <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
+                </div>
+                <div className='gender-option'>
+                  <span>Female</span>
+                  <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
+                </div>
+                <div className='gender-option'>
+                  <span>Other</span>
+                  <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
+                </div>
               </div>
-            ))}
+            </div>
+          </>
+        )}
 
+        {/* <section className='primary sport'>
+          <input type='text'
+            onChange={(e)=>setPrimarySport(e.target.value)}
+            placeholder='Primary Sport'
+          />
+        </section> */}
+        {step > 1 && (
+          <div id="sign-up-back-button">
+            <button 
+              type="button" 
+              onClick={handleBack}
+              className='signup-button'
+            >
+              Back
+            </button>
           </div>
-          {/* <h1>Select your Experience Level</h1> */}
-          <div className="experience-level-radio-div">
-            {experienceLevels.map((level) => (
-              <label key={level}>
-                <input
-                  type="radio"
-                  value={level}
-                  checked={primarySport.experienceLevel === level}
-                  onChange={() =>
-                    setPrimarySport({ ...primarySport, experienceLevel: level })
-                  }
-                />
-                {level}
-              </label>
-            ))}
-          </div>
-          <button
+        )}
+        {step === 1 && (
+          <input
             type="button"
+            value="Next"
             onClick={handleNext}
-            disabled={!primarySport.sport || !primarySport.experienceLevel}
-          >
-            Next
-          </button>
-        </>
-      )}
+            disabled={!email || !password || password !== password2}
+            className='signup-button'
+          />
+        )}
+        {step === 2 && (
+          <>
+            {/* Render checkboxes for primary sports */}
+            <div className='primary-sport-div'>
+              {sportsList.map((sport) => (
+                <div key={sport} className="sport-option">
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={sport}
+                      checked={primarySport.sport === sport}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          setPrimarySport({ sport, experienceLevel: '' });
+                        } else {
+                          setPrimarySport({});
+                        }
+                      }}
+                    />
+                    {sport}
+                  </label>
+                </div>
+              ))}
 
-      {/* <input
-        type="submit"
-        value="Sign Up"
-        disabled={!email || !username || !password || password !== password2}
-      /> */}
-      {step === 3 && (
-        <>
-          {/* Render buttons for secondary sports */}
-          <div className='secondary-sport-list-div'>
-            {sportsList
-              .filter((sport) => sport !== primarySport)
-              .map((sport) => (
-                <label key={sport} className='secondary-sport-list-input-label'>
-                  <input 
-                    type="checkbox"
-                    value={sport}
-                    checked={selectedSports.includes(sport)}
-                    onChange={() => handleSportSelection(sport)}
+            </div>
+            {/* <h1>Select your Experience Level</h1> */}
+            <div className="experience-level-radio-div">
+              {experienceLevels.map((level) => (
+                <label key={level}>
+                  <input
+                    type="radio"
+                    value={level}
+                    checked={primarySport.experienceLevel === level}
+                    onChange={() =>
+                      setPrimarySport({ ...primarySport, experienceLevel: level })
+                    }
                   />
-                  {sport}
+                  {level}
                 </label>
-              ))
-            }
-          </div>
-          <input type="submit" value="Sign Up" />
-        </>
-      )}
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={!primarySport.sport || !primarySport.experienceLevel}
+            >
+              Next
+            </button>
+          </>
+        )}
+
+        {/* <input
+          type="submit"
+          value="Sign Up"
+          disabled={!email || !username || !password || password !== password2}
+        /> */}
+        {step === 3 && (
+          <>
+            {/* Render buttons for secondary sports */}
+            <div className='secondary-sport-list-div'>
+              {sportsList
+                .filter((sport) => sport !== primarySport)
+                .map((sport) => (
+                  <label key={sport} className='secondary-sport-list-input-label'>
+                    <input 
+                      type="checkbox"
+                      value={sport}
+                      checked={selectedSports.includes(sport)}
+                      onChange={() => handleSportSelection(sport)}
+                    />
+                    {sport}
+                  </label>
+                ))
+              }
+            </div>
+            <input type="submit" value="Sign Up" />
+          </>
+        )}
+      </div>
     </form>
   );
 }

@@ -1,30 +1,25 @@
-.signup-form {
-    /* background: radial-gradient(circle, rgba(137,252,0,0.351707887113764) 0%, rgba(81,187,254,0.7786741792485955) 100%); */
-    /* background: linear-gradient(67deg, rgba(137,252,0,1) 0%, rgba(81,187,254,1) 100%); */
-    /* background: radial-gradient(circle, rgba(137,252,0,0.351707887113764) 0%, rgba(250,130,76,0.7786741792485955) 100%);
-    background: linear-gradient(67deg, rgba(137,252,0,1) 0%, rgba(250,130,76,1) 100%); */
-    background: radial-gradient(circle, rgba(81,187,254,0.351707887113764) 0%, rgba(250,130,76,0.7786741792485955) 100%);
-    background: linear-gradient(67deg, rgba(81,187,254,1) 0%, rgba(250,130,76,1) 100%);
-    width: 32rem;
-    height: 40rem;
-    border-style: none;
-    border-radius: 3rem;
-    padding: 2rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+.signup-form-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    bottom: 50%;
 }
 
 .signup-form-header {
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     margin-bottom: 1rem;
+    white-space: nowrap;
 }
 
 .signup-form-header h2 {
     color: #F4FFFD;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .signup-form p {
@@ -47,6 +42,9 @@
 
 .select-field, .select-field option {
     color: #F4FFFD; /* White color */
+    height: 2.25rem;
+    padding: 0;
+    padding-inline-start: 0.5rem;
 }
 
 
@@ -58,12 +56,16 @@
     width: 12rem;
 }
 
+.month {
+    width: 7.25rem;
+}
+
 .date {
-    width: 5rem;
+    width: 3.25rem;
 }
 
 .year {
-    width: 6rem;
+    width: 4.75rem;
 }
 
 .primary-sport-div{
@@ -71,7 +73,7 @@
     flex-wrap: wrap;
 }
 
- 
+
 .sport-option {
     /* width: 33%; */
     box-sizing: border-box;
@@ -117,59 +119,22 @@
     padding: 10px
 }
 
-.experience-level-radio-div label{
-    /* border */
-}
-
-
-/* .sport-option button {
-    color: pink;
-    border-color: pink;
-    width: 90%;
-}
-
-.sport-option button:disabled {
-    background-color: pink;
-    color: white;
-} */
-
 #sign-up-back-button {
     width: 100%;
 }
 
 .field-row-container {
     display: flex;
-    gap: 1rem;
-    margin: 0.5rem 0rem;
     width: 100%;
     justify-content: center;
-    height: 4rem;
 }
 
 
 .field-container {
     display: flex;
+    margin-top: 0.5rem;
 }
 
-.email-field {
-    background-color: transparent;
-    border-style: solid;
-    border-color: #F4FFFD;
-    border-radius: 3rem;
-    height: 2.25rem;
-    width: 25rem;
-    margin: 0.25rem 0rem;
-    /* padding-inline-start: 0.75rem; */
-    padding-left: 0.75rem;
-    font-family: 'Nunito', sans-serif;
-    color: #F4FFFD;
-}
-
-.gender-row-container {
-    display: flex;
-    gap: 1rem;
-    /* width: 100%; */
-}
 
 .gender-option {
     display: flex;
@@ -179,4 +144,10 @@
 .sign-up-gender-field {
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
+}
+
+.signup-button {
+    width: 6rem;
+    height: 3rem;
+    border-radius: 3rem;
 }
