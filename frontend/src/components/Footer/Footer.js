@@ -7,6 +7,9 @@ const Footer = () => {
         <div>
           Copyright &copy; 2023 Illuminati Inc. dba 'Pacer'
         </div>
+        <div className='easter-egg disable-highlighting'>
+          <span>GARY'S EASTER EGG (-‿◦☀)</span>
+        </div>
       </footer>
     </>
   );

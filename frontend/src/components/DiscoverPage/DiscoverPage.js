@@ -14,11 +14,16 @@ export default function DiscoverPage(props){
         'CrossFit (fitness activity/sport) 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
     ];
     const history = useHistory()
-    const [filterContainerOpen, setFilterContainerOpen] = useState(false);
+    const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
     const events = Object.values(eventsObj);
-    const [renderedEvents, setRenderedEvents] = useState(events)
+    // ==================== calculating time functionality =============================
+    const nowTime = new Date()
+    const futureEvents = events.filter((e)=> nowTime.getTime() < new Date(e.dateTime).getTime())
+    const [renderedEvents, setRenderedEvents] = useState(futureEvents)
+
+    // ======= filtering logic ================
     const [canRemoveFilters, setCanRemoveFilters] = useState(false)
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -29,11 +34,17 @@ export default function DiscoverPage(props){
 
     function handleFilter(eventType){
         setCanRemoveFilters(false)
-        console.log(canRemoveFilters)
         let toFilter = eventType.split(' ')[0]
-        // console.log(renderedEvents)
         let filteredEvents = renderedEvents.filter((event)=>event.eventType===toFilter)
+        let newSportList = filteredSports.filter((sport)=>sport===eventType)
         setRenderedEvents(filteredEvents)
+        setFilteredSports(newSportList)
+    }
+
+    function resetFilters(){
+        setRenderedEvents(futureEvents)
+        setFilteredSports(sportsWithEmojis)
+        console.log(filteredSports)
     }
 
     const timeConverter = (dateTime) => {
@@ -94,9 +105,9 @@ export default function DiscoverPage(props){
                             onMouseMove={onMouseMove}
                             onMouseUp={onMouseUpOrLeave}
                             onMouseLeave={onMouseUpOrLeave}
-                            >
-                            <p onClick={()=>setRenderedEvents(events)}>Remove Filters</p>
-                            {sportsWithEmojis.map((sport)=>{
+                        >
+                            <p className="sport-filter-label" onClick={resetFilters}>❌</p>
+                            {filteredSports.map((sport)=>{
                                 return (
                                     <p className="sport-label"
                                         onClick={()=>handleFilter(sport)}
@@ -105,6 +116,7 @@ export default function DiscoverPage(props){
                                     </p>
                                 )
                             })}
+                            <p className="sport-label">Rob's Easter Egg</p>
                         </div>
                         <button id="event-create-button"
                             onClick={()=>history.push("/event-form")}

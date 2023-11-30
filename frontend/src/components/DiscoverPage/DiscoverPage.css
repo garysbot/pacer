@@ -41,7 +41,7 @@
   position: relative;
 }
 
-.sport-filter-container p {
+.sport-label {
   width: auto;
   background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
   font-size: 0.75rem;
@@ -52,15 +52,30 @@
   border-radius: 2rem;
 }
 
+.sport-label:hover {
+  cursor: pointer;
+}
+
 .sport-filter-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.sport-label:hover {
-  /* box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51); */
+.sport-filter-label{
+    width: auto;
+    background: linear-gradient(145deg, #89fc00 0%, rgba(250,130,76,1) 100%);
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 3px;
+    font-family: 'Lexend';
+    font-weight: 500;
+    border-radius: 2rem;
 }
+
+.sport-filter-label:hover{
+  cursor: pointer;
+}
+
+
 
 #event-create-button{
   width: 80%;
