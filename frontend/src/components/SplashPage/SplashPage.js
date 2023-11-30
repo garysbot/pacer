@@ -9,7 +9,7 @@ function SplashPage() {
             <source src='../../static/splash-vid-3.mp4' type="video/mp4"/>
           </video>
           <div className='video-overlay'>
-            <h1>Exercising is lonely af</h1>
+            <h1>Exercising is <h1 className='animate-characters'>lonely af</h1></h1>
             <p>Pacer connects you with new exercise pals at your performance level</p>
           </div>
         </div>
