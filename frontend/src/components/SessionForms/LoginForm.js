@@ -24,6 +24,7 @@ function LoginForm ({ onSuccess }) {
     e.preventDefault();
     const res = await dispatch(login({ email, password })); 
     if (res === "success") onSuccess();
+    else return;
   }
 
   return (
