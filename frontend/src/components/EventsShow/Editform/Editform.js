@@ -9,7 +9,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { updateEventThunk } from "../../../store/events";
 
-export default function Editform(){
+export default function Editform({ setEditPage }) {
     const dispatch = useDispatch();
     const { id } = useParams();
     const selectedEvent = useSelector((state) => state.events.all[id]);
@@ -26,10 +26,18 @@ export default function Editform(){
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('selectedEventData'));
         if (storedData) {
+            const dateObject = new Date(storedData.dateTime);
+            const date = dateObject.toISOString().split('T')[0];
+            let hours = dateObject.getHours();
+            const minutes = dateObject.getMinutes();
+            const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+            const time = `${formattedHours}:${formattedMinutes}`;
+
         setEventName(storedData.eventName);
         setDescription(storedData.description);
-        setDate(storedData.dateTime);
-        setTime(storedData.dateTime);
+        setDate(date);
+        setTime(time);
         setEventType(storedData.eventType);
         setDifficulty(storedData.difficulty);
         setMaxGroupSize(storedData.maxGroupSize);
@@ -50,17 +58,17 @@ export default function Editform(){
     ];
     const difficulties = ["Beginner", "Intermediate", "Advanced"]
 
-    const [eventName, setEventName] = useState(selectedEvent?.eventName)
-    const [description, setDescription] = useState(selectedEvent?.description)
-    const [date, setDate] = useState(selectedEvent?.dateTime);
-    const [time, setTime] = useState(selectedEvent?.dateTime);
-    const [eventType, setEventType] = useState(selectedEvent?.eventType)
-    const [difficulty, setDifficulty] = useState(selectedEvent?.difficulty)
-    const [maxGroupSize, setMaxGroupSize] = useState(selectedEvent?.maxGroupSize)
-    const [selectedAddress, setSelectedAddress] = useState(selectedEvent?.locationName);
-    const [latitude, setLatitude] = useState(selectedEvent?.latitude);
-    const [longitude, setLongitude] = useState(selectedEvent?.longitude);
-    const [locationName, setLocationName] = useState(selectedEvent?.locationName);
+    const [eventName, setEventName] = useState("")
+    const [description, setDescription] = useState("")
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
+    const [eventType, setEventType] = useState("")
+    const [difficulty, setDifficulty] = useState("")
+    const [maxGroupSize, setMaxGroupSize] = useState(0)
+    const [selectedAddress, setSelectedAddress] = useState("");
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [locationName, setLocationName] = useState("");
 
     const handleSelect = async (address) => {
         try {
@@ -130,6 +138,7 @@ export default function Editform(){
 
     return (
         <>
+            <button className='cancel-edit' onClick={() => setEditPage(false)}>Cancel Edit</button>
             <div id="event-form-div">
                 <label>
                     Give your event a name
@@ -141,7 +150,7 @@ export default function Editform(){
                     Where is this event taking place?
                     <br/>
                     <PlacesAutocomplete
-                        value={locationName}
+                        value={selectedAddress}
                         onChange={setSelectedAddress}
                         onSelect={handleSelect}
                     >

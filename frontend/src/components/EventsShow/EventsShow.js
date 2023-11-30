@@ -212,7 +212,7 @@ export default function EventsShow(){
             )}
         </>
           ) : (
-            <EditForm/>
+            <EditForm setEditPage={setEditPage}/>
           )}
           </>
     )}
