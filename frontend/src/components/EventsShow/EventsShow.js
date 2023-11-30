@@ -73,8 +73,8 @@ export default function EventsShow(){
     if (attendeesCount > 5) {
       if (showAttendees) {
         return (
-            <span onClick={handleArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
-                {attendeesCount} Attending <span style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
+            <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+                {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
                 <div className="attendees-list" style={{ display: showAttendees ? "block" : "none" }}>
                 {selectedEvent?.attendeesDetails.slice(0, 5).map((attendee, index) => (
                     <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
@@ -89,8 +89,8 @@ export default function EventsShow(){
         }
 
         return (
-          <span onClick={handleArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
-            {attendeesCount} Attending <span style={{ cursor: 'pointer' }}>&#9660;</span>
+          <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+            {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="attendees-list">
               {chunks.map((chunk, chunkIndex) => (
                 <div key={chunkIndex}>
@@ -130,8 +130,8 @@ export default function EventsShow(){
     if (maybesCount > 5) {
       if (showMaybes) {
         return (
-            <span onClick={handleDownArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
-                {maybesCount} Interested <span style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
+            <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+                {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
                 <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
                 {selectedEvent?.maybesDetails.slice(0, 5).map((maybes, index) => (
                     <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
@@ -146,8 +146,8 @@ export default function EventsShow(){
         }
 
         return (
-          <span onClick={handleDownArrowToggle} style={{ fontSize: "1.5rem", fontWeight: "400" }}>
-            {maybesCount} Interested <span style={{ cursor: 'pointer' }}>&#9660;</span>
+          <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+            {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="maybes-list">
               {chunks.map((chunk, chunkIndex) => (
                 <div key={chunkIndex}>
