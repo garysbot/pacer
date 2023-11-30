@@ -72,7 +72,6 @@ export const composeEvent = data => async dispatch => {
     dispatch(receiveNewEvent(event));
     return event;
   } catch(err) {
-    // debugger
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       return dispatch(receiveErrors(resBody.errors));
