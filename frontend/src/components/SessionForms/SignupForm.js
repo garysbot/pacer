@@ -28,7 +28,7 @@ function SignupForm ({ onSuccess }) {
   const [day, setDay] = useState(date.getDate());
   const [month, setMonth] = useState(months[date.getMonth()]);
   const [year, setYear] = useState(date.getFullYear());
-  const [birthday, setBirthday] = useState(date);
+  const [birthday, setBirthday] = useState('');
   const [gender, setGender] = useState('')
   const [primarySport, setPrimarySport] = useState({});
   const [experienceLevel, setExperienceLevel] = useState('');
@@ -66,6 +66,7 @@ function SignupForm ({ onSuccess }) {
     const currentDate = new Date();
     const selectedDate = new Date(birthday);
     const age = currentDate.getFullYear() - selectedDate.getFullYear();
+    debugger;
     if (age < 18) {
       newErrors.age = 'Must be at least 18 years old';
     }
@@ -300,7 +301,7 @@ function SignupForm ({ onSuccess }) {
               <div className='field-row-container'>
                 <select
                     name='month'
-                    onChange={(e) => {setMonth(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    onChange={(e) => {setMonth(e.target.value); setBirthday(e.target.value.toString()+'-'+month.toString()+'-'+day.toString())}}
                     value={month}
                     className='select-field month'
                 >
@@ -308,7 +309,7 @@ function SignupForm ({ onSuccess }) {
                 </select>
                 <select
                     name='day'
-                    onChange={(e) => {setDay(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    onChange={(e) => {setDay(e.target.value); setBirthday(e.target.value.toString()+'-'+month.toString()+'-'+day.toString())}}
                     value={day}
                     className='select-field date'
                 >
@@ -316,7 +317,7 @@ function SignupForm ({ onSuccess }) {
                 </select>
                 <select
                     name='year'
-                    onChange={(e) => {setYear(e.target.value); setBirthday(year.toString()+'-'+month.toString()+'-'+day.toString())}}
+                    onChange={(e) => {setYear(e.target.value); setBirthday(e.target.value.toString()+'-'+month.toString()+'-'+day.toString()); debugger;}}
                     value={year}
                     className='select-field year'
                 >

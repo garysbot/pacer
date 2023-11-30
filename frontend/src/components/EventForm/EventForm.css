@@ -1,129 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@700&family=Nunito:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap');
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-#event-form-div{
+.event-form-div {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2rem 0rem;
+    margin-bottom: 4rem;
+}
+.create-form-header {
+  padding-top: 2rem;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+  color: #F4FFFD;
 }
 
-#event-form-form{
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
+.event-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#form-submit{
-    width: 100%;
-}
-
-#form-submit:hover{
-    cursor: pointer;
-    background-color: white;
-}
-
-label{
-    font-family: 'Lexend';
-    color: white;
-    /* margin: 10px */
+textarea {
+  background-color: transparent;
+  border-style: solid;
+  border-color: #F4FFFD;
+  border-radius: 3rem;
+  height: 2.25rem;
+  width: 16rem;
+  margin: 0.25rem 0rem;
+  /* padding-inline-start: 0.75rem; */
+  padding-left: 0.75rem;
+  font-family: 'Nunito', sans-serif;
+  color: #F4FFFD;
+  border-width: 2px;
 }
 
 select {
-    width: 100%;
-    margin: 5px;
-    padding: 10px;
-    font-size: 20px;
-    border-width: 2px;
-    border-style: outset;
-    border-radius: 30px;
-    /* box-shadow: 0px 0px 5px rgba(66,66,66,.75); */
-    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+ border-width: 2px; 
 }
 
-.event-form-text-input{
-    width: 100%;
-    margin: 5px;
-    padding: 10px;
-    font-size: 20px;
-    border-width: 4px;
-    border-color: #ff5964;
-    background-color: #ffffff;
-    color: #000000;
-    border-style: outset;
-    border-radius: 30px;
-    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
-    /* font-family: 'Lexend'; */
-}
-.event-form-text-input:focus{
-    outline: none;
-}
-
-input[type=number]{
-    width: 100%;
-    margin: 5px;
-    padding: 10px;
-    font-size: 20px;
-    border-width: 4px;
-    border-color: #ff5964;
-    background-color: #ffffff;
-    color: #000000;
-    border-style: outset;
-    border-radius: 30px;
-    box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-}
-
-input[type=time] {
-  border: none;
-  color: #2a2c2d;
-  font-size: 14px;
-  font-family: helvetica;
-  width: 50%
-}
-
-input[type=time]::-webkit-datetime-edit-fields-wrapper {
+.form-submit {
+  width: 12rem;
+  height: 2.25rem;
+  text-align: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 2px;
 }
-
-input[type=time]::-webkit-datetime-edit-text {
-  padding: 19px 4px;
-}
-
-input[type=time]::-webkit-datetime-edit-hour-field {
-  background-color: #f2f4f5;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-input[type=time]::-webkit-datetime-edit-minute-field {
-  background-color: #f2f4f5;
-  border-radius: 15%;
-  padding: 19px 13px;
-}
-
-input[type=time]::-webkit-datetime-edit-ampm-field {
-  background-color: #7155d3;
-  border-radius: 15%;
-  color: #fff;
-  padding: 19px 13px;
-}
-
-input[type=time]::-webkit-clear-button {
-  display: none;
-}
-
-input[type=time]::-webkit-inner-spin-button {
-  display: none;
-}
-
-
-
-
