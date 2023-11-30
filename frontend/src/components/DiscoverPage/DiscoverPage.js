@@ -3,6 +3,8 @@ import './DiscoverPage.css'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../store/events";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import LoginForm from '../SessionForms/LoginForm';
+import Modal from '../../context/Modal';
 
 export default function DiscoverPage(props){
     const sportsWithEmojis = [
@@ -17,6 +19,7 @@ export default function DiscoverPage(props){
     const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
     const events = Object.values(eventsObj);
     // ==================== calculating time functionality =============================
     const nowTime = new Date()
@@ -84,9 +87,35 @@ export default function DiscoverPage(props){
         setIsDragging(false);
     };
 
+    const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
+
+    const openModal = (modalType) => {
+        setShowModal(modalType);
+    };
+
+    const closeModal = () => {
+        setShowModal(null);
+    };
+
+    const handleSignInSuccess = () => {
+        closeModal();
+    };
+
+    const handleCreateEventBtn = () => {
+        if (sessionUser) {
+            history.push("/event-form")
+        }
+        else {
+            openModal('signin');
+        }
+    }
+
     return (
         <>
             <main>
+                <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
+                    <LoginForm onSuccess={handleSignInSuccess} />
+                </Modal>
                 <div className="discover-parent-container">
                     <div className="filter-container">
                         <form>                           
@@ -119,7 +148,7 @@ export default function DiscoverPage(props){
                             <p className="sport-label">Rob's Easter Egg</p>
                         </div>
                         <button id="event-create-button"
-                            onClick={()=>history.push("/event-form")}
+                            onClick={handleCreateEventBtn}
                         >
                             Create an event!
                         </button>

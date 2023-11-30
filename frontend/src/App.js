@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/" component={SplashPage} />
         <Route exact path="/events/:id" component={EventsShow}/>
         <Route exact path="/users/:id" component={UsersShow}/>
-        <Route exact path="/event-form" component={EventForm}/>
+        <ProtectedRoute exact path="/event-form" component={EventForm}/>
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
         {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}

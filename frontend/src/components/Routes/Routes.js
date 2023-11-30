@@ -25,7 +25,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         loggedIn ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/" />
+          <Redirect to="/discover" />
         )
       }
     />
