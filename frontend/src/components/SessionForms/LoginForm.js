@@ -20,10 +20,11 @@ function LoginForm ({ onSuccess }) {
     return e => setState(e.currentTarget.value);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password })); 
-    onSuccess();
+    const res = await dispatch(login({ email, password })); 
+    if (res === "success") onSuccess();
+    else return;
   }
 
   return (
@@ -41,7 +42,7 @@ function LoginForm ({ onSuccess }) {
             placeholder="Email address"
             className='input-field'
           />
-          <div className="errors">{errors?.email}</div>
+          <span className="errors">{errors?.email}</span>
         </label>
 
         <label>
@@ -52,7 +53,7 @@ function LoginForm ({ onSuccess }) {
             placeholder="Password"
             className='input-field'
           />
-          <div className="errors">{errors?.password}</div>
+          <span className="errors">{errors?.password}</span>
         </label>
 
         <input

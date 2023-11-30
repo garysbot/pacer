@@ -49,6 +49,41 @@ function SignupForm ({ onSuccess }) {
     };
   }, [dispatch]);
 
+  const [stepOneErrors, setStepOneErrors] = useState({});
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (firstName.length < 3) {
+      newErrors.firstName = 'First name must be at least 3 characters';
+    }
+    if (lastName.length < 3) {
+      newErrors.lastName = 'Last name must be at least 3 characters';
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      newErrors.email = 'Invalid email address';
+    }
+    const currentDate = new Date();
+    const selectedDate = new Date(birthday);
+    const age = currentDate.getFullYear() - selectedDate.getFullYear();
+    if (age < 18) {
+      newErrors.age = 'Must be at least 18 years old';
+    }
+    if (!password) {
+      newErrors.passwordErrorOne = 'Please enter a password';
+    }
+    if (password.length < 6) {
+      newErrors.passwordErrorTwo = 'Password must be at least 6 characters';
+    }
+    if (!gender) {
+      newErrors.gender = 'Please select a gender';
+    } 
+    setStepOneErrors(newErrors);
+
+    // If there are no errors, return true; otherwise, return false
+    return Object.keys(newErrors).length === 0;
+  };
+
   const update = field => {
     let setState;
 
@@ -76,6 +111,9 @@ function SignupForm ({ onSuccess }) {
   }
 
   const handleNext = () => {
+    if (step === 1 && !validateForm()) {
+      return;
+    }
     setStep(step + 1);
   };
 
@@ -107,16 +145,16 @@ function SignupForm ({ onSuccess }) {
   ]
   const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (step === 1) {
-      // Proceed to the next step
       handleNext();
     } else if (step === 2) {
       // Set primary sport and proceed to step 3
-      handleNext();
-      setPrimarySport({ sport: primarySport.sport, experienceLevel });
+      if (primarySport.sport && primarySport.experienceLevel) handleNext();
+      else return;
+      // setPrimarySport({ sport: primarySport.sport, experienceLevel });
     } else if (step === 3) {
       // Perform signup and dispatch
       const user = {
@@ -131,9 +169,12 @@ function SignupForm ({ onSuccess }) {
         selectedSports,
       };
 
-      dispatch(signup(user));
-      onSuccess();
-      history.push('/discover');
+      const res = await dispatch(signup(user));
+      if (res === "success") { 
+        onSuccess();
+        history.push('/discover');
+      }
+      else return;
     }
   };
 
@@ -171,6 +212,10 @@ function SignupForm ({ onSuccess }) {
   };
 
   return (
+    <>
+    <div id="sign-up-errors">
+      {errors}
+    </div>
     <form className='signup-form' onSubmit={handleSubmit}>
       <div className='signup-form-content'>
         <div className='signup-form-header'>
@@ -190,6 +235,7 @@ function SignupForm ({ onSuccess }) {
                   className='input-field'
                 />
               </label>
+              {stepOneErrors.firstName && <span className="sign-up-errors">{stepOneErrors.firstName}</span>}
             </div>
             <div className='field-container'>
               <label>
@@ -201,6 +247,7 @@ function SignupForm ({ onSuccess }) {
                   className='input-field'
                 />
               </label>
+              {stepOneErrors.lastName && <span className="sign-up-errors">{stepOneErrors.lastName}</span>}
             </div>
 
             <div className='field-container'>
@@ -214,6 +261,7 @@ function SignupForm ({ onSuccess }) {
                 />
                 <div className="errors">{errors?.email}</div>
               </label>
+              {stepOneErrors.email && <span className="sign-up-errors">{stepOneErrors.email}</span>}
             </div>
 
             <div className='field-container'>
@@ -227,6 +275,8 @@ function SignupForm ({ onSuccess }) {
                 />
                 <div className="errors">{errors?.password}</div>
               </label>
+              {stepOneErrors.passwordErrorOne && <span className="sign-up-errors">{stepOneErrors.passwordErrorOne}</span>}
+              {stepOneErrors.passwordErrorTwo && <span className="sign-up-errors">{stepOneErrors.passwordErrorTwo}</span>}
             </div>
 
             <div className='field-container'>
@@ -273,6 +323,7 @@ function SignupForm ({ onSuccess }) {
                     {generateYearOptions()}
                 </select>
               </div>
+              {stepOneErrors.age && <span className="sign-up-errors">{stepOneErrors.age}</span>}
             </div>
             
             <div className="field-container gender-container">
@@ -291,7 +342,10 @@ function SignupForm ({ onSuccess }) {
                   <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
                 </div>
               </div>
+              {stepOneErrors.gender && <span className="sign-up-errors">{stepOneErrors.gender}</span>}
             </div>
+            <span></span>
+
             <input
               type="button"
               value="Next"
@@ -307,11 +361,12 @@ function SignupForm ({ onSuccess }) {
             {/* //! Sport Container */}
             <div className='primary-sport-container'>
               {sportsList.map((sport) => (
-                <div key={sport} className="sport-option-container">
+                <div key={sport} className={`sport-option-container`}>
 
                   <button
                     value={sport}
                     onClick={(e) => setPrimarySport({ sport, experienceLevel: '' }) }
+                    className={primarySport.sport === sport ? 'selected' : ''}
                   >
                     <span className='sport-button-label'>{sport}</span>
                   </button>
@@ -382,10 +437,22 @@ function SignupForm ({ onSuccess }) {
               }
             </div>
             <input type="submit" value="Sign Up" className='signup-button'/>
+            {step > 1 && (
+              <div id="sign-up-back-button">
+                <button 
+                  type="button" 
+                  onClick={handleBack}
+                  className='signup-button'
+                >
+                  Back
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
     </form>
+    </>
   );
 }
 

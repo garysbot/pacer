@@ -12,6 +12,7 @@ import SplashPage from './components/SplashPage/SplashPage.js';
 import DiscoverPage from './components/DiscoverPage/DiscoverPage.js';
 import UsersShow from './components/UsersShow/UsersShow.js';
 import EventsShow from './components/EventsShow/EventsShow.js';
+import About from './components/About/About.js';
 
 import { getCurrentUser } from './store/session';
 
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/" component={SplashPage} />
         <Route exact path="/events/:id" component={EventsShow}/>
         <Route exact path="/users/:id" component={UsersShow}/>
+        <Route exact path="/about" component={About}/>
         <ProtectedRoute exact path="/event-form" component={EventForm}/>
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}

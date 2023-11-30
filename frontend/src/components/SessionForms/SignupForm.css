@@ -212,3 +212,8 @@ button .sport-button-label:hover {
     margin: 0.25rem;
     padding: 0.25rem;
 }
+
+.sport-option-container .selected {
+    border-color: aqua;
+    background-color: lightblue;
+}

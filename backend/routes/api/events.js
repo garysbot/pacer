@@ -329,10 +329,68 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       latitude: req.body.latitude
     };
 
-    const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {
+    let updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {
       new: true,
       runValidators: true
     }).populate('owner', '_id');
+
+    updatedEvent = await Event.populate(event, [
+      { path: 'owner', select: '_id firstName lastName' },
+      { path: 'attendees', select: '_id firstName lastName' },
+      { path: 'maybes', select: '_id firstName lastName' },
+    ]);
+
+    // Prepare the response object with the desired structure
+    const responseEvent = {
+      _id: updatedEvent._id,
+      eventName: updatedEvent.eventName,
+      locationName: updatedEvent.locationName,
+      description: updatedEvent.description,
+      dateTime: updatedEvent.dateTime,
+      difficulty: updatedEvent.difficulty,
+      eventType: updatedEvent.eventType,
+      maxGroupSize: updatedEvent.maxGroupSize,
+      attendees: updatedEvent.attendees.map(attendee => ({
+        _id: attendee._id,
+        firstName: attendee.firstName,
+        lastName: attendee.lastName,
+      })),
+      maybes: updatedEvent.maybes.map(maybe => ({
+        _id: maybe._id,
+        firstName: maybe.firstName,
+        lastName: maybe.lastName,
+      })),
+      longitude: updatedEvent.longitude,
+      latitude: updatedEvent.latitude,
+      eventPrivacy: updatedEvent.eventPrivacy,
+      ownerDetails: {
+        _id: updatedEvent.owner._id,
+        firstName: updatedEvent.owner.firstName,
+        lastName: updatedEvent.owner.lastName,
+      },
+      attendeesDetails: await Promise.all(
+        updatedEvent.attendees.map(async attendeeId => {
+          const user = await User.findById(attendeeId);
+          return {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            // Add other user details as needed
+          };
+        })
+      ),
+      maybesDetails: await Promise.all(
+        updatedEvent.maybes.map(async maybeId => {
+          const user = await User.findById(maybeId);
+          return {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            // Add other user details as needed
+          };
+        })
+      ),
+    };
 
     if (!updatedEvent) {
       const error = new Error('Event not found');
@@ -340,7 +398,7 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       throw error;
     }
 
-    return res.json(updatedEvent);
+    return res.json(responseEvent);
   } catch (err) {
     next(err);
   }
