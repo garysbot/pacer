@@ -144,63 +144,60 @@ export default function EventForm({props}){
             <div className="create-form-header">
                 <h2>🗓️ Create a new event</h2>
             </div>
+
             <form className="event-form-container">
                 <div className="field-container create-event">
                     <p className="field-label create-event-field">Event Name</p>
-                    <label>
-                        <input 
+                    <input 
                         className='input-field' 
                         type="text" 
-                        onChange={(e)=>setEventName(e.target.value)}/>
-                    </label>
+                        placeholder="Event Name"
+                        onChange={(e)=>setEventName(e.target.value)}
+                    />
                     {error.eventName && <span className="event-form-errors">{error.eventName}</span>}
                 </div>
 
                 <div className="field-container create-event">
                     <p className="field-label  create-event-field">Where is the event taking place?</p>
-                    <label>
-                        <PlacesAutocomplete
-                            value={selectedAddress}
-                            onChange={setSelectedAddress}
-                            onSelect={handleSelect}
-                        >
-                            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <PlacesAutocomplete
+                        value={selectedAddress}
+                        onChange={setSelectedAddress}
+                        onSelect={handleSelect}
+                    >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                        <div>
+                            <input
+                                className='input-field'
+                                {...getInputProps({
+                                    placeholder: "Enter location...",
+                                })}
+                            />
                             <div>
-                                <input
-                                    className='input-field'
-                                    {...getInputProps({
-                                        placeholder: "Enter location...",
-                                    })}
-                                />
-                                <div>
-                                {loading && <div>Loading...</div>}
-                                {suggestions.map((suggestion) => (
-                                    <div {...getSuggestionItemProps(suggestion)}>
-                                    {suggestion.description}
-                                    </div>
-                                ))}
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion) => (
+                                <div {...getSuggestionItemProps(suggestion)}>
+                                {suggestion.description}
                                 </div>
+                            ))}
                             </div>
-                            )}
-                        </PlacesAutocomplete>
-                    </label>
+                        </div>
+                        )}
+                    </PlacesAutocomplete>
                     {error.location && <span className="event-form-errors">{error.location}</span>}
                 </div>
                 
                 <div className="field-container create-event">
                     <p className="field-label  create-event-field">When is the event taking place?</p>
-                    <label>
-                        <input
-                            className='input-field'
-                            type="date"
-                            onChange={(e) => setDate(e.target.value)}
-                        />
-                        <input
-                            className='input-field'
-                            type="time"
-                            onChange={(e) => setTime(e.target.value)}
-                        />
-                    </label>
+                    <input
+                        className='input-field'
+                        type="date"
+                        onChange={(e) => setDate(e.target.value)}
+                    />
+                    <input
+                        className='input-field'
+                        type="time"
+                        onChange={(e) => setTime(e.target.value)}
+                    />
                     {error.datetime && <span className="event-form-errors">{error.datetime}</span>}
                     {error.date && <span className="event-form-errors">{error.date}</span>}
                     {error.time && <span className="event-form-errors">{error.time}</span>}
@@ -209,72 +206,65 @@ export default function EventForm({props}){
                 
                 <div className="field-container create-event">
                     <p className="field-label  create-event-field">Provide a description for the event</p>
-                    <label>
-                        <textarea
-                            className='input-field'
-                            value={description}
-                            onChange={handleDescriptionChange}
-                            rows={4} // You can adjust the number of rows as needed
-                            maxLength={1000}
-                        />
-                    </label>
+                    <textarea
+                        className='input-field'
+                        placeholder="What kinda fun "
+                        value={description}
+                        onChange={handleDescriptionChange}
+                        rows={4} // You can adjust the number of rows as needed
+                        maxLength={1000}
+                    />
                     {error.description && <span className="event-form-errors">{error.description}</span>}
                 </div>
 
                 <div className="field-container create-event">
                     <p className="field-label create-event-field">What is the maximum group size for this event?</p>
-                    <label>
-                        <input 
-                            className='input-field'
-                            type="number" 
-                            onChange={(e)=>setMaxGroupSize(e.target.value)}
-                        />
-                    </label>
+                    <input 
+                        className='input-field'
+                        type="number" 
+                        onChange={(e)=>setMaxGroupSize(e.target.value)}
+                    />
                     {error.groupSize && <span className="event-form-errors">{error.groupSize}</span>}
                 </div>
                 
                 <div className="field-container create-event">
                     <p className="field-label create-event-field">What type of activity?</p>
-                    <label>
-                        <select 
-                            onChange={(e) => setEventType(e.target.value)}
-                            className='input-field'
-                        >
-                            <option value="" disabled selected>
-                                Please select an activity
+                    <select 
+                        onChange={(e) => setEventType(e.target.value)}
+                        className='input-field'
+                    >
+                        <option value="" disabled selected>
+                            Please select an activity
+                        </option>
+                        {allowedEventTypes.map((type) => (
+                            <option key={type} value={type}>
+                                {type}
                             </option>
-                            {allowedEventTypes.map((type) => (
-                                <option key={type} value={type}>
-                                    {type}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
+                        ))}
+                    </select>
                     {error.eventType && <span className="event-form-errors">{error.eventType}</span>}
                 </div>
 
                 <div className="field-container create-event">
                     <p className="field-label  create-event-field">What is the relative difficulty of this event?</p>
-                    <label>
-                        <select 
-                            onChange={(e) => setDifficulty(e.target.value)}
-                            className='input-field'
-                        >
-                            <option value="" disabled selected>
-                                Please select a difficulty level
+                    <select 
+                        onChange={(e) => setDifficulty(e.target.value)}
+                        className='input-field'
+                    >
+                        <option value="" disabled selected>
+                            Please select a difficulty level
+                        </option>
+                        {difficulties.map((d) => (
+                            <option key={d} value={d}>
+                                {d}
                             </option>
-                            {difficulties.map((d) => (
-                                <option key={d} value={d}>
-                                    {d}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
+                        ))}
+                    </select>
                     {error.difficulty && <span className="event-form-errors">{error.difficulty}</span>}
                 </div>
                 
                 <div className="field-container create-event">
-                    <button id="form-submit" onClick={handleSubmit}> Create Event!</button>
+                    <button className="form-submit" onClick={handleSubmit}> Create Event!</button>
                 </div>
             </form>
         </div>

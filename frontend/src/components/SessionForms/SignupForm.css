@@ -91,7 +91,7 @@
 .field-container {
     display: flex;
     flex-direction: column;
-    margin-top: 0.5rem;
+    margin: 0.25rem 0rem;
 }
 
 

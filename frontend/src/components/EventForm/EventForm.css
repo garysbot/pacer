@@ -1,15 +1,16 @@
-.create-form-header {
-  padding-top: 2rem;
-  margin-bottom: 1rem;
-  white-space: nowrap;
-  color: #F4FFFD;
-}
-
 .event-form-div {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2rem 0rem;
+    margin-bottom: 4rem;
+}
+.create-form-header {
+  padding-top: 2rem;
+  margin-bottom: 1rem;
+  white-space: nowrap;
+  color: #F4FFFD;
 }
 
 .event-form-container {
@@ -30,5 +31,19 @@ textarea {
   padding-left: 0.75rem;
   font-family: 'Nunito', sans-serif;
   color: #F4FFFD;
+  border-width: 2px;
+}
+
+select {
+ border-width: 2px; 
+}
+
+.form-submit {
+  width: 12rem;
+  height: 2.25rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-width: 2px;
 }
