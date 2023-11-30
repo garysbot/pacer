@@ -16,16 +16,40 @@ export default function UsersShow(){
     useEffect(()=>{
         dispatch(getUser(id))
     },[dispatch])
+
+
+    const secondarySports = shownUser?.secondarySports?.map((sport)=>(
+        <div className="secondary-sport">
+            <h3>{sport.Sport}: {sport.Experience}</h3>
+        </div>
+    ))
+
+
+    const userFriends = shownUser?.friends.map((friend, index)=>(
+        <span key={index} className="attendee-circle"></span>
+    ))
+
+
+
+
     return (
         <>
-            <section id="general-info">
-                <h1>{shownUser.firstName} {shownUser.lastName}</h1> 
-                <section id="sports">
-                    Favorite Sport: {shownUser.primarySport["Sport"]}
+            <section id="user-show-main">
+                <section id="general-info">
+                    <h1>{shownUser?.firstName} {shownUser?.lastName}</h1> 
                     <br/>
-                    Experience Level: {shownUser.primarySport["Experience"]}
+                    <h2>Favorite Sport: {shownUser?.primarySport?.Sport}</h2>
+                    <h3>Experience Level: {shownUser?.primarySport?.Experience}</h3>
+                    <br/>
+                    <h2>Secondary Sports</h2>
+                        {secondarySports}
                 </section>
+                <section id="social-metrics">
 
+                    <div className="friends-list">
+                        
+                    </div>
+                </section>
             </section>
         </>
     )
