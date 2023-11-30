@@ -10,7 +10,7 @@ export default function UsersShow(){
 
     const dispatch = useDispatch()
     const {id} = useParams()
-    const shownUser = useSelector(state=>state.users.user)
+    const shownUser = useSelector(state=>state.users?.user)
     console.log(id)
 
     useEffect(()=>{
@@ -25,7 +25,7 @@ export default function UsersShow(){
     ))
 
 
-    const userFriends = shownUser?.friends.map((friend, index)=>(
+    const userFriends = shownUser?.friends?.map((friend, index)=>(
         <span key={index} className="attendee-circle"></span>
     ))
 
