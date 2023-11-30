@@ -14,7 +14,7 @@ export default function DiscoverPage(props){
         'CrossFit (fitness activity/sport) 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
     ];
     const history = useHistory()
-    const [filterContainerOpen, setFilterContainerOpen] = useState(false);
+    const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
     const events = Object.values(eventsObj);
@@ -36,7 +36,15 @@ export default function DiscoverPage(props){
         setCanRemoveFilters(false)
         let toFilter = eventType.split(' ')[0]
         let filteredEvents = renderedEvents.filter((event)=>event.eventType===toFilter)
+        let newSportList = filteredSports.filter((sport)=>sport===eventType)
         setRenderedEvents(filteredEvents)
+        setFilteredSports(newSportList)
+    }
+
+    function resetFilters(){
+        setRenderedEvents(futureEvents)
+        setFilteredSports(sportsWithEmojis)
+        console.log(filteredSports)
     }
 
     const timeConverter = (dateTime) => {
@@ -97,9 +105,9 @@ export default function DiscoverPage(props){
                             onMouseMove={onMouseMove}
                             onMouseUp={onMouseUpOrLeave}
                             onMouseLeave={onMouseUpOrLeave}
-                            >
-                            <p onClick={()=>setRenderedEvents(futureEvents)}>Remove Filters</p>
-                            {sportsWithEmojis.map((sport)=>{
+                        >
+                            <p className="sport-filter-label" onClick={resetFilters}>❌</p>
+                            {filteredSports.map((sport)=>{
                                 return (
                                     <p className="sport-label"
                                         onClick={()=>handleFilter(sport)}
@@ -108,6 +116,7 @@ export default function DiscoverPage(props){
                                     </p>
                                 )
                             })}
+                            <p className="sport-label">Rob's Easter Egg</p>
                         </div>
                         <button id="event-create-button"
                             onClick={()=>history.push("/event-form")}
