@@ -1,0 +1,13 @@
+#user-show-main{
+    border: 1px solid white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+#general-info{
+    border: 1px solid white;
+    width: fit-content;
+}
