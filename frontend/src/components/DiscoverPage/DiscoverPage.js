@@ -18,7 +18,12 @@ export default function DiscoverPage(props){
     const eventsObj = useSelector(state => state.events.all);
     const dispatch = useDispatch();
     const events = Object.values(eventsObj);
-    const [renderedEvents, setRenderedEvents] = useState(events)
+    // ==================== calculating time functionality =============================
+    const nowTime = new Date()
+    const futureEvents = events.filter((e)=> nowTime.getTime() < new Date(e.dateTime).getTime())
+    const [renderedEvents, setRenderedEvents] = useState(futureEvents)
+
+    // ======= filtering logic ================
     const [canRemoveFilters, setCanRemoveFilters] = useState(false)
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -29,9 +34,7 @@ export default function DiscoverPage(props){
 
     function handleFilter(eventType){
         setCanRemoveFilters(false)
-        console.log(canRemoveFilters)
         let toFilter = eventType.split(' ')[0]
-        // console.log(renderedEvents)
         let filteredEvents = renderedEvents.filter((event)=>event.eventType===toFilter)
         setRenderedEvents(filteredEvents)
     }
@@ -95,7 +98,7 @@ export default function DiscoverPage(props){
                             onMouseUp={onMouseUpOrLeave}
                             onMouseLeave={onMouseUpOrLeave}
                             >
-                            <p onClick={()=>setRenderedEvents(events)}>Remove Filters</p>
+                            <p onClick={()=>setRenderedEvents(futureEvents)}>Remove Filters</p>
                             {sportsWithEmojis.map((sport)=>{
                                 return (
                                     <p className="sport-label"
