@@ -11,9 +11,6 @@
 
 html {
   background: radial-gradient(circle, rgba(81,187,254,1) 0%, rgba(250,76,76,1) 100%);
-  /* background: radial-gradient(circle, rgba(81,187,254,0.75) 0%, rgba(250,76,76,0.65) 100%); */
-  /* background: radial-gradient(circle, rgba(250,130,76,0.6838625098476891) 0%, rgba(137,252,0,0.6334423417804622) 100%); */
-  /* color: white;  */
 }
 
 h1 {
@@ -39,7 +36,7 @@ p {
 }
 
 span {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-family: 'Nunito';
   font-weight: 300;
 }
@@ -50,7 +47,7 @@ footer {
   font-weight: 300;
 }
 
-button {
+/* button {
   width: 6rem;
   height: 2rem;
   margin: 0.25rem;
@@ -62,7 +59,7 @@ button {
   color: #F4FFFD;
   transition: border-color 0.3s ease, color 0.3s ease;
   font-family: 'Lexend';
-}
+} */
 
 button:hover {
   border-color: #89FC00;
@@ -73,15 +70,13 @@ button:hover {
 form .errors {
   color: #FF5964;
   font-size: 0.75rem;
-  margin-bottom: 0.25rem;
-  height: 15px;
   display: flex;
   align-items: center;
   margin-left: 0.25rem;
 }
 
 a {
- color: white;
- text-decoration: none;
- cursor: pointer; 
+  color: white;
+  text-decoration: none;
+  cursor: pointer; 
 }

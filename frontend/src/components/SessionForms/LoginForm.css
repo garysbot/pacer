@@ -51,6 +51,7 @@
 
 input::placeholder {
   color: #F4FFFD;
+  opacity: 60%;
 }
 
 .login-form input[type='submit'].submit-field:hover {
@@ -62,9 +63,10 @@ input::placeholder {
 }
 
 .field-label {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-family: 'Lexend', sans-serif;
   font-weight: 400;
   margin-left: 0.25rem;
-  margin-bottom: 0.25rem;
+  /* margin-bottom: 0.25rem; */
+  margin-top: 0.5rem;
 }

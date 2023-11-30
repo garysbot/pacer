@@ -8,6 +8,7 @@
     left: 50%;
     right: 50%;
     bottom: 50%;
+    width: 100%;
 }
 
 .signup-form-header {
@@ -23,7 +24,7 @@
 }
 
 .signup-form p {
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: #F4FFFD;
     font-family: 'Lexend', sans-serif;
     font-weight: 400;
@@ -57,7 +58,7 @@
 }
 
 .month {
-    width: 7.25rem;
+    width: 7rem;
 }
 
 .date {
@@ -65,29 +66,7 @@
 }
 
 .year {
-    width: 4.75rem;
-}
-
-.primary-sport-div{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
-.sport-option {
-    /* width: 33%; */
-    box-sizing: border-box;
-    display: inline-block;
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid rgba(250,76,76,1);
-    border-radius: 5px;
-} 
-
-.sport-option label{
-    display: flex;
-    flex-direction: row;
-    gap: 5px
+    width: 4.5rem;
 }
 
 .secondary-sport-list-div{
@@ -110,19 +89,6 @@
     /* width: 90%; */
 }
 
-.experience-level-radio-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-top: 1px solid rgba(250,76,76,1);
-    margin-top: 10px;
-    padding: 10px
-}
-
-#sign-up-back-button {
-    width: 100%;
-}
-
 .field-row-container {
     display: flex;
     width: 100%;
@@ -130,8 +96,16 @@
 }
 
 
+.gender-row-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 2.25rem;
+}
+
 .field-container {
     display: flex;
+    flex-direction: column;
     margin-top: 0.5rem;
 }
 
@@ -148,6 +122,73 @@
 
 .signup-button {
     width: 6rem;
-    height: 3rem;
+    height: 2rem;
+    margin: 0.25rem;
     border-radius: 3rem;
+    border-style: none;
+    border-color: #F4FFFD;
+    background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+    border-width: 2px;
+    color: #F4FFFD;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    font-family: 'Lexend', sans-serif;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+
+.gender-container {
+    margin-bottom: 1rem;
+}
+
+.signup-form-content input[type='button'].signup-button:hover {
+    background: linear-gradient(145deg, rgba(255,89,100,1) 0%, rgba(250,130,76,1) 100%);
+    cursor: pointer;
+    box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+    -webkit-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+    -moz-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+}
+
+.primary-sport-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: space-between;
+    width: 35rem;
+}
+
+.sport-option-container {
+    display: flex;
+    width: 30%;
+}
+
+.sport-option-container button {
+    width: 23rem;
+    border-width: 2px;
+    border-radius: 3rem;
+    background-color: transparent;
+    border-style: solid;
+    border-color: #F4FFFD;
+    padding: 0.25rem 0;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+button .sport-button-label {
+    font-size: 0.75rem;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    color: #F4FFFD;
+    transition: color 0.3s ease;
+}
+
+.sport-option-container button:hover {
+    border-color: aqua;
+}
+
+button .sport-button-label:hover {
+    color: aqua;
+}
+
+label span {
+    font-size: 0.75rem;
 }

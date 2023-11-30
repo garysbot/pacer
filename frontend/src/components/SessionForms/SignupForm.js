@@ -40,6 +40,9 @@ function SignupForm ({ onSuccess }) {
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
 
+  // ! UI State
+  const [primarySportSelected, setPrimarySportSelected] = useState(false);
+
   useEffect(() => {
     return () => {
       dispatch(clearSessionErrors());
@@ -95,11 +98,12 @@ function SignupForm ({ onSuccess }) {
   };
 
   const sportsList = [
-    'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming', 'Yoga', 'Gym (Fitness)',
-    'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football', 'Hiking', 'Bowling', 'Water Sports', 'Ping Pong',
-    'Golf', 'Pickleball', 'Rock Climbing', 'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee',
-    'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
-    'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
+    'Basketball 🏀', 'Soccer ⚽', 'Baseball ⚾', 'Tennis 🎾', 'Running 🏃‍♂️', 'Volleyball 🏐', 'Swimming 🏊‍♂️',
+    'Yoga 🧘', 'Gym (Fitness) 🏋️', 'Handball 🤾', 'Biking 🚴', 'Martial Arts 🥋', 'Hockey 🏒', 'Football 🏈',
+    'Hiking 🥾', 'Bowling 🎳', 'Water Sports 🏄', 'Ping Pong 🏓', 'Golf ⛳', 'Pickleball 🏓', 'Rock Climbing 🧗',
+    'Skateboarding 🛹', 'Badminton 🏸', 'Walking 🚶', 'Lacrosse 🥍', 'Ultimate Frisbee 🥏', 'Rugby 🏉',
+    'Archery 🏹', 'Fencing 🤺', 'Sailing ⛵', 'Rowing 🚣', 'Table Tennis 🏓', 'Squash 🧃', 'Equestrian 🐎',
+    'CrossFit 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
   ]
   const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
 
@@ -171,6 +175,7 @@ function SignupForm ({ onSuccess }) {
       <div className='signup-form-content'>
         <div className='signup-form-header'>
           <h2>{step === 1 ? '🫶 Signup' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
+          <h3>{step === 1 ? 'Welcome to the party' : step === 2 ? 'Pacer is about community' : 'Select up to 5 additional sports'}</h3>
         </div>
 
         {step === 1 && (
@@ -239,7 +244,7 @@ function SignupForm ({ onSuccess }) {
               </div>
             </div>
 
-            <div className="sign-up-birthday-field">
+            <div className="field-container">
               <p className='field-label'>Birthday</p>
 
               <div className='field-row-container'>
@@ -270,9 +275,9 @@ function SignupForm ({ onSuccess }) {
               </div>
             </div>
             
-            <div className="sign-up-gender-field">
+            <div className="field-container gender-container">
               <p className='field-label'>Gender</p>
-              <div className='field-row-container'>
+              <div className='gender-row-container'>
                 <div className='gender-option'>
                   <span>Male</span>
                   <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
@@ -286,61 +291,35 @@ function SignupForm ({ onSuccess }) {
                   <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
                 </div>
               </div>
+              <input
+                type="button"
+                value="Next"
+                onClick={handleNext}
+                disabled={!email || !password || password !== password2}
+                className='signup-button'
+              />
             </div>
           </>
         )}
 
-        {/* <section className='primary sport'>
-          <input type='text'
-            onChange={(e)=>setPrimarySport(e.target.value)}
-            placeholder='Primary Sport'
-          />
-        </section> */}
-        {step > 1 && (
-          <div id="sign-up-back-button">
-            <button 
-              type="button" 
-              onClick={handleBack}
-              className='signup-button'
-            >
-              Back
-            </button>
-          </div>
-        )}
-        {step === 1 && (
-          <input
-            type="button"
-            value="Next"
-            onClick={handleNext}
-            disabled={!email || !password || password !== password2}
-            className='signup-button'
-          />
-        )}
         {step === 2 && (
           <>
-            {/* Render checkboxes for primary sports */}
-            <div className='primary-sport-div'>
+            {/* //! Sport Container */}
+            <div className='primary-sport-container'>
               {sportsList.map((sport) => (
-                <div key={sport} className="sport-option">
-                  <label>
-                    <input
-                      type="checkbox"
-                      value={sport}
-                      checked={primarySport.sport === sport}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setPrimarySport({ sport, experienceLevel: '' });
-                        } else {
-                          setPrimarySport({});
-                        }
-                      }}
-                    />
-                    {sport}
-                  </label>
+                <div key={sport} className="sport-option-container">
+
+                  <button
+                    value={sport}
+                    onClick={(e) => setPrimarySport({ sport, experienceLevel: '' }) }
+                  >
+                    <span className='sport-button-label'>{sport}</span>
+                  </button>
+
                 </div>
               ))}
-
             </div>
+
             {/* <h1>Select your Experience Level</h1> */}
             <div className="experience-level-radio-div">
               {experienceLevels.map((level) => (
@@ -353,10 +332,22 @@ function SignupForm ({ onSuccess }) {
                       setPrimarySport({ ...primarySport, experienceLevel: level })
                     }
                   />
-                  {level}
+                  <span className='sport-button-label'>{level}</span>
                 </label>
               ))}
             </div>
+
+            {step > 1 && (
+              <div id="sign-up-back-button">
+                <button 
+                  type="button" 
+                  onClick={handleBack}
+                  className='signup-button'
+                >
+                  Back
+                </button>
+              </div>
+            )}
             <button
               type="button"
               onClick={handleNext}
@@ -367,11 +358,6 @@ function SignupForm ({ onSuccess }) {
           </>
         )}
 
-        {/* <input
-          type="submit"
-          value="Sign Up"
-          disabled={!email || !username || !password || password !== password2}
-        /> */}
         {step === 3 && (
           <>
             {/* Render buttons for secondary sports */}
