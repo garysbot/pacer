@@ -153,7 +153,18 @@
   z-index: 0;
 
   /* Bottom gradient layer */
+}
+
+.beginner {
   background: linear-gradient(63deg, rgba(81,187,254,1) 0%, rgba(137,252,0,1) 100%);
+}
+
+.intermediate {
+  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+}
+
+.advanced {
+  background: linear-gradient(145deg, rgba(200,104,60,1) 0%, rgba(204,71,80,1) 100%);
 }
 
 .sport-icon::before {
