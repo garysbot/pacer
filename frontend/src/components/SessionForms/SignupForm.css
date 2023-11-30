@@ -23,6 +23,11 @@
     text-align: center;
 }
 
+.signup-form-header h3 {
+    color: #F4FFFD;
+    text-align: center;
+}
+
 .signup-form p {
     font-size: 0.75rem;
     color: #F4FFFD;
@@ -69,26 +74,6 @@
     width: 4.5rem;
 }
 
-.secondary-sport-list-div{
-    width: inherit;
-    display: flex; 
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-}
-
-.secondary-sport-list-input-label{
-    margin: 5px;
-    padding: 5px;
-    color: rgba(250,76,76,1);
-    border: 1px solid pink;
-    border-radius: 5px;
-    display: flex;
-    /* width: */
-    flex-direction: row;
-    align-items: center;
-    /* width: 90%; */
-}
-
 .field-row-container {
     display: flex;
     width: 100%;
@@ -121,9 +106,8 @@
 }
 
 .signup-button {
-    width: 6rem;
-    height: 2rem;
-    margin: 0.25rem;
+    width: 10rem;
+    margin-top: 1rem;
     border-radius: 3rem;
     border-style: none;
     border-color: #F4FFFD;
@@ -132,7 +116,7 @@
     color: #F4FFFD;
     transition: border-color 0.3s ease, color 0.3s ease;
     font-family: 'Lexend', sans-serif;
-    padding: 0.25rem;
+    padding: 0.5rem;
     cursor: pointer;
 }
 
@@ -189,6 +173,42 @@ button .sport-button-label:hover {
     color: aqua;
 }
 
-label span {
+.experience-level-radio-div {
+    display: flex;
+    gap: 1rem;    
+}
+
+.experience-level-radio-div label {
+    width: 8rem;
+}
+
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1.25rem 0;
+}
+
+.primary-sport-container label {
+    color: #F4FFFD;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
     font-size: 0.75rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    padding-inline-start: 0.25rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #F4FFFD;
+    border-radius: 3rem;
+}
+
+
+.secondary-sport-list-input-label {
+    display: flex;
+    align-items: center;
+}
+
+.secondary-sport-list-input-label input {
+    margin: 0.25rem;
+    padding: 0.25rem;
 }

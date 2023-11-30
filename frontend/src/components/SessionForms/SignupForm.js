@@ -174,8 +174,8 @@ function SignupForm ({ onSuccess }) {
     <form className='signup-form' onSubmit={handleSubmit}>
       <div className='signup-form-content'>
         <div className='signup-form-header'>
-          <h2>{step === 1 ? '🫶 Signup' : step === 2 ? 'Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
-          <h3>{step === 1 ? 'Welcome to the party' : step === 2 ? 'Pacer is about community' : 'Select up to 5 additional sports'}</h3>
+          <h2>{step === 1 ? '🫶 Signup' : step === 2 ? '🏆 Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
+          <h3>{step === 1 ? 'Welcome to the party!' : step === 2 ? 'Pacer is all about community' : 'Select up to 5 additional sports'}</h3>
         </div>
 
         {step === 1 && (
@@ -291,14 +291,14 @@ function SignupForm ({ onSuccess }) {
                   <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
                 </div>
               </div>
-              <input
-                type="button"
-                value="Next"
-                onClick={handleNext}
-                disabled={!email || !password || password !== password2}
-                className='signup-button'
-              />
             </div>
+            <input
+              type="button"
+              value="Next"
+              onClick={handleNext}
+              disabled={!email || !password || password !== password2}
+              className='signup-button'
+            />
           </>
         )}
 
@@ -321,22 +321,33 @@ function SignupForm ({ onSuccess }) {
             </div>
 
             {/* <h1>Select your Experience Level</h1> */}
-            <div className="experience-level-radio-div">
-              {experienceLevels.map((level) => (
-                <label key={level}>
-                  <input
-                    type="radio"
-                    value={level}
-                    checked={primarySport.experienceLevel === level}
-                    onChange={() =>
-                      setPrimarySport({ ...primarySport, experienceLevel: level })
-                    }
-                  />
-                  <span className='sport-button-label'>{level}</span>
-                </label>
-              ))}
+            <div className='experience-container'>
+              <span>Experience Level</span>
+              <div className="experience-level-radio-div">
+                {experienceLevels.map((level) => (
+                  <label key={level}>
+                    <input
+                      type="radio"
+                      value={level}
+                      checked={primarySport.experienceLevel === level}
+                      onChange={() =>
+                        setPrimarySport({ ...primarySport, experienceLevel: level })
+                      }
+                    />
+                    <span className='sport-button-label'>{level}</span>
+                  </label>
+                ))}
+              </div>
             </div>
 
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={!primarySport.sport || !primarySport.experienceLevel}
+              className='signup-button'
+            >
+              Next
+            </button>
             {step > 1 && (
               <div id="sign-up-back-button">
                 <button 
@@ -348,20 +359,13 @@ function SignupForm ({ onSuccess }) {
                 </button>
               </div>
             )}
-            <button
-              type="button"
-              onClick={handleNext}
-              disabled={!primarySport.sport || !primarySport.experienceLevel}
-            >
-              Next
-            </button>
           </>
         )}
 
         {step === 3 && (
           <>
             {/* Render buttons for secondary sports */}
-            <div className='secondary-sport-list-div'>
+            <div className='primary-sport-container'>
               {sportsList
                 .filter((sport) => sport !== primarySport)
                 .map((sport) => (
@@ -377,7 +381,7 @@ function SignupForm ({ onSuccess }) {
                 ))
               }
             </div>
-            <input type="submit" value="Sign Up" />
+            <input type="submit" value="Sign Up" className='signup-button'/>
           </>
         )}
       </div>

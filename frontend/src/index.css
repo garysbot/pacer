@@ -47,10 +47,9 @@ footer {
   font-weight: 300;
 }
 
-/* button {
+button {
   width: 6rem;
   height: 2rem;
-  margin: 0.25rem;
   border-radius: 3rem;
   border-style: solid;
   border-color: #F4FFFD;
@@ -59,7 +58,7 @@ footer {
   color: #F4FFFD;
   transition: border-color 0.3s ease, color 0.3s ease;
   font-family: 'Lexend';
-} */
+}
 
 button:hover {
   border-color: #89FC00;
@@ -80,3 +79,4 @@ a {
   text-decoration: none;
   cursor: pointer; 
 }
+
