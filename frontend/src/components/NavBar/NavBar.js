@@ -50,13 +50,22 @@ function NavBar () {
       <div className='nav-container'>
         <div className='navbar' style={{ backgroundColor: `rgba(233, 88, 95, ${navOpacity})` }}>
           {/* Pacer Logo Home Link */}
-          <Link to='/'><h1 className='logo'>Pacer</h1></Link>
-          <Link to={'/discover'}><h3>Discover</h3></Link>
+          <div className='nav-logo'>
+            <Link to='/'><h1 className='logo'>Pacer</h1></Link>
+          </div>
+          
+          <div className='nav-links'>
+            <Link to={'/discover'}><h3>Discover</h3></Link>
+            <Link to={'/discover'}><h3>About</h3></Link>
+          </div>
+
           <div id="nav-auth">
             {
               loggedIn ? (
                 <>
-                  <Link to={`/users/${loggedInUser._id}`}>Profile</Link>
+                  <Link to={`/users/${loggedInUser._id}`}>
+                    <button className='auth-buttons'>Profile</button>
+                  </Link>
                   <button onClick={logoutUser} className='auth-buttons'>Logout</button>
                 </>
               ) : (
@@ -78,6 +87,7 @@ function NavBar () {
               <LoginForm onSuccess={handleSignInSuccess} />
             </Modal>
           </div>
+
         </div>
       </div>
     </>
