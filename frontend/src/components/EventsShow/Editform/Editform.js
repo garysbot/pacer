@@ -128,11 +128,12 @@ export default function Editform({ setEditPage }) {
         };
 
         const event = await dispatch(updateEventThunk(selectedEvent._id ,editEvent));
-        redirectToShow(event);
+        await dispatch(getEventThunk(id)); 
+        setEditPage(false);
     }
-
+    
     const redirectToShow = (event) => {
-        history.push(`events/${selectedEvent._id}`);
+        history.push(`/events/${selectedEvent._id}`);
     }
 
 

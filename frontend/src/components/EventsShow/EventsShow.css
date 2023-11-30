@@ -65,7 +65,7 @@
 
 .join-event {
     display: flex;
-    justify-content: center;
+    margin-left: 5%;
     margin-top: 3rem;
     margin-bottom: 1rem;
 }
@@ -86,6 +86,28 @@
   
 .join-event button:hover {
     border-color: green;
-    /* color: green; */
     box-shadow: none;
   }
+
+.master-show-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.master-show-div > div {
+    width: 50%; 
+    box-sizing: border-box; 
+  }
+
+#event-large-map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#event-large-map-container img {
+    border-radius: 25px;
+    height: auto;
+}
