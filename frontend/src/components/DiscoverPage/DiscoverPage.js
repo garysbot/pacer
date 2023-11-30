@@ -134,7 +134,7 @@ export default function DiscoverPage(props){
                                                     <div className="event-subheader">
                                                         <p className="sport-icon">🏃🏻‍♂️</p>
                                                         <p className="event-subheader-difficulty">{event.difficulty}</p>
-                                                        <p className="event-subheader-host">with {`${event.ownerDetails.firstName} ${event.ownerDetails.lastName}`}</p>
+                                                        <p className="event-subheader-host">with {`${event.ownerDetails?.firstName} ${event.ownerDetails?.lastName}`}</p>
                                                     </div>
                                                 </div>
                                                 <div className="date-time-location">

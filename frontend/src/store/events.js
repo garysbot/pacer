@@ -82,7 +82,7 @@ export const composeEvent = data => async dispatch => {
 export const updateEventThunk = (eventId, data) => async dispatch => {
   try {
     const res = await jwtFetch(`/api/events/${eventId}`, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(data)
     });
     const event = await res.json();
