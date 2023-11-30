@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event')
+const User = mongoose.model('User');
 const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validations/events')
 
@@ -224,6 +225,7 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       eventPrivacy: req.body.eventPrivacy || false,
       longitude: req.body.longitude,
       latitude: req.body.latitude,
+      attendees: [req.body.owner],
     });
 
     let event = await newEvent.save();

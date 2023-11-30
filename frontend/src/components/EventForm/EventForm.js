@@ -36,6 +36,7 @@ export default function EventForm({props}){
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [locationName, setLocationName] = useState("");
+    const [error, setError] = useState({});
     // const [event, setEvent] = useState({});
   
     const handleSelect = async (address) => {
@@ -50,11 +51,62 @@ export default function EventForm({props}){
         console.error("Error selecting address", error);
       }
     };
+
+    const validateForm = () => {
+        const newErrors = {};
+    
+        if (!eventName || eventName.length < 5 || eventName.length > 100) {
+            newErrors.eventName = "Event name must be between 5 and 100 characters";
+        }
+    
+        if (!description || description.length < 5 || description.length > 1000) {
+            newErrors.description = "Description must be between 5 and 1000 characters";
+        }
+    
+        if (!selectedAddress || !latitude || !longitude || !locationName) {
+            newErrors.location = "Please select a valid location";
+        }
+    
+        const currentDateTime = new Date();
+        const selectedDateTime = new Date(`${date}T${time}`);
+        if (selectedDateTime <= currentDateTime) {
+            newErrors.datetime = "Event datetime must be in the future";
+        }
+
+        if (!date) {
+            newErrors.date = "Please select a date";
+        }
+
+        if (!time) {
+            newErrors.time = "Please select a time";
+        }
+    
+        if (maxGroupSize === 0) {
+            newErrors.groupSize = "Max group size must be at least 1";
+        }
+    
+        if (!eventType) {
+            newErrors.eventType = "Please select an activity type";
+        }
+    
+        if (!difficulty) {
+            newErrors.difficulty = "Please select a difficulty level";
+        }
+    
+        setError(newErrors);
+    
+        // If there are no errors, return true; otherwise, return false
+        return Object.keys(newErrors).length === 0;
+    };
   
     const history = useHistory();
     async function handleSubmit(e) {
         e.preventDefault();
     
+        if (!validateForm()) {
+            return;
+        }
+
         // Format the date and time before creating the event
         const formattedDateTime = `${date} ${time}`;
     
@@ -93,8 +145,12 @@ export default function EventForm({props}){
                 <label>
                     Give your event a name
                     <br/>
-                    <input className='event-form-text-input' type="text" onChange={(e)=>setEventName(e.target.value)}/>
+                    <input 
+                    className='event-form-text-input' 
+                    type="text" 
+                    onChange={(e)=>setEventName(e.target.value)}/>
                 </label>
+                {error.eventName && <span className="event-form-errors">{error.eventName}</span>}
                 <br/>
                 <label>
                     Where is this event taking place?
@@ -124,6 +180,7 @@ export default function EventForm({props}){
                         )}
                     </PlacesAutocomplete>
                 </label>
+                {error.location && <span className="event-form-errors">{error.location}</span>}
                 <br/>
                 <label>
                     When is the event taking place?
@@ -139,6 +196,9 @@ export default function EventForm({props}){
                         onChange={(e) => setTime(e.target.value)}
                     />
                 </label>
+                {error.datetime && <span className="event-form-errors">{error.datetime}</span>}
+                {error.date && <span className="event-form-errors">{error.date}</span>}
+                {error.time && <span className="event-form-errors">{error.time}</span>}
                 <br/>  
                 <label>
                     Provide a description for the event
@@ -151,6 +211,7 @@ export default function EventForm({props}){
                         maxLength={1000}
                     />
                 </label>
+                {error.description && <span className="event-form-errors">{error.description}</span>}
                 <br/>       
                 <label>
                     What is the maximum group size for this event?
@@ -159,6 +220,7 @@ export default function EventForm({props}){
                     <br/>
                     <input className='event-form-text-input' type="number" onChange={(e)=>setMaxGroupSize(e.target.value)}/>
                 </label>
+                {error.groupSize && <span className="event-form-errors">{error.groupSize}</span>}
                 <br/>
                 <label>
                     What type of activity?
@@ -174,6 +236,7 @@ export default function EventForm({props}){
                         ))}
                     </select>
                 </label>
+                {error.eventType && <span className="event-form-errors">{error.eventType}</span>}
                 <br/>
                 <label>
                     What is the relative difficulty of this event?
@@ -189,7 +252,7 @@ export default function EventForm({props}){
                         ))}
                     </select>
                 </label>
-
+                {error.difficulty && <span className="event-form-errors">{error.difficulty}</span>}
                 <button id="form-submit" onClick={handleSubmit}> Create Event!</button>
             </form>
         </div>
