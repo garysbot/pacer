@@ -157,29 +157,27 @@ export default function EventForm({props}){
                     {error.eventName && <span className="event-form-errors">{error.eventName}</span>}
                 </div>
 
-                <div className="field-container create-event">
-                    <p className="field-label  create-event-field">Where is the event taking place?</p>
+                <div className="field-container-create-event">
+                    <p className="field-label">Location</p>
                     <PlacesAutocomplete
                         value={selectedAddress}
                         onChange={setSelectedAddress}
                         onSelect={handleSelect}
                     >
                         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
+                        <div className="location-result-container">
                             <input
                                 className='input-field'
                                 {...getInputProps({
                                     placeholder: "Enter location...",
                                 })}
                             />
-                            <div>
-                            {loading && <div>Loading...</div>}
+                            {loading && <div className="location-result">Loading...</div>}
                             {suggestions.map((suggestion) => (
-                                <div {...getSuggestionItemProps(suggestion)}>
-                                {suggestion.description}
+                                <div className="location-result" {...getSuggestionItemProps(suggestion)}>
+                                    <p className="location-result">{suggestion.description}</p>
                                 </div>
                             ))}
-                            </div>
                         </div>
                         )}
                     </PlacesAutocomplete>
@@ -187,17 +185,19 @@ export default function EventForm({props}){
                 </div>
                 
                 <div className="field-container create-event">
-                    <p className="field-label  create-event-field">When is the event taking place?</p>
-                    <input
-                        className='input-field'
-                        type="date"
-                        onChange={(e) => setDate(e.target.value)}
-                    />
-                    <input
-                        className='input-field'
-                        type="time"
-                        onChange={(e) => setTime(e.target.value)}
-                    />
+                    <p className="field-label  create-event-field">Event Date & Time</p>
+                    <div className="date-time-input-container">
+                        <input
+                            className='input-field'
+                            type="date"
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                        <input
+                            className='input-field'
+                            type="time"
+                            onChange={(e) => setTime(e.target.value)}
+                        />
+                    </div>
                     {error.datetime && <span className="event-form-errors">{error.datetime}</span>}
                     {error.date && <span className="event-form-errors">{error.date}</span>}
                     {error.time && <span className="event-form-errors">{error.time}</span>}
@@ -205,10 +205,9 @@ export default function EventForm({props}){
 
                 
                 <div className="field-container create-event">
-                    <p className="field-label  create-event-field">Provide a description for the event</p>
+                    <p className="field-label  create-event-field">Event Description</p>
                     <textarea
                         className='input-field'
-                        placeholder="What kinda fun "
                         value={description}
                         onChange={handleDescriptionChange}
                         rows={4} // You can adjust the number of rows as needed
@@ -218,7 +217,7 @@ export default function EventForm({props}){
                 </div>
 
                 <div className="field-container create-event">
-                    <p className="field-label create-event-field">What is the maximum group size for this event?</p>
+                    <p className="field-label create-event-field">Max Attendees</p>
                     <input 
                         className='input-field'
                         type="number" 
@@ -228,7 +227,7 @@ export default function EventForm({props}){
                 </div>
                 
                 <div className="field-container create-event">
-                    <p className="field-label create-event-field">What type of activity?</p>
+                    <p className="field-label create-event-field">Activity</p>
                     <select 
                         onChange={(e) => setEventType(e.target.value)}
                         className='input-field'
@@ -264,7 +263,7 @@ export default function EventForm({props}){
                 </div>
                 
                 <div className="field-container create-event">
-                    <button className="form-submit" onClick={handleSubmit}> Create Event!</button>
+                    <button className="form-submit signup-button" onClick={handleSubmit}> Create Event!</button>
                 </div>
             </form>
         </div>

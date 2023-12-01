@@ -69,6 +69,7 @@ input::placeholder {
   margin-left: 0.25rem;
   margin-top: 0.5rem;
   color: #F4FFFD;
+  max-width: 60%;
 }
 
 .errors {

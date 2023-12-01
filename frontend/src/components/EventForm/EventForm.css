@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 textarea {
@@ -27,15 +28,17 @@ textarea {
   height: 2.25rem;
   width: 16rem;
   margin: 0.25rem 0rem;
-  /* padding-inline-start: 0.75rem; */
   padding-left: 0.75rem;
   font-family: 'Nunito', sans-serif;
   color: #F4FFFD;
   border-width: 2px;
+  line-height: 2;
 }
 
+
 select {
- border-width: 2px; 
+  border-width: 2px;
+
 }
 
 .form-submit {
@@ -46,4 +49,74 @@ select {
   justify-content: center;
   align-items: center;
   border-width: 2px;
+  align-self: center;
+}
+
+input[type="date"] {
+  width: 8rem;
+  font-size: 0.75rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url(../../../public/static/cal.svg) no-repeat;
+  width: 20px;
+  height: 20px;
+  /* padding-top: 0.25rem; */
+  margin-top: 0.2rem;
+  margin-right: 0.5rem;
+}
+
+input[type='time'] {
+  width: 7.75rem;
+  font-size: 0.75rem;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  background: url(../../../public/static/time.svg) no-repeat;
+  width: 20px;
+  height: 20px;
+  /* padding-top: 0.25rem; */
+  margin-top: 0.25rem;
+  margin-right: 0.2rem;
+}
+
+.date-time-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input[type='number'] {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+  margin-right: 0.75rem;
+}
+
+.location-result {
+  color: #F4FFFD;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  /* max-width: 80%; */
+  overflow-x: hidden;
+}
+
+.location-result-container {
+  max-width: 70%;
+}
+
+
+.create-event {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.field-container-create-event {
+  display: flex;
+  flex-direction: column;
+  margin: 0.25rem 0rem;
+  max-width: 100%;
 }
