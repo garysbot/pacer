@@ -1,78 +1,82 @@
 import React, { useEffect, useState } from "react";
-import './EventsShow.css';
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+// import { Loader } from "@googlemaps/js-api-loader";
 import { getEventThunk } from "../../store/events";
-import { useParams } from "react-router-dom";
 import EditForm from "./Editform/Editform";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
-// import { Loader } from "@googlemaps/js-api-loader";
+import './EventsShow.css';
 
 export default function EventsShow(){
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const history = useHistory()
-    const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const history = useHistory()
+  const sessionUser = useSelector(state => state.session.user);
 
-    useEffect(() => {
-        dispatch(getEventThunk(id));
-    }, [dispatch, id]);
+  // ! Loads current event on page load
+  useEffect(() => {
+      dispatch(getEventThunk(id));
+  }, [dispatch, id]);
 
-    const selectedEvent = useSelector((state) => state.events.all[id]);
-    const currentUser = useSelector((state) => state.session.user)
+  const selectedEvent = useSelector((state) => state.events.all[id]);
+  const currentUser = useSelector((state) => state.session.user)
 
-    const timeConverter = (dateTime) => {
-        const date = new Date(dateTime);
-        const formattedDate = date.toLocaleDateString("en-US", { year: '2-digit', month: '2-digit', day: '2-digit' });
-        const formattedTime = date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true });
+  // ! Time converter helper
+  const timeConverter = (dateTime) => {
+      const date = new Date(dateTime);
+      const formattedDate = date.toLocaleDateString("en-US", { year: '2-digit', month: '2-digit', day: '2-digit' });
+      const formattedTime = date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true });
 
-        return (
-            <p className="date-time"> {selectedEvent?.locationName} - {formattedDate} {formattedTime}</p>
-        )
-    }
+      return (
+          <p className="date-time"> {selectedEvent?.locationName} - {formattedDate} {formattedTime}</p>
+      )
+  }
 
-    const [editPage, setEditPage] = useState(false);
+  const [editPage, setEditPage] = useState(false);
 
-    const handleEditClick = () => {
-      setEditPage(true)
-    }
+  const handleEditClick = () => {
+    setEditPage(true)
+  }
 
-    const [attending, setAttending] = useState(false);
-    const [interested, setInterested] = useState(false);
-  
-    const handleAttendEvent = () => {
-      if (sessionUser) {
-        if (attending) {
-          setAttending(false);
-          setInterested(false);
-        } else {
-          setAttending(true);
-          if (interested) {
-            setInterested(false);
-          }
-        }
+  const [attending, setAttending] = useState(false);
+  const [interested, setInterested] = useState(false);
+
+  // ! Attending Event
+  const handleAttendEvent = () => {
+    if (sessionUser) {
+      if (attending) {
+        setAttending(false);
+        setInterested(false);
       } else {
-        openModal('signin');
-      }
-    };
-    
-    const handleInterestedInEvent = () => {
-      if (sessionUser) {
+        setAttending(true);
         if (interested) {
           setInterested(false);
-          setAttending(false);
-        } else {
-          setInterested(true);
-          if (attending) {
-            setAttending(false);
-          }
         }
-      } else {
-        openModal('signin');
       }
-    };
+    } else {
+      openModal('signin');
+    }
+  };
+  
+  // ! Interested Event
+  const handleInterestedInEvent = () => {
+    if (sessionUser) {
+      if (interested) {
+        setInterested(false);
+        setAttending(false);
+      } else {
+        setInterested(true);
+        if (attending) {
+          setAttending(false);
+        }
+      }
+    } else {
+      openModal('signin');
+    }
+  };
 
+  // ! Require logged in to attend or interested
   const [showModal, setShowModal] = useState(null);
 
   const openModal = (modalType) => {
@@ -87,14 +91,14 @@ export default function EventsShow(){
     closeModal();
 };
 
-
+  // ! Attendees hover modal
   const [showAttendees, setShowAttendees] = useState(true);
   const attendeesCount = selectedEvent?.attendees.length || 0;
 
   const handleArrowToggle = () => {
     setShowAttendees(!showAttendees);
   };
-
+  
   const renderAttendees = () => {
     const attendeesCount = selectedEvent?.attendees.length;
 
@@ -145,6 +149,7 @@ export default function EventsShow(){
     }
   };
 
+  // ! Maybes hover modal
   const [showMaybes, setShowMaybes] = useState(true);
   const maybesCount = selectedEvent?.maybes.length || 0;
 
@@ -201,77 +206,95 @@ export default function EventsShow(){
       );
     }
   };
-      
-  // let map;
-
-  // const loader = new Loader({
-  //   apiKey: "YOUR_API_KEY",
-  //   version: "weekly",
-  // });
   
-  // loader.load().then(async () => {
-  //   const { Map } = await google.maps.importLibrary("maps");
-  
-  //   map = new Map(document.getElementById("event-large-map-container"), {
-  //     center: { lat: -34.397, lng: 150.644 },
-  //     zoom: 8,
-  //   });
-  // });
 
-    return (
-        <>
-        <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
-          <LoginForm onSuccess={handleSignInSuccess} />
-        </Modal>
+  return (
+    <>
+    <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
+      <LoginForm onSuccess={handleSignInSuccess} />
+    </Modal>
 
-        {!editPage ? (
-        <>
-          <div className="master-show-div">
-            <div>
-              {currentUser?._id === selectedEvent?.ownerDetails._id && <p id="event-edit" onClick={handleEditClick}>Edit Event</p>}
-              <div className="name-box">  
-                  <p>{selectedEvent?.eventName}</p>
-              </div>
-              <div className="event-info">
-                  <p>{timeConverter(selectedEvent?.dateTime)}</p>
-                  <p>{selectedEvent?.eventType} - {selectedEvent?.difficulty}</p>
-                  <p>Event created by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
-                  <p>{selectedEvent?.maxGroupSize} Max Group Size</p>
-                  <p>{selectedEvent?.description}</p>
-                  <p>{renderAttendees()}</p>
-                  <p>{renderMaybes()}</p>
-              </div>
-              
-              {currentUser?._id !== selectedEvent?.ownerDetails._id && (
+    {!editPage ? (
+    <>
+      <div className="event-show-parent-container">
+        <div 
+          className="event-show-banner-container"
+          style={{ 
+            backgroundImage: `linear-gradient(to bottom, transparent, #F4FFFD), url("https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}")`,
+          }}
+          >
+          <div className="event-name-container">  
+            <h1>{selectedEvent?.eventName}</h1>
+            <p>Event hosted by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
+          </div>
+        </div>
+
+        <div className="event-show-content-container">
+          <div className="event-show-detail-container">
+            <div className="event-name-container">  
+              <p>{selectedEvent?.eventName}</p>
+            </div>
+            <div className="event-edit-container">
+              {
+                currentUser?._id === selectedEvent?.ownerDetails._id 
+                && 
+                <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
+              }
+            </div>
+
+            <div className="event-info-container">
+                <p>{timeConverter(selectedEvent?.dateTime)}</p>
+                <p>{selectedEvent?.eventType} - {selectedEvent?.difficulty}</p>
+                <p>Event created by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
+                <p>{selectedEvent?.maxGroupSize} Max Group Size</p>
+                <p>{selectedEvent?.description}</p>
+                <p>{renderAttendees()}</p>
+                <p>{renderMaybes()}</p>
+            </div>
+            
+            {
+              currentUser?._id !== selectedEvent?.ownerDetails._id 
+              && 
+              (
                 <div className="join-event">
                   <button
                     onClick={handleAttendEvent}
-                    style={{ backgroundColor: attending ? '#89FC00' : 'transparent', color: attending ? 'green' : '#F4FFFD' }}
+                    style={{
+                      backgroundColor: attending ? '#89FC00' : 'transparent', 
+                      color: attending ? 'green' : '#F4FFFD' 
+                    }}
                     disabled={attending && !interested}
                   >
                     {attending ? 'Attending Event !!' : 'Attend Event'}
                   </button>
                   <button
                     onClick={handleInterestedInEvent}
-                    style={{ backgroundColor: interested ? '#89FC00' : 'transparent', color: interested ? 'green' : '#F4FFFD' }}
+                    style={{ 
+                      backgroundColor: interested ? '#89FC00' : 'transparent', 
+                      color: interested ? 'green' : '#F4FFFD' 
+                    }}
                     disabled={interested && !attending}
                   >
                     {interested ? 'Interested in Going' : 'Interested in Event?'}
                   </button>
                 </div>
-              )}
-              </div>
-              <div id="event-large-map-container">
-                  <img 
-                      src={`https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
-                      alt="map"
-                  />
+              )
+            }
+          </div>
 
-              </div>
-            </div>
-        </>
-          ) : (
-            <EditForm setEditPage={setEditPage}/>
-          )}
-          </>
+          <div id="event-show-map-container">
+              <img 
+                  src={`https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
+                  alt="map"
+              />
+          </div>
+        </div>
+        
+      </div>
+    </>
+    ) : (
+      <EditForm setEditPage={setEditPage}/>
     )}
+    </>
+  )
+}

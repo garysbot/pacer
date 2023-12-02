@@ -1,16 +1,50 @@
-.name-box {
-    margin-top: 1.5rem;
-    width: 90%;
-    margin-left: 5%;
-    height: 4rem;
+/* Main Containers ------------- */
+
+.event-show-parent-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
-.name-box p{
-    margin-top: 1rem;
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-family: 'Lexend', sans-serif;
-    color: #F4FFFD;
+.event-show-banner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 65%;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0; /* Remove padding */
+    height: 24rem;
+}
+
+.event-show-content-container {
+    display: flex;
+    width: 65%;
+    background-color: #1D1D1D;
+    padding: 1rem;
+}
+
+.event-show-map-container {
+    width: 35%;
+}
+
+/* ----------------------------- */
+
+.event-name-container {
+    color: #1D1D1D;
+    padding: 1rem;
+}
+
+
+.event-edit-container {
+    background-color: red;
 }
 
 #event-edit {
@@ -21,47 +55,27 @@
     cursor: pointer;
 }
 
-.event-info {
+.event-name-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+
+
+.event-info-container {
     width: 90%;
     margin-left: 5%;
 }
 
-.event-info p{
+.event-info-container p {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
     color: #F4FFFD;
 }
 
-.attendee-circle {
-    display: inline-block;
-    width: 2.5rem; 
-    height: 2.5rem; 
-    border-radius: 50%;
-    background-color: #F4FFFD;
-    margin-top: 1rem; 
-    margin-right: 1rem;
-  }
-  
-  .attendee-circle:hover {
-    transform: scale(1.2); 
-    transition: transform 0.2s ease;
-  }
-  
-.attendee-circle:hover::before {
-    content: attr(data-name);
-    position: absolute;
-    background: rgba(0, 0, 0, 0.8);
-    color: #F4FFFD;
-    padding: .25rem;
-    border-radius: .25rem;
-    font-size: 1rem;
-    bottom: 2.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    z-index: 999;
-}
 
 .join-event {
     display: flex;
@@ -82,23 +96,45 @@
     color: #F4FFFD;
     transition: border-color 0.3s ease, color 0.3s ease;
     font-family: 'Lexend';
-  }
-  
+}
+
 .join-event button:hover {
     border-color: green;
     box-shadow: none;
-  }
-
-.master-show-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
 }
 
-.master-show-div > div {
-    width: 50%; 
-    box-sizing: border-box; 
-  }
+.attendee-circle {
+    display: inline-block;
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
+    background-color: #F4FFFD;
+    margin-top: 1rem; 
+    margin-right: 1rem;
+}
+
+.attendee-circle:hover {
+    transform: scale(1.2); 
+    transition: transform 0.2s ease;
+}
+
+.attendee-circle:hover::before {
+    content: attr(data-name);
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: #F4FFFD;
+    padding: .25rem;
+    border-radius: .25rem;
+    font-size: 1rem;
+    bottom: 2.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 999;
+}
+
+
+
 
 #event-large-map-container {
     display: flex;
