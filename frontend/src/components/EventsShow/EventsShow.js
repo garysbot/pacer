@@ -354,51 +354,52 @@ export default function EventsShow(){
                   <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
                 }
               </div>
+              <div className="detail-event-inner-left">
+                <div className="detail-event-info">
+                  <div className="date-time">
+                    <p>Date: {formattedDate}</p>
+                    <p>Time: {formattedTime}</p>
+                  </div>
 
-              <div className="detail-event-info">
-                <div className="date-time">
-                  <p>Date: {formattedDate}</p>
-                  <p>Time: {formattedTime}</p>
+                  <p>Location: {selectedEvent?.locationName}</p>
+                  <br></br>
+                  <p>Max Group Size: {selectedEvent?.maxGroupSize}</p>
+                  
+                  <br></br>
+                  <p>Details:</p>
+                  <p>{selectedEvent?.description}</p>
                 </div>
-
-                <p>Location: {selectedEvent?.locationName}</p>
-                <br></br>
-                <p>Max Group Size: {selectedEvent?.maxGroupSize}</p>
-                
-                <br></br>
-                <p>Details:</p>
-                <p>{selectedEvent?.description}</p>
                 <div>
-                {
-                  currentUser?._id !== selectedEvent?.ownerDetails._id 
-                  && 
-                  (
-                    <div className="join-event">
-                      <button
-                        onClick={handleAttendEvent}
-                        style={{
-                          backgroundColor: attending ? '#89FC00' : 'transparent', 
-                          color: attending ? 'green' : '#F4FFFD' 
-                        }}
-                        disabled={attending && !interested}
-                      >
-                        {attending ? 'Attending Event !!' : 'Attend Event'}
-                      </button>
-                      <button
-                        onClick={handleInterestedInEvent}
-                        style={{ 
-                          backgroundColor: interested ? '#89FC00' : 'transparent', 
-                          color: interested ? 'green' : '#F4FFFD' 
-                        }}
-                        disabled={interested && !attending}
-                      >
-                        {interested ? 'Interested in Going' : 'Interested in Event?'}
-                      </button>
-                    </div>
-                  )
-                }
+                  {
+                    currentUser?._id !== selectedEvent?.ownerDetails._id 
+                    && 
+                    (
+                      <div className="join-event">
+                        <button
+                          onClick={handleAttendEvent}
+                          style={{
+                            backgroundColor: attending ? '#89FC00' : 'transparent', 
+                            color: attending ? 'green' : '#F4FFFD' 
+                          }}
+                          disabled={attending && !interested}
+                        >
+                          {attending ? 'Attending Event !!' : 'Attend Event'}
+                        </button>
+                        <button
+                          onClick={handleInterestedInEvent}
+                          style={{ 
+                            backgroundColor: interested ? '#89FC00' : 'transparent', 
+                            color: interested ? 'green' : '#F4FFFD' 
+                          }}
+                          disabled={interested && !attending}
+                        >
+                          {interested ? 'Interested in Going' : 'Interested in Event?'}
+                        </button>
+                      </div>
+                    )
+                  }
+                  </div>
                 </div>
-              </div>
 
               <div className="detail-attendees-info">
                 <p>{renderAttendees()}</p>
