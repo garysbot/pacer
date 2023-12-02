@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 65%;
+    /* border-radius: 3rem; */
     border-top-left-radius: 3rem;
     border-top-right-radius: 3rem;
     background-size: cover;
@@ -26,8 +27,10 @@
 
 .event-show-content-container {
     display: flex;
+    flex-direction: column;
     width: 65%;
-    background-color: rgba(230, 230, 230, .8);
+    /* background-color: rgba(230, 230, 230, 1); */
+    background-color: rgba(244, 255, 253, 0.8);
     padding: 2rem;
     border-bottom-left-radius: 3rem;
     border-bottom-right-radius: 3rem;
@@ -49,7 +52,7 @@
     margin-left: 1rem;
 }
 
-.event-edit-container {
+.detail-event-edit {
     background-color: red;
 }
 
@@ -61,27 +64,50 @@
     cursor: pointer;
 }
 
-
-
-
-.event-info-container {
-    width: 90%;
-    margin-left: 5%;
+.detail-container-row-one {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
-.event-info-container p {
-    font-size: 1.5rem;
-    font-weight: 400;
+
+.detail-event-info {
+    width: 60%;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+}
+
+.detail-event-info a {
+    color: #1D1D1D;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: color, 0.3s ease;
+}
+
+.detail-event-info a:hover {
+    color: #FF5964;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.detail-event-info .date-time {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
     margin-bottom: 1rem;
-    color: #F4FFFD;
+    align-items: center;
 }
 
+.detail-attendees-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .join-event {
     display: flex;
-    margin-left: 5%;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
 }
 
 .join-event button {

@@ -112,7 +112,7 @@ export default function EventsShow(){
     if (attendeesCount > 5) {
       if (showAttendees) {
         return (
-            <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+            <span>
                 {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
                 <div className="attendees-list" style={{ display: showAttendees ? "block" : "none" }}>
                 {selectedEvent?.attendeesDetails.slice(0, 5).map((attendee, index) => (
@@ -128,7 +128,7 @@ export default function EventsShow(){
         }
 
         return (
-          <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+          <span>
             {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="attendees-list">
               {chunks.map((chunk, chunkIndex) => (
@@ -144,7 +144,7 @@ export default function EventsShow(){
       }
     } else {
       return (
-        <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+        <span>
           {attendeesCount} Attending
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
@@ -170,7 +170,7 @@ export default function EventsShow(){
     if (maybesCount > 5) {
       if (showMaybes) {
         return (
-            <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+            <span>
                 {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
                 <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
                 {selectedEvent?.maybesDetails.slice(0, 5).map((maybes, index) => (
@@ -186,7 +186,7 @@ export default function EventsShow(){
         }
 
         return (
-          <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+          <span>
             {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="maybes-list">
               {chunks.map((chunk, chunkIndex) => (
@@ -202,7 +202,7 @@ export default function EventsShow(){
       }
     } else {
       return (
-        <span style={{ fontSize: "1.5rem", fontWeight: "400" }}>
+        <span>
           {maybesCount} Interested
           <div className="maybes-list">
             {selectedEvent?.maybesDetails.map((maybes, index) => (
@@ -214,6 +214,7 @@ export default function EventsShow(){
     }
   };
   
+  // ! Difficulty Badge
   const difficultyColor = (difficulty, eventType) => {
     switch (difficulty) {
         case 'Beginner':
@@ -327,17 +328,16 @@ export default function EventsShow(){
     {!editPage ? (
     <>
       <div className="event-show-parent-container">
-        <div 
-          className="event-show-banner-container"
+        <div className="event-show-banner-container"
           style={{ 
-            backgroundImage: `linear-gradient(to bottom, transparent, #F4FFFD), url("https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}")`,
+            backgroundImage: `linear-gradient(to bottom, transparent, rgba(244, 255, 253, 0.8)), url("https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}")`,
           }}
           >
           <div className="event-name-container">  
             <h1>{selectedEvent?.eventName}</h1>
             <div className="event-subheader event-banner-subhead">
               { difficultyColor(selectedEvent?.difficulty, selectedEvent?.eventType) }
-              <p className="event-subheader-difficulty event-banner-profile-link">{selectedEvent?.difficulty} with <Link to={`/users/${sessionUser?._id}`} >{`${selectedEvent?.ownerDetails?.firstName} ${selectedEvent?.ownerDetails?.lastName}`}</Link> on {formattedDate} {formattedTime}</p>
+              <p className="event-banner-profile-link">{selectedEvent?.difficulty} {selectedEvent?.eventType} hosted by <Link to={`/users/${selectedEvent?.ownerDetails._id}`}>{selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</Link></p>
               <p className="event-subheader-host"></p>
             </div>
           </div>
@@ -345,55 +345,68 @@ export default function EventsShow(){
 
         <div className="event-show-content-container">
           <div className="event-show-detail-container">
-            <div className="event-name-container">  
-              <p>{selectedEvent?.eventName}</p>
-            </div>
-            <div className="event-edit-container">
-              {
-                currentUser?._id === selectedEvent?.ownerDetails._id 
-                && 
-                <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
-              }
+
+            <div className="detail-container-row-one">
+              <div className="detail-event-edit">
+                {
+                  currentUser?._id === selectedEvent?.ownerDetails._id 
+                  && 
+                  <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
+                }
+              </div>
+
+              <div className="detail-event-info">
+                <div className="date-time">
+                  <p>Date: {formattedDate}</p>
+                  <p>Time: {formattedTime}</p>
+                </div>
+
+                <p>Location: {selectedEvent?.locationName}</p>
+                <br></br>
+                <p>Max Group Size: {selectedEvent?.maxGroupSize}</p>
+                
+                <br></br>
+                <p>Details:</p>
+                <p>{selectedEvent?.description}</p>
+                <div>
+                {
+                  currentUser?._id !== selectedEvent?.ownerDetails._id 
+                  && 
+                  (
+                    <div className="join-event">
+                      <button
+                        onClick={handleAttendEvent}
+                        style={{
+                          backgroundColor: attending ? '#89FC00' : 'transparent', 
+                          color: attending ? 'green' : '#F4FFFD' 
+                        }}
+                        disabled={attending && !interested}
+                      >
+                        {attending ? 'Attending Event !!' : 'Attend Event'}
+                      </button>
+                      <button
+                        onClick={handleInterestedInEvent}
+                        style={{ 
+                          backgroundColor: interested ? '#89FC00' : 'transparent', 
+                          color: interested ? 'green' : '#F4FFFD' 
+                        }}
+                        disabled={interested && !attending}
+                      >
+                        {interested ? 'Interested in Going' : 'Interested in Event?'}
+                      </button>
+                    </div>
+                  )
+                }
+                </div>
+              </div>
+
+              <div className="detail-attendees-info">
+                <p>{renderAttendees()}</p>
+                <p>{renderMaybes()}</p>
+              </div>
+
             </div>
 
-            <div className="event-info-container">
-              <p>{timeConverter(selectedEvent?.dateTime)}</p>
-              <p>{selectedEvent?.eventType} - {selectedEvent?.difficulty}</p>
-              <p>Event created by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
-              <p>{selectedEvent?.maxGroupSize} Max Group Size</p>
-              <p>{selectedEvent?.description}</p>
-              <p>{renderAttendees()}</p>
-              <p>{renderMaybes()}</p>
-            </div>
-            
-            {
-              currentUser?._id !== selectedEvent?.ownerDetails._id 
-              && 
-              (
-                <div className="join-event">
-                  <button
-                    onClick={handleAttendEvent}
-                    style={{
-                      backgroundColor: attending ? '#89FC00' : 'transparent', 
-                      color: attending ? 'green' : '#F4FFFD' 
-                    }}
-                    disabled={attending && !interested}
-                  >
-                    {attending ? 'Attending Event !!' : 'Attend Event'}
-                  </button>
-                  <button
-                    onClick={handleInterestedInEvent}
-                    style={{ 
-                      backgroundColor: interested ? '#89FC00' : 'transparent', 
-                      color: interested ? 'green' : '#F4FFFD' 
-                    }}
-                    disabled={interested && !attending}
-                  >
-                    {interested ? 'Interested in Going' : 'Interested in Event?'}
-                  </button>
-                </div>
-              )
-            }
           </div>
 
           <div id="event-show-map-container">
