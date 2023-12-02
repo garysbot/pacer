@@ -7,6 +7,7 @@ import EditForm from "./Editform/Editform";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
 import './EventsShow.css';
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function EventsShow(){
   const dispatch = useDispatch();
@@ -33,6 +34,12 @@ export default function EventsShow(){
       )
   }
 
+  // ! Formatted Dates
+  const formattedDate = new Date(selectedEvent?.dateTime).toLocaleDateString("en-US", { year: '2-digit', month: '2-digit', day: '2-digit' });
+
+  const formattedTime = new Date(selectedEvent?.dateTime).toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true });
+
+  // ! Edit Event
   const [editPage, setEditPage] = useState(false);
 
   const handleEditClick = () => {
@@ -207,6 +214,109 @@ export default function EventsShow(){
     }
   };
   
+  const difficultyColor = (difficulty, eventType) => {
+    switch (difficulty) {
+        case 'Beginner':
+            return (
+                <p className="sport-icon beginner">{sportIcon(eventType)}</p>
+            )
+        case 'Intermediate':
+            return (
+                <p className="sport-icon intermediate">{sportIcon(eventType)}</p>
+            )
+        case 'Advanced':
+            return (
+                <p className="sport-icon advanced">{sportIcon(eventType)}</p>
+            )
+        default:
+            return null
+    }
+  }
+
+  const sportIcon = (eventType) => {
+    switch (eventType) {
+        case 'Basketball':
+            return "🏀";
+        case 'Soccer':
+            return "⚽";
+        case 'Baseball':
+            return "⚾";
+        case 'Tennis':
+            return "🎾";
+        case 'Running':
+            return "🏃‍♂️";
+        case 'Volleyball':
+            return "🏐";
+        case 'Swimming':
+            return "🏊‍♂️";
+        case 'Yoga':
+            return "🧘";
+        case 'Gym (Fitness)':
+            return "🏋️";
+        case 'Handball':
+            return "🤾";
+        case 'Biking':
+            return "🚴";
+        case 'Martial Arts':
+            return "🥋";
+        case 'Hockey':
+            return "🏒";
+        case 'Football':
+            return "🏈";
+        case 'Hiking':
+            return "🥾";
+        case 'Bowling':
+            return "🎳";
+        case 'Water Sports':
+            return "🏄";
+        case 'Ping Pong':
+            return "🏓";
+        case 'Golf':
+            return "⛳";
+        case 'Pickleball':
+            return "🏓";
+        case 'Rock Climbing':
+            return "🧗";
+        case 'Skateboarding':
+            return "🛹";
+        case 'Badminton':
+            return "🏸";
+        case 'Walking':
+            return "🚶";
+        case 'Lacrosse':
+            return "🥍";
+        case 'Ultimate Frisbee':
+            return "🥏";
+        case 'Rugby':
+            return "🏉";
+        case 'Archery':
+            return "🏹";
+        case 'Fencing':
+            return "🤺";
+        case 'Sailing':
+            return "⛵";
+        case 'Rowing':
+            return "🚣";
+        case 'Table Tennis':
+            return "🏓";
+        case 'Squash':
+            return "🧃";
+        case 'Equestrian':
+            return "🐎";
+        case 'CrossFit':
+            return "🏋️‍♂️";
+        case 'Triathlons':
+            return "🏊‍♂️";
+        case 'Cricket':
+            return "🏏";
+        case 'Jiu-Jitsu':
+            return "🥋";
+        case 'Boxing':
+            return "🥊";
+        default:
+            return ""; // Return an empty string or a default icon if eventType does not match
+    }
+};
 
   return (
     <>
@@ -225,7 +335,11 @@ export default function EventsShow(){
           >
           <div className="event-name-container">  
             <h1>{selectedEvent?.eventName}</h1>
-            <p>Event hosted by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
+            <div className="event-subheader event-banner-subhead">
+              { difficultyColor(selectedEvent?.difficulty, selectedEvent?.eventType) }
+              <p className="event-subheader-difficulty event-banner-profile-link">{selectedEvent?.difficulty} with <Link to={`/users/${sessionUser?._id}`} >{`${selectedEvent?.ownerDetails?.firstName} ${selectedEvent?.ownerDetails?.lastName}`}</Link> on {formattedDate} {formattedTime}</p>
+              <p className="event-subheader-host"></p>
+            </div>
           </div>
         </div>
 
@@ -243,13 +357,13 @@ export default function EventsShow(){
             </div>
 
             <div className="event-info-container">
-                <p>{timeConverter(selectedEvent?.dateTime)}</p>
-                <p>{selectedEvent?.eventType} - {selectedEvent?.difficulty}</p>
-                <p>Event created by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
-                <p>{selectedEvent?.maxGroupSize} Max Group Size</p>
-                <p>{selectedEvent?.description}</p>
-                <p>{renderAttendees()}</p>
-                <p>{renderMaybes()}</p>
+              <p>{timeConverter(selectedEvent?.dateTime)}</p>
+              <p>{selectedEvent?.eventType} - {selectedEvent?.difficulty}</p>
+              <p>Event created by {selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</p>
+              <p>{selectedEvent?.maxGroupSize} Max Group Size</p>
+              <p>{selectedEvent?.description}</p>
+              <p>{renderAttendees()}</p>
+              <p>{renderMaybes()}</p>
             </div>
             
             {

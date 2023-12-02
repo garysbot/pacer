@@ -27,8 +27,10 @@
 .event-show-content-container {
     display: flex;
     width: 65%;
-    background-color: #1D1D1D;
-    padding: 1rem;
+    background-color: rgba(230, 230, 230, .8);
+    padding: 2rem;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
 }
 
 .event-show-map-container {
@@ -40,8 +42,12 @@
 .event-name-container {
     color: #1D1D1D;
     padding: 1rem;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
 }
-
 
 .event-edit-container {
     background-color: red;
@@ -55,12 +61,6 @@
     cursor: pointer;
 }
 
-.event-name-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
-}
 
 
 
@@ -146,4 +146,17 @@
 #event-large-map-container img {
     border-radius: 25px;
     height: auto;
+}
+
+.event-banner-profile-link a {
+    color: #1d1d1d;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: color, 0.3s ease;
+}
+
+.event-banner-profile-link a:hover {
+    color: #FF5964;
+    font-weight: 700;
+    text-decoration: underline;
 }
