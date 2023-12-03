@@ -76,7 +76,31 @@ form .errors {
 
 a {
   color: white;
-  text-decoration: none;
   cursor: pointer; 
+  text-decoration: none;
 }
 
+.styled-link a {
+  background:
+    linear-gradient(
+      to right,
+      rgba(81, 187, 254, 1),
+      rgba(81, 187, 254, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(81, 187, 254, 1),
+      rgba(137, 252, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(255, 89, 100, 1),
+      rgba(250, 130, 76, 1)
+  );
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.styled-link :hover {
+  background-size: 0 3px, 100% 3px;
+}

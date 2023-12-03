@@ -222,12 +222,12 @@ export default function DiscoverPage(props){
                     <LoginForm onSuccess={handleSignInSuccess} />
                 </Modal>
                 <div className="discover-parent-container">
-                    <div className="filter-container">
+                    {/* <div className="filter-container">
                         <form>                           
                             <h3>Filter</h3>
                             <p>Primary Sport</p>
                         </form>
-                    </div>
+                    </div> */}
                     <div className="index-container">
                         <div className="index-header">
                             <h2>Find an event near you</h2>

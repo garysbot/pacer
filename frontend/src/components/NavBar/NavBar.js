@@ -55,8 +55,8 @@ function NavBar () {
           </div>
           
           <div className='nav-links'>
-            <Link to={'/discover'}><h3>Discover</h3></Link>
-            <Link to={'/about'}><h3>About</h3></Link>
+            <h3 className='styled-link'><Link to={'/discover'}>Discover</Link></h3>
+            <h3 className='styled-link'><Link to={'/about'}>About</Link></h3>
           </div>
 
           <div id="nav-auth">
