@@ -112,46 +112,71 @@ export default function EventsShow(){
     if (attendeesCount > 5) {
       if (showAttendees) {
         return (
-            <span>
-                {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
-                <div className="attendees-list" style={{ display: showAttendees ? "block" : "none" }}>
-                {selectedEvent?.attendeesDetails.slice(0, 5).map((attendee, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
-                ))}
-                </div>
-            </span>
+          <>
+          <div className="attending-container">
+            <p>{attendeesCount} Attending 
+              <span 
+                onClick={handleArrowToggle} 
+                style={{ cursor: 'pointer' }}
+                >
+                  {showAttendees ? ' \u25B6' : ' \u25BC'}
+              </span> </p>
+              <div 
+                className="attendees-list" 
+                style={{ 
+                  display: showAttendees ? "block" : "none" 
+                  }}
+                >
+                {
+                  selectedEvent?.attendeesDetails.slice(0, 4).map((attendee, index) => (
+                  <span 
+                    key={index} 
+                    className="attendee-circle" 
+                    data-name={`${attendee.firstName} ${attendee.lastName}`}
+                    >
+                  </span>
+                  ))
+                }
+              </div>
+            </div>
+          </>
         );
       } else {
         const chunks = [];
-        for (let i = 0; i < attendeesCount; i += 5) {
-          chunks.push(selectedEvent?.attendeesDetails.slice(i, i + 5));
+        for (let i = 0; i < attendeesCount; i += 4) {
+          chunks.push(selectedEvent?.attendeesDetails.slice(i, i + 4));
         }
 
         return (
-          <span>
-            {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
-            <div className="attendees-list">
-              {chunks.map((chunk, chunkIndex) => (
-                <div key={chunkIndex}>
-                  {chunk.map((attendee, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
-                  ))}
-                </div>
-              ))}
+          <>
+          <div className="attending-container">
+            <p>{attendeesCount} Attending 
+            <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
+              <div className="attendees-list">
+                {chunks.map((chunk, chunkIndex) => (
+                  <div key={chunkIndex}>
+                    {chunk.map((attendee, index) => (
+                      <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
-          </span>
+          </>
         );
       }
     } else {
       return (
-        <span>
-          {attendeesCount} Attending
+        <>
+        <div className="attending-container">
+          <p>{attendeesCount} Attending</p>
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
               <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
             ))}
           </div>
-        </span>
+        </div>
+        </>
       );
     }
   };
@@ -170,46 +195,53 @@ export default function EventsShow(){
     if (maybesCount > 5) {
       if (showMaybes) {
         return (
-            <span>
-                {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
-                <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
-                {selectedEvent?.maybesDetails.slice(0, 5).map((maybes, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
-                ))}
-                </div>
-            </span>
+          <>
+            <div className="attending-container">
+              <p>
+              {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
+              <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
+              {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
+                  <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+              ))}
+              </div>
+            </div>
+          </>
         );
       } else {
         const chunks = [];
-        for (let i = 0; i < maybesCount; i += 5) {
-          chunks.push(selectedEvent?.maybesDetails.slice(i, i + 5));
+        for (let i = 0; i < maybesCount; i += 4) {
+          chunks.push(selectedEvent?.maybesDetails.slice(i, i + 4));
         }
 
         return (
-          <span>
-            {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
-            <div className="maybes-list">
-              {chunks.map((chunk, chunkIndex) => (
-                <div key={chunkIndex}>
-                  {chunk.map((maybes, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
-                  ))}
-                </div>
-              ))}
+          <>
+          <div className="attending-container">
+              <p>{maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
+              <div className="maybes-list">
+                {chunks.map((chunk, chunkIndex) => (
+                  <div key={chunkIndex}>
+                    {chunk.map((maybes, index) => (
+                      <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
-          </span>
+          </>
         );
       }
     } else {
       return (
-        <span>
-          {maybesCount} Interested
-          <div className="maybes-list">
-            {selectedEvent?.maybesDetails.map((maybes, index) => (
-              <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
-            ))}
+        <>
+          <div className="attending-container">
+            <p>{maybesCount} Interested</p>
+            <div className="maybes-list">
+              {selectedEvent?.maybesDetails.map((maybes, index) => (
+                <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+              ))}
+            </div>
           </div>
-        </span>
+        </>
       );
     }
   };
@@ -356,17 +388,27 @@ export default function EventsShow(){
               </div>
               <div className="detail-event-inner-left">
                 <div className="detail-event-info">
-                  <div className="date-time">
-                    <p>Date: {formattedDate}</p>
-                    <p>Time: {formattedTime}</p>
+                  <div className="desc-row">
+                    <p>
+                      <span className="desc-field-label">
+                        Date
+                      </span>
+                      {` ${formattedDate}`}
+                    </p>
+                    <p>
+                      <span className="desc-field-label">Time</span> {` ${formattedTime}`}</p>
                   </div>
 
-                  <p>Location: {selectedEvent?.locationName}</p>
-                  <br></br>
-                  <p>Max Group Size: {selectedEvent?.maxGroupSize}</p>
+                  <div className="desc-row">
+                    <p style={{width: '100%'}}>
+                      <span className="desc-field-label">Location </span> {selectedEvent?.locationName}</p>
+                    
+                  </div>
+                  <p style={{width: '60%'}}>
+                      <span className="desc-field-label">Max Attendees </span> {selectedEvent?.maxGroupSize} people</p>
                   
                   <br></br>
-                  <p>Details:</p>
+                  <p className="desc-field-label">Details</p>
                   <p>{selectedEvent?.description}</p>
                 </div>
                 <div>

@@ -239,7 +239,7 @@ export default function DiscoverPage(props){
                             onMouseUp={onMouseUpOrLeave}
                             onMouseLeave={onMouseUpOrLeave}
                         >
-                            <p className="sport-filter-label" onClick={resetFilters}>❌</p>
+                            <p className="sport-label" onClick={resetFilters}>X</p>
                             {filteredSports.map((sport)=>{
                                 return (
                                     <p className="sport-label"

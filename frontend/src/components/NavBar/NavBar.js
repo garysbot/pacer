@@ -70,7 +70,7 @@ function NavBar () {
                 </>
               ) : (
                 <>
-                  <button onClick={() => openModal('signup')} className="auth-buttons">
+                  <button onClick={() => openModal('signup')} className="brand-button">
                     Sign Up
                   </button>
                   <button onClick={() => openModal('signin')} className="auth-buttons">
