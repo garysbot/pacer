@@ -156,7 +156,15 @@ export default function EventsShow(){
                 {chunks.map((chunk, chunkIndex) => (
                   <div key={chunkIndex}>
                     {chunk.map((attendee, index) => (
-                      <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
+                      <>
+                        <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/>
+                        <span 
+                          key={index} 
+                          className="attendee-circle" 
+                          data-name={`${attendee.firstName} ${attendee.lastName}`}
+                          >  
+                        </span>
+                      </>
                     ))}
                   </div>
                 ))}
