@@ -7,7 +7,7 @@
 }
 
 .about-team-content {
-  max-width: 70%;
+  max-width: 80%;
   margin: 3rem 1rem;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,10 @@
 
 .about-team-header h1, h2, h3, p, span {
     color: #F4FFFD;
+}
+
+.about-team-header h1 {
+  margin-bottom: 1rem;
 }
 
 .about-team-section {
@@ -31,8 +35,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.25rem;
   height: auto;
+  width: 20%;
+}
+
+.person-container h3 {
+  margin-bottom: 1rem;
+}
+
+.person-container p {
+  margin-bottom: 1rem;
+}
+
+.person-container img {
+  margin-bottom: 1rem;
 }
 
 .about-img {
@@ -45,7 +62,21 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-evenly
+}
+
+.about-team-url-icon {
+  width: 2rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  fill: #F4FFFD;
+  transition: fill, ease 0.2s;
+}
+
+.about-team-url-icon:hover {
+  fill: #FF5964;
 }
 
 @media screen and (max-width: 768px) {

@@ -57,16 +57,22 @@
     margin-left: 1rem;
 }
 
-.detail-event-edit {
+/* .detail-event-edit {
     background-color: red;
-}
+} */
 
 #event-edit {
     font-family: 'Lexend', sans-serif;
-    margin-top: 1rem;
-    margin-left: 92%;
-    color: #F4FFFD;
+    /* margin-top: 1rem;
+    margin-left: 92%; */
+    /* color: #F4FFFD; */
+    font-weight: 600;
     cursor: pointer;
+    width: 100%;
+    margin-left: 300px;
+    margin-top: -340px;
+    z-index: 1;
+    width: 100px;
 }
 
 .detail-container-row-one {
@@ -224,7 +230,7 @@
     flex-direction: column;
     /* gap: 1rem; */
     margin-bottom: 2rem;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     z-index: 9000;
 }
 
@@ -237,4 +243,8 @@
 
 .attendees-list {
     color: red;
+}
+
+.gm-style-iw-d p {
+    color:black;
 }

@@ -27,7 +27,7 @@ export default function DiscoverPage(props){
     const [renderedEvents, setRenderedEvents] = useState(futureEvents)
 
     // ======= filtering logic ================
-    const [canRemoveFilters, setCanRemoveFilters] = useState(false)
+    const [canRemoveFilters, setCanRemoveFilters] = useState(true)
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
@@ -257,10 +257,10 @@ export default function DiscoverPage(props){
                             Create an event!
                         </button>
                         {
-                            renderedEvents.map((event, index) =>    
+                            renderedEvents?.map((event, index) =>    
                                 (
-                                    <Link to={`/events/${event._id}`}>
-                                        <div key={index} className="event-container">
+                                    <Link key={index} to={`/events/${event._id}`}>
+                                        <div className="event-container">
                                             <div className="event-content">
                                                 <div className="event-header">
                                                     <h3>{event.eventName}</h3>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 // import { Loader } from "@googlemaps/js-api-loader";
@@ -8,6 +8,7 @@ import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
 import './EventsShow.css';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 
 export default function EventsShow(){
   const dispatch = useDispatch();
@@ -359,6 +360,19 @@ export default function EventsShow(){
     }
 };
 
+  const mapStyles = {
+    height: '400px',
+    width: '100%',
+  };
+
+  // State to manage the visibility of the InfoWindow
+  const [infoWindowVisible, setInfoWindowVisible] = useState(false);
+
+  // Function to handle marker click and toggle the InfoWindow visibility
+  const handleMarkerClick = () => {
+    setInfoWindowVisible(!infoWindowVisible);
+  };
+
   return (
     <>
     <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
@@ -387,13 +401,6 @@ export default function EventsShow(){
           <div className="event-show-detail-container">
 
             <div className="detail-container-row-one">
-              <div className="detail-event-edit">
-                {
-                  currentUser?._id === selectedEvent?.ownerDetails._id 
-                  && 
-                  <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
-                }
-              </div>
               <div className="detail-event-inner-left">
                 <div className="detail-event-info">
                   <div className="desc-row">
@@ -450,22 +457,59 @@ export default function EventsShow(){
                   }
                   </div>
                 </div>
-
-              <div className="detail-attendees-info">
-                <p>{renderAttendees()}</p>
-                <p>{renderMaybes()}</p>
-              </div>
+              
+                
+                <div className="detail-attendees-info">
+                  <div className="detail-event-edit">
+                    {
+                      currentUser?._id === selectedEvent?.ownerDetails._id 
+                      && 
+                      <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
+                    }
+                  </div>
+                  <p>{renderAttendees()}</p>
+                  <p>{renderMaybes()}</p>
+                </div>
 
             </div>
 
           </div>
 
-          <div id="event-show-map-container">
+          {/* <div id="event-show-map-container">
               <img 
                   src={`https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
                   alt="map"
               />
-          </div>
+          </div> */}
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={14}
+            center={{
+              lat: selectedEvent?.latitude,
+              lng: selectedEvent?.longitude,
+            }}
+          >
+            <Marker position={{
+              lat: selectedEvent?.latitude,
+              lng: selectedEvent?.longitude,
+            }} 
+              onClick={handleMarkerClick}
+            />
+            {infoWindowVisible && (
+              <InfoWindow
+                position={{
+                  lat: selectedEvent?.latitude,
+                  lng: selectedEvent?.longitude,
+                }}
+                onCloseClick={() => setInfoWindowVisible(false)}
+              >
+                <div>
+                  <p>Location: {selectedEvent?.locationName}</p>
+                  <p>Time of Event: {formattedTime}</p>
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
         </div>
         
       </div>
