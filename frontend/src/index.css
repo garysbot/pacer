@@ -52,18 +52,19 @@ button {
   height: 2rem;
   border-radius: 3rem;
   border-style: none;
+  cursor: pointer;
   /* border-color: #F4FFFD; */
   /* border-width: 2px; */
   background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
   color: #F4FFFD;
   font-family: 'Lexend';
-  transition: background 1s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 button:hover {
-  background: linear-gradient(63deg, rgba(81,187,254,1) 0%, rgba(137,252,0,1) 100%);
-  /* color: #89FC00; */
-  box-shadow: none;
+  box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+  -webkit-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+  -moz-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
 }
 
 form .errors {

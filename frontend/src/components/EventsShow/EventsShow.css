@@ -173,7 +173,6 @@
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    z-index: 999;
 }
 
 
@@ -226,6 +225,7 @@
     /* gap: 1rem; */
     margin-bottom: 2rem;
     margin-left: 2rem;
+    z-index: 9000;
 }
 
 .attending-container p {

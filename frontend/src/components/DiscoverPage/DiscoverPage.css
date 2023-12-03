@@ -50,25 +50,30 @@
   font-family: 'Lexend';
   font-weight: 500;
   border-radius: 2rem;
+  transition: box-shadow 0.2s ease;
 }
 
 .sport-label:hover {
   cursor: pointer;
+  box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
 }
 
 .sport-filter-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
 
-.sport-filter-label{
-    width: auto;
-    background: linear-gradient(145deg, #89fc00 0%, rgba(250,130,76,1) 100%);
-    font-size: 0.75rem;
-    padding: 0.75rem;
-    border-radius: 3px;
-    font-family: 'Lexend';
-    font-weight: 500;
-    border-radius: 2rem;
+.sport-filter-label {
+  width: auto;
+  background: linear-gradient(145deg, #89fc00 0%, rgba(250,130,76,1) 100%);
+  font-size: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 3px;
+  font-family: 'Lexend';
+  font-weight: 500;
+  border-radius: 2rem;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .sport-filter-label:hover{
