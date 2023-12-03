@@ -63,15 +63,18 @@
 }
 
 .month {
-    width: 7rem;
+    width: 8rem;
+    border-radius: 3rem;
 }
 
 .date {
     width: 3.25rem;
+    border-radius: 3rem;
 }
 
 .year {
-    width: 4.5rem;
+    width: 5rem;
+    border-radius: 3rem;
 }
 
 .field-row-container {
@@ -217,3 +220,4 @@ button .sport-button-label:hover {
     border-color: aqua;
     background-color: lightblue;
 }
+
