@@ -401,13 +401,6 @@ export default function EventsShow(){
           <div className="event-show-detail-container">
 
             <div className="detail-container-row-one">
-              <div className="detail-event-edit">
-                {
-                  currentUser?._id === selectedEvent?.ownerDetails._id 
-                  && 
-                  <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
-                }
-              </div>
               <div className="detail-event-inner-left">
                 <div className="detail-event-info">
                   <div className="desc-row">
@@ -464,11 +457,19 @@ export default function EventsShow(){
                   }
                   </div>
                 </div>
-
-              <div className="detail-attendees-info">
-                <p>{renderAttendees()}</p>
-                <p>{renderMaybes()}</p>
-              </div>
+              
+                
+                <div className="detail-attendees-info">
+                  <div className="detail-event-edit">
+                    {
+                      currentUser?._id === selectedEvent?.ownerDetails._id 
+                      && 
+                      <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
+                    }
+                  </div>
+                  <p>{renderAttendees()}</p>
+                  <p>{renderMaybes()}</p>
+                </div>
 
             </div>
 
