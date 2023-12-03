@@ -167,14 +167,16 @@ const generateRandomEvent = (usersArray) => {
     }
   }
 
+  const eventType = getRandomElement(sports);
+
   return new Event({
     owner: randomUser._id,
     eventName: randomEventTitle,
-    description: `This event will focus on ${getRandomElement(sports)}. Join us for a fun time! ${faker.lorem.paragraph()}`,
+    eventType: eventType,
+    description: `This event will focus on ${eventType}.  Join us for a fun time! ${faker.lorem.paragraph()}`,
     locationName: faker.address.streetName(),
     dateTime: randomDate,
     difficulty: getRandomElement(['Beginner', 'Intermediate', 'Advanced']),
-    eventType: getRandomElement(sports),
     maxGroupSize: faker.datatype.number({ min: 2, max: 100 }),
     attendees: attendees,
     maybes: maybes,
