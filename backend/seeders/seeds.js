@@ -21,6 +21,29 @@ const sports = [
     'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
   ];
 
+  const eventTitles = [
+    "Athletic Challenge",
+    "Summer Games",
+    "Fitness Expo",
+    "Sports Extravaganza",
+    "Active Pursuit",
+    "Champion's Rally",
+    "Endurance Quest",
+    "Victory Showdown",
+    "Athletic Spectacle",
+    "Health & Wellness Festival",
+    "Athletic Carnival",
+    "Endurance Challenge",
+    "Victory Cup",
+    "Fitness Fiesta",
+    "Active Quest",
+    "Athletic Endeavor",
+    "Sportsmanship Showcase",
+    "Fitness Frenzy",
+    "Wellness Summit",
+    "Sports Challenge"
+  ];
+
 // Create users
 const users = [];
 
@@ -119,6 +142,7 @@ const events = [];
 const generateRandomEvent = (usersArray) => {
   const randomUserIndex = Math.floor(Math.random() * usersArray.length);
   const randomUser = usersArray[randomUserIndex];
+  const randomEventTitle = getRandomElement(eventTitles);
 
   const currentDate = new Date();
   const nextYear = currentDate.getFullYear() + 1;
@@ -145,8 +169,8 @@ const generateRandomEvent = (usersArray) => {
 
   return new Event({
     owner: randomUser._id,
-    eventName: faker.lorem.words(3),
-    description: faker.lorem.sentence(),
+    eventName: randomEventTitle,
+    description: `This event will focus on ${getRandomElement(sports)}. Join us for a fun time! ${faker.lorem.paragraph()}`,
     locationName: faker.address.streetName(),
     dateTime: randomDate,
     difficulty: getRandomElement(['Beginner', 'Intermediate', 'Advanced']),
@@ -169,7 +193,7 @@ for (let i = 0; i < NUM_SEED_EVENTS; i++) {
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    // console.log('Connected to MongoDB successfully');
+    console.log('Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -178,14 +202,14 @@ mongoose
   });
 
 const insertSeeds = () => {
-  // console.log("Resetting db and seeding users and events...");
+  console.log("Resetting db and seeding users and events...");
 
   User.collection.drop()
                   .then(() => Event.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Event.insertMany(events))
                   .then(() => {
-                    // console.log("Done!");
+                    console.log("Done!");
                     mongoose.disconnect();
                   })
                   .catch(err => {
