@@ -6,12 +6,12 @@ footer {
 }
 
 .easter-egg {
-  color: #f35154;
   font-size: 0;
   line-height: 1.5;
 }
 
 .easter-egg span {
+  color: #f35154;
   font-size: 1rem;
   font-family: 'Lexend', sans-serif;
   font-weight: 700;

@@ -79,17 +79,17 @@ function NavBar () {
                 </>
               )
             }
-            <Modal isOpen={showModal === 'signup'} onClose={closeModal}>
-              <SignupForm onSuccess={handleSignUpSuccess} />
-            </Modal>
-
-            <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
-              <LoginForm onSuccess={handleSignInSuccess} />
-            </Modal>
           </div>
 
         </div>
       </div>
+      <Modal isOpen={showModal === 'signup'} onClose={closeModal}>
+        <SignupForm onSuccess={handleSignUpSuccess} />
+      </Modal>
+
+      <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
+        <LoginForm onSuccess={handleSignInSuccess} />
+      </Modal>
     </>
   );
 }
