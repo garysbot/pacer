@@ -1,13 +1,41 @@
 #user-show-main{
     border: 1px solid white;
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    
+    gap: 20px;
+    padding: 20px;
 }
 
 #general-info{
-    border: 1px solid white;
-    width: fit-content;
+    border-radius: 10px;
+    box-shadow:10px ;
+    width: 40%;
+    height: 70%;
+    padding: 10px;
+    border: 1px solid #e2e2e2;
+    color: #e2e2e2;
+    margin: 10px;
+    -webkit-box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
+    box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
+}
+
+.blur-header{
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.62);
+}
+
+#health-metrics{
+    margin: 10px;
+    height: fit-content;
+    width: 40%;
+    height: 50%;
+    border: 1px solid #e2e2e2;
+    color: #e2e2e2;
+    border-radius: 10px;
+    -webkit-box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
+    box-shadow: 14px 18px 35px -11px rgba(0,0,0,0.75);
 }
