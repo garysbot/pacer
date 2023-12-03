@@ -2,9 +2,7 @@
 
 const mongoose = require('mongoose');
 const { mongoURI: db } = require('../config/keys.js');
-const dotenv = require("dotenv");
 
-dotenv.config();
 /**
  * Module dependencies.
  */
