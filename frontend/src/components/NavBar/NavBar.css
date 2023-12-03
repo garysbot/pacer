@@ -1,5 +1,6 @@
 .auth-buttons {
     cursor: pointer;
+    margin: 0rem 0.5rem;
 }
 
 .nav-container {
@@ -56,3 +57,7 @@
     /* width: 30%; */
     justify-self: flex-start;
 }
+
+
+/*  */
+
