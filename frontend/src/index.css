@@ -84,8 +84,8 @@ a {
   background:
     linear-gradient(
       to right,
-      rgba(81, 187, 254, 1),
-      rgba(81, 187, 254, 1)
+      rgba(81, 187, 254, 0),
+      rgba(81, 187, 254, 0)
     ),
     linear-gradient(
       to right,
