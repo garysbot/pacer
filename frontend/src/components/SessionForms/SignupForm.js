@@ -66,7 +66,6 @@ function SignupForm ({ onSuccess }) {
     const currentDate = new Date();
     const selectedDate = new Date(birthday);
     const age = currentDate.getFullYear() - selectedDate.getFullYear();
-    debugger;
     if (age < 18) {
       newErrors.age = 'Must be at least 18 years old';
     }
@@ -317,7 +316,7 @@ function SignupForm ({ onSuccess }) {
                 </select>
                 <select
                     name='year'
-                    onChange={(e) => {setYear(e.target.value); setBirthday(e.target.value.toString()+'-'+month.toString()+'-'+day.toString()); debugger;}}
+                    onChange={(e) => {setYear(e.target.value); setBirthday(e.target.value.toString()+'-'+month.toString()+'-'+day.toString());}}
                     value={year}
                     className='select-field year'
                 >

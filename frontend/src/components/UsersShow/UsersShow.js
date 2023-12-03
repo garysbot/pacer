@@ -11,7 +11,7 @@ export default function UsersShow(){
     const dispatch = useDispatch()
     const {id} = useParams()
     const shownUser = useSelector(state=>state.users?.user)
-    console.log(id)
+    // console.log(id)
 
     useEffect(()=>{
         dispatch(getUser(id))
