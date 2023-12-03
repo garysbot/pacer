@@ -17,7 +17,7 @@ export default function DiscoverPage(props){
     ];
     const history = useHistory()
     const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
-    const eventsObj = useSelector(state => state.events.all);
+    const eventsObj = useSelector(state => state.events?.all);
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const events = Object.values(eventsObj);
@@ -47,7 +47,6 @@ export default function DiscoverPage(props){
     function resetFilters(){
         setRenderedEvents(futureEvents)
         setFilteredSports(sportsWithEmojis)
-        console.log(filteredSports)
     }
 
     const timeConverter = (dateTime) => {
