@@ -10,7 +10,7 @@ function SplashPage() {
           </video>
           <div className='video-overlay'>
             <h1>Exercising is <h1 className='animate-characters'>lonely af</h1></h1>
-            <p>Pacer connects you with new exercise pals at your performance level</p>
+            <h3>Pacer connects you with new exercise pals at your performance level</h3>
           </div>
         </div>
 
@@ -32,36 +32,6 @@ function SplashPage() {
           <h3>Subhead</h3>
           <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
         </div>
-
-        <div className='section-container'>
-          <h1>Hello from MainPage</h1>
-          <h3>Subhead</h3>
-          <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
-        </div>
-
-        <div className='section-container'>
-          <h1>Hello from MainPage</h1>
-          <h3>Subhead</h3>
-          <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
-        </div>
-
-        <div className='section-container'>
-          <h1>Hello from MainPage</h1>
-          <h3>Subhead</h3>
-          <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
-        </div>
-
-        <div className='section-container'>
-          <h1>Hello from MainPage</h1>
-          <h3>Subhead</h3>
-          <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
-        </div>
-        <div id="gif">
-          
-        </div>
-        <div id="about"></div>
-
-
       </main>
     </>
   );
