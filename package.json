@@ -1,7 +1,7 @@
 {
-  "name": "mern-twitter",
+  "name": "pacer",
   "version": "1.0.0",
-  "description": "will the real twitter please stand up",
+  "description": "Pacer connects you with new exercise pals at your performance level",
   "scripts": {
     "backend-install": "npm install --prefix backend",
     "backend": "npm run dev --prefix backend",
@@ -11,12 +11,13 @@
     "build": "npm run backend-install && npm run frontend-install && npm run frontend-build"
   },
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "keywords": [],
   "author": "garysbot",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.2"
-  }
+  },
+  "devDependencies": {}
 }
