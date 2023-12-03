@@ -195,7 +195,7 @@ for (let i = 0; i < NUM_SEED_EVENTS; i++) {
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log('Connected to MongoDB successfully');
+    // console.log('Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -204,14 +204,14 @@ mongoose
   });
 
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and events...");
+  // console.log("Resetting db and seeding users and events...");
 
   User.collection.drop()
                   .then(() => Event.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Event.insertMany(events))
                   .then(() => {
-                    console.log("Done!");
+                    // console.log("Done!");
                     mongoose.disconnect();
                   })
                   .catch(err => {
