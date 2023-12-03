@@ -14,51 +14,40 @@
   align-items: center;
 }
 
+
 .about-team-section {
-  width: 70%;
+  width: 95%;
   display: flex;
-  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
   align-items: flex-start;
   justify-content: space-evenly;
-  /* margin: 3rem 1rem; */
-  /* gap: 4rem; */
+  margin: 3rem 1rem;
+  gap: 4rem;
 }
 
 .person-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.75rem;
-  width: 20%; /* Adjust based on your layout preference */
-  box-sizing: border-box; /* Include padding and border in the element's width and height */
-}
-
-.person-container h2, 
-.person-container h3, 
-.person-container p, 
-.person-container img, 
-.person-container .team-link-icons {
-  /* Align items to the start to ensure alignment */
-  align-self: flex-start;
+  height: auto;
 }
 
 .about-img {
   width: 10rem;
   height: 10rem;
-  border-radius: 50%; /* Use 50% for a perfect circle */
+  border-radius: 100%;
 }
 
 .team-link-icons {
   display: flex;
   gap: 1rem;
   align-items: center;
-  justify-content: start; /* Aligns icons to the start */
+  justify-content: space-evenly;
 }
 
-/* Responsive design for smaller screens */
 @media screen and (max-width: 768px) {
   .about-team-section {
     flex-direction: column;
-    align-items: center;
   }
 
   .person-container {

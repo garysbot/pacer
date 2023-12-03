@@ -10,8 +10,7 @@ export default function About(){
             <div className="about-team-content">
                 <div className="about-team-header">
 
-                    <h1>About Us</h1>
-                    <h2>Subheader lorem ipsum random text here</h2>
+                    <h1>👋🏼 About Us</h1>
                     <p>
                         Welcome to Pacer, your go-to social hub for fitness enthusiasts! At Pacer, we believe that exercising is not just about breaking a sweat but also about building connections and having fun. Whether you're a seasoned fitness guru or just starting your wellness journey, Pacer is the perfect platform to find like-minded individuals eager to share their passion for health and fitness.
                     </p>
