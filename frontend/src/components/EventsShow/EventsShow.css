@@ -37,6 +37,10 @@
     border-bottom-right-radius: 3rem;
 }
 
+.event-show-detail-container p {
+    color: #1D1D1D;
+}
+
 .event-show-map-container {
     width: 100%;
 }
@@ -112,6 +116,10 @@
     flex-direction: column;
     /* justify-content: center; */
     align-items: flex-start;
+}
+
+.detail-attendees-info p {
+    color: #1D1D1D;
 }
 
 .join-event {

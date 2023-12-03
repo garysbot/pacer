@@ -112,14 +112,32 @@ export default function EventsShow(){
     if (attendeesCount > 5) {
       if (showAttendees) {
         return (
-            <span>
-                {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>{showAttendees ? ' \u25B6' : ' \u25BC'}</span>
-                <div className="attendees-list" style={{ display: showAttendees ? "block" : "none" }}>
-                {selectedEvent?.attendeesDetails.slice(0, 5).map((attendee, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
-                ))}
-                </div>
+          <>
+            {attendeesCount} Attending 
+            <span 
+              onClick={handleArrowToggle} 
+              style={{ cursor: 'pointer' }}
+              >
+                {showAttendees ? ' \u25B6' : ' \u25BC'}
             </span>
+            <div 
+              className="attendees-list" 
+              style={{ 
+                display: showAttendees ? "block" : "none" 
+                }}
+              >
+              {
+                selectedEvent?.attendeesDetails.slice(0, 5).map((attendee, index) => (
+                <span 
+                  key={index} 
+                  className="attendee-circle" 
+                  data-name={`${attendee.firstName} ${attendee.lastName}`}
+                  >
+                </span>
+                ))
+              }
+            </div>
+          </>
         );
       } else {
         const chunks = [];
@@ -128,7 +146,7 @@ export default function EventsShow(){
         }
 
         return (
-          <span>
+          <>
             {attendeesCount} Attending <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="attendees-list">
               {chunks.map((chunk, chunkIndex) => (
@@ -139,19 +157,19 @@ export default function EventsShow(){
                 </div>
               ))}
             </div>
-          </span>
+          </>
         );
       }
     } else {
       return (
-        <span>
+        <>
           {attendeesCount} Attending
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
               <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
             ))}
           </div>
-        </span>
+        </>
       );
     }
   };
@@ -170,14 +188,14 @@ export default function EventsShow(){
     if (maybesCount > 5) {
       if (showMaybes) {
         return (
-            <span>
-                {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
-                <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
-                {selectedEvent?.maybesDetails.slice(0, 5).map((maybes, index) => (
-                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
-                ))}
-                </div>
-            </span>
+          <>
+            {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span>
+            <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
+            {selectedEvent?.maybesDetails.slice(0, 5).map((maybes, index) => (
+                <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+            ))}
+            </div>
+          </>
         );
       } else {
         const chunks = [];
@@ -186,7 +204,7 @@ export default function EventsShow(){
         }
 
         return (
-          <span>
+          <>
             {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span>
             <div className="maybes-list">
               {chunks.map((chunk, chunkIndex) => (
@@ -197,19 +215,19 @@ export default function EventsShow(){
                 </div>
               ))}
             </div>
-          </span>
+          </>
         );
       }
     } else {
       return (
-        <span>
+        <>
           {maybesCount} Interested
           <div className="maybes-list">
             {selectedEvent?.maybesDetails.map((maybes, index) => (
               <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
             ))}
           </div>
-        </span>
+        </>
       );
     }
   };
