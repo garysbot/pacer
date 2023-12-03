@@ -41,24 +41,47 @@ export default function UsersShow(){
                                 {shownUser?.firstName} {shownUser?.lastName} 
                             </h1>
                         </span>
-                    <p>Gender: {shownUser?.gender}</p>
+                    <h3>Gender: {shownUser?.gender}</h3>
                     <br/>
                         <span className="blur-header">
                             <h2>
                                 Favorite Sport: 
                             </h2>
                         </span>
-                                <h3>
-                                    {shownUser?.primarySport?.Sport}
-                                </h3>                       
+                        <h3>
+                            {shownUser?.primarySport?.Sport}
+                        </h3>                       
                         <br/>
-                    <h2>Experience Level: {shownUser?.primarySport?.Experience}</h2>
+                    <span className="blur-header">
+                        <h2>
+                            Experience Level: 
+                        </h2>
+                    </span>
+                    <h3>
+                        {shownUser?.primarySport?.Experience}
+                    </h3>
                     <br/>
-                    <h2>Secondary Sports</h2>
+                    <span className="blur-header">
+                        <h2>Secondary Sports</h2>
+                    </span>
+                    <h3>
                         {secondarySports}
+                    </h3>
                 </section>
                 <section id="health-metrics">
-                    <h3>Height: </h3>
+                    <span className="blur-header">
+                        <h2>Height: </h2>
+                    </span>
+                    <h3>{shownUser?.height}</h3>
+                    <span className="blur-header">
+                        <h2>Weight: </h2>
+                    </span>
+                    <h3>{shownUser?.weight}</h3>
+                </section>
+                <section id="social-metrics">
+                    <span className="blur-header">
+                        <h2>Social Metrics</h2>
+                    </span>
                 </section>
             </section>
         </>
