@@ -36,19 +36,29 @@ export default function UsersShow(){
         <>
             <section id="user-show-main">
                 <section id="general-info">
-                    <h1>{shownUser?.firstName} {shownUser?.lastName}</h1> 
+                        <span className="blur-header">
+                            <h1>
+                                {shownUser?.firstName} {shownUser?.lastName} 
+                            </h1>
+                        </span>
+                    <p>Gender: {shownUser?.gender}</p>
                     <br/>
-                    <h2>Favorite Sport: {shownUser?.primarySport?.Sport}</h2>
-                    <h3>Experience Level: {shownUser?.primarySport?.Experience}</h3>
+                        <span className="blur-header">
+                            <h2>
+                                Favorite Sport: 
+                            </h2>
+                        </span>
+                                <h3>
+                                    {shownUser?.primarySport?.Sport}
+                                </h3>                       
+                        <br/>
+                    <h2>Experience Level: {shownUser?.primarySport?.Experience}</h2>
                     <br/>
                     <h2>Secondary Sports</h2>
                         {secondarySports}
                 </section>
-                <section id="social-metrics">
-
-                    <div className="friends-list">
-                        
-                    </div>
+                <section id="health-metrics">
+                    <h3>Height: </h3>
                 </section>
             </section>
         </>
