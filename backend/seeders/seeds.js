@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = require('../config/keys.js');
+const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Event = require('../models/Event');
 const bcrypt = require('bcryptjs');
@@ -193,7 +193,7 @@ for (let i = 0; i < NUM_SEED_EVENTS; i++) {
 
 // Connect to database
 mongoose
-  .connect(db.mongoURI, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to MongoDB successfully');
     insertSeeds();
