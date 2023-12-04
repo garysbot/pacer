@@ -26,7 +26,7 @@ export default function About(){
                         <h2>Gary Jiang</h2>
                         <h3>Team & Frontend Lead</h3>
                         <p>
-                            Formerly a director in paid media, Gary is a full-stack developer with a passion for building products that make a difference. He is a graduate of Babson College with a BA in Business, Marketing, and Entrepreneurship.
+                            Formerly a director in corporate paid media, Gary is a full-stack developer with a passion for building products that make a difference. He is a graduate of Babson College with a BA in Business, Marketing, and Entrepreneurship.
                         </p>
                         <div className="team-link-icons">
                             <a href='https://github.com/garysbot' target="_blank" rel="noopener noreferrer" className="external-link">
@@ -50,7 +50,7 @@ export default function About(){
                         <h2>Jason Jun</h2>
                         <h3>Frontend & Backend</h3>
                         <p>
-                            Jason is a full-stack developer with a background in finance and accounting. He is a graduate of the University of Toronto's Full-Stack Web Development Bootcamp and is currently working as a freelance developer. In his spare time, Jason enjoys playing basketball, reading, and watching movies.
+                        Attended the University of Michigan, studying Computer Science Engineering between 2014-2019. Worked two summers for a tech consulting company responsible for two different projects for maintaining and growing client base. Previous experience as a freelance frontend engineer before attending App Academy.
                         </p>
                         <div className="team-link-icons">
                             <a href='https://github.com/junjason' target="_blank" rel="noopener noreferrer" className="external-link">
@@ -94,7 +94,7 @@ export default function About(){
 
                     {/* // ! Rob */ }
                     <div className="person-container">
-                        <img src='/static/about-prof-test.png' alt='' className="about-img"/>
+                        <img src='/static/rob.jpg' alt='' className="about-img"/>
                         <h2>Rob Lee</h2>
                         <h3>Frontend & Backend</h3>
                         <p>

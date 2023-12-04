@@ -261,3 +261,7 @@
 .maybes-list {
     margin-top: .5rem;
 }
+
+.gm-style-mtc button {
+    border-radius: 3.25rem !important;
+}
