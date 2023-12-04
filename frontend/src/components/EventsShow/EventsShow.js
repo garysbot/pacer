@@ -110,7 +110,7 @@ export default function EventsShow(){
   const renderAttendees = () => {
     const attendeesCount = selectedEvent?.attendees.length;
 
-    if (attendeesCount > 5) {
+    if (attendeesCount > 4) {
       if (showAttendees) {
         return (
           <>
@@ -130,13 +130,9 @@ export default function EventsShow(){
                 >
                 {
                   selectedEvent?.attendeesDetails.slice(0, 4).map((attendee, index) => (
-                  <span 
-                    key={index} 
-                    className="attendee-circle" 
-                    data-name={`${attendee.firstName} ${attendee.lastName}`}
-                    >
-                      <img src={`../../${attendee.profilePhotoUrl}`}></img>
-                  </span>
+                    <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
+                      <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
+                    </Link>
                   ))
                 }
               </div>
@@ -159,14 +155,9 @@ export default function EventsShow(){
                   <div key={chunkIndex}>
                     {chunk.map((attendee, index) => (
                       <>
-                        {/* <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/> */}
-                        <span 
-                          key={index} 
-                          className="attendee-circle" 
-                          data-name={`${attendee.firstName} ${attendee.lastName}`}
-                          >  
-                          <img src={`../../${attendee.profilePhotoUrl}`}></img>
-                        </span>
+                        <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
+                          <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
+                        </Link>
                       </>
                     ))}
                   </div>
@@ -183,9 +174,9 @@ export default function EventsShow(){
           <p>{attendeesCount} Attending</p>
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
-              <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
-                <img src={`../../${attendee.profilePhotoUrl}`}></img>
-              </span>
+              <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
+                <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
+              </Link>
             ))}
           </div>
         </div>
@@ -205,7 +196,7 @@ export default function EventsShow(){
   const renderMaybes = () => {
     const maybesCount = selectedEvent?.maybes.length;
 
-    if (maybesCount > 5) {
+    if (maybesCount > 4) {
       if (showMaybes) {
         return (
           <>
@@ -215,11 +206,9 @@ export default function EventsShow(){
               <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
               {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
                 <>
-                  <div className="attendee-bubble">
-                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                      <img src={`../../${maybes.profilePhotoUrl}`} className="attendee-circle"></img>
-                    </span>
-                  </div>
+                    <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                      <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+                    </Link>
                 </>
               ))}
               </div>
@@ -241,11 +230,9 @@ export default function EventsShow(){
                   <div key={chunkIndex}>
                     {chunk.map((maybes, index) => (
                       <>
-                        <div className="attendee-bubble">
-                          <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                            <img src={`../../${maybes.profilePhotoUrl}`}></img>
-                          </span>
-                        </div>
+                        <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                          <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+                        </Link>
                       </>
                     ))}
                   </div>
@@ -263,14 +250,9 @@ export default function EventsShow(){
             <div className="maybes-list">
               {selectedEvent?.maybesDetails.map((maybes, index) => (
                 <>
-                  <div className="attendee-bubble">
-                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                    <img 
-                      src={`../../${maybes.profilePhotoUrl}`}  alt='' 
-                      className="attendee-circle"
-                    ></img>
-                    </span>
-                  </div>
+                    <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                      <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+                    </Link>
                 </>
               ))}
             </div>

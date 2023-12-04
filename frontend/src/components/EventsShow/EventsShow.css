@@ -37,6 +37,10 @@
     border-bottom-right-radius: 3rem;
 }
 
+.event-show-detail-container {
+    margin-bottom: -3rem;
+}
+
 .event-show-detail-container p {
     color: #1D1D1D;
 }
@@ -85,7 +89,7 @@
     flex-direction: row;
     width: 100%;
     margin-bottom: 6rem;
-    height: 14rem;
+    /* height: 14rem; */
 }
 
 .detail-event-inner-left {
@@ -117,16 +121,13 @@
 
 .detail-event-info .desc-row {
     display: flex;
-    /* flex-direction: column; */
     gap: 1.5rem;
     margin-bottom: 1rem;
-    /* justify-content: space-between; */
 }
 
 .detail-attendees-info {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: flex-start;
 }
 
@@ -164,7 +165,6 @@
     height: 2.5rem; 
     border-radius: 50%;
     background-color: #F4FFFD;
-    /* margin-top: 1rem;  */
     margin-right: 1rem;
 }
 
@@ -186,9 +186,6 @@
     transform: translateX(-50%);
     white-space: nowrap;
 }
-
-
-
 
 #event-large-map-container {
     display: flex;
@@ -248,7 +245,7 @@
 }
 
 .attendees-list {
-    color: red;
+    margin-top: .5rem;
 }
 
 .gm-style-iw-d p {
@@ -261,7 +258,6 @@
     border-radius: 50%;
 }
 
-.attendees-list,
 .maybes-list {
-    
+    margin-top: .5rem;
 }
