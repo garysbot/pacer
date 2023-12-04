@@ -57,6 +57,14 @@ export default function UsersShow(){
                         </h3>
                     </span>
                     </section>
+                    <section>
+                        <span className="blur-header">
+                            <h2>Height: {shownUser?.height}in</h2>
+                        </span>
+                        <span className="blur-header">
+                            <h2>Weight: {shownUser?.weight}lbs</h2>
+                        </span>
+                    </section>
                 </section>
             </section>
         </>
