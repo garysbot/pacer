@@ -97,6 +97,9 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
       remainingSports = remainingSports.filter(sport => sport !== selectedSport);
     }
   
+    // Generate a random number between 1 and 15 for the profile photo
+    const profilePhotoNumber = faker.number.int({ min: 1, max: 15 });
+
     users.push(
       new User({
         email: generatedEmail,
@@ -112,7 +115,8 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
           Experience: getRandomElement(['Beginner', 'Intermediate', 'Advanced'])
         },
         secondarySports: secondarySports,
-        userPrivacy: "false"
+        userPrivacy: "false",
+        profilePhotoUrl: `../../db/pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`
       })
     );
   }
