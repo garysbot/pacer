@@ -135,6 +135,7 @@ export default function EventsShow(){
                     className="attendee-circle" 
                     data-name={`${attendee.firstName} ${attendee.lastName}`}
                     >
+                      <img src={`../../${attendee.profilePhotoUrl}`}></img>
                   </span>
                   ))
                 }
@@ -158,12 +159,13 @@ export default function EventsShow(){
                   <div key={chunkIndex}>
                     {chunk.map((attendee, index) => (
                       <>
-                        <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/>
+                        {/* <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/> */}
                         <span 
                           key={index} 
                           className="attendee-circle" 
                           data-name={`${attendee.firstName} ${attendee.lastName}`}
                           >  
+                          <img src={`../../${attendee.profilePhotoUrl}`}></img>
                         </span>
                       </>
                     ))}
@@ -181,7 +183,9 @@ export default function EventsShow(){
           <p>{attendeesCount} Attending</p>
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
-              <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
+              <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
+                <img src={`../../${attendee.profilePhotoUrl}`}></img>
+              </span>
             ))}
           </div>
         </div>
@@ -210,9 +214,13 @@ export default function EventsShow(){
               {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
               <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
               {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
-                  <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                    <img src={`../../${maybes.profilePhotoUrl}`}></img>
-                  </span>
+                <>
+                  <div className="attendee-bubble">
+                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                      <img src={`../../${maybes.profilePhotoUrl}`} className="attendee-circle"></img>
+                    </span>
+                  </div>
+                </>
               ))}
               </div>
             </div>
@@ -232,9 +240,13 @@ export default function EventsShow(){
                 {chunks.map((chunk, chunkIndex) => (
                   <div key={chunkIndex}>
                     {chunk.map((maybes, index) => (
-                      <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                        <img src={`../../${maybes.profilePhotoUrl}`}></img>
-                      </span>
+                      <>
+                        <div className="attendee-bubble">
+                          <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                            <img src={`../../${maybes.profilePhotoUrl}`}></img>
+                          </span>
+                        </div>
+                      </>
                     ))}
                   </div>
                 ))}
@@ -250,9 +262,16 @@ export default function EventsShow(){
             <p>{maybesCount} Interested</p>
             <div className="maybes-list">
               {selectedEvent?.maybesDetails.map((maybes, index) => (
-                <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                  <img src={`../../${maybes.profilePhotoUrl}`}></img>
-                </span>
+                <>
+                  <div className="attendee-bubble">
+                    <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                    <img 
+                      src={`../../${maybes.profilePhotoUrl}`}  alt='' 
+                      className="attendee-circle"
+                    ></img>
+                    </span>
+                  </div>
+                </>
               ))}
             </div>
           </div>
