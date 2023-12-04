@@ -74,7 +74,7 @@ export default function About(){
                         <h2>Francis Cawog</h2>
                         <h3>Backend Lead</h3>
                         <p>
-                            Francis is a full-stack developer with a background in finance and accounting. He is a graduate of the University of Toronto's Full-Stack Web Development Bootcamp and is currently working as a freelance developer. In his spare time, Francis enjoys playing basketball, reading, and watching movies.
+                            Francis is a full-stack developer with a background in retail sales and photography. He is a graduate of City University of New York - Hunter College with a degree in Human Biology and is currently pursuing a career as a Full-Stack Web Developer. In his spare time, Francis enjoys traveling, football, and playing video games.
                         </p>
                         <div className="team-link-icons">
                             <a href='https://github.com/FrancisCawog' target="_blank" rel="noopener noreferrer" className="external-link">

@@ -50,6 +50,23 @@ export default function EventsShow(){
   const [attending, setAttending] = useState(false);
   const [interested, setInterested] = useState(false);
 
+  useEffect(() => {
+    if (selectedEvent?.attendees.includes(sessionUser?._id) && !attending) {
+      setAttending(true);
+    } else if (!sessionUser) {
+      setAttending(false);
+    }
+  }, [selectedEvent?.attendees, sessionUser?._id]);
+
+
+  useEffect(() => {
+    if (selectedEvent?.maybes.includes(sessionUser?._id) && !interested) {
+      setInterested(true);
+    } else if (!sessionUser) {
+      setInterested(false);
+    }
+  }, [selectedEvent?.maybes, sessionUser?._id]);
+
   // ! Attending Event
   const handleAttendEvent = () => {
     if (sessionUser) {
