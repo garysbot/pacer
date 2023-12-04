@@ -253,3 +253,14 @@
 .gm-style-iw-d p {
     color:black;
 }
+
+.attendee-circle img {
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
+}
+
+.attendees-list,
+.maybes-list {
+    
+}
