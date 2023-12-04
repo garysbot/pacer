@@ -2,7 +2,16 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  margin-top: 2rem;
   margin: 2rem 0rem;
+  opacity: 70%;
+  height: 8rem;
+}
+
+footer p {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 400;
 }
 
 .easter-egg {
