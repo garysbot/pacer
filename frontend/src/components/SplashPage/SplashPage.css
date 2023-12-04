@@ -61,6 +61,11 @@
   align-items: center;
 }
 
+.section-content h1 {
+  color: #f4FFFD;
+  margin-bottom: 1rem;
+}
+
 .animate-characters
 {
   background-image: linear-gradient(
