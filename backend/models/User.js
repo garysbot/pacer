@@ -53,6 +53,9 @@ const userSchema = new Schema({
   userPrivacy: {
     type: String,
     required: true
+  },
+  profilePhotoUrl: {
+    type: String
   }
 }, {
   timestamps: true
