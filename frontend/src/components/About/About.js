@@ -22,11 +22,11 @@ export default function About(){
                 <div className="about-team-section">
                     {/* // ! Gary */ }
                     <div className="person-container">
-                        <img src='/static/about-prof-test.png' alt='' className="about-img"/>
+                        <img src='/static/gary.jpeg' alt='' className="about-img"/>
                         <h2>Gary Jiang</h2>
                         <h3>Team & Frontend Lead</h3>
                         <p>
-                            Formerly a director in paid media, Gary is a full-stack developer with a passion for building products that make a difference. He is a graduate of the University of Toronto's Full-Stack Web Development Bootcamp and is currently working as a freelance developer. In his spare time, Gary enjoys playing basketball, reading, and watching movies.
+                            Formerly a director in paid media, Gary is a full-stack developer with a passion for building products that make a difference. He is a graduate of Babson College with a BA in Business, Marketing, and Entrepreneurship.
                         </p>
                         <div className="team-link-icons">
                             <a href='https://github.com/garysbot' target="_blank" rel="noopener noreferrer" className="external-link">
@@ -46,7 +46,7 @@ export default function About(){
 
                     {/* // ! Jason */ }
                     <div className="person-container">
-                        <img src='/static/about-prof-test.png' alt='' className="about-img"/>
+                        <img src='/static/jason.jpeg' alt='' className="about-img"/>
                         <h2>Jason Jun</h2>
                         <h3>Frontend & Backend</h3>
                         <p>
@@ -70,7 +70,7 @@ export default function About(){
 
                     {/* // ! Francis */ }
                     <div className="person-container">
-                        <img src='/static/about-prof-test.png' alt='' className="about-img"/>
+                        <img src='/static/francis.jpg' alt='' className="about-img"/>
                         <h2>Francis Cawog</h2>
                         <h3>Backend Lead</h3>
                         <p>
