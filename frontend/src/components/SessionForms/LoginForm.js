@@ -39,19 +39,21 @@ function LoginForm ({ onSuccess }) {
     else return;
   }
 
-  const submitDemoCredentials = async () => {
-    const res = await dispatch(login({ email, password }));
+  const submitDemoCredentials = async (e) => {
+    e.preventDefault();
+    const res = await dispatch(login({email:'demo-user@appacademy.io', password:'password' }));
     if (res === 'success') {
       onSuccess();
     }
+    else return;
   };
 
-  const handleDemoUser = (e) => {
-    setEmail('demo-user@appacademy.io');
-    setPassword('password');
-    handleSubmit(e);
-    setIsDemoClicked(true);
-  };
+  // const handleDemoUser = (e) => {
+  //   setEmail();
+  //   setPassword();
+  //   handleSubmit(e);
+  //   setIsDemoClicked(true);
+  // };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -92,7 +94,7 @@ function LoginForm ({ onSuccess }) {
         <input
           type="submit"
           value="Demo User"
-          onClick={handleDemoUser}
+          onClick={submitDemoCredentials}
           className='submit-field'
         />
       </div>
