@@ -464,7 +464,9 @@ export default function EventsShow(){
                     {
                       currentUser?._id === selectedEvent?.ownerDetails._id 
                       && 
-                      <p id="event-edit" onClick={handleEditClick}>Edit Event</p>
+                      <div id="event-edit-cont" onClick={handleEditClick}>
+                        <p id="event-edit">Edit Event</p>
+                      </div>
                     }
                   </div>
                   <p>{renderAttendees()}</p>

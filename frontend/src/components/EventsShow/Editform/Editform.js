@@ -8,6 +8,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { updateEventThunk } from "../../../store/events";
+// import "./Editform.css"
 
 export default function Editform({ setEditPage }) {
     const dispatch = useDispatch();
