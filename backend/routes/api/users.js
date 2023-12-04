@@ -124,7 +124,7 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     userPrivacy: "false",
     friends: [],
     eventsAttended: [],
-    profilePhotoUrl: `../../../db/pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`,
+    profilePhotoUrl: `../../../pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`,
   });
 
   bcrypt.genSalt(10, (err, salt) => {
