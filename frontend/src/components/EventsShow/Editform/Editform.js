@@ -8,7 +8,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { updateEventThunk } from "../../../store/events";
-// import "./Editform.css"
+import "./Editform.css"
 
 export default function Editform({ setEditPage }) {
     const dispatch = useDispatch();
@@ -54,8 +54,8 @@ export default function Editform({ setEditPage }) {
         'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming', 'Yoga', 'Gym (Fitness)',
         'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football', 'Hiking', 'Bowling', 'Water Sports', 'Ping Pong',
         'Golf', 'Pickleball', 'Rock Climbing', 'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee',
-        'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
-        'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
+        'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian',
+        'CrossFit)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
     ];
     const difficulties = ["Beginner", "Intermediate", "Advanced"]
 
@@ -70,6 +70,7 @@ export default function Editform({ setEditPage }) {
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [locationName, setLocationName] = useState("");
+    const [error, setError] = useState({});
 
     const handleSelect = async (address) => {
         try {
@@ -140,109 +141,139 @@ export default function Editform({ setEditPage }) {
 
     return (
         <>
-            <button className='cancel-edit' onClick={() => setEditPage(false)}>Cancel Edit</button>
-            <div id="event-form-div">
-                <label>
-                    Give your event a name
-                    <br/>
-                    <input className='event-form-text-input' type="text" value={eventName} onChange={(e)=>setEventName(e.target.value)}/>
-                </label>
-                <br/>
-                <label>
-                    Where is this event taking place?
-                    <br/>
+            <div className="edit-form-div">
+                <div className="create-form-header">
+                    <h2>🗓️ Update your event</h2>
+                </div>
+
+                <form className="event-form-container">
+                <div className="field-container create-event">
+                    <p className="field-label create-event-field">Event Name</p>
+                    <input 
+                        className='input-field' 
+                        value={eventName}
+                        type="text" 
+                        placeholder="Event Name"
+                        onChange={(e)=>setEventName(e.target.value)}
+                    />
+                    {error.eventName && <span className="event-form-errors">{error.eventName}</span>}
+                </div>
+                
+                <div className="field-container-create-event">
+                    <p className="field-label">Location</p>
                     <PlacesAutocomplete
                         value={selectedAddress}
                         onChange={setSelectedAddress}
                         onSelect={handleSelect}
                     >
                         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
+                        <div className="location-result-container">
                             <input
-                            className="event-form-text-input"
-                            {...getInputProps({
-                                placeholder: "Enter location...",
-                            })}
+                                className='input-field'
+                                {...getInputProps({
+                                    placeholder: "Enter location...",
+                                })}
                             />
-                            <div>
-                            {loading && <div>Loading...</div>}
+                            {loading && <div className="location-result">Loading...</div>}
                             {suggestions.map((suggestion) => (
-                                <div {...getSuggestionItemProps(suggestion)}>
-                                {suggestion.description}
+                                <div className="location-result" {...getSuggestionItemProps(suggestion)}>
+                                    <p className="location-result">{suggestion.description}</p>
                                 </div>
                             ))}
-                            </div>
                         </div>
                         )}
                     </PlacesAutocomplete>
-                </label>
-                <br/>
-                <label>
-                    When is the event taking place?
-                    <br />
-                    <input
-                    className="event-form-text-input"
-                    value={date}
-                    type="date"
-                    onChange={handleDateChange}
-                    />
-                    <input
-                    className="event-form-text-input"
-                    value={time}
-                    type="time"
-                    onChange={handleTimeChange}
-                    />
-                </label>
-                <br/>  
-                <label>
-                    Provide a description for the event
-                    <br/>
+                    {error.location && <span className="event-form-errors">{error.location}</span>}
+                </div>
+
+                <div className="field-container create-event">
+                    <p className="field-label  create-event-field">Event Date & Time</p>
+                    <div className="date-time-input-container">
+                        <input
+                            className='input-field'
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                        <input
+                            className='input-field'
+                            type="time"
+                            value={time}
+                            onChange={(e) => setTime(e.target.value)}
+                        />
+                    </div>
+                    {error.datetime && <span className="event-form-errors">{error.datetime}</span>}
+                    {error.date && <span className="event-form-errors">{error.date}</span>}
+                    {error.time && <span className="event-form-errors">{error.time}</span>}
+                </div>
+
+                <div className="field-container create-event">
+                    <p className="field-label  create-event-field">Event Description</p>
                     <textarea
-                        className='event-form-text-input'
+                        className='input-field'
                         value={description}
                         onChange={handleDescriptionChange}
                         rows={4}
                         maxLength={1000}
                     />
-                </label>
-                <br/>       
-                <label>
-                    What is the maximum group size for this event
-                    <br/>
-                    <input className='event-form-text-input' type="number" value={maxGroupSize} onChange={handleMaxGroupSizeChange}/>
-                </label>
-                <br/>
-                <label>
-                    What type of activity?
-                    <br/>
-                    <select value={eventType} onChange={handleEventTypeChange}>
-                        <option value="" disabled>
-                        Please select an activity
+                    {error.description && <span className="event-form-errors">{error.description}</span>}
+                </div>
+
+                <div className="field-container create-event">
+                    <p className="field-label create-event-field">Max Attendees</p>
+                    <input 
+                        className='input-field'
+                        value={maxGroupSize}
+                        type="number" 
+                        onChange={(e)=>setMaxGroupSize(e.target.value)}
+                    />
+                    {error.groupSize && <span className="event-form-errors">{error.groupSize}</span>}
+                </div>
+
+                <div className="field-container create-event">
+                    <p className="field-label create-event-field">Activity</p>
+                    <select 
+                        onChange={(e) => setEventType(e.target.value)}
+                        value={eventType}
+                        className='input-field'
+                    >
+                        <option value="" disabled selected>
+                            Please select an activity
                         </option>
-                        {allowedEventTypes.map((d) => (
-                        <option key={d} value={d}>
-                            {d}
-                        </option>
+                        {allowedEventTypes.map((type) => (
+                            <option key={type} value={type}>
+                                {type}
+                            </option>
                         ))}
                     </select>
-                </label>
-                <br/>
-                <label>
-                    What is the relative difficulty of this event?
-                    <br/>
-                    <select value={difficulty} onChange={handleDifficultyChange}>
-                        <option value="" disabled>
-                        Please select a difficulty level
+                    {error.eventType && <span className="event-form-errors">{error.eventType}</span>}
+                </div>
+
+                <div className="field-container create-event">
+                    <p className="field-label  create-event-field">What is the relative difficulty of this event?</p>
+                    <select 
+                    value={difficulty}
+                        onChange={(e) => setDifficulty(e.target.value)}
+                        className='input-field'
+                    >
+                        <option value="" disabled selected>
+                            Please select a difficulty level
                         </option>
                         {difficulties.map((d) => (
-                        <option key={d} value={d}>
-                            {d}
-                        </option>
+                            <option key={d} value={d}>
+                                {d}
+                            </option>
                         ))}
                     </select>
-                </label>
+                    {error.difficulty && <span className="event-form-errors">{error.difficulty}</span>}
+                </div>
 
-            <button id="form-submit" onClick={handleEditSubmit}> Update Event</button>
+
+                <div className="field-container-update-event">
+                    <button id="submit-updates" onClick={handleEditSubmit}> Update Event</button>
+                    <button id='cancel-edit' onClick={() => setEditPage(false)}>Cancel Edit</button>
+                </div>
+            </form>
         </div>
         </>
     )}

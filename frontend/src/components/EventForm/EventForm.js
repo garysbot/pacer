@@ -17,8 +17,8 @@ export default function EventForm({props}){
         'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming', 'Yoga', 'Gym (Fitness)',
         'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football', 'Hiking', 'Bowling', 'Water Sports', 'Ping Pong',
         'Golf', 'Pickleball', 'Rock Climbing', 'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee',
-        'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian sports (horseback riding)',
-        'CrossFit (fitness activity/sport)', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
+        'Rugby', 'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian',
+        'CrossFit', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
     ];
     const difficulties = ["Beginner", "Intermediate", "Advanced"]
 
@@ -140,7 +140,7 @@ export default function EventForm({props}){
     };
     
     return (
-        <div class="event-form-div">
+        <div className="event-form-div">
             <div className="create-form-header">
                 <h2>🗓️ Create a new event</h2>
             </div>
@@ -262,7 +262,7 @@ export default function EventForm({props}){
                     {error.difficulty && <span className="event-form-errors">{error.difficulty}</span>}
                 </div>
                 
-                <div className="field-container create-event">
+                <div className="field-container-create-event">
                     <button className="form-submit signup-button" onClick={handleSubmit}> Create Event!</button>
                 </div>
             </form>
