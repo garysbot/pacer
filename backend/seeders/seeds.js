@@ -74,7 +74,7 @@ users.push(
         }
     ],
     userPrivacy: "false",
-    profilePhotoUrl: `../../db/pacer-profile-pics/profile-pic-1.png`
+    profilePhotoUrl: `db/pacer-profile-pics/profile-pic-1.png`
   })
 )
 
@@ -117,7 +117,7 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
         },
         secondarySports: secondarySports,
         userPrivacy: "false",
-        profilePhotoUrl: `../../db/pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`
+        profilePhotoUrl: `db/pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`
       })
     );
   }

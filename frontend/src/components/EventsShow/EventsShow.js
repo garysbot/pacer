@@ -210,7 +210,9 @@ export default function EventsShow(){
               {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
               <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
               {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
-                  <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+                  <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                    <img src={`../../${maybes.profilePhotoUrl}`}></img>
+                  </span>
               ))}
               </div>
             </div>
@@ -231,7 +233,7 @@ export default function EventsShow(){
                   <div key={chunkIndex}>
                     {chunk.map((maybes, index) => (
                       <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                        {/* <img src={}></img> */}
+                        <img src={`../../${maybes.profilePhotoUrl}`}></img>
                       </span>
                     ))}
                   </div>
@@ -248,7 +250,9 @@ export default function EventsShow(){
             <p>{maybesCount} Interested</p>
             <div className="maybes-list">
               {selectedEvent?.maybesDetails.map((maybes, index) => (
-                <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}></span>
+                <span key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+                  <img src={`../../${maybes.profilePhotoUrl}`}></img>
+                </span>
               ))}
             </div>
           </div>
