@@ -8,6 +8,7 @@ function LoginForm ({ onSuccess }) {
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
+  const [isDemoClicked, setIsDemoClicked] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -15,10 +16,21 @@ function LoginForm ({ onSuccess }) {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (isDemoClicked) {
+      submitDemoCredentials();
+    }
+  }, [isDemoClicked]);
+
   const update = (field) => {
-    const setState = field === 'email' ? setEmail : setPassword;
-    return e => setState(e.currentTarget.value);
-  }
+    return e => {
+      if (field === 'email') {
+        setEmail(e.currentTarget.value);
+      } else if (field === 'password') {
+        setPassword(e.currentTarget.value);
+      }
+    };
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +38,20 @@ function LoginForm ({ onSuccess }) {
     if (res === "success") onSuccess();
     else return;
   }
+
+  const submitDemoCredentials = async () => {
+    const res = await dispatch(login({ email, password }));
+    if (res === 'success') {
+      onSuccess();
+    }
+  };
+
+  const handleDemoUser = (e) => {
+    setEmail('demo-user@appacademy.io');
+    setPassword('password');
+    handleSubmit(e);
+    setIsDemoClicked(true);
+  };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -60,6 +86,13 @@ function LoginForm ({ onSuccess }) {
           type="submit"
           value="Login"
           disabled={!email || !password}
+          className='submit-field'
+        />
+
+        <input
+          type="submit"
+          value="Demo User"
+          onClick={handleDemoUser}
           className='submit-field'
         />
       </div>
