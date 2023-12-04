@@ -108,6 +108,8 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     return next(err);
   }
 
+  const profilePhotoNumber = Math.floor(Math.random() * 15) + 1;
+
   // Otherwise create a new user
   const newUser = new User({
     email: req.body.email,
@@ -121,7 +123,8 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     secondarySports: req.body.secondarySports || [],
     userPrivacy: "false",
     friends: [],
-    eventsAttended: []
+    eventsAttended: [],
+    profilePhotoUrl: `../../../db/pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`,
   });
 
   bcrypt.genSalt(10, (err, salt) => {

@@ -66,6 +66,7 @@ router.get('/', async (req, res) => {
             _id: '$ownerDetails._id',
             firstName: '$ownerDetails.firstName',
             lastName: '$ownerDetails.lastName',
+            profilePhotoUrl: '$ownerDetails.profilePhotoUrl',
             // Add other owner details as needed
           },
           attendeesDetails: {
@@ -76,6 +77,7 @@ router.get('/', async (req, res) => {
                 _id: '$$attendee._id',
                 firstName: '$$attendee.firstName',
                 lastName: '$$attendee.lastName',
+                profilePhotoUrl: '$$attendee.profilePhotoUrl',
                 // Add other attendee details as needed
               },
             },
@@ -88,6 +90,7 @@ router.get('/', async (req, res) => {
                 _id: '$$maybe._id',
                 firstName: '$$maybe.firstName',
                 lastName: '$$maybe.lastName',
+                profilePhotoUrl: '$$maybe.profilePhotoUrl',
                 // Add other maybe details as needed
               },
             },
@@ -170,6 +173,7 @@ router.get('/:id', async (req, res) => {
             _id: '$ownerDetails._id',
             firstName: '$ownerDetails.firstName',
             lastName: '$ownerDetails.lastName',
+            profilePhotoUrl: '$ownerDetails.profilePhotoUrl',
             // Add other owner details as needed
           },
           attendeesDetails: {
@@ -180,6 +184,7 @@ router.get('/:id', async (req, res) => {
                 _id: '$$attendee._id',
                 firstName: '$$attendee.firstName',
                 lastName: '$$attendee.lastName',
+                profilePhotoUrl: '$$attendee.profilePhotoUrl',
                 // Add other attendee details as needed
               },
             },
@@ -192,6 +197,7 @@ router.get('/:id', async (req, res) => {
                 _id: '$$maybe._id',
                 firstName: '$$maybe.firstName',
                 lastName: '$$maybe.lastName',
+                profilePhotoUrl: '$$maybe.profilePhotoUrl',
                 // Add other maybe details as needed
               },
             },
@@ -251,11 +257,13 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
         _id: attendee._id,
         firstName: attendee.firstName,
         lastName: attendee.lastName,
+        profilePhotoUrl: attendee.profilePhotoUrl,
       })),
       maybes: event.maybes.map(maybe => ({
         _id: maybe._id,
         firstName: maybe.firstName,
         lastName: maybe.lastName,
+        profilePhotoUrl: maybe.profilePhotoUrl,
       })),
       longitude: event.longitude,
       latitude: event.latitude,
@@ -264,6 +272,7 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
         _id: event.owner._id,
         firstName: event.owner.firstName,
         lastName: event.owner.lastName,
+        profilePhotoUrl: event.owner.profilePhotoUrl,
       },
       attendeesDetails: await Promise.all(
         event.attendees.map(async attendeeId => {
@@ -272,6 +281,7 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            profilePhotoUrl: user.profilePhotoUrl,
             // Add other user details as needed
           };
         })
@@ -283,6 +293,7 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            profilePhotoUrl: user.profilePhotoUrl,
             // Add other user details as needed
           };
         })
@@ -354,11 +365,13 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
         _id: attendee._id,
         firstName: attendee.firstName,
         lastName: attendee.lastName,
+        profilePhotoUrl: attendee.profilePhotoUrl,
       })),
       maybes: updatedEvent.maybes.map(maybe => ({
         _id: maybe._id,
         firstName: maybe.firstName,
         lastName: maybe.lastName,
+        profilePhotoUrl: maybe.profilePhotoUrl,
       })),
       longitude: updatedEvent.longitude,
       latitude: updatedEvent.latitude,
@@ -367,6 +380,7 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
         _id: updatedEvent.owner._id,
         firstName: updatedEvent.owner.firstName,
         lastName: updatedEvent.owner.lastName,
+        profilePhotoUrl: updatedEvent.profilePhotoUrl,
       },
       attendeesDetails: await Promise.all(
         updatedEvent.attendees.map(async attendeeId => {
@@ -375,6 +389,7 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            profilePhotoUrl: user.profilePhotoUrl,
             // Add other user details as needed
           };
         })
@@ -386,6 +401,7 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            profilePhotoUrl: user.profilePhotoUrl,
             // Add other user details as needed
           };
         })

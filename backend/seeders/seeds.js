@@ -73,7 +73,8 @@ users.push(
             Experience: "Advanced"
         }
     ],
-    userPrivacy: "false"
+    userPrivacy: "false",
+    profilePhotoUrl: `../../db/pacer-profile-pics/profile-pic-1.png`
   })
 )
 
