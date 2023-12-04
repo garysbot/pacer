@@ -25,7 +25,7 @@ app.use(passport.initialize());
 
 const path = require('path');
 // Add this middleware to serve static files
-// app.use('/db', express.static(path.join(__dirname, 'db')));
+app.use('/db', express.static(path.join(__dirname, 'db')));
 
 // Security Middleware
 if (!isProduction) {
