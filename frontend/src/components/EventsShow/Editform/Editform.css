@@ -22,3 +22,16 @@
     width: 7.75rem;
   }
 
+#event-delete {
+    display: flex;
+    flex-direction: row;
+    margin: 0.25rem 0rem;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+#delete-event {
+  width: 7.75rem;
+}

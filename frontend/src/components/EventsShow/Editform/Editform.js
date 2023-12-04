@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Redirect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getEventThunk } from '../../../store/events';
+import { getEventThunk, fetchEvents } from '../../../store/events';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -9,6 +9,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { updateEventThunk } from "../../../store/events";
 import "./Editform.css"
+import { deleteEventThunk } from '../../../store/events';
 
 export default function Editform({ setEditPage }) {
     const dispatch = useDispatch();
@@ -85,26 +86,6 @@ export default function Editform({ setEditPage }) {
         }
     };
 
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
-    };
-
-    const handleTimeChange = (e) => {
-        setTime(e.target.value);
-    };
-
-    const handleEventTypeChange = (e) => {
-        setEventType(e.target.value);
-    };
-
-    const handleDifficultyChange = (e) => {
-        setDifficulty(e.target.value);
-    };
-
-    const handleMaxGroupSizeChange = (e) => {
-        setMaxGroupSize(e.target.value);
-    };
-
     const handleDescriptionChange = (e) => {
         setDescription(e.target.value.slice(0, 1000));
     };
@@ -133,11 +114,12 @@ export default function Editform({ setEditPage }) {
         await dispatch(getEventThunk(id)); 
         setEditPage(false);
     }
-    
-    const redirectToShow = (event) => {
-        history.push(`/events/${selectedEvent._id}`);
-    }
 
+    const handleDelete = async (e) => {
+        history.push('/discover');
+        await dispatch(deleteEventThunk(selectedEvent._id));
+        await dispatch(getEventThunk());
+    }
 
     return (
         <>
@@ -273,6 +255,8 @@ export default function Editform({ setEditPage }) {
                     <button id="submit-updates" onClick={handleEditSubmit}> Update Event</button>
                     <button id='cancel-edit' onClick={() => setEditPage(false)}>Cancel Edit</button>
                 </div>
+
+                <button id="delete-event" onClick={handleDelete}>Delete Event</button>
             </form>
         </div>
         </>
