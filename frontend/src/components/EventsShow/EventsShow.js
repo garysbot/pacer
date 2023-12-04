@@ -135,6 +135,7 @@ export default function EventsShow(){
                     className="attendee-circle" 
                     data-name={`${attendee.firstName} ${attendee.lastName}`}
                     >
+                      <img src={`../../${attendee.profilePhotoUrl}`}></img>
                   </span>
                   ))
                 }
@@ -158,12 +159,13 @@ export default function EventsShow(){
                   <div key={chunkIndex}>
                     {chunk.map((attendee, index) => (
                       <>
-                        <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/>
+                        {/* <img src={`/static/profile-pics/profile-pic-${index}.png`} alt='' className="attendee-circle"/> */}
                         <span 
                           key={index} 
                           className="attendee-circle" 
                           data-name={`${attendee.firstName} ${attendee.lastName}`}
                           >  
+                          <img src={`../../${attendee.profilePhotoUrl}`}></img>
                         </span>
                       </>
                     ))}
@@ -181,7 +183,9 @@ export default function EventsShow(){
           <p>{attendeesCount} Attending</p>
           <div className="attendees-list">
             {selectedEvent?.attendeesDetails.map((attendee, index) => (
-              <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}></span>
+              <span key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
+                <img src={`../../${attendee.profilePhotoUrl}`}></img>
+              </span>
             ))}
           </div>
         </div>

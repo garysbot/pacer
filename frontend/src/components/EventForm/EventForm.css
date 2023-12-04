@@ -52,7 +52,7 @@ select {
 }
 
 input[type="date"] {
-  width: 8rem;
+  width: 12.5rem;
   font-size: 0.75rem;
 }
 
@@ -66,7 +66,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 input[type='time'] {
-  width: 7.75rem;
+  width: 12.5rem;
   font-size: 0.75rem;
 }
 
@@ -119,3 +119,20 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0.25rem 0rem;
   max-width: 100%;
 }
+
+.location-result-container {
+  width: 100%; /* Set the width to 100% */
+  /* max-width: 400px; Set a maximum width for better readability */
+}
+
+.location-result {
+  color: #F4FFFD;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  padding: 0.5rem; /* Add some padding for better spacing */
+  border: 1px solid #F4FFFD; /* Add a border for better separation */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+

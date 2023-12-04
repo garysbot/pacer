@@ -24,6 +24,9 @@ export default function UsersShow(){
         <>
             <section id="user-show-main">
                 <section id="general-info">
+                    <div id="profile-pic">
+                        <img src={`../../${shownUser?.profilePhotoUrl}`}></img>
+                    </div>
                     <section id="user-info">
                         <span className="blur-header">
                             <h2>
@@ -56,14 +59,13 @@ export default function UsersShow(){
                             {secondarySports}
                         </h3>
                     </span>
-                    </section>
-                    <section>
-                        <span className="blur-header">
-                            <h2>Height: {shownUser?.height}in</h2>
-                        </span>
-                        <span className="blur-header">
-                            <h2>Weight: {shownUser?.weight}lbs</h2>
-                        </span>
+                    <h2>More Info</h2>
+                    <span className="blur-header">
+                        <h3>Height: {shownUser?.height}in</h3>
+                    </span>
+                    <span className="blur-header">
+                        <h3>Weight: {shownUser?.weight}lbs</h3>
+                    </span>
                     </section>
                 </section>
             </section>
