@@ -157,13 +157,14 @@
     box-shadow: none;
 }
 
+
 .attendee-circle {
     display: inline-block;
     width: 2.5rem; 
     height: 2.5rem; 
     border-radius: 50%;
     background-color: #F4FFFD;
-    margin-top: 1rem; 
+    /* margin-top: 1rem;  */
     margin-right: 1rem;
 }
 
