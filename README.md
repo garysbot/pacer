@@ -1,9 +1,9 @@
 # Pacer
 Hate working out alone? Make new friends while playing your favorite sports with Pacer!
 
-<br>(🚧 Work in Progress! 🚧)<br>
-[Visit the Pacer Live Demo]()
-<br>(🚧 Work in Progress! 🚧)
+
+[Live Demo](https://pacer-65mk.onrender.com/)
+<br>
 <br>
 
 
