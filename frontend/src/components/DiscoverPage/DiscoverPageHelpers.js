@@ -17,7 +17,7 @@ export const difficultyBadge = (difficulty, eventType) => {
   }
 }
 
-export const sportIcon = (eventType) => {
+const sportIcon = (eventType) => {
   switch (eventType) {
     case 'Basketball':
       return "🏀";
