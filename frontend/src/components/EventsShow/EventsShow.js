@@ -11,6 +11,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { difficultyBadge } from "../DiscoverPage/DiscoverPageHelpers";
 import AttendeeDropdowns from "./AttendeeDropdowns";
+import MaybeDropdowns from "./MaybeDropdowns";
 
 export default function EventsShow(){
   const dispatch = useDispatch();
@@ -203,82 +204,82 @@ export default function EventsShow(){
   //   }
   // };
 
-  // ! Maybes hover modal
-  const [showMaybes, setShowMaybes] = useState(true);
-  const maybesCount = selectedEvent?.maybes.length || 0;
+  // // ! Maybes hover modal
+  // const [showMaybes, setShowMaybes] = useState(true);
+  // const maybesCount = selectedEvent?.maybes.length || 0;
 
-  const handleDownArrowToggle = () => {
-    setShowMaybes(!showMaybes);
-  };
+  // const handleDownArrowToggle = () => {
+  //   setShowMaybes(!showMaybes);
+  // };
 
-  const renderMaybes = () => {
-    const maybesCount = selectedEvent?.maybes.length;
+  // const renderMaybes = () => {
+  //   const maybesCount = selectedEvent?.maybes.length;
 
-    if (maybesCount > 4) {
-      if (showMaybes) {
-        return (
-          <>
-            <div className="attending-container">
-              <p>
-              {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
-              <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
-              {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
-                <>
-                    <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                      <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-                    </Link>
-                </>
-              ))}
-              </div>
-            </div>
-          </>
-        );
-      } else {
-        const chunks = [];
-        for (let i = 0; i < maybesCount; i += 4) {
-          chunks.push(selectedEvent?.maybesDetails.slice(i, i + 4));
-        }
+  //   if (maybesCount > 4) {
+  //     if (showMaybes) {
+  //       return (
+  //         <>
+  //           <div className="attending-container">
+  //             <p>
+  //             {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
+  //             <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
+  //             {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
+  //               <>
+  //                   <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+  //                     <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+  //                   </Link>
+  //               </>
+  //             ))}
+  //             </div>
+  //           </div>
+  //         </>
+  //       );
+  //     } else {
+  //       const chunks = [];
+  //       for (let i = 0; i < maybesCount; i += 4) {
+  //         chunks.push(selectedEvent?.maybesDetails.slice(i, i + 4));
+  //       }
 
-        return (
-          <>
-          <div className="attending-container">
-              <p>{maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
-              <div className="maybes-list">
-                {chunks.map((chunk, chunkIndex) => (
-                  <div key={chunkIndex}>
-                    {chunk.map((maybes, index) => (
-                      <>
-                        <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                          <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-                        </Link>
-                      </>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </>
-        );
-      }
-    } else {
-      return (
-        <>
-          <div className="attending-container">
-            <p>{maybesCount} Interested</p>
-            <div className="maybes-list">
-              {selectedEvent?.maybesDetails.map((maybes, index) => (
-                <>
-                    <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-                      <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-                    </Link>
-                </>
-              ))}
-            </div>
-          </div>
-        </>
-      );
-    }
-  };
+  //       return (
+  //         <>
+  //         <div className="attending-container">
+  //             <p>{maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
+  //             <div className="maybes-list">
+  //               {chunks.map((chunk, chunkIndex) => (
+  //                 <div key={chunkIndex}>
+  //                   {chunk.map((maybes, index) => (
+  //                     <>
+  //                       <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+  //                         <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+  //                       </Link>
+  //                     </>
+  //                   ))}
+  //                 </div>
+  //               ))}
+  //             </div>
+  //           </div>
+  //         </>
+  //       );
+  //     }
+  //   } else {
+  //     return (
+  //       <>
+  //         <div className="attending-container">
+  //           <p>{maybesCount} Interested</p>
+  //           <div className="maybes-list">
+  //             {selectedEvent?.maybesDetails.map((maybes, index) => (
+  //               <>
+  //                   <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
+  //                     <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
+  //                   </Link>
+  //               </>
+  //             ))}
+  //           </div>
+  //         </div>
+  //       </>
+  //     );
+  //   }
+  // };
   
 
   const mapStyles = {
@@ -391,19 +392,11 @@ export default function EventsShow(){
                     }
                   </div>
                   <p><AttendeeDropdowns selectedEvent={selectedEvent} /></p>
-                  <p>{renderMaybes()}</p>
+                  <p><MaybeDropdowns selectedEvent={selectedEvent}/></p>
                 </div>
-
             </div>
-
           </div>
 
-          {/* <div id="event-show-map-container">
-              <img 
-                  src={`https://maps.googleapis.com/maps/api/staticmap?center=${selectedEvent?.latitude},${selectedEvent?.longitude}&zoom=12&size=800x800&markers=color:red%7Clabel:A%7C${selectedEvent?.latitude},${selectedEvent?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
-                  alt="map"
-              />
-          </div> */}
           <GoogleMap
             mapContainerStyle={mapStyles}
             zoom={14}
