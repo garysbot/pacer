@@ -5,7 +5,9 @@ export default function EventComments({ selectedEvent }){
       <div className="comments-container">
             <div className="comments-content">
               <div className="comments-header">
+                <hr></hr>
                 <h2>Comments</h2>
+                <hr></hr>
               </div>
 
               <div className="comments-list">
@@ -16,12 +18,21 @@ export default function EventComments({ selectedEvent }){
                       {/* Picture */}
                       <p>Gary Jiang</p> 
                       {/* Profile URL */}
-                      <p>11:51 AM</p>
                     </div>
                     
                     <div className="comment-body">
-                      <p>Hello lorem ipsum dolor</p>
+                      <p>Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor Hello lorem ipsum dolor </p>
                     </div>
+
+                    <div className="comment-footer">
+                      <p>12:01 AM</p>
+                      {/* Comment Time Stamp */}
+                      <p className="button">Edit</p>
+                      {/* Edit Comment Button */}
+                      <p className="button">Delete</p>
+                      {/* Delete Comment Button */}
+                    </div>
+
                   </div>
                 </div>
               </div>
