@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import './DiscoverPage.css'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../store/events";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
-import { difficultyBadge } from "./DiscoverPageHelpers";
 import DiscoverPageEventContainer from "./DiscoverPageEventContainer";
 
 export default function DiscoverPage(){
