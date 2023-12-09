@@ -14,6 +14,10 @@
 .filter-container {
   width: 20%;
   padding: 1rem;
+  border: #89fc00 2px solid;
+  border-radius: 3rem;
+  margin: 1rem;
+  margin-left: 2rem;
 }
 
 .index-container {

@@ -5,6 +5,7 @@ import { fetchEvents } from "../../store/events";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
+import { difficultyBadge } from "./DiscoverPageHelpers";
 
 export default function DiscoverPage(props){
     const sportsWithEmojis = [
@@ -109,191 +110,88 @@ export default function DiscoverPage(props){
         }
     }
 
-    const difficultyColor = (difficulty, eventType) => {
-        switch (difficulty) {
-            case 'Beginner':
-                return (
-                    <p className="sport-icon beginner">{sportIcon(eventType)}</p>
-                )
-            case 'Intermediate':
-                return (
-                    <p className="sport-icon intermediate">{sportIcon(eventType)}</p>
-                )
-            case 'Advanced':
-                return (
-                    <p className="sport-icon advanced">{sportIcon(eventType)}</p>
-                )
-            default:
-                return null
-        }
-    }
-
-    const sportIcon = (eventType) => {
-        switch (eventType) {
-            case 'Basketball':
-                return "🏀";
-            case 'Soccer':
-                return "⚽";
-            case 'Baseball':
-                return "⚾";
-            case 'Tennis':
-                return "🎾";
-            case 'Running':
-                return "🏃‍♂️";
-            case 'Volleyball':
-                return "🏐";
-            case 'Swimming':
-                return "🏊‍♂️";
-            case 'Yoga':
-                return "🧘";
-            case 'Gym (Fitness)':
-                return "🏋️";
-            case 'Handball':
-                return "🤾";
-            case 'Biking':
-                return "🚴";
-            case 'Martial Arts':
-                return "🥋";
-            case 'Hockey':
-                return "🏒";
-            case 'Football':
-                return "🏈";
-            case 'Hiking':
-                return "🥾";
-            case 'Bowling':
-                return "🎳";
-            case 'Water Sports':
-                return "🏄";
-            case 'Ping Pong':
-                return "🏓";
-            case 'Golf':
-                return "⛳";
-            case 'Pickleball':
-                return "🏓";
-            case 'Rock Climbing':
-                return "🧗";
-            case 'Skateboarding':
-                return "🛹";
-            case 'Badminton':
-                return "🏸";
-            case 'Walking':
-                return "🚶";
-            case 'Lacrosse':
-                return "🥍";
-            case 'Ultimate Frisbee':
-                return "🥏";
-            case 'Rugby':
-                return "🏉";
-            case 'Archery':
-                return "🏹";
-            case 'Fencing':
-                return "🤺";
-            case 'Sailing':
-                return "⛵";
-            case 'Rowing':
-                return "🚣";
-            case 'Table Tennis':
-                return "🏓";
-            case 'Squash':
-                return "🧃";
-            case 'Equestrian':
-                return "🐎";
-            case 'CrossFit':
-                return "🏋️‍♂️";
-            case 'Triathlons':
-                return "🏊‍♂️";
-            case 'Cricket':
-                return "🏏";
-            case 'Jiu-Jitsu':
-                return "🥋";
-            case 'Boxing':
-                return "🥊";
-            default:
-                return ""; // Return an empty string or a default icon if eventType does not match
-        }
-    };
-    
-
     return (
         <>
-            <main>
-                <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
-                    <LoginForm onSuccess={handleSignInSuccess} />
-                </Modal>
-                <div className="discover-parent-container">
-                    {/* <div className="filter-container">
-                        <form>                           
-                            <h3>Filter</h3>
-                            <p>Primary Sport</p>
-                        </form>
-                    </div> */}
-                    <div className="index-container">
-                        <div className="index-header">
-                            <h2>Find an event near you</h2>
-                        </div>
-                        <div 
-                            className="sport-filter-container"
-                            ref={sportFilterContainerRef}
-                            onMouseDown={onMouseDown}
-                            onMouseMove={onMouseMove}
-                            onMouseUp={onMouseUpOrLeave}
-                            onMouseLeave={onMouseUpOrLeave}
-                        >
-                            <p className="sport-label" onClick={resetFilters}>X</p>
-                            {filteredSports.map((sport)=>{
-                                return (
-                                    <p className="sport-label"
-                                        onClick={()=>handleFilter(sport)}
-                                    >
-                                        {sport}
-                                    </p>
-                                )
-                            })}
-                            <p className="sport-label">Rob's Easter Egg</p>
-                        </div>
-                        <button id="event-create-button"
-                            onClick={handleCreateEventBtn}
-                        >
-                            Create an event!
-                        </button>
-                        {
-                            renderedEvents?.map((event, index) =>    
-                                (
-                                    <Link key={index} to={`/events/${event._id}`}>
-                                        <div className="event-container">
-                                            <div className="event-content">
-                                                <div className="event-header">
-                                                    <h3>{event.eventName}</h3>
-                                                    <div className="event-subheader">
-                                                        { difficultyColor(event.difficulty, event.eventType) }
-                                                        <p className="event-subheader-difficulty">{event.difficulty}</p>
-                                                        <p className="event-subheader-host">with {`${event.ownerDetails?.firstName} ${event.ownerDetails?.lastName}`}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="date-time-location">
-                                                    { timeConverter(event.dateTime) }
-                                                    <p>{event.locationName}</p>
-                                                    <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
-                                                </div>
-                                                <div className="event-description">
-                                                    {event.description}
-                                                </div>
-                                            </div>
-                                            <div className="event-mini-map-container">
-                                                <img
-                                                    src={`https://maps.googleapis.com/maps/api/staticmap?center=${event?.latitude},${event?.longitude}&zoom=12&size=400x400&markers=color:red%7Clabel:A%7C${event?.latitude},${event?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
-                                                    alt="map"
-                                                />
-                                                {/* <img src='/static/temp-map.png' alt='map' /> */}
-                                            </div>
-                                        </div>
-                                    </Link>
-                                )
-                            )
-                        }
+          <main>
+            <Modal isOpen={showModal === 'signin'} onClose={closeModal}>
+                <LoginForm onSuccess={handleSignInSuccess} />
+            </Modal>
+            <div className="discover-parent-container">
+              <div className="filter-container">
+                  <form>                           
+                      <h3>Filter</h3>
+                      <p>Sport</p>
+                      <p>Experience</p>
+                      <p>Borough</p>
+                  </form>
+              </div>
+
+              <div className="index-container">
+                <div className="index-header">
+                    <h2>Find an event near you</h2>
                 </div>
-                </div>
-            </main>
+                  <div 
+                    className="sport-filter-container"
+                    ref={sportFilterContainerRef}
+                    onMouseDown={onMouseDown}
+                    onMouseMove={onMouseMove}
+                    onMouseUp={onMouseUpOrLeave}
+                    onMouseLeave={onMouseUpOrLeave}
+                  >
+                    <p className="sport-label" onClick={resetFilters}>X</p>
+                    {filteredSports.map((sport)=>{
+                        return (
+                            <p className="sport-label"
+                                onClick={()=>handleFilter(sport)}
+                            >
+                                {sport}
+                            </p>
+                        )
+                    })}
+                    <p className="sport-label">Rob's Easter Egg</p>
+                  </div>
+                    <button id="event-create-button"
+                      onClick={handleCreateEventBtn}
+                    >
+                      Create an event!
+                    </button>
+                    {
+                      renderedEvents?.map((event, index) =>    
+                        (
+                          <div className="event-container">
+                            <div className="event-content">
+                              <div className="event-header">
+                                <Link key={index} to={`/events/${event._id}`}>
+                                  <h3>{event.eventName}</h3>
+                                </Link>
+                                <div className="event-subheader">
+                                    { difficultyBadge(event.difficulty, event.eventType) }
+                                    <p className="event-subheader-difficulty">{event.difficulty}</p>
+                                    <p className="event-subheader-host">with {`${event.ownerDetails?.firstName} ${event.ownerDetails?.lastName}`}</p>
+                                </div>
+                              </div>
+                              <div className="date-time-location">
+                                { timeConverter(event.dateTime) }
+                                <p>{event.locationName}</p>
+                                <p>{`${event.attendees.length} / ${event.maxGroupSize} Attendees`}</p>
+                              </div>
+                              <div className="event-description">
+                                {event.description}
+                              </div>
+                            </div>
+                            <div className="event-mini-map-container">
+                              <img
+                                src={`https://maps.googleapis.com/maps/api/staticmap?center=${event?.latitude},${event?.longitude}&zoom=12&size=400x400&markers=color:red%7Clabel:A%7C${event?.latitude},${event?.longitude}&key=${process.env.REACT_APP_MAPS_API_KEY}`}
+                                alt="map"
+                              />
+                            </div>
+                          </div>
+                        )
+                      )
+                    }
+            </div>
+            </div>
+          </main>
         </>
     )
 }
