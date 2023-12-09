@@ -1,22 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-// import { Loader } from "@googlemaps/js-api-loader";
+import { useParams, Link } from "react-router-dom";
 import { getEventThunk } from "../../store/events";
 import EditForm from "./Editform/Editform";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
 import './EventsShow.css';
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import { difficultyBadge } from "../DiscoverPage/DiscoverPageHelpers";
 import AttendeeDropdowns from "./AttendeeDropdowns";
 import MaybeDropdowns from "./MaybeDropdowns";
+import EventComments from "./EventComments";
 
 export default function EventsShow(){
   const dispatch = useDispatch();
   const { id } = useParams();
-  const history = useHistory()
   const sessionUser = useSelector(state => state.session.user);
 
   // ! Loads current event on page load
@@ -26,17 +24,6 @@ export default function EventsShow(){
 
   const selectedEvent = useSelector((state) => state.events.all[id]);
   const currentUser = useSelector((state) => state.session.user)
-
-  // ! Time converter helper
-  const timeConverter = (dateTime) => {
-      const date = new Date(dateTime);
-      const formattedDate = date.toLocaleDateString("en-US", { year: '2-digit', month: '2-digit', day: '2-digit' });
-      const formattedTime = date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true });
-
-      return (
-          <p className="date-time"> {selectedEvent?.locationName} - {formattedDate} {formattedTime}</p>
-      )
-  }
 
   // ! Formatted Dates
   const formattedDate = new Date(selectedEvent?.dateTime).toLocaleDateString("en-US", { year: '2-digit', month: '2-digit', day: '2-digit' });
@@ -119,167 +106,6 @@ export default function EventsShow(){
     closeModal();
 };
 
-  // ! Attendees hover modal
-  // const [showAttendees, setShowAttendees] = useState(true);
-
-  // const handleArrowToggle = () => {
-  //   setShowAttendees(!showAttendees);
-  // };
-  
-  // const renderAttendees = () => {
-  //   const attendeesCount = selectedEvent?.attendees.length;
-
-  //   if (attendeesCount > 4) {
-  //     if (showAttendees) {
-  //       return (
-  //         <>
-  //         <div className="attending-container">
-  //           <p>{attendeesCount} Attending 
-  //             <span 
-  //               onClick={handleArrowToggle} 
-  //               style={{ cursor: 'pointer' }}
-  //               >
-  //                 {showAttendees ? ' \u25B6' : ' \u25BC'}
-  //             </span> </p>
-  //             <div 
-  //               className="attendees-list" 
-  //               style={{ 
-  //                 display: showAttendees ? "block" : "none" 
-  //                 }}
-  //               >
-  //               {
-  //                 selectedEvent?.attendeesDetails.slice(0, 4).map((attendee, index) => (
-  //                   <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
-  //                     <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
-  //                   </Link>
-  //                 ))
-  //               }
-  //             </div>
-  //           </div>
-  //         </>
-  //       );
-  //     } else {
-  //       const chunks = [];
-  //       for (let i = 0; i < attendeesCount; i += 4) {
-  //         chunks.push(selectedEvent?.attendeesDetails.slice(i, i + 4));
-  //       }
-
-  //       return (
-  //         <>
-  //         <div className="attending-container">
-  //           <p>{attendeesCount} Attending 
-  //           <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
-  //             <div className="attendees-list">
-  //               {chunks.map((chunk, chunkIndex) => (
-  //                 <div key={chunkIndex}>
-  //                   {chunk.map((attendee, index) => (
-  //                     <>
-  //                       <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
-  //                         <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
-  //                       </Link>
-  //                     </>
-  //                   ))}
-  //                 </div>
-  //               ))}
-  //             </div>
-  //           </div>
-  //         </>
-  //       );
-  //     }
-  //   } else {
-  //     return (
-  //       <>
-  //       <div className="attending-container">
-  //         <p>{attendeesCount} Attending</p>
-  //         <div className="attendees-list">
-  //           {selectedEvent?.attendeesDetails.map((attendee, index) => (
-  //             <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
-  //               <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
-  //             </Link>
-  //           ))}
-  //         </div>
-  //       </div>
-  //       </>
-  //     );
-  //   }
-  // };
-
-  // // ! Maybes hover modal
-  // const [showMaybes, setShowMaybes] = useState(true);
-  // const maybesCount = selectedEvent?.maybes.length || 0;
-
-  // const handleDownArrowToggle = () => {
-  //   setShowMaybes(!showMaybes);
-  // };
-
-  // const renderMaybes = () => {
-  //   const maybesCount = selectedEvent?.maybes.length;
-
-  //   if (maybesCount > 4) {
-  //     if (showMaybes) {
-  //       return (
-  //         <>
-  //           <div className="attending-container">
-  //             <p>
-  //             {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
-  //             <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
-  //             {selectedEvent?.maybesDetails.slice(0, 4).map((maybes, index) => (
-  //               <>
-  //                   <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-  //                     <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-  //                   </Link>
-  //               </>
-  //             ))}
-  //             </div>
-  //           </div>
-  //         </>
-  //       );
-  //     } else {
-  //       const chunks = [];
-  //       for (let i = 0; i < maybesCount; i += 4) {
-  //         chunks.push(selectedEvent?.maybesDetails.slice(i, i + 4));
-  //       }
-
-  //       return (
-  //         <>
-  //         <div className="attending-container">
-  //             <p>{maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
-  //             <div className="maybes-list">
-  //               {chunks.map((chunk, chunkIndex) => (
-  //                 <div key={chunkIndex}>
-  //                   {chunk.map((maybes, index) => (
-  //                     <>
-  //                       <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-  //                         <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-  //                       </Link>
-  //                     </>
-  //                   ))}
-  //                 </div>
-  //               ))}
-  //             </div>
-  //           </div>
-  //         </>
-  //       );
-  //     }
-  //   } else {
-  //     return (
-  //       <>
-  //         <div className="attending-container">
-  //           <p>{maybesCount} Interested</p>
-  //           <div className="maybes-list">
-  //             {selectedEvent?.maybesDetails.map((maybes, index) => (
-  //               <>
-  //                   <Link to={`/users/${maybes._id}`} key={index} className="attendee-circle" data-name={`${maybes.firstName} ${maybes.lastName}`}>
-  //                     <img src={`../../${maybes.profilePhotoUrl}`} alt={`${maybes.firstName}'s Profile`} />
-  //                   </Link>
-  //               </>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </>
-  //     );
-  //   }
-  // };
   
 
   const mapStyles = {
@@ -426,8 +252,8 @@ export default function EventsShow(){
               </InfoWindow>
             )}
           </GoogleMap>
+          <EventComments selectedEvent={selectedEvent} />
         </div>
-        
       </div>
     </>
     ) : (

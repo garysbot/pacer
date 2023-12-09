@@ -265,3 +265,36 @@
 .gm-style-mtc button {
     border-radius: 3.25rem !important;
 }
+
+.comments-container {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.comments-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+}
+
+.comment-header {
+  width: 100%;
+  display: flex;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+
+
+.comments-header h2 {
+  color: #1D1D1D;
+}
+
+.comment-header p {
+  color: #1D1D1D;
+}
+
+.comment-body p {
+  color: #1D1D1D;
+}
