@@ -9,6 +9,7 @@ import Modal from '../../context/Modal';
 import './EventsShow.css';
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import { difficultyBadge } from "../DiscoverPage/DiscoverPageHelpers";
 
 export default function EventsShow(){
   const dispatch = useDispatch();
@@ -279,110 +280,6 @@ export default function EventsShow(){
     }
   };
   
-  // ! Difficulty Badge
-  const difficultyColor = (difficulty, eventType) => {
-    switch (difficulty) {
-        case 'Beginner':
-            return (
-                <p className="sport-icon beginner">{sportIcon(eventType)}</p>
-            )
-        case 'Intermediate':
-            return (
-                <p className="sport-icon intermediate">{sportIcon(eventType)}</p>
-            )
-        case 'Advanced':
-            return (
-                <p className="sport-icon advanced">{sportIcon(eventType)}</p>
-            )
-        default:
-            return null
-    }
-  }
-
-  const sportIcon = (eventType) => {
-    switch (eventType) {
-        case 'Basketball':
-            return "🏀";
-        case 'Soccer':
-            return "⚽";
-        case 'Baseball':
-            return "⚾";
-        case 'Tennis':
-            return "🎾";
-        case 'Running':
-            return "🏃‍♂️";
-        case 'Volleyball':
-            return "🏐";
-        case 'Swimming':
-            return "🏊‍♂️";
-        case 'Yoga':
-            return "🧘";
-        case 'Gym (Fitness)':
-            return "🏋️";
-        case 'Handball':
-            return "🤾";
-        case 'Biking':
-            return "🚴";
-        case 'Martial Arts':
-            return "🥋";
-        case 'Hockey':
-            return "🏒";
-        case 'Football':
-            return "🏈";
-        case 'Hiking':
-            return "🥾";
-        case 'Bowling':
-            return "🎳";
-        case 'Water Sports':
-            return "🏄";
-        case 'Ping Pong':
-            return "🏓";
-        case 'Golf':
-            return "⛳";
-        case 'Pickleball':
-            return "🏓";
-        case 'Rock Climbing':
-            return "🧗";
-        case 'Skateboarding':
-            return "🛹";
-        case 'Badminton':
-            return "🏸";
-        case 'Walking':
-            return "🚶";
-        case 'Lacrosse':
-            return "🥍";
-        case 'Ultimate Frisbee':
-            return "🥏";
-        case 'Rugby':
-            return "🏉";
-        case 'Archery':
-            return "🏹";
-        case 'Fencing':
-            return "🤺";
-        case 'Sailing':
-            return "⛵";
-        case 'Rowing':
-            return "🚣";
-        case 'Table Tennis':
-            return "🏓";
-        case 'Squash':
-            return "🧃";
-        case 'Equestrian':
-            return "🐎";
-        case 'CrossFit':
-            return "🏋️‍♂️";
-        case 'Triathlons':
-            return "🏊‍♂️";
-        case 'Cricket':
-            return "🏏";
-        case 'Jiu-Jitsu':
-            return "🥋";
-        case 'Boxing':
-            return "🥊";
-        default:
-            return ""; // Return an empty string or a default icon if eventType does not match
-    }
-};
 
   const mapStyles = {
     height: '400px',
@@ -414,7 +311,7 @@ export default function EventsShow(){
           <div className="event-name-container">  
             <h1>{selectedEvent?.eventName}</h1>
             <div className="event-subheader event-banner-subhead">
-              { difficultyColor(selectedEvent?.difficulty, selectedEvent?.eventType) }
+              { difficultyBadge(selectedEvent?.difficulty, selectedEvent?.eventType) }
               <p className="event-banner-profile-link">{selectedEvent?.difficulty} {selectedEvent?.eventType} hosted by <Link to={`/users/${selectedEvent?.ownerDetails._id}`}>{selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</Link></p>
               <p className="event-subheader-host"></p>
             </div>
