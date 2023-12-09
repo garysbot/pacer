@@ -14,6 +14,10 @@
 .filter-container {
   width: 20%;
   padding: 1rem;
+  border: #89fc00 2px solid;
+  border-radius: 3rem;
+  margin: 1rem;
+  margin-left: 2rem;
 }
 
 .index-container {
@@ -158,19 +162,7 @@
   /* Bottom gradient layer */
 }
 
-.beginner {
-  background: linear-gradient(63deg, rgba(81,187,254,1) 0%, rgba(137,252,0,1) 100%);
-}
-
-.intermediate {
-  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
-}
-
-.advanced {
-  background: linear-gradient(145deg, rgba(200,104,60,1) 0%, rgba(204,71,80,1) 100%);
-}
-
-.sport-icon::before {
+.beginner::before {
   content: '';
   position: absolute;
   top: 0;
@@ -179,9 +171,49 @@
   bottom: 0;
   border-radius: inherit; /* Inherit the border radius */
   z-index: -1;
-  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+  background: linear-gradient(63deg, #5cb270 0%, #f4f269 100%);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
+}
+
+.intermediate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* Inherit the border radius */
+  z-index: -1;
+  background: linear-gradient(145deg, #f7a2a1 0%, #f4d444 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.advanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* Inherit the border radius */
+  z-index: -1;
+  background: linear-gradient(63deg, #b94c98 0%, #f0073b 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.beginner {
+  background: linear-gradient(63deg, #f4f269 0%, #5cb270 100%);
+}
+
+.intermediate {
+  background: linear-gradient(63deg, #f4d444 0%, #f7a2a1 100%);
+}
+
+.advanced {
+  background: linear-gradient(63deg, #f0073b 0%, #b94c98 100%);
 }
 
 .sport-icon:hover::before {
