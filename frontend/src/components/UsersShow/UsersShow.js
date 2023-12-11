@@ -9,7 +9,7 @@ export default function UsersShow(){
     const dispatch = useDispatch()
     const {id} = useParams()
     const shownUser = useSelector(state=>state.users?.user)
-    // // console.log(id)
+    const currentUser = useSelector(state=>state.session?.user)
     useEffect(()=>{
         dispatch(getUser(id))
     },[dispatch])
@@ -59,13 +59,22 @@ export default function UsersShow(){
                             {secondarySports}
                         </h3>
                     </span>
-                    <h2>More Info</h2>
-                    <span className="blur-header">
-                        <h3>Height: {shownUser?.height}in</h3>
-                    </span>
-                    <span className="blur-header">
-                        <h3>Weight: {shownUser?.weight}lbs</h3>
-                    </span>
+                    {currentUser._id === shownUser?._id ?
+                        <>
+                            <h2>More Info</h2>
+                            <span className="blur-header">
+                                <h3>Height: {shownUser?.height}in</h3>
+                            </span>
+                            <span className="blur-header">
+                                <h3>Weight: {shownUser?.weight}lbs</h3>
+                            </span>
+                        </>  
+                    : <></>}
+                    </section>
+                    <section className="user-friends">
+                        <span className="blur-header">
+                            <h2>Friends</h2>
+                        </span>
                     </section>
                 </section>
             </section>
