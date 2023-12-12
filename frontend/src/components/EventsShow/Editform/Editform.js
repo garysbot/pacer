@@ -106,8 +106,7 @@ export default function Editform({ setEditPage }) {
             eventType, 
             maxGroupSize,
             latitude,
-            longitude,
-            eventPrivacy: false
+            longitude
         };
 
         const event = await dispatch(updateEventThunk(selectedEvent._id ,editEvent));

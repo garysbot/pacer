@@ -56,10 +56,6 @@ const eventSchema = new Schema({
   latitude: {
     type: Number,
     required: true
-  },
-  eventPrivacy: {
-    type: Boolean,
-    required: true
   }
 }, {
   timestamps: true

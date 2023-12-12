@@ -61,7 +61,6 @@ router.get('/', async (req, res) => {
           maybes: 1,
           longitude: 1,
           latitude: 1,
-          eventPrivacy: 1,
           ownerDetails: {
             _id: '$ownerDetails._id',
             firstName: '$ownerDetails.firstName',
@@ -168,7 +167,6 @@ router.get('/:id', async (req, res) => {
           maybes: 1,
           longitude: 1,
           latitude: 1,
-          eventPrivacy: 1,
           ownerDetails: {
             _id: '$ownerDetails._id',
             firstName: '$ownerDetails.firstName',
@@ -228,7 +226,6 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       difficulty: req.body.difficulty,
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
-      eventPrivacy: req.body.eventPrivacy || false,
       longitude: req.body.longitude,
       latitude: req.body.latitude,
       attendees: [req.body.owner],
@@ -267,7 +264,6 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       })),
       longitude: event.longitude,
       latitude: event.latitude,
-      eventPrivacy: event.eventPrivacy,
       ownerDetails: {
         _id: event.owner._id,
         firstName: event.owner.firstName,
@@ -335,7 +331,6 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       difficulty: req.body.difficulty,
       eventType: req.body.eventType,
       maxGroupSize: req.body.maxGroupSize,
-      eventPrivacy: req.body.eventPrivacy || false,
       longitude: req.body.longitude,
       latitude: req.body.latitude
     };
@@ -375,7 +370,6 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       })),
       longitude: updatedEvent.longitude,
       latitude: updatedEvent.latitude,
-      eventPrivacy: updatedEvent.eventPrivacy,
       ownerDetails: {
         _id: updatedEvent.owner._id,
         firstName: updatedEvent.owner.firstName,
