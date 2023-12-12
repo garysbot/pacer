@@ -140,7 +140,7 @@ export default function DiscoverPage(){
                     })}
                     <p className="sport-label">Rob's Easter Egg</p>
                   </div>
-                    <button id="event-create-button" onClick={handleCreateEventBtn}>
+                    <button id="event-create-button" className="auth-buttons" onClick={handleCreateEventBtn}>
                       Create an event!
                     </button>
                     {renderedEvents?.map((event, index) => (<DiscoverPageEventContainer event={event} index={index} />))}

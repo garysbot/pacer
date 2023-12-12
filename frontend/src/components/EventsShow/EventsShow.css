@@ -332,3 +332,7 @@
   font-size: 0.75rem;
   opacity: 80%;
 }
+
+.event-show-rsvp-buttons {
+  padding: 1rem;
+}

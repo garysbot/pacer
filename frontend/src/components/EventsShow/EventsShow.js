@@ -174,7 +174,8 @@ export default function EventsShow(){
                   <p className="desc-field-label">Details</p>
                   <p>{selectedEvent?.description}</p>
                 </div>
-                <div>
+                <div className="event-show-rsvp-buttons">
+                  <p className="desc-field-label">RSVP</p>
                   {
                     currentUser?._id !== selectedEvent?.ownerDetails._id 
                     && 
@@ -183,22 +184,35 @@ export default function EventsShow(){
                         <button
                           onClick={handleAttendEvent}
                           style={{
-                            backgroundColor: attending ? '#89FC00' : 'transparent', 
-                            color: attending ? 'green' : '#F4FFFD' 
+                            background: 
+                              attending ? 
+                                '#89FC00' : 
+                                'linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%)',
+                            color: attending ? 'green' : '#F4FFFD',
+                            height: '3rem',
+                            width: '12rem',
+                            border: 'none'
                           }}
                           disabled={attending && !interested}
                         >
-                          {attending ? 'Attending Event !!' : 'Attend Event'}
+                          {attending ? 'Attending' : 'Attending?'}
                         </button>
                         <button
                           onClick={handleInterestedInEvent}
                           style={{ 
-                            backgroundColor: interested ? '#89FC00' : 'transparent', 
-                            color: interested ? 'green' : '#F4FFFD' 
+                            background: 
+                              interested ? 
+                                '#89FC00' : 
+                                'linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%)',
+                            color: interested ? 'green' : '#F4FFFD',
+                            height: '3rem',
+                            width: '12rem',
+                            border: 'none'
+                            
                           }}
                           disabled={interested && !attending}
                         >
-                          {interested ? 'Interested in Going' : 'Interested in Event?'}
+                          {interested ? 'Interested' : 'Interested?'}
                         </button>
                       </div>
                     )
