@@ -295,8 +295,6 @@
   gap: 1rem;
 }
 
-
-
 .comment-header p {
   color: #1D1D1D;
   font-family: 'Lexend', sans-serif;
@@ -335,4 +333,10 @@
 
 .event-show-rsvp-buttons {
   padding: 1rem;
+}
+
+.comments-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

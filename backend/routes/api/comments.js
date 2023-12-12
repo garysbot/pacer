@@ -5,12 +5,12 @@ const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
 const validateCommentInput = require('../../validations/comments')
 
-router.get('/comments', async (req, res) => {
-      const comments = await Comment.find()
-                                .populate("owner", "_id firstName lastName profilePhotoUrl")
-                                .sort({ createdAt: -1 });
-      return res.json(comments);
-    });
+// router.get('/comments', async (req, res) => {
+//       const comments = await Comment.find()
+//                                 .populate("owner", "_id firstName lastName profilePhotoUrl")
+//                                 .sort({ createdAt: -1 });
+//       return res.json(comments);
+//     });
     
 router.post('/comments', requireUser, validateCommentInput, async (req, res, next) => {
       try {

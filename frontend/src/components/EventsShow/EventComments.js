@@ -6,7 +6,10 @@ export default function EventComments({ selectedEvent }){
             <div className="comments-content">
               <div className="comments-header">
                 <hr></hr>
-                <h2>Comments</h2>
+                <div className="comments-button-container">
+                  <h2>Comments</h2>
+                  <button>Add Comment</button>
+                </div>
                 <hr></hr>
               </div>
 
@@ -25,12 +28,14 @@ export default function EventComments({ selectedEvent }){
                     </div>
 
                     <div className="comment-footer">
-                      <p>12:01 AM</p>
-                      {/* Comment Time Stamp */}
                       <p className="button">Edit</p>
                       {/* Edit Comment Button */}
                       <p className="button">Delete</p>
                       {/* Delete Comment Button */}
+                      <p>Dec 12th, 2023 </p>
+                      {/* Comment Date Stamp */}
+                      <p>12:01 AM</p>
+                      {/* Comment Time Stamp */}
                     </div>
 
                   </div>

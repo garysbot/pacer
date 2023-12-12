@@ -43,11 +43,6 @@ const validateEventInput = [
         .withMessage('Please select a maximum group size')
         .isInt({ min: 1 })
         .withMessage('Max group size must be a positive integer'),
-    // check('eventPrivacy')
-    //     .exists({ checkFalsy: true })
-    //     .isBoolean(),
-
-
     // check('longitude')
     //     .exists({ checkFalsy: true })
     //     .withMessage('Longitude is required')

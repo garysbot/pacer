@@ -49,6 +49,13 @@ const eventSchema = new Schema({
       required: true
     }
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+      required: true
+    }
+  ],
   longitude: {
     type: Number,
     required: true

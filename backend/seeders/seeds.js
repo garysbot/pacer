@@ -49,6 +49,7 @@ const users = [];
 
 users.push(
   new User ({
+    _id: "6578a50ca44a34731bd390d2",
     email: 'demo-user@appacademy.io',
     hashedPassword: bcrypt.hashSync('password', 10),
     firstName: "Demo",
@@ -124,23 +125,23 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
 // Create events
 const events = [];
 
-// events.push(
-//   new Event({
-//     owner: ObjectId('615c55670000000000000000'), // Replace with an actual ObjectId
-//     eventName: 'Demo Event',
-//     description: 'This is a test demo event',
-//     locationName: 'App Academy NYC',
-//     dateTime: new Date('2023-12-08T10:00:00-05:00'),
-//     difficulty: 'Beginner',
-//     eventType: 'Running',
-//     maxGroupSize: 25,
-//     attendees: [ObjectId('615c55670000000000000000'), ObjectId('615c55670000000000000001')], // Replace with actual ObjectIds
-//     maybes: [ObjectId('615c55670000000000000002'), ObjectId('615c55670000000000000003')], // Replace with actual ObjectIds
-//     longitude: -73.993752,
-//     latitude: 40.736370,
-//     eventPrivacy: false,
-//   })
-// );
+events.push(
+  new Event({
+    owner: "6578a50ca44a34731bd390d2",
+    _id:"6578a6e2a2cf3cce3a0b4114",
+    eventName:"test event",
+    locationName:"90 5th Ave, New York, NY 10011, USA",
+    description:"TEST EVENTTTTT",
+    dateTime:"2023-12-30T17:30:00.000Z",
+    difficulty:"Beginner",
+    eventType:"Basketball",
+    maxGroupSize:20,
+    attendees: ["6578a50ca44a34731bd390d2"],
+    maybes: [],
+    longitude:-73.9937922,
+    latitude:40.7362862,
+  })
+);
 
 const generateRandomEvent = (usersArray) => {
   const randomUserIndex = Math.floor(Math.random() * usersArray.length);
