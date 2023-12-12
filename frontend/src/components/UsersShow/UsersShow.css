@@ -113,13 +113,13 @@
   color: black;
 }
 
-input[type=text]{
+.can-edit-input{
   border: none;
   outline: none;
   font-size: 2rem;
   font-weight: 800;
 }
-input[type=text]:focus{
+.can-edit-input:focus{
   border: none;
   outline: none;
 }
