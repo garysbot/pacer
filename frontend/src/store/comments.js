@@ -29,9 +29,9 @@ const receiveNewComment = comment =>({
     comment
 })
 
-export const composeComment = data => async dispatch => {
+export const composeComment = (data, eventId) => async dispatch => {
   try {
-    const res = await jwtFetch('/api/comments/', {
+    const res = await jwtFetch(`/api/comments/${eventId}`, {
       method: 'POST',
       body: JSON.stringify(data)
     });
@@ -116,7 +116,7 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
   }
 };
 
-const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const commentsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
   switch(action.type) {
     case RECIEVE_COMMENTS:
       const allCommentsArray = action.comments;
