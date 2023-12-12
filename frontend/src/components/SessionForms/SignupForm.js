@@ -290,7 +290,7 @@ function SignupForm ({ onSuccess }) {
                 />
               </label>
               <div className="errors">
-                {password !== password2 && 'Confirm Password field must match'}
+                {password !== password2 && <span className='sign-up-errors'>Passwords must match</span>}
               </div>
             </div>
 
