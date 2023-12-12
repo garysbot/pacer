@@ -144,6 +144,45 @@ function SignupForm ({ onSuccess }) {
     'CrossFit 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
   ]
   const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
+  const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
+  const profilePictures = [
+    '../../../pacer-profile-pics/profile-pic-1.png',
+    '../../../pacer-profile-pics/profile-pic-2.png',
+    '../../../pacer-profile-pics/profile-pic-3.png',
+    '../../../pacer-profile-pics/profile-pic-4.png',
+    '../../../pacer-profile-pics/profile-pic-5.png',
+    '../../../pacer-profile-pics/profile-pic-6.png',
+    '../../../pacer-profile-pics/profile-pic-7.png',
+    '../../../pacer-profile-pics/profile-pic-8.png',
+    '../../../pacer-profile-pics/profile-pic-9.png',
+    '../../../pacer-profile-pics/profile-pic-10.png',
+    '../../../pacer-profile-pics/profile-pic-11.png',
+    '../../../pacer-profile-pics/profile-pic-12.png',
+    '../../../pacer-profile-pics/profile-pic-13.png',
+    '../../../pacer-profile-pics/profile-pic-14.png',
+    '../../../pacer-profile-pics/profile-pic-15.png',
+  ];
+
+  const handleProfilePictureSelection = (picture) => {
+    setSelectedProfilePicture(picture);
+  };
+
+  const generateProfilePictureOptions = () => {
+    return profilePictures.map((picture) => (
+      <label key={picture} className='profile-picture-option'>
+        <div>
+          <input
+            type="radio"
+            value={picture}
+            checked={selectedProfilePicture === picture}
+            onChange={() => handleProfilePictureSelection(picture)}
+          />
+          <img src={picture} alt={`Profile ${picture}`} />
+        </div>
+      </label>
+    ));
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -156,7 +195,8 @@ function SignupForm ({ onSuccess }) {
       else return;
       // setPrimarySport({ sport: primarySport.sport, experienceLevel });
     } else if (step === 3) {
-      // Perform signup and dispatch
+      handleNext();
+    } else if (step === 4) {
       const user = {
         firstName,
         lastName,
@@ -167,6 +207,7 @@ function SignupForm ({ onSuccess }) {
         // username,
         password,
         selectedSports,
+        profilePhotoUrl: selectedProfilePicture,
       };
 
       const res = await dispatch(signup(user));
@@ -211,6 +252,20 @@ function SignupForm ({ onSuccess }) {
     setExperienceLevel(level);
   };
 
+  const headerTitles = [
+    '🫶 Signup',
+    '🏆 Select your favorite sport',
+    'Select up to 5 additional sports',
+    'Select Your Profile Picture',
+  ];
+
+  const headerMessages = [
+    'Welcome to the party!',
+    'Pacer is all about community',
+    'Select up to 5 additional sports',
+    '', // Empty string for the fourth step, as there's no specific message
+  ];
+
   return (
     <>
     <div id="sign-up-errors">
@@ -219,8 +274,8 @@ function SignupForm ({ onSuccess }) {
     <form className='signup-form' onSubmit={handleSubmit}>
       <div className='signup-form-content'>
         <div className='signup-form-header'>
-          <h2>{step === 1 ? '🫶 Signup' : step === 2 ? '🏆 Select your favorite sport' : 'Select up to 5 additional sports'}</h2>
-          <h3>{step === 1 ? 'Welcome to the party!' : step === 2 ? 'Pacer is all about community' : 'Select up to 5 additional sports'}</h3>
+          <h2>{headerTitles[step - 1]}</h2>
+          <h3>{headerMessages[step - 1]}</h3>
         </div>
 
         {step === 1 && (
@@ -435,6 +490,36 @@ function SignupForm ({ onSuccess }) {
                   </label>
                 ))
               }
+            </div>
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={!primarySport.sport || !primarySport.experienceLevel}
+              className='signup-button'
+            >
+              Next
+            </button>
+            {/* <input type="submit" value="Sign Up" className='signup-button'/> */}
+            {step > 1 && (
+              <div id="sign-up-back-button">
+                <button 
+                  type="button" 
+                  onClick={handleBack}
+                  className='signup-button'
+                >
+                  Back
+                </button>
+              </div>
+            )}
+          </>
+        )}
+
+        {step === 4 && (
+          <>
+            {/* Profile picture selection */}
+            <div className='profile-picture-container'>
+              {/* <h2>Select Your Profile Picture</h2> */}
+              {generateProfilePictureOptions()}
             </div>
             <input type="submit" value="Sign Up" className='signup-button'/>
             {step > 1 && (

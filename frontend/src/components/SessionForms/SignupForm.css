@@ -222,3 +222,19 @@ button .sport-button-label:hover {
     background-color: lightblue;
 }
 
+.profile-picture-option img {
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.profile-picture-container {
+    display: flex;
+    width: 800px;
+    height: 800px;
+}
+
+.profile-picture-option {
+    max-width: 100px;
+}
+
+  

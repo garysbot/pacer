@@ -5,15 +5,18 @@ import { logout } from '../../store/session';
 import SignupForm from '../SessionForms/SignupForm';
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import "./NavBar.css"
 
 function NavBar () {
   const loggedIn = useSelector(state => !!state.session.user);
   const loggedInUser = useSelector(state=>state.session.user)
   const dispatch = useDispatch();
+  const history = useHistory();
   const logoutUser = e => {
       e.preventDefault();
       dispatch(logout());
+      history.push('/');
   }
 
   const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
