@@ -100,6 +100,41 @@ export default function DiscoverPage(){
         }
     }
 
+    const [selectedSport, setSelectedSport] = useState('');
+    const [selectedLocation, setSelectedLocation] = useState('');
+    const [selectedDifficulty, setSelectedDifficulty] = useState('');
+
+    const updateFilters = () => {
+        let filteredEvents = futureEvents;
+
+        // Sport filter
+        if (selectedSport) {
+            filteredEvents = filteredEvents.filter(event =>
+                selectedSport === event.eventType.split(' ')[0]
+            );
+        }
+
+        // Location filter
+        if (selectedLocation) {
+            filteredEvents = filteredEvents.filter(event =>
+                selectedLocation === event.location
+            );
+        }
+
+        // Difficulty filter
+        if (selectedDifficulty) {
+            filteredEvents = filteredEvents.filter(event =>
+                selectedDifficulty === event.difficulty
+            );
+        }
+
+        setRenderedEvents(filteredEvents);
+        setCanRemoveFilters(false);
+    };
+
+    const locations = ['Brooklyn', 'Manhattan', 'Bronx', 'Queens', 'Staten Island', 'New Jersey'];
+    const difficultyLevel = ['Beginner', 'Intermediate', 'Advanced'];
+
     return (
         <>
           <main>
@@ -108,11 +143,69 @@ export default function DiscoverPage(){
             </Modal>
             <div className="discover-parent-container">
               <div className="filter-container">
-                  <form>                           
-                      <h3>Filter</h3>
-                      <p>Sport</p>
-                      <p>Experience</p>
-                      <p>Borough</p>
+                  <form>       
+                        <button
+                                type="button"
+                                onClick={() => {
+                                    setSelectedSport('');
+                                    setSelectedDifficulty('');
+                                    setSelectedLocation('');
+                                    updateFilters();
+                                }}
+                            >
+                            Reset Filters
+                        </button>
+                        <p>Sport</p>
+                        {sportsWithEmojis.map((sport, index) => (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="sport"
+                                            value={sport.split(' ')[0]}
+                                            checked={selectedSport === sport.split(' ')[0]}
+                                            onChange={(e) => {
+                                                const selectedSport = e.target.value;
+                                                setSelectedSport(selectedSport);
+                                                updateFilters();
+                                            }}
+                                        />
+                                        {sport}
+                                    </label>
+                                ))}
+                        <p>Experience</p>
+                        {difficultyLevel.map((difficulty, index) => (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="difficulty"
+                                            value={difficulty.split(' ')[0]}
+                                            checked={selectedDifficulty === difficulty.split(' ')[0]}
+                                            onChange={(e) => {
+                                                const selectedDifficulty = e.target.value;
+                                                setSelectedDifficulty(selectedDifficulty);
+                                                updateFilters();
+                                            }}
+                                        />
+                                        {difficulty}
+                                    </label>
+                                ))}
+                        <p>Location</p>
+                        {locations.map((location, index) => (
+                                    <label key={index}>
+                                        <input
+                                            type="radio"
+                                            name="location"
+                                            value={location.split(' ')[0]}
+                                            checked={selectedLocation === location.split(' ')[0]}
+                                            onChange={(e) => {
+                                                const selectedLocation = e.target.value;
+                                                setSelectedLocation(selectedLocation);
+                                                updateFilters();
+                                            }}
+                                        />
+                                        {location}
+                                    </label>
+                                ))}
                   </form>
               </div>
 
