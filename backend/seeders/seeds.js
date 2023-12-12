@@ -73,7 +73,6 @@ users.push(
             Experience: "Advanced"
         }
     ],
-    userPrivacy: "false",
     profilePhotoUrl: `../../../pacer-profile-pics/profile-pic-1.png`
   })
 )
@@ -116,7 +115,6 @@ for (let i = 1; i < NUM_SEED_USERS; i++) {
           Experience: getRandomElement(['Beginner', 'Intermediate', 'Advanced'])
         },
         secondarySports: secondarySports,
-        userPrivacy: "false",
         profilePhotoUrl: `../../../pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`
       })
     );
@@ -187,7 +185,6 @@ const generateRandomEvent = (usersArray) => {
     maybes: maybes,
     longitude: faker.datatype.number({ min: -74.05, max: -73.75, precision: 0.000001 }),
     latitude: faker.datatype.number({ min: 40.6, max: 40.9, precision: 0.000001 }),
-    eventPrivacy: false,
   });
 };
 

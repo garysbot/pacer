@@ -17,8 +17,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
-
 router.put('/:id', async (req, res) => {
   try {
     const userId = req.params.id;
@@ -121,7 +119,6 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
     weight: req.body.weight,
     primarySport: req.body.primarySport,
     secondarySports: req.body.secondarySports || [],
-    userPrivacy: "false",
     friends: [],
     eventsAttended: [],
     profilePhotoUrl: `../../../pacer-profile-pics/profile-pic-${profilePhotoNumber}.png`,

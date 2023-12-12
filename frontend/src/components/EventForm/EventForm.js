@@ -120,8 +120,7 @@ export default function EventForm({props}){
           eventType, 
           maxGroupSize,
           latitude,
-          longitude,
-          eventPrivacy: false
+          longitude
         };
     
         // const event = await dispatch(composeEvent(newEvent));

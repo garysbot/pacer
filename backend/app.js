@@ -9,10 +9,12 @@ const { isProduction } = require('./config/keys');
 
 require('./models/User');
 require('./models/Event');
+require('./models/Comment');
 require('./config/passport');
 const passport = require('passport');
 const usersRouter = require('./routes/api/users');
 const eventsRouter = require('./routes/api/events');
+const commentsRouter = require('./routes/api/comments');
 const csrfRouter = require('./routes/api/csrf');
 
 const app = express();
@@ -47,6 +49,7 @@ app.use(
 
 app.use('/api/users', usersRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/comments', commentsRouter);
 app.use('/api/csrf', csrfRouter);
 
 // Serve static React build files statically in production

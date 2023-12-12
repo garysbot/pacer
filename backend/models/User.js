@@ -50,10 +50,6 @@ const userSchema = new Schema({
     type: Array,
     required: true
   },
-  userPrivacy: {
-    type: String,
-    required: true
-  },
   profilePhotoUrl: {
     type: String
   }
