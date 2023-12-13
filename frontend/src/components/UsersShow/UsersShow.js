@@ -158,7 +158,7 @@ export default function UsersShow(){
                             {secondarySports}
                         </h3>
                     </span>
-                    {currentUser._id === shownUser?._id ?
+                    {currentUser?._id === shownUser?._id ?
                         <>
                             <h2>More Info</h2>
                             <span className="blur-header">
