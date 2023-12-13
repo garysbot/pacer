@@ -109,17 +109,7 @@ export default function UsersShow(){
                                     {shownUser?.firstName} {shownUser?.lastName}
                                 </h2>}
                             <h3>Gender:</h3> 
-                                {canEdit 
-                                ? 
-                                    <input type="text"
-                                        className="can-edit-input"
-                                        defaultValue={shownUser?.gender}
-                                        onChange={(e)=>setFormGender(e.target.value)}
-                                    />
-                                : 
                                     <h3>{shownUser?.gender}</h3>
-                                
-                                }
                                 
 
                         </span>
