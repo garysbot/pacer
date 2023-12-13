@@ -14,7 +14,7 @@
 .filter-container {
   width: 20%;
   padding: 1rem;
-  border: #89fc00 2px solid;
+  /* border: #89fc00 2px solid; */
   border-radius: 3rem;
   margin: 1rem;
   margin-left: 2rem;
@@ -270,6 +270,7 @@
   transition: box-shadow 0.3s ease, color 0.3s ease;
   font-family: 'Lexend', sans-serif;
   margin-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .filter-sidebar-field-container {
@@ -277,14 +278,19 @@
 }
 
 .filter-sidebar-field-title {
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 .filter-sidebar-sport-options {
   display: flex;
   flex-direction: column;
-  height: 10rem;
+  height: 18rem;
   overflow-y: scroll;
+  margin-bottom: 2.5rem;
+}
+
+.filter-sidebar-sport-options::-webkit-scrollbar {
+  width: 10px;
 }
 
 .filter-sidebar-options {
@@ -292,11 +298,11 @@
   flex-direction: column;
 }
 
-.filter-field-option {
+.filter-field-option, .filter-sidebar-options {
   margin: 0.5rem 0.25rem;
 }
 
-.filter-field-option label {
+.filter-field-option, .filter-sidebar-options label {
   font-family: 'Nunito', sans-serif;
   font-weight: 300;
 }
@@ -305,4 +311,15 @@
   position: fixed;
   opacity: 0;
   pointer-events: none;
+}
+
+.filter-label {
+  cursor: pointer;
+  margin: 0.25rem;
+  opacity: 80%;
+}
+
+.filter-label:hover {
+  font-weight: 700;
+  opacity: 100%;
 }

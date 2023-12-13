@@ -156,14 +156,16 @@ export default function DiscoverPage() {
               >
                 Reset Filter
               </button>
+
               <div className="filter-sidebar-field-container">
+                
                 <div className="filter-sidebar-field-title">
                   <h3>Sport</h3>
                 </div>
                 <div className="filter-sidebar-sport-options">
                   {sportsWithEmojis.map((sport, index) => (
                     <div className="filter-field-option">
-                      <label key={index}>
+                      <label className="filter-label" key={index}>
                         <input
                           className="filter-radio"
                           type="radio"
@@ -185,12 +187,14 @@ export default function DiscoverPage() {
 
               <div className="filter-sidebar-field-container">
                 <div className="filter-sidebar-field-title">
-                  <p>Experience</p>
+                  <h3>Experience</h3>
                 </div>
+
                 <div className="filter-sidebar-options">
                   {difficultyLevel.map((difficulty, index) => (
-                    <label key={index}>
+                    <label className="filter-label" key={index}>
                       <input
+                        className="filter-radio"
                         type="radio"
                         name="difficulty"
                         value={difficulty.split(' ')[0]}
@@ -206,23 +210,34 @@ export default function DiscoverPage() {
                   ))}
                 </div>
               </div>
-              <p>Location</p>
-              {locations.map((location, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="location"
-                    value={location.split(' ')[0]}
-                    checked={selectedLocation === location.split(' ')[0]}
-                    onChange={(e) => {
-                      const selectedLocation = e.target.value;
-                      setSelectedLocation(selectedLocation);
-                      updateFilters();
-                    }}
-                  />
-                  {location}
-                </label>
-              ))}
+              
+          <div className="filter-sidebar-options">
+            <div className="filter-sidebar-field-container">
+              <div className="filter-sidebar-field-title">
+                <h3>Location</h3>
+              </div>
+              <div className="filter-sidebar-options">
+                {locations.map((location, index) => (
+                  <label className="filter-label" key={index}>
+                    <input
+                      className="filter-radio"
+                      type="radio"
+                      name="location"
+                      value={location.split(' ')[0]}
+                      checked={selectedLocation === location.split(' ')[0]}
+                      onChange={(e) => {
+                        const selectedLocation = e.target.value;
+                        setSelectedLocation(selectedLocation);
+                        updateFilters();
+                      }}
+                    />
+                    {location}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
             </form>
           </div>
 
