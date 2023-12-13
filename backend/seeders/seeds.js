@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Event = require('../models/Event');
+const Comment = require('../models/Comment');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -193,12 +194,36 @@ for (let i = 0; i < NUM_SEED_EVENTS; i++) {
   events.push(generateRandomEvent(users));
 }
 
+const comments = []
+
+comments.push(
+  new Comment({
+    owner: "6578a50ca44a34731bd390d2",
+    event: "6578a6e2a2cf3cce3a0b4114",
+    body: "This is a test Comment. Random words and phrases go here"
+  })
+);
+
+for (let i = 0; i < 100; i++) {
+  const randomUserIndex = Math.floor(Math.random() * users.length);
+  const randomEventIndex = Math.floor(Math.random() * events.length);
+
+  const randomUser = users[randomUserIndex];
+  const randomEvent = events[randomEventIndex];
+
+  comments.push(
+    new Comment({
+      owner: randomUser._id,
+      event: randomEvent._id,
+      body: faker.lorem.sentence()
+    })
+  );
+}
 
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    // console.log('Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -207,14 +232,13 @@ mongoose
   });
 
 const insertSeeds = () => {
-  // console.log("Resetting db and seeding users and events...");
 
   User.collection.drop()
                   .then(() => Event.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Event.insertMany(events))
+                  .then(() => Comment.insertMany(comments))
                   .then(() => {
-                    // console.log("Done!");
                     mongoose.disconnect();
                   })
                   .catch(err => {
