@@ -146,21 +146,10 @@ function SignupForm ({ onSuccess }) {
   const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
   const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
   const profilePictures = [
-    '../../../pacer-profile-pics/profile-pic-1.png',
-    '../../../pacer-profile-pics/profile-pic-2.png',
-    '../../../pacer-profile-pics/profile-pic-3.png',
     '../../../pacer-profile-pics/profile-pic-4.png',
-    '../../../pacer-profile-pics/profile-pic-5.png',
-    '../../../pacer-profile-pics/profile-pic-6.png',
-    '../../../pacer-profile-pics/profile-pic-7.png',
-    '../../../pacer-profile-pics/profile-pic-8.png',
     '../../../pacer-profile-pics/profile-pic-9.png',
-    '../../../pacer-profile-pics/profile-pic-10.png',
-    '../../../pacer-profile-pics/profile-pic-11.png',
     '../../../pacer-profile-pics/profile-pic-12.png',
-    '../../../pacer-profile-pics/profile-pic-13.png',
-    '../../../pacer-profile-pics/profile-pic-14.png',
-    '../../../pacer-profile-pics/profile-pic-15.png',
+    '../../../pacer-profile-pics/profile-pic-11.png'
   ];
 
   const handleProfilePictureSelection = (picture) => {
@@ -172,6 +161,7 @@ function SignupForm ({ onSuccess }) {
       <label key={picture} className='profile-picture-option'>
         <div>
           <input
+            className='profile-picture-radio'
             type="radio"
             value={picture}
             checked={selectedProfilePicture === picture}
