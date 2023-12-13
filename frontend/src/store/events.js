@@ -1,6 +1,5 @@
 import jwtFetch from "./jwt";
 import { RECEIVE_USER_LOGOUT } from "./session";
-import Comment from "../../../backend/models/Comment";
 
 const RECEIVE_EVENTS = "events/RECIEVE_EVENTS"
 const RECEIVE_EVENT = "events/RECIEVE_EVENT"
@@ -114,10 +113,7 @@ export const getEventThunk = eventId => async dispatch => {
   try {
     const res = await jwtFetch(`/api/events/${eventId}`);
     const event = await res.json();
-    const commentsInEvents = event.comments
-    const eventComments = await Comment.find({_id: {$in: commentsInEvents}})
-    const eventObj = {event, eventComments}
-    dispatch(receiveEvent(eventObj));
+    dispatch(receiveEvent(event));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
