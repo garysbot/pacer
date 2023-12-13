@@ -111,6 +111,7 @@
 
 .signup-button {
     width: 10rem;
+    height: 2rem;
     margin-top: 1rem;
     border-radius: 3rem;
     border-style: none;
@@ -225,16 +226,24 @@ button .sport-button-label:hover {
 .profile-picture-option img {
     height: 5rem;
     border-radius: 50%;
+    margin: 1rem;
 }
 
 .profile-picture-container {
     display: flex;
+    justify-content: center;
     width: 800px;
     height: 800px;
 }
 
 .profile-picture-option {
     max-width: 100px;
+}
+
+.profile-picture-radio {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
 }
 
   
