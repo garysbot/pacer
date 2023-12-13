@@ -17,9 +17,9 @@ export default function DiscoverPage() {
     'CrossFit 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
   ];
   const history = useHistory()
-  const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
-  const eventsObj = useSelector(state => state.events?.all);
   const dispatch = useDispatch();
+  // const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
+  const eventsObj = useSelector(state => state.events?.all);
   const sessionUser = useSelector(state => state.session.user);
   const events = Object.values(eventsObj);
   // ==================== calculating time functionality =============================
@@ -35,47 +35,47 @@ export default function DiscoverPage() {
   }, [dispatch, history])
 
 
-  function handleFilter(eventType) {
-    setCanRemoveFilters(false)
-    let toFilter = eventType.split(' ')[0]
-    let filteredEvents = renderedEvents.filter((event) => event.eventType === toFilter)
-    let newSportList = filteredSports.filter((sport) => sport === eventType)
-    setRenderedEvents(filteredEvents)
-    setFilteredSports(newSportList)
-  }
+  // function handleFilter(eventType) {
+  //   setCanRemoveFilters(false)
+  //   let toFilter = eventType.split(' ')[0]
+  //   let filteredEvents = renderedEvents.filter((event) => event.eventType === toFilter)
+  //   let newSportList = filteredSports.filter((sport) => sport === eventType)
+  //   setRenderedEvents(filteredEvents)
+  //   setFilteredSports(newSportList)
+  // }
 
-  function resetFilters() {
-    setRenderedEvents(futureEvents)
-    setFilteredSports(sportsWithEmojis)
-  }
+  // function resetFilters() {
+  //   setRenderedEvents(futureEvents)
+  //   setFilteredSports(sportsWithEmojis)
+  // }
 
   // ! For sport-filter-container horizontal mouse scroll
   // Ref for the container and state for drag-scrolling
-  const sportFilterContainerRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  // const sportFilterContainerRef = useRef(null);
+  // const [isDragging, setIsDragging] = useState(false);
+  // const [startX, setStartX] = useState(0);
+  // const [scrollLeft, setScrollLeft] = useState(0);
 
-  // Mouse down handler
-  const onMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - sportFilterContainerRef.current.offsetLeft);
-    setScrollLeft(sportFilterContainerRef.current.scrollLeft);
-  };
+  // // Mouse down handler
+  // const onMouseDown = (e) => {
+  //   setIsDragging(true);
+  //   setStartX(e.pageX - sportFilterContainerRef.current.offsetLeft);
+  //   setScrollLeft(sportFilterContainerRef.current.scrollLeft);
+  // };
 
-  // Mouse move handler
-  const onMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - sportFilterContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 3; // Scroll-fastness
-    sportFilterContainerRef.current.scrollLeft = scrollLeft - walk;
-  };
+  // // Mouse move handler
+  // const onMouseMove = (e) => {
+  //   if (!isDragging) return;
+  //   e.preventDefault();
+  //   const x = e.pageX - sportFilterContainerRef.current.offsetLeft;
+  //   const walk = (x - startX) * 3; // Scroll-fastness
+  //   sportFilterContainerRef.current.scrollLeft = scrollLeft - walk;
+  // };
 
-  // Mouse up and leave handlers
-  const onMouseUpOrLeave = () => {
-    setIsDragging(false);
-  };
+  // // Mouse up and leave handlers
+  // const onMouseUpOrLeave = () => {
+  //   setIsDragging(false);
+  // };
 
   const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
 
@@ -245,7 +245,7 @@ export default function DiscoverPage() {
             <div className="index-header">
               <h2>Find an event near you</h2>
             </div>
-            <div
+            {/* <div
               className="sport-filter-container"
               ref={sportFilterContainerRef}
               onMouseDown={onMouseDown}
@@ -264,7 +264,7 @@ export default function DiscoverPage() {
                 )
               })}
               <p className="sport-label">Rob's Easter Egg</p>
-            </div>
+            </div> */}
             <button id="event-create-button" className="auth-buttons" onClick={handleCreateEventBtn}>
               Create an event!
             </button>
