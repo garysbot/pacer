@@ -47,7 +47,7 @@
 
 .sport-label {
   width: auto;
-  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+  background: linear-gradient(145deg, rgba(250, 130, 76, 1) 0%, rgba(255, 89, 100, 1) 100%);
   font-size: 0.75rem;
   padding: 0.75rem;
   border-radius: 3px;
@@ -59,18 +59,19 @@
 
 .sport-label:hover {
   cursor: pointer;
-  box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
-  -webkit-box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
-  -moz-box-shadow: 6px 2px 8px -5px rgba(0,0,0,0.3);
+  box-shadow: 6px 2px 8px -5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 6px 2px 8px -5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 6px 2px 8px -5px rgba(0, 0, 0, 0.3);
 }
 
 .sport-filter-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 .sport-filter-label {
   width: auto;
-  background: linear-gradient(145deg, #89fc00 0%, rgba(250,130,76,1) 100%);
+  background: linear-gradient(145deg, #89fc00 0%, rgba(250, 130, 76, 1) 100%);
   font-size: 0.75rem;
   padding: 0.75rem;
   border-radius: 3px;
@@ -80,17 +81,17 @@
   transition: box-shadow 0.3s ease-in-out;
 }
 
-.sport-filter-label:hover{
+.sport-filter-label:hover {
   cursor: pointer;
 }
 
 
 
-#event-create-button{
+#event-create-button {
   width: 80%;
 }
 
-#event-create-button:hover{
+#event-create-button:hover {
   cursor: pointer;
 }
 
@@ -109,9 +110,9 @@
 .event-container:hover {
   /* width: 80%; */
   /* height: 18.025rem; */
-  box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
 }
 
 .event-content {
@@ -132,8 +133,8 @@
 .event-subheader {
   display: flex;
   align-items: center;
-  gap: 0.5rem;  
-  
+  gap: 0.5rem;
+
 }
 
 .event-subheader-difficulty {
@@ -146,7 +147,7 @@
 .event-subheader-host {
   font-size: 0.75rem;
   font-family: 'Lexend';
-  
+
 }
 
 .sport-icon {
@@ -156,7 +157,8 @@
   align-items: center;
   border-radius: 3rem;
   margin: 0.25rem 0rem;
-  position: relative; /* Needed for absolute positioning of pseudo-element */
+  position: relative;
+  /* Needed for absolute positioning of pseudo-element */
   z-index: 0;
 
   /* Bottom gradient layer */
@@ -169,7 +171,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: inherit; /* Inherit the border radius */
+  border-radius: inherit;
+  /* Inherit the border radius */
   z-index: -1;
   background: linear-gradient(63deg, #5cb270 0%, #f4f269 100%);
   opacity: 0;
@@ -183,7 +186,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: inherit; /* Inherit the border radius */
+  border-radius: inherit;
+  /* Inherit the border radius */
   z-index: -1;
   background: linear-gradient(145deg, #f7a2a1 0%, #f4d444 100%);
   opacity: 0;
@@ -197,7 +201,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: inherit; /* Inherit the border radius */
+  border-radius: inherit;
+  /* Inherit the border radius */
   z-index: -1;
   background: linear-gradient(63deg, #b94c98 0%, #f0073b 100%);
   opacity: 0;
@@ -248,7 +253,56 @@
 }
 
 .event-mini-map-container img:hover {
-  box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -webkit-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
-  -moz-box-shadow: 6px 6px 28px -5px rgba(0,0,0,0.51);
+  box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
+  -webkit-box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
+  -moz-box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
+}
+
+.filter-container form {
+  margin: 1rem;
+}
+
+.filter-sidebar-button {
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  background: linear-gradient(145deg, rgba(250, 130, 76, 1) 0%, rgba(255, 89, 100, 1) 100%);
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+  font-family: 'Lexend', sans-serif;
+  margin-right: 0.5rem;
+}
+
+.filter-sidebar-field-container {
+  margin: 1rem 0rem;
+}
+
+.filter-sidebar-field-title {
+  margin-bottom: 1rem;
+}
+
+.filter-sidebar-sport-options {
+  display: flex;
+  flex-direction: column;
+  height: 10rem;
+  overflow-y: scroll;
+}
+
+.filter-sidebar-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-field-option {
+  margin: 0.5rem 0.25rem;
+}
+
+.filter-field-option label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+}
+
+.filter-radio {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
 }
