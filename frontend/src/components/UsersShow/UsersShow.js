@@ -3,9 +3,11 @@ import { useState, useEffect} from "react";
 import './UsersShow.css';
 import { useDispatch, useSelector } from "react-redux"
 import { fetchEvents } from "../../store/events"
-import { getUser } from "../../store/users"
+import { getUser, editUser } from "../../store/users"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useParams } from "react-router-dom"
 export default function UsersShow(){
+    const history = useHistory()
     const dispatch = useDispatch()
     const {id} = useParams()
     const shownUser = useSelector(state=>state.users?.user)
@@ -14,7 +16,6 @@ export default function UsersShow(){
     const [canEdit, setCanEdit] = useState(false)
     function enableEdit(){
         setCanEdit(!canEdit)
-        console.log(canEdit)
     }
     // =============== list of sports for the edit form ==============================
     const sportsList = [
@@ -38,26 +39,32 @@ export default function UsersShow(){
         )
     })
 // ================= formstates ==========================
-    const [formFirstName, setFormFirstName] = useState()
-    const [formLastName, setFormLastName] = useState()
-    const [formGender, setFormGender] = useState()
-    const [formPrimarySport, setFormPrimarySport] = useState()
-    const [formSportExperience, setFormSportExperience] = useState()
-    const [formHeight, setFormHeight] = useState()
-    const [formWeight, setFormWeight] = useState()
+    const [formFirstName, setFormFirstName] = useState(shownUser?.firstName)
+    const [formLastName, setFormLastName] = useState(shownUser?.lastName)
+    const [formGender, setFormGender] = useState(shownUser?.gender)
+    const [formPrimarySport, setFormPrimarySport] = useState(shownUser?.primarySport?.Sport)
+    const [formSportExperience, setFormSportExperience] = useState(shownUser?.primarySport?.Experience)
+    const [formHeight, setFormHeight] = useState(shownUser?.height)
+    const [formWeight, setFormWeight] = useState(shownUser?.weight)
 // =============== update Object =====================
-    const newObj = {
-        firstName: formFirstName,
-        lastName: formLastName,
-        gender: formGender,
-        primarySport: {
-            Sport: formPrimarySport,
-            Experience: formSportExperience
-        },
-        height: formHeight,
-        weight: formWeight
-    }
 
+   function makeChanges(e){
+        e.preventDefault()
+        const newObj = {
+            firstName: formFirstName,
+            lastName: formLastName,
+            gender: formGender,
+            primarySport: {
+                Sport: formPrimarySport,
+                Experience: formSportExperience
+            },
+            height: formHeight,
+            weight: formWeight
+        }
+        dispatch(editUser(shownUser._id, newObj))
+        // history.push(`/users/${currentUser._id}`)
+        setCanEdit(false)
+    }
 
 
 
@@ -78,7 +85,7 @@ export default function UsersShow(){
                     <div id="profile-pic">
                         <img src={`../../${shownUser?.profilePhotoUrl}`}></img>
                         {currentUser?._id === shownUser?._id && <button onClick={enableEdit}>Edit Profile</button>}
-                        {canEdit && <button>Save Changes</button>}
+                        {canEdit && <button onClick={(e)=>makeChanges(e)}>Save Changes</button>}
                     </div>
                     <section id="user-info">
                         <span className="blur-header">
@@ -87,13 +94,13 @@ export default function UsersShow(){
                                 <>
                                     <input type="text"
                                         className="can-edit-input"
-                                        value={`${shownUser?.firstName}`}
+                                        defaultValue={`${shownUser?.firstName}`}
                                         onChange={(e)=>setFormFirstName(e.target.value)}
 
                                     />
                                     <input type="text"
                                         className="can-edit-input"
-                                        value={`${shownUser.lastName}`}
+                                        defaultValue={`${shownUser.lastName}`}
                                         onChange={(e)=>setFormLastName(e.target.value)}
                                     /> 
                                 </>
@@ -106,7 +113,7 @@ export default function UsersShow(){
                                 ? 
                                     <input type="text"
                                         className="can-edit-input"
-                                        value={`${shownUser?.gender}`}
+                                        defaultValue={shownUser?.gender}
                                         onChange={(e)=>setFormGender(e.target.value)}
                                     />
                                 : 
@@ -124,7 +131,9 @@ export default function UsersShow(){
                             {canEdit 
                             ? 
                                 <>
-                                    <select onChange={(e)=>setFormPrimarySport(e.target.value)}>
+                                    <select onChange={(e)=>setFormPrimarySport(e.target.value)}
+                                        defaultValue={shownUser?.primarySport?.Sport}
+                                    >
                                         {selectSportOptions}
                                     </select>
                                 </> 
@@ -165,9 +174,10 @@ export default function UsersShow(){
                             <span className="blur-header">
                                 {canEdit 
                                 ? 
-                                    <input type="number"
-                                        value={`${shownUser?.height}`}
-                                    /> 
+                                        <input type="number"
+                                            defaultValue={`${shownUser?.height}`}
+                                            onChange={(e)=>setFormHeight(e.target.value)}
+                                        /> 
                                 : 
                                     <h3>Height: {shownUser?.height}in</h3>        
                                 }
@@ -177,6 +187,7 @@ export default function UsersShow(){
                                 ? 
                                     <input type="number"
                                         value={`${shownUser?.weight}`}
+                                        onChange={(e)=>setFormWeight(e.target.value)}
                                     /> 
                                 : 
                                     <h3>Weight: {shownUser?.weight}lbs</h3>
