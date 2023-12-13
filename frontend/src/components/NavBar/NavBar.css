@@ -1,13 +1,10 @@
 .auth-buttons {
-    cursor: pointer;
-    margin: 0rem 0rem;
-    background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
-    transition: box-shadow 0.3s ease, color 0.3s ease;
-    font-family: 'Lexend', sans-serif;
-    margin-right: 0.5rem;
-    box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
-    -webkit-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
-    -moz-box-shadow: 6px 2px 28px -5px rgba(0,0,0,0.51);
+  cursor: pointer;
+  margin: 0rem 0rem;
+  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+  font-family: 'Lexend', sans-serif;
+  margin-right: 0.5rem;
 }
 
 .nav-container {
