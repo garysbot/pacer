@@ -84,43 +84,29 @@ router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) =
     });
     
 router.delete('/:id', requireUser, async (req, res, next) => {
-      try {
-        const commentId = req.params.id;
-        const eventId = req.event._id;
-        const userId = req.user._id;
+  try {
+    const commentId = req.params.id;
+    const comment = await Comment.findById(commentId);
+
+    if (!comment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const deletedComment = await Comment.findByIdAndDelete(commentId);
+
+    if (!deletedComment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    return res.json({ message: 'Comment deleted successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
     
-        const comment = await Comment.findById(commentId);
-    
-        if (!comment) {
-            const error = new Error('Comment not found');
-            error.statusCode = 404;
-            throw error;
-          }
-    
-        if (comment.owner.toString() !== userId.toString()) {
-            const error = new Error('Unauthorized');
-            error.statusCode = 401; 
-            throw error;
-          }
-  
-        if (comment.event.toString() !== eventId.toString()) {
-              const error = new Error('Unauthorized');
-              error.statusCode = 401; 
-              throw error;
-            }
-    
-        const deletedComment = await Comment.findByIdAndDelete(commentId);
-    
-        if (!deletedComment) {
-          const error = new Error('Comment not found');
-          error.statusCode = 404;
-          throw error;
-        }
-    
-        return res.json({ message: 'Comment deleted successfully' });
-      } catch (err) {
-        next(err);
-      }
-    });
 
 module.exports = router;

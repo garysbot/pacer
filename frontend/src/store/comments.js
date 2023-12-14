@@ -98,7 +98,7 @@ const deleteComment = commentId => ({
 
 export const deleteCommentThunk = commentId => async dispatch => {
   try {
-    await jwtFetch(`/api/events/${commentId}`, {
+    await jwtFetch(`/api/comments/${commentId}`, {
       method: 'DELETE'
     });
     dispatch(deleteComment(commentId));

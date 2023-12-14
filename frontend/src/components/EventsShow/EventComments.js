@@ -5,6 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import LoginForm from '../SessionForms/LoginForm';
 import { composeComment } from "../../store/comments";
 import Modal from '../../context/Modal';
+import { deleteCommentThunk } from "../../store/comments";
 
 export default function EventComments({ selectedEvent }) {
   const dispatch = useDispatch();
@@ -57,6 +58,10 @@ export default function EventComments({ selectedEvent }) {
       setShowCommentInput(false);
     }
   };  
+
+  const handleDelete = async (commentId) => {
+    await dispatch(deleteCommentThunk(commentId));
+  }
 
   return (
     <>
@@ -112,7 +117,7 @@ export default function EventComments({ selectedEvent }) {
               {comment?.owner?._id === currentUser?._id && (
                 <div className="events-edit-delete">
                   <p className="button">Edit</p>
-                  <p className="button">Delete</p>
+                  <p className="button" onClick={() => handleDelete(comment?._id)}>Delete</p>
                 </div>
                 )}
                 <div className="comment-info">
