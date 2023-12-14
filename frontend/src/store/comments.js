@@ -74,21 +74,25 @@ const updateComment = comment=> ({
     comment
 });
 
-export const updateEventThunk = (eventId, data) => async dispatch => {
+export const updateCommentThunk = (commentId, data) => async (dispatch) => {
   try {
-    const res = await jwtFetch(`/api/events/${eventId}`, {
+    const res = await jwtFetch(`/api/comments/${commentId}`, {
       method: 'PATCH',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
+
+    if (!res.ok) {
+      throw new Error('Update comment failed');
+    }
+
     const comment = await res.json();
     dispatch(updateComment(comment));
-  } catch(err) {
-    const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      return dispatch(receiveErrors(resBody.errors));
-    }
+  } catch (err) {
+    console.error(err);
+    return dispatch(receiveErrors([{ message: 'Update comment failed' }]));
   }
 };
+
 
 const DELETE_COMMENT = "comments/DELETE_COMMENT";
 const deleteComment = commentId => ({

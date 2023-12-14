@@ -374,3 +374,7 @@
     height: 2.5rem; 
     border-radius: 50%;
 }
+
+.events-edit-delete p:hover {
+    cursor: pointer;
+}

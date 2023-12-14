@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import LoginForm from '../SessionForms/LoginForm';
-import { composeComment } from "../../store/comments";
 import Modal from '../../context/Modal';
-import { deleteCommentThunk } from "../../store/comments";
+import { deleteCommentThunk, updateCommentThunk, composeComment} from "../../store/comments";
 
 export default function EventComments({ selectedEvent }) {
   const dispatch = useDispatch();
@@ -17,6 +16,8 @@ export default function EventComments({ selectedEvent }) {
   const comments = useSelector((state) => state.comments?.all);
   const selectedComments = Object.values(comments).filter(comment => comment.event === selectedEvent?._id);
   const currentUser = useSelector((state) => state.session.user);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedComment, setEditedComment] = useState('');
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -65,6 +66,18 @@ export default function EventComments({ selectedEvent }) {
     dispatch(fetchComments());
   }
 
+  const handleEdit = (commentId, currentComment) => {
+    setEditingCommentId(commentId);
+    setEditedComment(currentComment);
+  };
+
+  const handleSaveEdit = async (commentId) => {
+    await dispatch(updateCommentThunk(commentId, { event: selectedEvent._id, body: editedComment, owner: currentUser }));
+    setEditingCommentId(null);
+    setEditedComment('');
+    dispatch(fetchComments());
+  };
+
   return (
     <>
       <Modal isOpen={showModal} onClose={closeModal}>
@@ -111,14 +124,34 @@ export default function EventComments({ selectedEvent }) {
                 <p>{comment?.owner?.firstName} {comment?.owner?.lastName}</p>
               </div>
 
-            <div className="comment-body">
-              <p>{comment?.body}</p>
-            </div>
+              <div className="comment-body">
+                {editingCommentId === comment?._id ? (
+                  <>
+                    <textarea
+                      rows="4"
+                      cols="50"
+                      value={editedComment}
+                      onChange={(e) => setEditedComment(e.target.value)}
+                    ></textarea>
+                    <button onClick={() => handleSaveEdit(comment?._id)}>Save</button>
+                  </>
+                ) : (
+                  <p>{comment?.body}</p>
+                )}
+              </div>
 
               <div className="comment-footer">
               {comment?.owner?._id === currentUser?._id && (
                 <div className="events-edit-delete">
-                  <p className="button">Edit</p>
+                {editingCommentId === comment?._id ? (
+                  <p className="button" onClick={() => handleSaveEdit(comment?._id)}>
+                    Save
+                  </p>
+                ) : (
+                  <p className="button" onClick={() => handleEdit(comment?._id, comment?.body)}>
+                    Edit
+                  </p>
+                )}
                   <p className="button" onClick={() => handleDelete(comment?._id)}>Delete</p>
                 </div>
                 )}

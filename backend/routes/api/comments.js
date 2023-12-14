@@ -30,58 +30,53 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-});
-    
-    
+}); 
     
 router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
-      try {
-        const commentId = req.params.id;
-        const eventId = req.event._id;
-        const userId = req.user._id;
-    
-        const comment = await Comment.findById(commentId);
-    
-        if (!comment) {
-          const error = new Error('Comment not found');
-          error.statusCode = 404;
-          throw error;
-        }
-    
-        if (comment.owner.toString() !== userId.toString()) {
-          const error = new Error('Unauthorized');
-          error.statusCode = 401; 
-          throw error;
-        }
+  try {
+    const commentId = req.params.id;
 
-        if (comment.event.toString() !== eventId.toString()) {
-            const error = new Error('Unauthorized');
-            error.statusCode = 401; 
-            throw error;
-          }
-    
-        const updatedCommentData = {
-            owner: req.user._id,
-            event: req.event._id,
-            body: req.body.body
-        };
-    
-        let updatedComment = await Comment.findByIdAndUpdate(commentId, updatedCommentData, {
-          new: true,
-          runValidators: true
-        }).populate('owner', '_id').populate('event', '_id');
-    
-        if (!updatedComment) {
-          const error = new Error('Comment not found');
-          error.statusCode = 404;
-          throw error;
-        }
-    
-        return res.json(updatedComment);
-      } catch (err) {
-        next(err);
+    const comment = await Comment.findById(commentId);
+
+    if (!comment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    if (comment.owner.toString() !== req.user._id.toString()) {
+      const error = new Error('Unauthorized');
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const updatedCommentData = {
+      body: req.body.body
+    };
+
+    const updatedComment = await Comment.findByIdAndUpdate(
+      commentId,
+      updatedCommentData,
+      {
+        new: true,
+        runValidators: true,
       }
-    });
+    )
+      .populate('owner', '_id firstName lastName profilePhotoUrl')
+      .populate('event', '_id eventName locationName dateTime difficulty eventType maxGroupSize longitude latitude');
+
+    if (!updatedComment) {
+      const error = new Error('Comment not found');
+      error.statusCode = 404;
+      throw error;
+    }
+
+    return res.json(updatedComment);
+  } catch (err) {
+    next(err);
+  }
+});
+
     
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {
