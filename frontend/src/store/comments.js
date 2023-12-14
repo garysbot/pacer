@@ -27,22 +27,33 @@ const receiveNewComment = comment =>({
     comment
 })
 
-export const composeComment = (data, eventId) => async dispatch => {
+export const composeComment = (data) => async (dispatch) => {
   try {
-    const res = await jwtFetch(`/api/comments/${eventId}`, {
+    const res = await jwtFetch(`/api/comments`, {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    const comment = await res.json();
-    dispatch(receiveNewComment(comment));
-    return comment;
-  } catch(err) {
-    const resBody = await err.json();
-    if (resBody.statusCode === 400) {
-      return dispatch(receiveErrors(resBody.errors));
+
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const errorData = await res.json();
+        if (res.status === 400) {
+          return dispatch(receiveErrors(errorData.errors));
+        }
+      } else {
+        console.error('Non-JSON error response');
+      }
+    } else {
+      const comment = await res.json();
+      dispatch(receiveNewComment(comment));
+      return comment;
     }
+  } catch (err) {
+    console.error('Network error:', err);
   }
 };
+
 
 
 const RECEIVE_COMMENT_ERRORS = "comments/RECEIVE_COMMENT_ERRORS";

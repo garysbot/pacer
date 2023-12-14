@@ -13,21 +13,26 @@ router.get('/', async (req, res) => {
     });
     
 router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
-      try {
-        const newComment = new Comment({
-          owner: req.user._id,
-          event: req.event._id,
-          body: req.body.body
-        });
-    
-        let comment = await newComment.save();
-        comment = await comment.populate('owner', '_id').populate('event', '_id');
-        return res.json(comment);
-      }
-      catch(err) {
-        next(err);
-      }
+  try {
+    const newComment = new Comment({
+      owner: req.body.owner,
+      event: req.body.event,
+      body: req.body.body
     });
+
+    let comment = await newComment.save();
+
+    comment = await Comment.findById(comment._id)
+      .populate('owner', '_id firstName lastName profilePhotoUrl')
+      .populate('event', '_id eventName locationName dateTime difficulty eventType maxGroupSize longitude latitude');
+
+    return res.json(comment);
+  } catch (err) {
+    next(err);
+  }
+});
+    
+    
     
 router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
       try {
