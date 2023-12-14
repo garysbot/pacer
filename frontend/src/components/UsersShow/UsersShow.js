@@ -75,9 +75,23 @@ export default function UsersShow(){
         <div className="secondary-sport">
             <h3>{sport.Sport}: {sport.Experience}</h3>
         </div>))
-    const userFriends = shownUser?.friends?.map((friend, index)=>(
-        <span key={index} className="attendee-circle"></span>
+
+
+
+    const dummyFriendsArray = [
+        {
+            _id: 1,
+            firstName: "Robert",
+            lastName: "Lee",
+            profilePicUrl: ""
+        }
+    ]
+    const userFriends = dummyFriendsArray.map((friend, index)=>(
+        <span key={index} className="user-friend">{friend.firstName} {friend.lastName}</span>
     ))
+
+
+
     return (
         <>
             <section id="user-show-main">
@@ -189,6 +203,7 @@ export default function UsersShow(){
                     <section className="user-friends">
                         <span className="blur-header">
                             <h2>Friends</h2>
+                            {userFriends}
                         </span>
                     </section>
                 </section>
