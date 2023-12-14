@@ -8,7 +8,7 @@ export default function AttendeeDropdowns({ selectedEvent }) {
     setShowAttendees(!showAttendees);
   };
 
-  const attendeesCount = selectedEvent?.attendees.length;
+  const attendeesCount = selectedEvent?.attendees?.length;
 
   if (attendeesCount > 4) {
     if (showAttendees) {
@@ -29,7 +29,7 @@ export default function AttendeeDropdowns({ selectedEvent }) {
                 }}
               >
               {
-                selectedEvent?.attendeesDetails.slice(0, 4).map((attendee, index) => (
+                selectedEvent?.attendees?.slice(0, 4).map((attendee, index) => (
                   <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
                     <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
                   </Link>
@@ -42,7 +42,7 @@ export default function AttendeeDropdowns({ selectedEvent }) {
     } else {
       const chunks = [];
       for (let i = 0; i < attendeesCount; i += 4) {
-        chunks.push(selectedEvent?.attendeesDetails.slice(i, i + 4));
+        chunks.push(selectedEvent?.attendees.slice(i, i + 4));
       }
 
       return (
@@ -73,7 +73,7 @@ export default function AttendeeDropdowns({ selectedEvent }) {
       <div className="attending-container">
         <p>{attendeesCount} Attending</p>
         <div className="attendees-list">
-          {selectedEvent?.attendeesDetails.map((attendee, index) => (
+          {selectedEvent?.attendees.map((attendee, index) => (
             <Link to={`/users/${attendee._id}`} key={index} className="attendee-circle" data-name={`${attendee.firstName} ${attendee.lastName}`}>
               <img src={`../../${attendee.profilePhotoUrl}`} alt={`${attendee.firstName}'s Profile`} />
             </Link>
