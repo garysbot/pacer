@@ -46,7 +46,7 @@ export default function EventsShow(){
     } else if (!sessionUser) {
       setAttending(false);
     }
-  }, [selectedEvent?.attendees, sessionUser?._id]);
+  }, [selectedEvent?.attendees, selectedEvent?.maybes, sessionUser?._id]);
 
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function EventsShow(){
     } else if (!sessionUser) {
       setInterested(false);
     }
-  }, [selectedEvent?.maybes, sessionUser?._id]);
+  }, [selectedEvent?.maybes, selectedEvent?.attendees, sessionUser?._id]);
 
   // ! Attending Event
   const handleAttendEvent = () => {
@@ -72,17 +72,13 @@ export default function EventsShow(){
         setAttending(true);
         const updatedEvent = { ...selectedEvent };
         updatedEvent.attendees = selectedEvent.attendees.concat({_id: sessionUser._id});
-        dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
         
-        if (interested) {
           setInterested(false);
-          const updatedEvent = { ...selectedEvent };
           updatedEvent.maybes = selectedEvent.maybes.filter(
             user => user._id !== sessionUser._id
           );
 
           dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
-        }
       }
     } else {
       openModal('signin');
@@ -104,18 +100,14 @@ export default function EventsShow(){
         setInterested(true);
         const updatedEvent = { ...selectedEvent };
         updatedEvent.maybes = selectedEvent.maybes.concat({_id: sessionUser._id});
-        dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
 
-        if (attending) {
           setAttending(false);
 
-          const updatedEvent = { ...selectedEvent };
           updatedEvent.attendees = selectedEvent.attendees.filter(
             user => user._id !== sessionUser._id
           );
 
           dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
-        }
       }
     } else {
       openModal('signin');
