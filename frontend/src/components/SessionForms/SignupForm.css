@@ -246,4 +246,6 @@ button .sport-button-label:hover {
   pointer-events: none;
 }
 
-  
+.profile-picture-container .selected img {
+    border: 2px solid lightblue;
+}
