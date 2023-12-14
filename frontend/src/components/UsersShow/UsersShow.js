@@ -12,6 +12,13 @@ export default function UsersShow(){
     const {id} = useParams()
     const shownUser = useSelector(state=>state.users?.user)
     const currentUser = useSelector(state=>state.session?.user)
+// ========== getting events, then filtering them down to only the user's events
+    const allUserEventsAttended = shownUser?.eventsAttended
+    const allEventsObj = useSelector(state=>state.events?.all)
+    const allEvents = Object.values(allEventsObj)
+    const allUserEvents = allEvents.filter((event)=>event.owner._id === shownUser._id)
+    console.log(allUserEvents)
+
 // =============== implementing an edit user functionality ================
     const [canEdit, setCanEdit] = useState(false)
     function enableEdit(){
@@ -62,7 +69,6 @@ export default function UsersShow(){
             weight: formWeight
         }
         dispatch(editUser(shownUser._id, newObj))
-        // history.push(`/users/${currentUser._id}`)
         setCanEdit(false)
     }
 
@@ -76,8 +82,7 @@ export default function UsersShow(){
             <h3>{sport.Sport}: {sport.Experience}</h3>
         </div>))
 
-
-
+// dummy friends array for when we actually have a user's friends in the store
     const dummyFriendsArray = [
         {
             _id: 1,
@@ -90,6 +95,18 @@ export default function UsersShow(){
         <span key={index} className="user-friend">{friend.firstName} {friend.lastName}</span>
     ))
 
+// dummy events array for when we actually have eventsAttended in the store
+    
+    
+    const nowTime = new Date()
+    const futureEvents = allUserEvents.filter((e) => nowTime.getTime() < new Date(e.dateTime).getTime())
+    console.log(futureEvents)
+    const renderedFutureEvents = futureEvents.map((event)=>{
+        <div className="event-tile">{event.eventName}</div>
+    })
+    const renderedEvents = allUserEvents.map((event)=>{
+        return <div className="event-tile" key={event._id}>{event.eventName}</div>
+    })
 
 
     return (
@@ -206,6 +223,12 @@ export default function UsersShow(){
                             {userFriends}
                         </span>
                     </section>
+                </section>
+                <section className="events-div">
+                    <span className="blur-header">
+                        <h1>User's Events</h1>
+                    </span>
+                    {renderedFutureEvents}
                 </section>
             </section>
         </>
