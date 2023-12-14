@@ -84,16 +84,3 @@ export default function AttendeeDropdowns({ selectedEvent }) {
     );
   }
 }
-
-// state
-// 1. showAttendees
-
-// props
-// 1. selectedEvent
-
-// helpers
-// 1. handleArrowToggle
-
-// imports
-// 1. Link
-// 1. useState

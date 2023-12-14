@@ -145,12 +145,6 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       throw error;
     }
 
-    if (event.owner.toString() !== userId.toString()) {
-      const error = new Error('Unauthorized');
-      error.statusCode = 401; 
-      throw error;
-    }
-
     const updatedEventData = {
       eventName: req.body.eventName,
       description: req.body.description,

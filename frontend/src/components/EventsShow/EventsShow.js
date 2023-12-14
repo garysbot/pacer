@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
-import { getEventThunk } from "../../store/events";
+import { getEventThunk, updateEventThunk } from "../../store/events";
 import EditForm from "./Editform/Editform";
 import LoginForm from '../SessionForms/LoginForm';
 import Modal from '../../context/Modal';
@@ -41,7 +41,7 @@ export default function EventsShow(){
   const [interested, setInterested] = useState(false);
 
   useEffect(() => {
-    if (selectedEvent?.attendees.includes(sessionUser?._id) && !attending) {
+    if ((selectedEvent?.attendees.some(user => user._id === sessionUser?._id)) && !attending) {
       setAttending(true);
     } else if (!sessionUser) {
       setAttending(false);
@@ -50,7 +50,7 @@ export default function EventsShow(){
 
 
   useEffect(() => {
-    if (selectedEvent?.maybes.includes(sessionUser?._id) && !interested) {
+    if ((selectedEvent?.maybes.some(user => user._id === sessionUser?._id)) && !interested) {
       setInterested(true);
     } else if (!sessionUser) {
       setInterested(false);
@@ -62,11 +62,26 @@ export default function EventsShow(){
     if (sessionUser) {
       if (attending) {
         setAttending(false);
-        setInterested(false);
+        const updatedEvent = { ...selectedEvent };
+          updatedEvent.attendees = selectedEvent.attendees.filter(
+            user => user._id !== sessionUser._id
+          );
+
+          dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
       } else {
         setAttending(true);
+        const updatedEvent = { ...selectedEvent };
+        updatedEvent.attendees = selectedEvent.attendees.concat({_id: sessionUser._id});
+        dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
+        
         if (interested) {
           setInterested(false);
+          const updatedEvent = { ...selectedEvent };
+          updatedEvent.maybes = selectedEvent.maybes.filter(
+            user => user._id !== sessionUser._id
+          );
+
+          dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
         }
       }
     } else {
@@ -79,11 +94,27 @@ export default function EventsShow(){
     if (sessionUser) {
       if (interested) {
         setInterested(false);
-        setAttending(false);
+        const updatedEvent = { ...selectedEvent };
+          updatedEvent.maybes = selectedEvent.maybes.filter(
+            user => user._id !== sessionUser._id
+          );
+
+          dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
       } else {
         setInterested(true);
+        const updatedEvent = { ...selectedEvent };
+        updatedEvent.maybes = selectedEvent.maybes.concat({_id: sessionUser._id});
+        dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
+
         if (attending) {
           setAttending(false);
+
+          const updatedEvent = { ...selectedEvent };
+          updatedEvent.attendees = selectedEvent.attendees.filter(
+            user => user._id !== sessionUser._id
+          );
+
+          dispatch(updateEventThunk(selectedEvent._id, updatedEvent));
         }
       }
     } else {
@@ -193,7 +224,6 @@ export default function EventsShow(){
                             width: '12rem',
                             border: 'none'
                           }}
-                          disabled={attending && !interested}
                         >
                           {attending ? 'Attending' : 'Attending?'}
                         </button>
@@ -210,7 +240,6 @@ export default function EventsShow(){
                             border: 'none'
                             
                           }}
-                          disabled={interested && !attending}
                         >
                           {interested ? 'Interested' : 'Interested?'}
                         </button>
