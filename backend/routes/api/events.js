@@ -145,17 +145,24 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       throw error;
     }
 
-    const updatedEventData = {
-      eventName: req.body.eventName,
-      description: req.body.description,
-      locationName: req.body.locationName,
-      dateTime: req.body.dateTime,
-      difficulty: req.body.difficulty,
-      eventType: req.body.eventType,
-      maxGroupSize: req.body.maxGroupSize,
-      longitude: req.body.longitude,
-      latitude: req.body.latitude
-    };
+   // console.log(req.body.maybes);
+   const newMaybes = req.body.maybes.map(maybe => maybe._id);
+   const newAttendees = req.body.attendees.map(attendee => attendee._id);
+   // console.log(newMaybes);
+
+   const updatedEventData = {
+     eventName: req.body.eventName,
+     description: req.body.description,
+     locationName: req.body.locationName,
+     dateTime: req.body.dateTime,
+     difficulty: req.body.difficulty,
+     eventType: req.body.eventType,
+     maxGroupSize: req.body.maxGroupSize,
+     longitude: req.body.longitude,
+     latitude: req.body.latitude,
+     maybes: newMaybes,
+     attendees: newAttendees,
+   };
 
     const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {
       new: true,
