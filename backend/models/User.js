@@ -34,10 +34,6 @@ const userSchema = new Schema({
     type: Number,
     required: false
   },
-  friends: {
-    type: Array,
-    required: true
-  },
   primarySport: {
     type: Object,
     required: true
