@@ -139,7 +139,7 @@ export default function EventsShow(){
             <h1>{selectedEvent?.eventName}</h1>
             <div className="event-subheader event-banner-subhead">
               { difficultyBadge(selectedEvent?.difficulty, selectedEvent?.eventType) }
-              <p className="event-banner-profile-link">{selectedEvent?.difficulty} {selectedEvent?.eventType} hosted by <Link to={`/users/${selectedEvent?.ownerDetails._id}`}>{selectedEvent?.ownerDetails.firstName} {selectedEvent?.ownerDetails.lastName}</Link></p>
+              <p className="event-banner-profile-link">{selectedEvent?.difficulty} {selectedEvent?.eventType} hosted by <Link to={`/users/${selectedEvent?.owner?._id}`}>{selectedEvent?.owner?.firstName} {selectedEvent?.owner?.lastName}</Link></p>
               <p className="event-subheader-host"></p>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function EventsShow(){
                 <div className="event-show-rsvp-buttons">
                   <p className="desc-field-label">RSVP</p>
                   {
-                    currentUser?._id !== selectedEvent?.ownerDetails._id 
+                    currentUser?._id !== selectedEvent?.owner?._id 
                     && 
                     (
                       <div className="join-event">
@@ -224,7 +224,7 @@ export default function EventsShow(){
                 <div className="detail-attendees-info">
                   <div className="detail-event-edit">
                     {
-                      currentUser?._id === selectedEvent?.ownerDetails._id 
+                      currentUser?._id === selectedEvent?.owner?._id 
                       && 
                       <div id="event-edit-cont" onClick={handleEditClick}>
                         <p id="event-edit">Edit Event</p>

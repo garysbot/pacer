@@ -8,95 +8,23 @@ const validateEventInput = require('../../validations/events')
 
 router.get('/', async (req, res) => {
   try {
-    const eventsWithUsers = await Event.aggregate([
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'owner',
-          foreignField: '_id',
-          as: 'ownerDetails',
-        },
-      },
-      {
-        $unwind: '$ownerDetails',
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { attendees: '$attendees' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $in: ['$_id', '$$attendees'] },
-              },
-            },
-          ],
-          as: 'attendeesDetails',
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { maybes: '$maybes' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $in: ['$_id', '$$maybes'] },
-              },
-            },
-          ],
-          as: 'maybesDetails',
-        },
-      },
-      {
-        $project: {
-          eventName: 1,
-          locationName: 1,
-          description: 1,
-          dateTime: 1,
-          difficulty: 1,
-          eventType: 1,
-          maxGroupSize: 1,
-          attendees: 1,
-          maybes: 1,
-          longitude: 1,
-          latitude: 1,
-          ownerDetails: {
-            _id: '$ownerDetails._id',
-            firstName: '$ownerDetails.firstName',
-            lastName: '$ownerDetails.lastName',
-            profilePhotoUrl: '$ownerDetails.profilePhotoUrl',
-            // Add other owner details as needed
-          },
-          attendeesDetails: {
-            $map: {
-              input: '$attendeesDetails',
-              as: 'attendee',
-              in: {
-                _id: '$$attendee._id',
-                firstName: '$$attendee.firstName',
-                lastName: '$$attendee.lastName',
-                profilePhotoUrl: '$$attendee.profilePhotoUrl',
-                // Add other attendee details as needed
-              },
-            },
-          },
-          maybesDetails: {
-            $map: {
-              input: '$maybesDetails',
-              as: 'maybe',
-              in: {
-                _id: '$$maybe._id',
-                firstName: '$$maybe.firstName',
-                lastName: '$$maybe.lastName',
-                profilePhotoUrl: '$$maybe.profilePhotoUrl',
-                // Add other maybe details as needed
-              },
-            },
-          },
-        },
-      },
-    ]);
+    const eventsWithUsers = await Event.find()
+      .populate({
+        path: 'owner',
+        select: '_id firstName lastName profilePhotoUrl', 
+      })
+      .populate({
+        path: 'attendees',
+        select: '_id firstName lastName profilePhotoUrl', 
+      })
+      .populate({
+        path: 'maybes',
+        select: '_id firstName lastName profilePhotoUrl',
+      })
+      .select(
+        'eventName locationName description dateTime difficulty eventType maxGroupSize attendees maybes longitude latitude'
+      )
+      .lean(); // Convert Mongoose documents to plain JavaScript objects
 
     res.status(200).json(eventsWithUsers);
   } catch (error) {
@@ -105,110 +33,34 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 router.get('/:id', async (req, res) => {
   try {
     const eventId = req.params.id;
 
-    const eventWithUsers = await Event.aggregate([
-      {
-        $match: {
-          _id: mongoose.Types.ObjectId.createFromHexString(eventId),
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'owner',
-          foreignField: '_id',
-          as: 'ownerDetails',
-        },
-      },
-      {
-        $unwind: '$ownerDetails',
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { attendees: '$attendees' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $in: ['$_id', '$$attendees'] },
-              },
-            },
-          ],
-          as: 'attendeesDetails',
-        },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          let: { maybes: '$maybes' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $in: ['$_id', '$$maybes'] },
-              },
-            },
-          ],
-          as: 'maybesDetails',
-        },
-      },
-      {
-        $project: {
-          eventName: 1,
-          locationName: 1,
-          description: 1,
-          dateTime: 1,
-          difficulty: 1,
-          eventType: 1,
-          maxGroupSize: 1,
-          attendees: 1,
-          maybes: 1,
-          longitude: 1,
-          latitude: 1,
-          ownerDetails: {
-            _id: '$ownerDetails._id',
-            firstName: '$ownerDetails.firstName',
-            lastName: '$ownerDetails.lastName',
-            profilePhotoUrl: '$ownerDetails.profilePhotoUrl',
-            // Add other owner details as needed
-          },
-          attendeesDetails: {
-            $map: {
-              input: '$attendeesDetails',
-              as: 'attendee',
-              in: {
-                _id: '$$attendee._id',
-                firstName: '$$attendee.firstName',
-                lastName: '$$attendee.lastName',
-                profilePhotoUrl: '$$attendee.profilePhotoUrl',
-                // Add other attendee details as needed
-              },
-            },
-          },
-          maybesDetails: {
-            $map: {
-              input: '$maybesDetails',
-              as: 'maybe',
-              in: {
-                _id: '$$maybe._id',
-                firstName: '$$maybe.firstName',
-                lastName: '$$maybe.lastName',
-                profilePhotoUrl: '$$maybe.profilePhotoUrl',
-                // Add other maybe details as needed
-              },
-            },
-          },
-        },
-      },
-    ]);
+    const eventWithUsers = await Event.findById(eventId)
+      .populate({
+        path: 'owner',
+        select: '_id firstName lastName profilePhotoUrl', 
+      })
+      .populate({
+        path: 'attendees',
+        select: '_id firstName lastName profilePhotoUrl', 
+      })
+      .populate({
+        path: 'maybes',
+        select: '_id firstName lastName profilePhotoUrl', 
+      })
+      .select(
+        'eventName locationName description dateTime difficulty eventType maxGroupSize attendees maybes longitude latitude'
+      )
+      .lean(); // Convert Mongoose documents to plain JavaScript objects
 
-    if (eventWithUsers.length === 0) {
+    if (!eventWithUsers) {
       return res.status(404).json({ message: 'Event not found' });
     }
 
-    res.status(200).json(eventWithUsers[0]);
+    res.status(200).json(eventWithUsers);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -235,9 +87,9 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
 
     // Populate owner, attendees, and maybes fields
     event = await Event.populate(event, [
-      { path: 'owner', select: '_id firstName lastName' },
-      { path: 'attendees', select: '_id firstName lastName' },
-      { path: 'maybes', select: '_id firstName lastName' },
+      { path: 'owner', select: '_id firstName lastName profilePhotoUrl' },
+      { path: 'attendees', select: '_id firstName lastName profilePhotoUrl' },
+      { path: 'maybes', select: '_id firstName lastName profilePhotoUrl' },
     ]);
 
     // Prepare the response object with the desired structure
@@ -264,39 +116,15 @@ router.post('/', requireUser, validateEventInput, async (req, res, next) => {
       })),
       longitude: event.longitude,
       latitude: event.latitude,
-      ownerDetails: {
+      owner: {
         _id: event.owner._id,
         firstName: event.owner.firstName,
         lastName: event.owner.lastName,
         profilePhotoUrl: event.owner.profilePhotoUrl,
       },
-      attendeesDetails: await Promise.all(
-        event.attendees.map(async attendeeId => {
-          const user = await User.findById(attendeeId);
-          return {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profilePhotoUrl: user.profilePhotoUrl,
-            // Add other user details as needed
-          };
-        })
-      ),
-      maybesDetails: await Promise.all(
-        event.maybes.map(async maybeId => {
-          const user = await User.findById(maybeId);
-          return {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profilePhotoUrl: user.profilePhotoUrl,
-            // Add other user details as needed
-          };
-        })
-      ),
     };
 
-    res.status(200).json(responseEvent);
+    res.status(201).json(responseEvent); // Use 201 for resource creation
   } catch (err) {
     console.error(err);
     next(err);
@@ -335,16 +163,12 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       latitude: req.body.latitude
     };
 
-    let updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {
+    const updatedEvent = await Event.findByIdAndUpdate(eventId, updatedEventData, {
       new: true,
       runValidators: true
-    }).populate('owner', '_id');
-
-    updatedEvent = await Event.populate(event, [
-      { path: 'owner', select: '_id firstName lastName' },
-      { path: 'attendees', select: '_id firstName lastName' },
-      { path: 'maybes', select: '_id firstName lastName' },
-    ]);
+    }).populate('owner', '_id firstName lastName profilePhotoUrl')
+      .populate('attendees', '_id firstName lastName profilePhotoUrl')
+      .populate('maybes', '_id firstName lastName profilePhotoUrl');
 
     // Prepare the response object with the desired structure
     const responseEvent = {
@@ -370,49 +194,20 @@ router.patch('/:id', requireUser, validateEventInput, async (req, res, next) => 
       })),
       longitude: updatedEvent.longitude,
       latitude: updatedEvent.latitude,
-      ownerDetails: {
+      owner: {
         _id: updatedEvent.owner._id,
         firstName: updatedEvent.owner.firstName,
         lastName: updatedEvent.owner.lastName,
-        profilePhotoUrl: updatedEvent.profilePhotoUrl,
+        profilePhotoUrl: updatedEvent.owner.profilePhotoUrl,
       },
-      attendeesDetails: await Promise.all(
-        updatedEvent.attendees.map(async attendeeId => {
-          const user = await User.findById(attendeeId);
-          return {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profilePhotoUrl: user.profilePhotoUrl,
-            // Add other user details as needed
-          };
-        })
-      ),
-      maybesDetails: await Promise.all(
-        updatedEvent.maybes.map(async maybeId => {
-          const user = await User.findById(maybeId);
-          return {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profilePhotoUrl: user.profilePhotoUrl,
-            // Add other user details as needed
-          };
-        })
-      ),
     };
 
-    if (!updatedEvent) {
-      const error = new Error('Event not found');
-      error.statusCode = 404;
-      throw error;
-    }
-
-    return res.json(responseEvent);
+    res.json(responseEvent);
   } catch (err) {
     next(err);
   }
 });
+
 
 router.delete('/:id', requireUser, async (req, res, next) => {
   try {

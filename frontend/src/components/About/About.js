@@ -48,7 +48,7 @@ export default function About(){
                     <div className="person-container">
                         <img src='/static/jason.jpeg' alt='' className="about-img"/>
                         <h2>Jason Jun</h2>
-                        <h3>Frontend & Backend</h3>
+                        <h3>Flex Lead</h3>
                         <p>
                             Attended the University of Michigan, studying Computer Science Engineering. Worked two summers for a tech consulting company responsible for two different projects for maintaining and growing client base. Previous experience as a freelance frontend engineer before attending App Academy.
                         </p>
@@ -56,13 +56,13 @@ export default function About(){
                             <a href='https://github.com/junjason' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <GithubIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://www.linkedin.com/in/jason-jun-0a7576237/' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <LinkedinIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://www.junjason.com' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <ResumeIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='mailto:jjun300700@gmail.com' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <EmailIcon className="about-team-url-icon"/>
                             </a>
                         </div>

@@ -158,7 +158,7 @@ function SignupForm ({ onSuccess }) {
 
   const generateProfilePictureOptions = () => {
     return profilePictures.map((picture) => (
-      <label key={picture} className='profile-picture-option'>
+      <label key={picture} className={`profile-picture-option ${selectedProfilePicture === picture ? 'selected' : ''}`}>
         <div>
           <input
             className='profile-picture-radio'
