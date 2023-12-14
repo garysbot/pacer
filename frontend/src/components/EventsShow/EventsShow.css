@@ -293,13 +293,14 @@
   display: flex;
   padding: 1rem 0;
   gap: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 .comment-header p {
   color: #1D1D1D;
   font-family: 'Lexend', sans-serif;
   font-weight: 400;
-  padding-left: 0.5rem;
 }
 
 .comment-body {
@@ -318,18 +319,19 @@
 }
 
 .comment-footer {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 1rem 0.5rem;
-  gap: 0.5rem;
-}
-
-.comment-footer p {
-  color: #1D1D1D;
-  font-size: 0.75rem;
-  opacity: 80%;
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0.5rem;
+    gap: 0.5rem;
+  }
+  
+  .comment-footer p {
+    color: #1D1D1D;
+    font-size: 0.75rem;
+    opacity: 80%;
+  }
 
 .event-show-rsvp-buttons {
   padding: 1rem;
@@ -339,4 +341,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.comment-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+  
+  .events-edit-delete {
+    display: flex;
+    gap: 10px;
+  }
+
+.commentee-circle {
+    display: inline-block;
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
+    background-color: #F4FFFD;
+    margin-right: 1rem;
+}
+
+.commentee-circle:hover {
+    transform: scale(1.2); 
+    transition: transform 0.2s ease;
+}
+
+.commentee-circle img {
+    width: 2.5rem; 
+    height: 2.5rem; 
+    border-radius: 50%;
 }

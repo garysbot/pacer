@@ -13,9 +13,7 @@ export const fetchComments = () => async dispatch =>{
         const res = await jwtFetch('/api/comments');
         const comments = await res.json();
         dispatch(receiveComments(comments));
-        // console.log(events);
     } catch (err) {
-      // console.log("hi");
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
         dispatch(receiveErrors(resBody.errors));
@@ -143,8 +141,4 @@ const commentsReducer = (state = { all: {}, user: {}, new: undefined }, action) 
   }
 };
 
-export default eventsReducer;
-
-
-
-
+export default commentsReducer;

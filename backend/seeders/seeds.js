@@ -235,6 +235,7 @@ const insertSeeds = () => {
 
   User.collection.drop()
                   .then(() => Event.collection.drop())
+                  .then(() => Comment.collection.drop())
                   .then(() => User.insertMany(users))
                   .then(() => Event.insertMany(events))
                   .then(() => Comment.insertMany(comments))

@@ -5,14 +5,14 @@ const Comment = mongoose.model('Comment');
 const { requireUser } = require('../../config/passport');
 const validateCommentInput = require('../../validations/comments')
 
-// router.get('/comments', async (req, res) => {
-//       const comments = await Comment.find()
-//                                 .populate("owner", "_id firstName lastName profilePhotoUrl")
-//                                 .sort({ createdAt: -1 });
-//       return res.json(comments);
-//     });
+router.get('/', async (req, res) => {
+      const comments = await Comment.find()
+                                .populate("owner", "_id firstName lastName profilePhotoUrl")
+                                .sort({ createdAt: -1 });
+      return res.json(comments);
+    });
     
-router.post('/comments', requireUser, validateCommentInput, async (req, res, next) => {
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
       try {
         const newComment = new Comment({
           owner: req.user._id,
@@ -29,7 +29,7 @@ router.post('/comments', requireUser, validateCommentInput, async (req, res, nex
       }
     });
     
-router.patch('/comments/:id', requireUser, validateCommentInput, async (req, res, next) => {
+router.patch('/:id', requireUser, validateCommentInput, async (req, res, next) => {
       try {
         const commentId = req.params.id;
         const eventId = req.event._id;
@@ -78,7 +78,7 @@ router.patch('/comments/:id', requireUser, validateCommentInput, async (req, res
       }
     });
     
-router.delete('/comments/:id', requireUser, async (req, res, next) => {
+router.delete('/:id', requireUser, async (req, res, next) => {
       try {
         const commentId = req.params.id;
         const eventId = req.event._id;
