@@ -56,11 +56,13 @@ export default function EventComments({ selectedEvent }) {
       await dispatch(composeComment({ event: selectedEvent._id, body: newComment, owner: currentUser }));
       setNewComment('');
       setShowCommentInput(false);
+      dispatch(fetchComments());
     }
   };  
 
   const handleDelete = async (commentId) => {
     await dispatch(deleteCommentThunk(commentId));
+    dispatch(fetchComments());
   }
 
   return (
