@@ -1,8 +1,7 @@
-# Pacer
+![Logo](./frontend/src/icons/pacer-readme-logo.png)
 Hate working out alone? Make new friends while playing your favorite sports with Pacer!
 MERN stack social platform for sports meetups by location and skill level with Google Maps API integration.
 
-![Logo](./frontend/src/icons/pacer-readme-logo.png)
 [Live Demo](https://pacer-65mk.onrender.com/)
 <br>
 <br>
