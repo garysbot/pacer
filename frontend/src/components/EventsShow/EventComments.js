@@ -91,10 +91,10 @@ export default function EventComments({ selectedEvent }) {
             <div className="comments-button-container">
               <h2>Comments</h2>
               {!currentUser && (
-                <button onClick={openModal}>Add Comment</button>
+                <button className="auth-buttons comment-button" onClick={openModal}>Add Comment</button>
               )}
               {currentUser && (
-                <button onClick={() => setShowCommentInput(true)}>Add Comment</button>
+                <button className="auth-buttons comment-button" onClick={() => setShowCommentInput(true)}>Add Comment</button>
               )}
             </div>
             <hr />
@@ -109,7 +109,7 @@ export default function EventComments({ selectedEvent }) {
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
               ></textarea>
-              <button onClick={handleSubmit}>Submit</button>
+              <button className="auth-buttons comment-button" onClick={handleSubmit}>Submit</button>
             </div>
           )}
 
@@ -133,7 +133,6 @@ export default function EventComments({ selectedEvent }) {
                       value={editedComment}
                       onChange={(e) => setEditedComment(e.target.value)}
                     ></textarea>
-                    <button onClick={() => handleSaveEdit(comment?._id)}>Save</button>
                   </>
                 ) : (
                   <p>{comment?.body}</p>
