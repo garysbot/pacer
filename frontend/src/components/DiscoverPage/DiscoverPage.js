@@ -60,7 +60,8 @@ export default function DiscoverPage() {
   const [filteredEvents, setFilteredEvents] = useState([]);
 
   const handleSportFilter = (sport) => {
-    setSelectedSport(sport);
+    const sportNameWithoutEmoji = sport.split(' ')[0];
+    setSelectedSport(sportNameWithoutEmoji);
   };
 
   const handleDifficultyFilter = (difficulty) => {
