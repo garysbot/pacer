@@ -144,7 +144,35 @@ events.push(
   })
 );
 
-const generateRandomEvent = (usersArray) => {
+const fetch = require('node-fetch').default;
+
+const generateLocation = async () => {
+  const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Times+Square,+New+York+City&key=AIzaSyCCBFUa9tL7or3XpEs6Ru-C4gqWh48afh8`;
+
+  try {
+    const response = await fetch(endpoint);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.results && data.results.length > 0) {
+        const randomResult = getRandomElement(data.results);
+        const locationName = randomResult.formatted_address;
+        const { lat, lng } = randomResult.geometry.location;
+        
+        return { locationName, latitude: lat, longitude: lng };
+      } else {
+        throw new Error('No location data found or empty response');
+      }
+    } else {
+      throw new Error('Failed to fetch location data - Response not OK');
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+
+const generateRandomEvent = async (usersArray) => {
   const randomUserIndex = Math.floor(Math.random() * usersArray.length);
   const randomUser = usersArray[randomUserIndex];
   const randomEventTitle = getRandomElement(eventTitles);
@@ -173,20 +201,21 @@ const generateRandomEvent = (usersArray) => {
   }
 
   const eventType = getRandomElement(sports);
+  const { locationName, latitude, longitude } = await generateLocation();
 
   return new Event({
     owner: randomUser._id,
     eventName: randomEventTitle,
     eventType: eventType,
     description: `This event will focus on ${eventType}.  Join us for a fun time! ${faker.lorem.paragraph()}`,
-    locationName: faker.address.streetName(),
+    locationName: locationName,
     dateTime: randomDate,
     difficulty: getRandomElement(['Beginner', 'Intermediate', 'Advanced']),
     maxGroupSize: faker.datatype.number({ min: 2, max: 100 }),
     attendees: attendees,
     maybes: maybes,
-    longitude: faker.datatype.number({ min: -74.05, max: -73.75, precision: 0.000001 }),
-    latitude: faker.datatype.number({ min: 40.6, max: 40.9, precision: 0.000001 }),
+    longitude: longitude,
+    latitude: latitude,
   });
 };
 
