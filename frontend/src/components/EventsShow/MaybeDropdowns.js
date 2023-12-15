@@ -16,7 +16,7 @@ export default function MaybeDropdowns({ selectedEvent }) {
         <>
           <div className="attending-container">
             <p>
-            {maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
+            {maybesCount} Interested <span className='dropdown-arrow' onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>{showMaybes? ' \u25B6' : ' \u25BC'}</span></p>
             <div className="maybes-list" style={{ display: showMaybes ? "block" : "none" }}>
             {selectedEvent?.maybes?.slice(0, 4).map((maybes, index) => (
               <>
@@ -38,7 +38,7 @@ export default function MaybeDropdowns({ selectedEvent }) {
       return (
         <>
         <div className="attending-container">
-            <p>{maybesCount} Interested <span onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
+            <p>{maybesCount} Interested <span className='dropdown-arrow' onClick={handleDownArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
             <div className="maybes-list">
               {chunks.map((chunk, chunkIndex) => (
                 <div key={chunkIndex}>

@@ -16,7 +16,8 @@ export default function AttendeeDropdowns({ selectedEvent }) {
         <>
         <div className="attending-container">
           <p>{attendeesCount} Attending 
-            <span 
+            <span
+              className="dropdown-arrow" 
               onClick={handleArrowToggle} 
               style={{ cursor: 'pointer' }}
               >
@@ -49,7 +50,7 @@ export default function AttendeeDropdowns({ selectedEvent }) {
         <>
         <div className="attending-container">
           <p>{attendeesCount} Attending 
-          <span onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
+          <span className='dropdown-arrow' onClick={handleArrowToggle} style={{ cursor: 'pointer' }}>&#9660;</span></p>
             <div className="attendees-list">
               {chunks.map((chunk, chunkIndex) => (
                 <div key={chunkIndex}>

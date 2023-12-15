@@ -378,3 +378,9 @@
 .events-edit-delete p:hover {
     cursor: pointer;
 }
+
+.dropdown-arrow {
+  color: #FF5964;
+  margin-left: 0.25rem;
+  margin-bottom: 0.25rem;
+}
