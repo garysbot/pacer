@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/about" component={About}/>
         <ProtectedRoute exact path="/event-form" component={EventForm}/>
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
