@@ -126,7 +126,7 @@ button {
   font-family: 'Lexend', sans-serif;
   &.learn-more {
     margin-top: 2rem;
-    width: 8rem;
+    width: 10rem;
     font-weight: 700;
     color: #1d1d1d;
     background: #fff0f0;

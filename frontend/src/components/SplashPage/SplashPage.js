@@ -16,7 +16,7 @@ function SplashPage() {
           <div className='video-overlay'>
             <h1>Exercising is <h1 className='animate-characters'>lonely af</h1></h1>
             <h3>Pacer connects you with new exercise pals at your performance level</h3>
-            <Link to='/discover'><button class="learn-more">Learn More</button></Link>
+            <Link to='/discover'><button class="learn-more">Discover Events</button></Link>
           </div>
         </div>
 
