@@ -1,59 +1,89 @@
 import React from "react";
-import { useState, useEffect} from "react";
-import './UsersShow.css';
-import { useDispatch, useSelector } from "react-redux"
-import { fetchEvents } from "../../store/events"
-import { getUser, editUser } from "../../store/users"
+import { useState, useEffect } from "react";
+import "./UsersShow.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser, editUser } from "../../store/users";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useParams } from "react-router-dom"
-export default function UsersShow(){
-    const history = useHistory()
-    const dispatch = useDispatch()
-    const {id} = useParams()
-    const shownUser = useSelector(state=>state.users?.user)
-    const currentUser = useSelector(state=>state.session?.user)
-// ========== getting events, then filtering them down to only the user's events
-    const allUserEventsAttended = shownUser?.eventsAttended
-    const allEventsObj = useSelector(state=>state.events?.all)
-    const allEvents = Object.values(allEventsObj)
-    const allUserEvents = allEvents.filter((event)=>event.owner._id === shownUser._id)
-    console.log(allUserEvents)
+import { useParams } from "react-router-dom";
 
-// =============== implementing an edit user functionality ================
-    const [canEdit, setCanEdit] = useState(false)
-    function enableEdit(){
-        setCanEdit(!canEdit)
-    }
-    // =============== list of sports for the edit form ==============================
-    const sportsList = [
-    'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming',
-    'Yoga', 'Gym (Fitness)', 'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football',
-    'Hiking', 'Bowling', 'Water Sports', 'Ping Pong', 'Golf', 'Pickleball', 'Rock Climbing',
-    'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee', 'Rugby',
-    'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian',
-    'CrossFit', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
-    ];
-    const selectSportOptions = sportsList.map((sport)=>{
-        return (
-            <option value={sport}>{sport}</option>
-        )
-    })
-// ============== list of experiences for the edit form========================
-    const experienceLevels = ['Beginner', 'Intermediate', 'Advanced'];
-    const selectExperienceOptions = experienceLevels.map((e)=>{
-        return (
-            <option value={e}>{e}</option>
-        )
-    })
-// ================= formstates ==========================
-    const [formFirstName, setFormFirstName] = useState(shownUser?.firstName)
-    const [formLastName, setFormLastName] = useState(shownUser?.lastName)
-    const [formGender, setFormGender] = useState(shownUser?.gender)
-    const [formPrimarySport, setFormPrimarySport] = useState(shownUser?.primarySport?.Sport)
-    const [formSportExperience, setFormSportExperience] = useState(shownUser?.primarySport?.Experience)
-    const [formHeight, setFormHeight] = useState(shownUser?.height)
-    const [formWeight, setFormWeight] = useState(shownUser?.weight)
-// =============== update Object =====================
+export default function UsersShow() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const shownUser = useSelector((state) => state.users?.user);
+  const currentUser = useSelector((state) => state.session?.user);
+
+  // =============== implementing an edit user functionality ================
+  const [canEdit, setCanEdit] = useState(false);
+  function enableEdit() {
+    setCanEdit(!canEdit);
+  }
+
+  // =============== list of sports for the edit form ==============================
+  const sportsList = [
+    "Basketball",
+    "Soccer",
+    "Baseball",
+    "Tennis",
+    "Running",
+    "Volleyball",
+    "Swimming",
+    "Yoga",
+    "Gym (Fitness)",
+    "Handball",
+    "Biking",
+    "Martial Arts",
+    "Hockey",
+    "Football",
+    "Hiking",
+    "Bowling",
+    "Water Sports",
+    "Ping Pong",
+    "Golf",
+    "Pickleball",
+    "Rock Climbing",
+    "Skateboarding",
+    "Badminton",
+    "Walking",
+    "Lacrosse",
+    "Ultimate Frisbee",
+    "Rugby",
+    "Archery",
+    "Fencing",
+    "Sailing",
+    "Rowing",
+    "Table Tennis",
+    "Squash",
+    "Equestrian",
+    "CrossFit",
+    "Triathlons",
+    "Cricket",
+    "Jiu-Jitsu",
+    "Boxing",
+  ];
+
+  const selectSportOptions = sportsList.map((sport) => {
+    return <option value={sport}>{sport}</option>;
+  });
+
+  // ============== list of experiences for the edit form========================
+  const experienceLevels = ["Beginner", "Intermediate", "Advanced"];
+  const selectExperienceOptions = experienceLevels.map((e) => {
+    return <option value={e}>{e}</option>;
+  });
+
+  // ================= formstates ==========================
+  const [formFirstName, setFormFirstName] = useState(shownUser?.firstName);
+  const [formLastName, setFormLastName] = useState(shownUser?.lastName);
+  const [formGender, setFormGender] = useState(shownUser?.gender);
+  const [formPrimarySport, setFormPrimarySport] = useState(
+    shownUser?.primarySport?.Sport
+  );
+  const [formSportExperience, setFormSportExperience] = useState(
+    shownUser?.primarySport?.Experience
+  );
+  const [formHeight, setFormHeight] = useState(shownUser?.height);
+  const [formWeight, setFormWeight] = useState(shownUser?.weight);
+  // =============== update Object =====================
 
    function makeChanges(e){
         e.preventDefault()
@@ -69,6 +99,7 @@ export default function UsersShow(){
             weight: formWeight
         }
         dispatch(editUser(shownUser._id, newObj))
+        // history.push(`/users/${currentUser._id}`)
         setCanEdit(false)
     }
 
@@ -82,7 +113,8 @@ export default function UsersShow(){
             <h3>{sport.Sport}: {sport.Experience}</h3>
         </div>))
 
-// dummy friends array for when we actually have a user's friends in the store
+
+
     const dummyFriendsArray = [
         {
             _id: 1,
@@ -95,18 +127,6 @@ export default function UsersShow(){
         <span key={index} className="user-friend">{friend.firstName} {friend.lastName}</span>
     ))
 
-// dummy events array for when we actually have eventsAttended in the store
-    
-    
-    const nowTime = new Date()
-    const futureEvents = allUserEvents.filter((e) => nowTime.getTime() < new Date(e.dateTime).getTime())
-    console.log(futureEvents)
-    const renderedFutureEvents = futureEvents.map((event)=>{
-        <div className="event-tile">{event.eventName}</div>
-    })
-    const renderedEvents = allUserEvents.map((event)=>{
-        return <div className="event-tile" key={event._id}>{event.eventName}</div>
-    })
 
 
     return (
@@ -223,12 +243,6 @@ export default function UsersShow(){
                             {userFriends}
                         </span>
                     </section>
-                </section>
-                <section className="events-div">
-                    <span className="blur-header">
-                        <h1>User's Events</h1>
-                    </span>
-                    {renderedFutureEvents}
                 </section>
             </section>
         </>
