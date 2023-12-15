@@ -1,5 +1,6 @@
 import './SplashPage.css'
 import { ReactComponent as MapPin } from '../../icons/running-pin.svg'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function SplashPage() {
 
@@ -15,6 +16,7 @@ function SplashPage() {
           <div className='video-overlay'>
             <h1>Exercising is <h1 className='animate-characters'>lonely af</h1></h1>
             <h3>Pacer connects you with new exercise pals at your performance level</h3>
+            <Link to='/discover'><button class="learn-more">Learn More</button></Link>
           </div>
         </div>
 
