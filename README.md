@@ -7,6 +7,12 @@ MERN stack social platform for sports meetups by location and skill level with G
 <br>
 <br>
 
+## Tech Stack
+- MongoDB
+- ExpressJS
+- React.js
+- Node.js
+
 ## Features
 1. User Auth
 2. Events (CRUD) w/ Interactive Google Map
@@ -17,16 +23,14 @@ MERN stack social platform for sports meetups by location and skill level with G
 7. Event Comments
 <br>
 
-## Tech Stack
-- MongoDB
-- ExpressJS
-- React.js
-- Node.js
 
 <br>
 
 ## Notable Highlights
+### User Auth
+![User-Auth](./frontend/src/icons/user-auth-login.gif)
 ![Sports-Ranking](./frontend/src/icons/sports-feature.gif)
+![Google-Map](./frontend/src/icons/google-map.gif)
 <br>
 *testcaption*
 
