@@ -69,16 +69,21 @@ export default function DiscoverPage() {
     const filteredBySport = selectedSport
       ? futureEvents.filter((event) => event.eventType === selectedSport)
       : futureEvents;
-
+  
     const filteredByDifficulty = selectedDifficulty
       ? filteredBySport.filter((event) => event.difficulty === selectedDifficulty)
       : filteredBySport;
-
-    // const sortedEvents = filteredByDifficulty.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-    setFilteredEvents(filteredByDifficulty);
-  }, [selectedSport, selectedDifficulty, futureEvents]);
-
+  
+    // Check if the filtered events are different before updating the state
+    if (!arraysAreEqual(filteredEvents, filteredByDifficulty)) {
+      setFilteredEvents(filteredByDifficulty);
+    }
+  }, [selectedSport, selectedDifficulty, futureEvents, filteredEvents]);
+  
+  // Utility function to compare arrays
+  const arraysAreEqual = (arr1, arr2) =>
+    arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+    
   return (
     <>
       <main>
