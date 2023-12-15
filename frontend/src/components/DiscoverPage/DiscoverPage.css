@@ -1,13 +1,8 @@
 .discover-parent-container {
   width: 100%;
   display: flex;
-  /* justify-content: space-between; */
   justify-content: center;
   padding: 1rem;
-  color: #F4FFFD;
-}
-
-.discover-parent-container p {
   color: #F4FFFD;
 }
 
@@ -34,15 +29,9 @@
   margin-bottom: 1rem;
 }
 
-.sport-filter-container {
+.filter-options {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  height: auto;
-  overflow-x: auto;
-  max-width: 80%;
-  white-space: nowrap;
-  position: relative;
+  flex-direction: column;
 }
 
 .sport-label {
@@ -258,8 +247,10 @@
   -moz-box-shadow: 6px 6px 28px -5px rgba(0, 0, 0, 0.51);
 }
 
-.filter-container form {
+.filter-container {
   margin: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .filter-sidebar-button {
@@ -286,20 +277,20 @@
   flex-direction: column;
   height: 18rem;
   overflow-y: scroll;
-  margin-bottom: 2.5rem;
 }
 
 .filter-sidebar-sport-options::-webkit-scrollbar {
   width: 10px;
 }
 
-.filter-sidebar-options {
+.filter-field {
   display: flex;
   flex-direction: column;
+  margin: 1rem;
 }
 
 .filter-field-option, .filter-sidebar-options {
-  margin: 0.5rem 0.25rem;
+  margin: 0.25rem;
 }
 
 .filter-field-option, .filter-sidebar-options label {
@@ -319,8 +310,19 @@
   opacity: 80%;
 }
 
+.filter-label input {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .filter-label:hover {
   font-weight: 700;
   opacity: 100%;
 }
 
+
+.difficulty-field {
+  display: flex;
+  flex-direction: column;
+}

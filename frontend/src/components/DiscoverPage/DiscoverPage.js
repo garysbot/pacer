@@ -9,13 +9,16 @@ import DiscoverPageEventContainer from "./DiscoverPageEventContainer";
 
 export default function DiscoverPage() {
   const sportsWithEmojis = [
-    'Basketball', 'Soccer', 'Baseball', 'Tennis', 'Running', 'Volleyball', 'Swimming',
-    'Yoga', 'Gym (Fitness)', 'Handball', 'Biking', 'Martial Arts', 'Hockey', 'Football',
-    'Hiking', 'Bowling', 'Water Sports', 'Ping Pong', 'Golf', 'Pickleball', 'Rock Climbing',
-    'Skateboarding', 'Badminton', 'Walking', 'Lacrosse', 'Ultimate Frisbee', 'Rugby',
-    'Archery', 'Fencing', 'Sailing', 'Rowing', 'Table Tennis', 'Squash', 'Equestrian',
-    'CrossFit', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
+    'Basketball 🏀', 'Soccer ⚽', 'Baseball ⚾', 'Tennis 🎾', 'Running 🏃',
+    'Volleyball 🏐', 'Swimming 🏊', 'Yoga 🧘', 'Gym (Fitness) 🏋️', 'Handball 🤾',
+    'Biking 🚴', 'Martial Arts 🥋', 'Hockey 🏒', 'Football 🏈', 'Hiking 🥾',
+    'Bowling 🎳', 'Water Sports 🌊', 'Ping Pong 🏓', 'Golf 🏌️', 'Pickleball 🥒',
+    'Rock Climbing 🧗', 'Skateboarding 🛹', 'Badminton 🏸', 'Walking 🚶', 'Lacrosse 🥍',
+    'Ultimate Frisbee 🥏', 'Rugby 🏉', 'Archery 🏹', 'Fencing 🤺', 'Sailing ⛵',
+    'Rowing 🚣', 'Table Tennis 🏓', 'Squash 🍽️', 'Equestrian 🐎', 'CrossFit 🏋️',
+    'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
   ];
+  
   const history = useHistory()
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
@@ -97,61 +100,55 @@ export default function DiscoverPage() {
         <div className="discover-parent-container">
           <div className="filter-container">
             {/* Sport filter */}
-            <div>
-              <h3>Sport</h3>
-              <label>
-                <input
-                  type="radio"
-                  name="sport"
-                  value=""
-                  checked={!selectedSport}
-                  onChange={() => handleSportFilter('')}
-                />
-                All Sports
-              </label>
-              {sportsWithEmojis.map((sport, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="sport"
-                    value={sport}
-                    checked={selectedSport === sport}
-                    onChange={() => handleSportFilter(sport)}
-                  />
-                  {sport}
+            <div className="filter-field primary-sport">
+              <h3 className="filter-sidebar-field-title">Sport</h3>
+              <div className="filter-options filter-sidebar-sport-options">
+                <label className="filter-field-option filter-label">
+                  <input type="radio" name="sport" value="" checked={!selectedSport} onChange={() => handleSportFilter('')}/>
+                  All Sports
                 </label>
-              ))}
+                {sportsWithEmojis.map((sport, index) => (
+                  <label key={index} className="filter-field-option filter-label">
+                    <input type="radio" name="sport" value={sport} checked={selectedSport === sport} onChange={() => handleSportFilter(sport)}/>
+                    {sport}
+                  </label>
+                ))}
+              </div>
             </div>
 
             {/* Difficulty filter */}
-            <div>
-              <h3>Difficulty</h3>
-              <label>
-                <input
-                  type="radio"
-                  name="difficulty"
-                  value=""
-                  checked={!selectedDifficulty}
-                  onChange={() => handleDifficultyFilter('')}
-                />
-                All Difficulty
-              </label>
-              {difficultyLevel.map((difficulty, index) => (
-                <label key={index}>
+            <div className="filter-field">
+              <h3 className="filter-sidebar-field-title">Difficulty</h3>
+              <div className="difficulty-field">
+                {/* label */}
+                <label className="filter-field-option filter-label">
                   <input
                     type="radio"
                     name="difficulty"
-                    value={difficulty}
-                    checked={selectedDifficulty === difficulty}
-                    onChange={() => handleDifficultyFilter(difficulty)}
+                    value=""
+                    checked={!selectedDifficulty}
+                    onChange={() => handleDifficultyFilter('')}
                   />
-                  {difficulty}
+                  All Difficulty
                 </label>
-              ))}
+                {/* inputs */}
+                {difficultyLevel.map((difficulty, index) => (
+                  <label key={index} className="filter-field-option filter-label">
+                    <input
+                      type="radio"
+                      name="difficulty"
+                      value={difficulty}
+                      checked={selectedDifficulty === difficulty}
+                      onChange={() => handleDifficultyFilter(difficulty)}
+                    />
+                    {difficulty}
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Render filtered events */}
+          {/* Render filtered events */}         
           <div className="index-container">
             <div className="index-header">
               <h2>Find an event near you</h2>
@@ -164,6 +161,7 @@ export default function DiscoverPage() {
             ))}
           </div>
         </div>
+
       </main>
     </>
   )
