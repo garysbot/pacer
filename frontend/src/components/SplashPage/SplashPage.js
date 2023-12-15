@@ -1,6 +1,10 @@
 import './SplashPage.css'
+import { ReactComponent as MapPin } from '../../icons/running-pin.svg'
 
 function SplashPage() {
+
+  const RunningPin = () => <MapPin className='pin' />
+
   return (
     <>
       <main>
@@ -14,8 +18,11 @@ function SplashPage() {
           </div>
         </div>
 
-        <div className='section-container'>
+        {/* <div className='section-container'>
           <div className='section-content'>
+            <RunningPin
+              className='pin'
+            />
             <h1>Find your workout buddy</h1>
             <p>With communities across running, cycling, swimming and more.</p>
           </div>
@@ -35,7 +42,7 @@ function SplashPage() {
             <h3>Subhead</h3>
             <p>Lorem ipsum words and words and wordsords and words and wordsords and words and words</p>
           </div>
-        </div>
+        </div> */}
       </main>
     </>
   );
