@@ -24,3 +24,16 @@ MERN stack social platform for sports meetups by location and skill level with G
 - Node.js
 
 <br>
+
+## Notable Highlights
+![Sports-Ranking](./frontend/src/icons/sports-feature.gif)
+<br>
+*testcaption*
+
+## Challenges
+
+## Team
+- Gary Jiang
+- Jason Jun
+- Francis Cawog
+- Robert Lee
