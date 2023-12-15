@@ -1,69 +1,24 @@
-/* #user-show-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.blur-header h2{
-  color: #000;
-}
-.blur-header h3{
-    color: #000;
-}
-
-#general-info{
-  width: 80%;
-  margin: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-}
-
-.secondary-sport {
-  margin-bottom: 10px;
-}
-
-.attendee-circle {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: #007bff;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-#profile-pic img {
-  height: 7rem;
-  width: 7rem;
-  border-radius: 50%;
-  margin-right: 3rem;
-} */
-
 #user-show-main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-}
-
-#general-info {
-  height: 50rem;
   width: 80%;
-  margin: 1rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 3rem;
-  display: flex;
-  flex-direction: row;
-  padding: 2rem;
-  gap: 3rem;
+  height: 60rem;
+  gap: 6rem;
+  margin: 3rem;
 }
 
-#profile-pic{
+.profile-column {
+
+}
+
+.user-column {
+}
+
+.stats-column {
+  margin: 2.75rem 0rem;
+}
+
+#profile-pic {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,72 +32,36 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#user-info {
-  width: 50%;
-}
-
-.blur-header h2 {
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.blur-header h3 {
-  color: #555;
-}
-
-.blur-header h2,
-.blur-header h3 {
-  margin: 0;
-}
-
 .secondary-sport {
   margin-bottom: 10px;
 }
 
-.attendee-circle {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-color: #007bff;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-/* Add more styles based on your specific design preferences */
-#user-info h2 {
-  color: black;
-}
-
-.can-edit-input{
+.can-edit-input {
   border: none;
   outline: none;
   font-size: 2rem;
   font-weight: 800;
 }
-.can-edit-input:focus{
+
+.can-edit-input:focus {
   border: none;
   outline: none;
 }
 
-
-.user-friend{
+.user-friend {
   color: black
 }
 
-.events-div{
-  height: 50rem;
-  width: 80%;
-  margin: 1rem;
-  /* background-color: #fff; */
-  /* color: black; */
-  border: 1px solid #ddd;
-  border-radius: 3rem;
-  display: flex;
-  flex-direction: row;
-  padding: 2rem;
-  gap: 3rem;
+.field-label-user-show, .field-value-user-show {
+  color: white;
 }
 
-.event-tile{
-  color: black;
+.field-label-user-show {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.field-value-user-show {
+  font-family: 'Nunito', sans-serif;
 }
