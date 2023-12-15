@@ -372,19 +372,34 @@ function SignupForm ({ onSuccess }) {
             </div>
             
             <div className="field-container gender-container">
-              <p className='field-label'>Gender</p>
-              <div className='gender-row-container'>
-                <div className='gender-option'>
+              <p className="field-label">Gender</p>
+              <div className="gender-row-container">
+                <div className="gender-option">
                   <span>Male</span>
-                  <input type='radio' value="male" onClick={(e)=>setGender(e.target.value)}/>
+                  <input
+                    type="radio"
+                    value="male"
+                    checked={gender === 'male'}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
                 </div>
-                <div className='gender-option'>
+                <div className="gender-option">
                   <span>Female</span>
-                  <input type='radio' value="female" onClick={(e)=>setGender(e.target.value)}/>
+                  <input
+                    type="radio"
+                    value="female"
+                    checked={gender === 'female'}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
                 </div>
-                <div className='gender-option'>
+                <div className="gender-option">
                   <span>Other</span>
-                  <input type='radio' value="other" onClick={(e)=>setGender(e.target.value)}/>
+                  <input
+                    type="radio"
+                    value="other"
+                    checked={gender === 'other'}
+                    onChange={(e) => setGender(e.target.value)}
+                  />
                 </div>
               </div>
               {stepOneErrors.gender && <span className="sign-up-errors">{stepOneErrors.gender}</span>}
