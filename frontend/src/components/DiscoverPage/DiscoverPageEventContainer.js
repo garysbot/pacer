@@ -23,7 +23,7 @@ export default function DiscoverPageEventContainer({ event, index }) {
             <div className="event-subheader">
                 { difficultyBadge(event.difficulty, event.eventType) }
                 <p className="event-subheader-difficulty">{event.difficulty}</p>
-                <p className="event-subheader-host">with {`${event.ownerDetails?.firstName} ${event.ownerDetails?.lastName}`}</p>
+                <p className="event-subheader-host">with {`${event.owner?.firstName} ${event.owner?.lastName}`}</p>
             </div>
           </div>
           <div className="date-time-location">

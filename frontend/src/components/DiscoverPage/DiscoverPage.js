@@ -9,73 +9,27 @@ import DiscoverPageEventContainer from "./DiscoverPageEventContainer";
 
 export default function DiscoverPage() {
   const sportsWithEmojis = [
-    'Basketball 🏀', 'Soccer ⚽', 'Baseball ⚾', 'Tennis 🎾', 'Running 🏃‍♂️', 'Volleyball 🏐', 'Swimming 🏊‍♂️',
-    'Yoga 🧘', 'Gym (Fitness) 🏋️', 'Handball 🤾', 'Biking 🚴', 'Martial Arts 🥋', 'Hockey 🏒', 'Football 🏈',
-    'Hiking 🥾', 'Bowling 🎳', 'Water Sports 🏄', 'Ping Pong 🏓', 'Golf ⛳', 'Pickleball 🏓', 'Rock Climbing 🧗',
-    'Skateboarding 🛹', 'Badminton 🏸', 'Walking 🚶', 'Lacrosse 🥍', 'Ultimate Frisbee 🥏', 'Rugby 🏉',
-    'Archery 🏹', 'Fencing 🤺', 'Sailing ⛵', 'Rowing 🚣', 'Table Tennis 🏓', 'Squash 🧃', 'Equestrian 🐎',
-    'CrossFit 🏋️‍♂️', 'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
+    'Basketball 🏀', 'Soccer ⚽', 'Baseball ⚾', 'Tennis 🎾', 'Running 🏃',
+    'Volleyball 🏐', 'Swimming 🏊', 'Yoga 🧘', 'Gym (Fitness) 🏋️', 'Handball 🤾',
+    'Biking 🚴', 'Martial Arts 🥋', 'Hockey 🏒', 'Football 🏈', 'Hiking 🥾',
+    'Bowling 🎳', 'Water Sports 🌊', 'Ping Pong 🏓', 'Golf 🏌️', 'Pickleball 🥒',
+    'Rock Climbing 🧗', 'Skateboarding 🛹', 'Badminton 🏸', 'Walking 🚶', 'Lacrosse 🥍',
+    'Ultimate Frisbee 🥏', 'Rugby 🏉', 'Archery 🏹', 'Fencing 🤺', 'Sailing ⛵',
+    'Rowing 🚣', 'Table Tennis 🏓', 'Squash 🍽️', 'Equestrian 🐎', 'CrossFit 🏋️',
+    'Triathlons 🏊‍♂️🚴‍♂️🏃‍♂️', 'Cricket 🏏', 'Jiu-Jitsu 🥋', 'Boxing 🥊'
   ];
+  
   const history = useHistory()
   const dispatch = useDispatch();
-  // const [filteredSports, setFilteredSports] = useState(sportsWithEmojis);
-  const eventsObj = useSelector(state => state.events?.all);
   const sessionUser = useSelector(state => state.session.user);
+  const eventsObj = useSelector(state => state.events?.all);
   const events = Object.values(eventsObj);
-  // ==================== calculating time functionality =============================
   const nowTime = new Date()
-  const futureEvents = events.filter((e) => nowTime.getTime() < new Date(e.dateTime).getTime())
-  const [renderedEvents, setRenderedEvents] = useState(futureEvents)
-
-  // ======= filtering logic ================
-  const [canRemoveFilters, setCanRemoveFilters] = useState(true)
+  const futureEvents = events.filter((event) => nowTime.getTime() < new Date(event.dateTime).getTime())
 
   useEffect(() => {
     dispatch(fetchEvents());
   }, [dispatch, history])
-
-
-  // function handleFilter(eventType) {
-  //   setCanRemoveFilters(false)
-  //   let toFilter = eventType.split(' ')[0]
-  //   let filteredEvents = renderedEvents.filter((event) => event.eventType === toFilter)
-  //   let newSportList = filteredSports.filter((sport) => sport === eventType)
-  //   setRenderedEvents(filteredEvents)
-  //   setFilteredSports(newSportList)
-  // }
-
-  // function resetFilters() {
-  //   setRenderedEvents(futureEvents)
-  //   setFilteredSports(sportsWithEmojis)
-  // }
-
-  // ! For sport-filter-container horizontal mouse scroll
-  // Ref for the container and state for drag-scrolling
-  // const sportFilterContainerRef = useRef(null);
-  // const [isDragging, setIsDragging] = useState(false);
-  // const [startX, setStartX] = useState(0);
-  // const [scrollLeft, setScrollLeft] = useState(0);
-
-  // // Mouse down handler
-  // const onMouseDown = (e) => {
-  //   setIsDragging(true);
-  //   setStartX(e.pageX - sportFilterContainerRef.current.offsetLeft);
-  //   setScrollLeft(sportFilterContainerRef.current.scrollLeft);
-  // };
-
-  // // Mouse move handler
-  // const onMouseMove = (e) => {
-  //   if (!isDragging) return;
-  //   e.preventDefault();
-  //   const x = e.pageX - sportFilterContainerRef.current.offsetLeft;
-  //   const walk = (x - startX) * 3; // Scroll-fastness
-  //   sportFilterContainerRef.current.scrollLeft = scrollLeft - walk;
-  // };
-
-  // // Mouse up and leave handlers
-  // const onMouseUpOrLeave = () => {
-  //   setIsDragging(false);
-  // };
 
   const [showModal, setShowModal] = useState(null); // Use null for no modal, 'signup' for signup, 'signin' for signin
 
@@ -101,40 +55,43 @@ export default function DiscoverPage() {
   }
 
   const [selectedSport, setSelectedSport] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
+  const difficultyLevel = ['Beginner', 'Intermediate', 'Advanced'];
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
-  const updateFilters = () => {
-    let filteredEvents = futureEvents;
-
-    // Sport filter
-    if (selectedSport) {
-      filteredEvents = filteredEvents.filter(event =>
-        selectedSport === event.eventType.split(' ')[0]
-      );
-    }
-
-    // Location filter
-    if (selectedLocation) {
-      filteredEvents = filteredEvents.filter(event =>
-        selectedLocation === event.location
-      );
-    }
-
-    // Difficulty filter
-    if (selectedDifficulty) {
-      filteredEvents = filteredEvents.filter(event =>
-        selectedDifficulty === event.difficulty
-      );
-    }
-
-    setRenderedEvents(filteredEvents);
-    setCanRemoveFilters(false);
+  const handleSportFilter = (sport) => {
+    const sportNameWithoutEmoji = sport.split(' ')[0];
+    setSelectedSport(sportNameWithoutEmoji);
   };
 
-  const locations = ['Brooklyn', 'Manhattan', 'Bronx', 'Queens', 'Staten Island', 'New Jersey'];
-  const difficultyLevel = ['Beginner', 'Intermediate', 'Advanced'];
+  const handleDifficultyFilter = (difficulty) => {
+    setSelectedDifficulty(difficulty);
+  };
 
+  useEffect(() => {
+    // Apply filters to events
+    const filteredBySport = selectedSport
+      ? futureEvents.filter((event) => event.eventType === selectedSport)
+      : futureEvents;
+
+    const filteredByDifficulty = selectedDifficulty
+      ? filteredBySport.filter((event) => event.difficulty === selectedDifficulty)
+      : filteredBySport;
+
+    // Sort events by dateTime in descending order
+    const sortedEvents = filteredByDifficulty.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+
+    // Check if the filtered events are different before updating the state
+    if (!arraysAreEqual(filteredEvents, sortedEvents)) {
+      setFilteredEvents(sortedEvents);
+    }
+  }, [selectedSport, selectedDifficulty, futureEvents, filteredEvents]);
+
+  
+  // Utility function to compare arrays -- will not change FilteredEvents in above useEffect if array size is equal
+  const arraysAreEqual = (arr1, arr2) =>
+    arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
+    
   return (
     <>
       <main>
@@ -143,134 +100,69 @@ export default function DiscoverPage() {
         </Modal>
         <div className="discover-parent-container">
           <div className="filter-container">
-            <form>
-              <button
-                className="filter-sidebar-button"
-                type="button"
-                onClick={() => {
-                  setSelectedSport('');
-                  setSelectedDifficulty('');
-                  setSelectedLocation('');
-                  updateFilters();
-                }}
-              >
-                Reset Filter
-              </button>
-
-              <div className="filter-sidebar-field-container">
-                
-                <div className="filter-sidebar-field-title">
-                  <h3>Sport</h3>
-                </div>
-                <div className="filter-sidebar-sport-options">
-                  {sportsWithEmojis.map((sport, index) => (
-                    <div className="filter-field-option">
-                      <label className="filter-label" key={index}>
-                        <input
-                          className="filter-radio"
-                          type="radio"
-                          name="sport"
-                          value={sport.split(' ')[0]}
-                          checked={selectedSport === sport.split(' ')[0]}
-                          onChange={(e) => {
-                            const selectedSport = e.target.value;
-                            setSelectedSport(selectedSport);
-                            updateFilters();
-                          }}
-                        />
-                        {sport}
-                      </label>
-                    </div>
-                  ))}
-                </div>
+            {/* Sport filter */}
+            <div className="filter-field primary-sport">
+              <h3 className="filter-sidebar-field-title">Sport</h3>
+              <div className="filter-options filter-sidebar-sport-options">
+                <label className="filter-field-option filter-label">
+                  <input type="radio" name="sport" value="" checked={!selectedSport} onChange={() => handleSportFilter('')}/>
+                  All Sports
+                </label>
+                {sportsWithEmojis.map((sport, index) => (
+                  <label key={index} className="filter-field-option filter-label">
+                    <input type="radio" name="sport" value={sport} checked={selectedSport === sport} onChange={() => handleSportFilter(sport)}/>
+                    {sport}
+                  </label>
+                ))}
               </div>
+            </div>
 
-              <div className="filter-sidebar-field-container">
-                <div className="filter-sidebar-field-title">
-                  <h3>Experience</h3>
-                </div>
-
-                <div className="filter-sidebar-options">
-                  {difficultyLevel.map((difficulty, index) => (
-                    <label className="filter-label" key={index}>
-                      <input
-                        className="filter-radio"
-                        type="radio"
-                        name="difficulty"
-                        value={difficulty.split(' ')[0]}
-                        checked={selectedDifficulty === difficulty.split(' ')[0]}
-                        onChange={(e) => {
-                          const selectedDifficulty = e.target.value;
-                          setSelectedDifficulty(selectedDifficulty);
-                          updateFilters();
-                        }}
-                      />
-                      {difficulty}
-                    </label>
-                  ))}
-                </div>
-              </div>
-              
-          <div className="filter-sidebar-options">
-            <div className="filter-sidebar-field-container">
-              <div className="filter-sidebar-field-title">
-                <h3>Location</h3>
-              </div>
-              <div className="filter-sidebar-options">
-                {locations.map((location, index) => (
-                  <label className="filter-label" key={index}>
+            {/* Difficulty filter */}
+            <div className="filter-field">
+              <h3 className="filter-sidebar-field-title">Difficulty</h3>
+              <div className="difficulty-field">
+                {/* label */}
+                <label className="filter-field-option filter-label">
+                  <input
+                    type="radio"
+                    name="difficulty"
+                    value=""
+                    checked={!selectedDifficulty}
+                    onChange={() => handleDifficultyFilter('')}
+                  />
+                  All Difficulty
+                </label>
+                {/* inputs */}
+                {difficultyLevel.map((difficulty, index) => (
+                  <label key={index} className="filter-field-option filter-label">
                     <input
-                      className="filter-radio"
                       type="radio"
-                      name="location"
-                      value={location.split(' ')[0]}
-                      checked={selectedLocation === location.split(' ')[0]}
-                      onChange={(e) => {
-                        const selectedLocation = e.target.value;
-                        setSelectedLocation(selectedLocation);
-                        updateFilters();
-                      }}
+                      name="difficulty"
+                      value={difficulty}
+                      checked={selectedDifficulty === difficulty}
+                      onChange={() => handleDifficultyFilter(difficulty)}
                     />
-                    {location}
+                    {difficulty}
                   </label>
                 ))}
               </div>
             </div>
           </div>
 
-            </form>
-          </div>
-
+          {/* Render filtered events */}         
           <div className="index-container">
             <div className="index-header">
               <h2>Find an event near you</h2>
             </div>
-            {/* <div
-              className="sport-filter-container"
-              ref={sportFilterContainerRef}
-              onMouseDown={onMouseDown}
-              onMouseMove={onMouseMove}
-              onMouseUp={onMouseUpOrLeave}
-              onMouseLeave={onMouseUpOrLeave}
-            >
-              <p className="sport-label" onClick={resetFilters}>X</p>
-              {filteredSports.map((sport) => {
-                return (
-                  <p className="sport-label"
-                    onClick={() => handleFilter(sport)}
-                  >
-                    {sport}
-                  </p>
-                )
-              })}
-              <p className="sport-label">Rob's Easter Egg</p>
-            </div> */}
             <button id="event-create-button" className="auth-buttons" onClick={handleCreateEventBtn}>
               Create an event!
             </button>
-            {renderedEvents?.map((event, index) => (<DiscoverPageEventContainer event={event} index={index} />))}
+            {filteredEvents.map((event, index) => (
+              <DiscoverPageEventContainer key={index} event={event} index={index} />
+            ))}
           </div>
         </div>
+
       </main>
     </>
   )
