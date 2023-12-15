@@ -1,10 +1,19 @@
 #user-show-main {
   display: flex;
   justify-content: center;
-  width: 80%;
-  height: 60rem;
-  gap: 6rem;
+  height: 36rem;
+  gap: 2rem;
   margin: 3rem;
+}
+
+.user-edit-buttons {
+  cursor: pointer;
+  padding: 0rem 0.75rem;
+  background: linear-gradient(145deg, rgba(250,130,76,1) 0%, rgba(255,89,100,1) 100%);
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+  font-family: 'Lexend', sans-serif;
+  width: auto;
+  height: 2rem;
 }
 
 .profile-column {
@@ -12,6 +21,7 @@
 }
 
 .user-column {
+  width: 100%;
 }
 
 .stats-column {
@@ -22,34 +32,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 }
 
 #profile-pic img {
-  height: 150px;
-  width: 150px;
+  height: 9rem;
+  width: 9rem;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.secondary-sport {
-  margin-bottom: 10px;
+.edit-field {
+  display: flex;
+  width: 5%;
 }
 
 .can-edit-input {
+  background-color: transparent;
   border: none;
   outline: none;
+  color: white;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
   font-size: 2rem;
-  font-weight: 800;
+  width: 12rem;
 }
 
-.can-edit-input:focus {
-  border: none;
-  outline: none;
+.sport-field {
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+  width: 8rem;
 }
 
-.user-friend {
-  color: black
+.other-field {
+  width: 4rem;
 }
 
 .field-label-user-show, .field-value-user-show {

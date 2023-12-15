@@ -136,8 +136,8 @@ export default function UsersShow() {
         <section id="profile-column">
           <div id="profile-pic">
             <img src={`../../${shownUser?.profilePhotoUrl}`}></img>
-            {currentUser?._id === shownUser?._id && <button onClick={enableEdit}>Edit Profile</button>}
-            {canEdit && <button onClick={(e) => makeChanges(e)}>Save Changes</button>}
+            {currentUser?._id === shownUser?._id && <button className='user-edit-buttons' onClick={enableEdit}>Edit Profile</button>}
+            {canEdit && <button className='user-edit-buttons' onClick={(e) => makeChanges(e)}>Save Changes</button>}
           </div>
         </section>
 
@@ -145,16 +145,18 @@ export default function UsersShow() {
           {canEdit
             ?
             <>
-              <input type="text"
-                className="can-edit-input"
-                defaultValue={`${shownUser?.firstName}`}
-                onChange={(e) => setFormFirstName(e.target.value)}
-              />
-              <input type="text"
-                className="can-edit-input"
-                defaultValue={`${shownUser.lastName}`}
-                onChange={(e) => setFormLastName(e.target.value)}
-              />
+              <div className="edit-field">
+                <input type="text"
+                  className="can-edit-input"
+                  defaultValue={`${shownUser?.firstName}`}
+                  onChange={(e) => setFormFirstName(e.target.value)}
+                />
+                <input type="text"
+                  className="can-edit-input"
+                  defaultValue={`${shownUser.lastName}`}
+                  onChange={(e) => setFormLastName(e.target.value)}
+                />
+              </div>
             </>
             :
             <h2>{shownUser?.firstName} {shownUser?.lastName}</h2>
@@ -167,7 +169,9 @@ export default function UsersShow() {
           {canEdit
             ?
             <>
-              <select onChange={(e) => setFormPrimarySport(e.target.value)}
+              <select 
+                className="can-edit-input sport-field"
+                onChange={(e) => setFormPrimarySport(e.target.value)}
                 defaultValue={shownUser?.primarySport?.Sport}
               >
                 {selectSportOptions}
@@ -180,7 +184,9 @@ export default function UsersShow() {
           <p className="field-label-user-show">Experience Level:</p>
           {canEdit
             ?
-            <select onChange={(e) => setFormSportExperience(e.target.value)}>
+            <select 
+              className="can-edit-input sport-field"
+              onChange={(e) => setFormSportExperience(e.target.value)}>
               {selectExperienceOptions}
             </select>
             :
@@ -189,8 +195,6 @@ export default function UsersShow() {
 
           <p className="field-label-user-show">Secondary Sports</p>
           <p className="field-value-user-show">{secondarySports}</p>
-        </section>
-
         <section className="stats-column">
           {currentUser._id === shownUser?._id ?
             <>
@@ -198,6 +202,7 @@ export default function UsersShow() {
               {canEdit
                 ?
                 <input type="number"
+                  className="can-edit-input other-field"
                   defaultValue={`${shownUser?.height}`}
                   onChange={(e) => setFormHeight(e.target.value)}
                 />
@@ -207,6 +212,7 @@ export default function UsersShow() {
               {canEdit
                 ?
                 <input type="number"
+                  className="can-edit-input other-field"
                   value={`${shownUser?.weight}`}
                   onChange={(e) => setFormWeight(e.target.value)}
                 />
@@ -219,6 +225,8 @@ export default function UsersShow() {
             </>
           }
         </section>
+        </section>
+
       </section>
     </>
   )
