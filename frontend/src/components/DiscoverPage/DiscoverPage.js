@@ -84,7 +84,7 @@ export default function DiscoverPage() {
   }, [selectedSport, selectedDifficulty, futureEvents, filteredEvents]);
 
   
-  // Utility function to compare arrays
+  // Utility function to compare arrays -- will not change FilteredEvents in above useEffect if array size is equal
   const arraysAreEqual = (arr1, arr2) =>
     arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
     
