@@ -6,8 +6,8 @@ const Comment = require('../models/Comment');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
-const NUM_SEED_USERS = 100;
-const NUM_SEED_EVENTS = 10;
+const NUM_SEED_USERS = 500;
+const NUM_SEED_EVENTS = 100;
 
 const getRandomElement = (arr) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
@@ -22,28 +22,68 @@ const sports = [
     'CrossFit', 'Triathlons', 'Cricket', 'Jiu-Jitsu', 'Boxing'
   ];
 
-  const eventTitles = [
-    "Athletic Challenge",
-    "Summer Games",
-    "Fitness Expo",
-    "Sports Extravaganza",
-    "Active Pursuit",
-    "Champion's Rally",
-    "Endurance Quest",
-    "Victory Showdown",
-    "Athletic Spectacle",
-    "Health & Wellness Festival",
-    "Athletic Carnival",
-    "Endurance Challenge",
-    "Victory Cup",
-    "Fitness Fiesta",
-    "Active Quest",
-    "Athletic Endeavor",
-    "Sportsmanship Showcase",
-    "Fitness Frenzy",
-    "Wellness Summit",
-    "Sports Challenge"
-  ];
+  const generateUniqueEventTitles = () => {
+    const adjectives = [
+        "Energetic",
+        "Vibrant",
+        "Dynamic",
+        "Thrilling",
+        "Exhilarating",
+        "Pulsating",
+        "Invigorating",
+        "Electrifying",
+        "Zesty",
+        "Robust",
+        "Stimulating",
+        "Lively",
+        "Fierce",
+        "Mighty",
+        "Intense",
+        "Potent",
+        "Rousing",
+        "Vital",
+        "Resilient",
+        "Zealous",
+    ];
+
+    const nouns = [
+        "Endurance",
+        "Challenge",
+        "Extravaganza",
+        "Showdown",
+        "Carnival",
+        "Rally",
+        "Quest",
+        "Fiesta",
+        "Jamboree",
+        "Spectacle",
+        "Expo",
+        "Gala",
+        "Adventure",
+        "Summit",
+        "Frenzy",
+        "Marathon",
+        "Ascent",
+        "Odyssey",
+        "Fusion",
+        "Pursuit",
+    ];
+
+    const generatedTitles = [];
+
+    while (generatedTitles.length < 100) {
+        const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const noun = nouns[Math.floor(Math.random() * nouns.length)];
+        const title = `${adjective} ${noun}`;
+        if (!generatedTitles.includes(title)) {
+            generatedTitles.push(title);
+        }
+    }
+
+    return generatedTitles;
+};
+
+const eventTitles = generateUniqueEventTitles();
 
 // Create users
 const users = [];
@@ -147,18 +187,23 @@ events.push(
 const fetch = require('node-fetch').default;
 
 const generateLocation = async () => {
-  const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Times+Square,+New+York+City&key=AIzaSyCCBFUa9tL7or3XpEs6Ru-C4gqWh48afh8`;
-
+  const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query="parks+in+New+York+City"&key=${process.env.REACT_APP_MAPS_API_KEY}`;
   try {
     const response = await fetch(endpoint);
     if (response.ok) {
       const data = await response.json();
       if (data.results && data.results.length > 0) {
         const randomResult = getRandomElement(data.results);
-        const locationName = randomResult.formatted_address;
-        const { lat, lng } = randomResult.geometry.location;
-        
-        return { locationName, latitude: lat, longitude: lng };
+        let locationName;
+
+        if (randomResult.name === "Park") {
+          locationName = randomResult.formatted_address;
+        } else {
+            locationName = randomResult.name;
+        }
+        const latitude = randomResult.geometry.location.lat;
+        const longitude = randomResult.geometry.location.lng;
+        return { locationName, latitude, longitude };
       } else {
         throw new Error('No location data found or empty response');
       }
@@ -214,16 +259,23 @@ const generateRandomEvent = async (usersArray) => {
     maxGroupSize: faker.datatype.number({ min: 2, max: 100 }),
     attendees: attendees,
     maybes: maybes,
-    longitude: longitude,
     latitude: latitude,
+    longitude: longitude
   });
 };
 
-for (let i = 0; i < NUM_SEED_EVENTS; i++) {
-  events.push(generateRandomEvent(users));
-}
+const generateEvent = async () => {
+  const event = await generateRandomEvent(users);
+  events.push(event);
+};
 
-const comments = []
+const generateAndPushEvents = async () => {
+  for (let i = 0; i < NUM_SEED_EVENTS; i++) {
+    await generateEvent();
+  }
+};
+
+const comments = [];
 
 comments.push(
   new Comment({
@@ -231,48 +283,70 @@ comments.push(
     event: "6578a6e2a2cf3cce3a0b4114",
     body: "This is a test Comment. Random words and phrases go here"
   })
-);
-
-for (let i = 0; i < 100; i++) {
-  const randomUserIndex = Math.floor(Math.random() * users.length);
-  const randomEventIndex = Math.floor(Math.random() * events.length);
-
-  const randomUser = users[randomUserIndex];
-  const randomEvent = events[randomEventIndex];
-
-  comments.push(
-    new Comment({
-      owner: randomUser._id,
-      event: randomEvent._id,
-      body: faker.lorem.sentence()
-    })
   );
-}
+
+const generateComments = async () => {
+
+  for (let i = 0; i < 500; i++) {
+    const randomUserIndex = Math.floor(Math.random() * users.length);
+    const randomEventIndex = Math.floor(Math.random() * events.length);
+
+    const randomUser = users[randomUserIndex];
+    const randomEvent = events[randomEventIndex];
+
+    comments.push(
+      new Comment({
+        owner: randomUser._id,
+        event: randomEvent._id,
+        body: faker.lorem.sentence(),
+      })
+    );
+  }
+};
+
+const generateEventsAndComments = async () => {
+  try {
+    await generateAndPushEvents();
+    await generateComments();
+  } catch (error) {
+    console.error('Error generating events and comments:', error);
+  }
+};
 
 // Connect to database
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => {
-    insertSeeds();
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(async () => {
+    try {
+      await dropCollections();
+      await generateEventsAndComments();
+      await insertSeedData();
+      mongoose.disconnect();
+    } catch (error) {
+      console.error(error);
+      process.exit(1);
+    }
   })
   .catch(err => {
     console.error(err.stack);
     process.exit(1);
   });
 
-const insertSeeds = () => {
+const dropCollections = async () => {
+  try {
+    await User.collection.drop();
+    await Event.collection.drop();
+    await Comment.collection.drop();
+  } catch (error) {
+    throw new Error('Error dropping collections');
+  }
+};
 
-  User.collection.drop()
-                  .then(() => Event.collection.drop())
-                  .then(() => Comment.collection.drop())
-                  .then(() => User.insertMany(users))
-                  .then(() => Event.insertMany(events))
-                  .then(() => Comment.insertMany(comments))
-                  .then(() => {
-                    mongoose.disconnect();
-                  })
-                  .catch(err => {
-                    console.error(err.stack);
-                    process.exit(1);
-                  });
-}
+const insertSeedData = async () => {
+  try {
+    await User.insertMany(users);
+    await Event.insertMany(events);
+    await Comment.insertMany(comments);
+  } catch (error) {
+    throw error;
+  }
+};
