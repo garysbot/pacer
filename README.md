@@ -22,17 +22,40 @@ MERN stack social platform for sports meetups by location and skill level with G
 6. Event Social Stats
 7. Event Comments
 <br>
-
-
 <br>
 
 ## Notable Highlights
-### User Auth
 ![User-Auth](./frontend/src/icons/user-auth-login.gif)
+<br>*User Authentication Modal*<br>
+
 ![Sports-Ranking](./frontend/src/icons/sports-feature.gif)
+<br>*Event Filter*<br>
+
 ![Google-Map](./frontend/src/icons/google-map.gif)
+<br>*Google Maps API Integration*<br>
 <br>
-*testcaption*
+
+## Idea
+*"I hate running alone but my friends run way too fast. I wish I had my own personal Pacer..."*
+<br><br>
+In the world of running *pacers* play a crucial role by setting a consistent speed to help runners achieve their target times in a race.
+<br><br>
+The *Pacer* platform helps you connect with people playing your favorite sport at similar performance levels so you can train, bond, and celebrate together.
+<br><br>
+
+
+## Plan
+1. Audience Value Props
+![Audience-Value-Props](./frontend/src/readme-imgs/audience-value-props.png)
+<br><br>
+
+2. Data Architecture & Flow
+![Data-Architecture-Flow](./frontend/src/readme-imgs/data-architecture.png)
+
+3. Design
+
+## Implementation
+
 
 ## Challenges
 
