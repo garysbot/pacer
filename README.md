@@ -11,7 +11,6 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 [Live Demo](https://pacer-65mk.onrender.com/)
 👈
 <br>
-<br>
 
 ## Features
 1. User Auth
@@ -82,7 +81,9 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 ## Challenges
 1. New tech stack & three days to learn it
 2. Event filtering and state management
-3. Google Maps and relevant location data
+3. Google Maps and parsing location data
+
+<br><br>
 
 ## Team
 ### Gary Jiang
