@@ -53,6 +53,8 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 ![Data-Architecture-Flow](./frontend/src/readme-imgs/data-architecture.png)
 
 3. Design
+![Design-1-Discover](./frontend/src/readme-imgs/design-1-discover.png)
+![Design-2-EventShow](./frontend/src/readme-imgs/design-2-event-show.png)
 
 ## Implementation
 
