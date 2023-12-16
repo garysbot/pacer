@@ -21,7 +21,7 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 6. Event Social Stats
 7. Event Comments
 <br>
-<br>
+
 
 ## Plan
 1. Audience Value Props
@@ -41,14 +41,16 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 - ExpressJS
 - React.js
 - Node.js
-
+<br>
 
 ## Notable Highlights
 ![User-Auth](./frontend/src/icons/user-auth-login.gif)
 <br>*User Authentication Modal*<br>
 
+
 ![Sports-Ranking](./frontend/src/icons/sports-feature.gif)
 <br>*Event Filter*<br>
+
 
 ![Google-Map](./frontend/src/icons/google-map.gif)
 <br>*Google Maps API Integration*<br>
