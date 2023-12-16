@@ -16,14 +16,14 @@ export default function DiscoverPageEventContainer({ event, index }) {
     <>
       <div className="event-container">
         <div className="event-content">
-          <div className="event-header">
+          <div className="event-header styled-link">
             <Link key={index} to={`/events/${event._id}`}>
               <h3>{event.eventName}</h3>
             </Link>
             <div className="event-subheader">
                 { difficultyBadge(event.difficulty, event.eventType) }
                 <p className="event-subheader-difficulty">{event.difficulty}</p>
-                <p className="event-subheader-host">with {`${event.owner?.firstName} ${event.owner?.lastName}`}</p>
+                <p className="event-subheader-host styled-link">{event.eventType} with <Link style={{'font-size': '0.75rem'}} to={`/users/${event.owner._id}`}>{`${event.owner?.firstName} ${event.owner?.lastName}`}</Link></p>
             </div>
           </div>
           <div className="date-time-location">

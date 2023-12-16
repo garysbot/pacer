@@ -169,7 +169,7 @@ export default function UsersShow() {
           {canEdit
             ?
             <>
-              <select 
+              <select
                 className="can-edit-input sport-field"
                 onChange={(e) => setFormPrimarySport(e.target.value)}
                 defaultValue={shownUser?.primarySport?.Sport}
@@ -184,7 +184,7 @@ export default function UsersShow() {
           <p className="field-label-user-show">Experience Level:</p>
           {canEdit
             ?
-            <select 
+            <select
               className="can-edit-input sport-field"
               onChange={(e) => setFormSportExperience(e.target.value)}>
               {selectExperienceOptions}
@@ -195,36 +195,36 @@ export default function UsersShow() {
 
           <p className="field-label-user-show">Secondary Sports</p>
           <p className="field-value-user-show">{secondarySports}</p>
-        <section className="stats-column">
-          {currentUser._id === shownUser?._id ?
-            <>
-              <h3 className="field-label-user-show">Personal Stats</h3>
-              {canEdit
-                ?
-                <input type="number"
-                  className="can-edit-input other-field"
-                  defaultValue={`${shownUser?.height}`}
-                  onChange={(e) => setFormHeight(e.target.value)}
-                />
-                :
-                <p className="field-value-user-show">Height: {shownUser?.height}in</p>
-              }
-              {canEdit
-                ?
-                <input type="number"
-                  className="can-edit-input other-field"
-                  value={`${shownUser?.weight}`}
-                  onChange={(e) => setFormWeight(e.target.value)}
-                />
-                :
-                <p className="field-value-user-show">Weight: {shownUser?.weight}lbs</p>
-              }
-            </>
-            : 
-            <>
-            </>
-          }
-        </section>
+          <section className="stats-column">
+            {currentUser?._id === shownUser?._id ?
+              <>
+                <h3 className="field-label-user-show">Personal Stats</h3>
+                {canEdit
+                  ?
+                  <input type="number"
+                    className="can-edit-input other-field"
+                    defaultValue={`${shownUser?.height}`}
+                    onChange={(e) => setFormHeight(e.target.value)}
+                  />
+                  :
+                  <p className="field-value-user-show">Height: {shownUser?.height}in</p>
+                }
+                {canEdit
+                  ?
+                  <input type="number"
+                    className="can-edit-input other-field"
+                    value={`${shownUser?.weight}`}
+                    onChange={(e) => setFormWeight(e.target.value)}
+                  />
+                  :
+                  <p className="field-value-user-show">Weight: {shownUser?.weight}lbs</p>
+                }
+              </>
+              :
+              <>
+              </>
+            }
+          </section>
         </section>
 
       </section>
