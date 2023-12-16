@@ -90,26 +90,22 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 [Github](https://github.com/garysbot)<br>
 [Website](https://imgaryjiang.com)<br>
 [LinkedIn](https://linkedin.com/in/garyjiang)<br>
-[Email](mailto:gj.garyjiang@gmail.com)<br>
 
 ### Jason Jun
 *Flex Lead*<br>
-Github<br>
-Website<br>
-LinkedIn<br>
-Email<br>
+[Github](https://github.com/garysbot)<br>
+[Website](https://imgaryjiang.com)<br>
+[LinkedIn](https://linkedin.com/in/garyjiang)<br>
 
 ### Francis Cawog
 *Backend Lead*<br>
-Github<br>
-Website<br>
-LinkedIn<br>
-Email<br>
+[Github](https://github.com/garysbot)<br>
+[Website](https://imgaryjiang.com)<br>
+[LinkedIn](https://linkedin.com/in/garyjiang)<br>
 
 ### Robert Lee
 *Flex*<br>
-Github<br>
-Website<br>
-LinkedIn<br>
-Email<br>
+[Github](https://github.com/garysbot)<br>
+[Website](https://imgaryjiang.com)<br>
+[LinkedIn](https://linkedin.com/in/garyjiang)<br>
 
