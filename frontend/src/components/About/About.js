@@ -98,16 +98,16 @@ export default function About(){
                         <h2>Rob Lee</h2>
                         <h3>Frontend & Backend</h3>
                         <p>
-                            A seasoned developer with artistic sensibilities, Robert is ready to bring his diverse array of talents to the next project he works on.
+                            Robert is a full-stack developer with a background in arts and political science. He is a graduate of Sarah Lawrence College with a degree in Liberal Arts and is currently pursuing a career as a Full-Stack Web Developer. In his spare time, Robert enjoys traveling, making art, and longboarding (when it’s warm out!).
                         </p>
                         <div className="team-link-icons">
                             <a href='https://github.com/DispicableLee' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <GithubIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://www.linkedin.com/in/robert-lee-webdeveloper/' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <LinkedinIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://docs.google.com/document/d/1bwsjcot_nLaSYYA5Hcpqaw_I90FNx3uJWyAngUjA7LE/edit?usp=sharing' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <ResumeIcon className="about-team-url-icon"/>
                             </a>
                             <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
