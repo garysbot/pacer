@@ -112,9 +112,9 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 
 ### Jason Jun
 *Flex Lead*<br>
-[Github](https://github.com/garysbot)<br>
-[Website](https://imgaryjiang.com)<br>
-[LinkedIn](https://linkedin.com/in/garyjiang)<br>
+[Github](https://github.com/junjason)<br>
+[Website](https://www.junjason.com)<br>
+[LinkedIn](https://www.linkedin.com/in/jason-jun-0a7576237/)<br>
 
 ### Francis Cawog
 *Backend Lead*<br>
