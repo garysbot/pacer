@@ -187,11 +187,13 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   - Displays all `Events` available for `Users`.
   - `Event POST` feature to create new `Events`.
   - Session and `User` validation required to create new `Events`.
+  ![Discover-Page](./frontend/src/icons/discover.gif)
 
 - `Event` Page 
   - Displays `Event` details from Redux state.
   - Attending & Interested buttons with integration to update Redux and MongoDB.
   - `Comments POST` feature to create new `Comments`.
+![Event-Page](./frontend/src/icons/events.gif)
 <br>
 
 ### State Management with Redux
