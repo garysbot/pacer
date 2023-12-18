@@ -60,35 +60,171 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 
 ## Implementation
 ### Data Architecture with Mongoose & MongoDB
-- Events, Users, Comments
-  - Schemas
-  - Models
-    - Three different models: events, users, and comments. Comments are the most compact model and is shown below. 
-    ![Comment-Model](./frontend/src/readme-imgs/comments-model.png)
-  - Validations
-     - Used in our post routes before creating an object in our database
-- Google Maps API
-- ![Dynamic-Map](./frontend/src/readme-imgs/dynamic-map.png)
-- We integrated/hit three different Google Maps API endpoints for this project: a dynamic map on the events show page (as shown above), a static map for each event preview in the discover page and a places API autocomplete for creating and editing an event (queries the API with a string and returns possible locations - similar to how the Google Maps Application search bar works).
-- ![Places-Autocomplete](./frontend/src/icons/places-autocomplete.gif)
+
+Mongoose Models: `Events`, `Users`, `Comments`
+```javascript
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const commentSchema = new Schema({
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  event: {
+    type: Schema.Types.ObjectId,
+    ref: 'Event',
+    required: true
+  },
+  body: {
+    type: String,
+    required: true
+  }
+}, {
+  timestamps: true
+});
+
+module.exports = mongoose.model('Comment', commentSchema);
+
+```
+<br>
+
+Validations to ensure data integrity:
+```javascript
+const validateEventInput = [
+    check('owner')
+        .exists({ checkFalsy: true })
+        .withMessage('User must be logged in to create an event'),
+    check('eventName')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5, max: 100 })
+        .withMessage('Event must have a name between 5 and 100 characters'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5, max: 1000 })
+        .withMessage('Event must have a description between 5 and 1000 characters'),
+    check('locationName')
+        .exists({ checkFalsy: true })
+        .withMessage('Event location must have a name'),
+        ...
+```
+<br>
+
+Dynamic Interactive Google Map:
+- Integrated three Google Maps API endpoints:
+1. Dynamic interactive map on `Events` page.
+2. Static map preview on `Discover` page.
+3. Places API autocomplete search results when selecting an `Event` location.
+
+![Places-Autocomplete](./frontend/src/icons/places-autocomplete.gif)
+
+```javascript
+<GoogleMap
+  mapContainerStyle={mapStyles}
+  zoom={14}
+  center={{
+    lat: selectedEvent?.latitude,
+    lng: selectedEvent?.longitude,
+  }}
+>
+  <Marker 
+    position={{
+    lat: selectedEvent?.latitude,
+    lng: selectedEvent?.longitude,
+    }}
+    onClick={handleMarkerClick}
+  />
+  {infoWindowVisible && (
+    <InfoWindow
+      position={{
+        lat: selectedEvent?.latitude,
+        lng: selectedEvent?.longitude,
+      }}
+      onCloseClick={() => setInfoWindowVisible(false)}
+    >
+      <div>
+        <p>Location: {selectedEvent?.locationName}</p>
+        <p>Time of Event: {formattedTime}</p>
+      </div>
+    </InfoWindow>
+  )}
+</GoogleMap>
+```
+
 
 ### Routing with Express.js
-- Users
-- Events
-- Comments
-- ![Comments-Post-Route](./frontend/src/readme-imgs/comments-post-route.png)
-- Both Events and Comments were full CRUD (Create, Read, Update, and Delete). We followed RESTful API practices for our backend routes. 
+- Three RESTful Express routes for `Users`, `Events`, `Comments`
+- Full CRUD for `Events` and `Comments`
+
+```javascript
+    
+router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
+  try {
+    const newComment = new Comment({
+      owner: req.body.owner,
+      event: req.body.event,
+      body: req.body.body
+    });
+
+    let comment = await newComment.save();
+
+    comment = await Comment.findById(comment._id)
+      .populate('owner', '_id firstName lastName profilePhotoUrl')
+      .populate('event', '_id eventName locationName dateTime difficulty eventType maxGroupSize longitude latitude');
+
+    return res.json(comment);
+  } catch (err) {
+    next(err);
+  }
+}); 
+```
 
 ### Main React.js Components
-- Events Page
-- Discover Page
- - Most of the logic for our Discover page component was creating an event at the top of the page, which triggers a sign-in if not logged in, a filtering logic based on both difficulty of the event and the sport for the event. A useEffect hook was used every time the useState variables for our filters were changed and the component would update and re-render.
+- `Discover` Page:
+  - Primary user interface with comprehensive `Event` filtering feature.
+  - Displays all `Events` available for `Users`.
+  - `Event POST` feature to create new `Events`.
+  - Session and `User` validation required to create new `Events`.
+
+- `Event` Page 
+  - Displays `Event` details from Redux state.
+  - Attending & Interested buttons with integration to update Redux and MongoDB.
+  - `Comments POST` feature to create new `Comments`.
 
 ### State Management with Redux
-- Events
-- ![Events-Reducer](./frontend/src/readme-imgs/events-reducer.png)
-- Users
-- Comments
+- Redux implemented for state management enhancing UI load times and reducing unnecessary API calls.
+- Redux slices of state for `Users`, `Events`, `Comments`.
+- `Events` reducer:
+```javascript
+const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+  switch (action.type) {
+    case RECEIVE_EVENTS:
+      const allEventsArray = action.events;
+
+      const allEventsObject = allEventsArray.reduce((accumulator, event) => {
+        accumulator[event._id] = event;
+        return accumulator;
+      }, {});
+
+      return { ...state, all: allEventsObject, new: undefined };
+    case RECEIVE_NEW_EVENT:
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
+    case UPDATE_EVENT:
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
+    case DELETE_EVENT:
+      const { [action.eventId]: deletedEvent, ...rest } = state.all;
+      return { ...state, all: rest, new: undefined };
+    case RECEIVE_EVENT:
+      return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
+    case RECEIVE_USER_LOGOUT:
+      return { ...state, user: {}, new: undefined }
+    default:
+      return state;
+  }
+};
+```
+
 <br><br>
 
 ## Challenges

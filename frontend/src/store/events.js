@@ -10,14 +10,14 @@ const UPDATE_EVENT = "events/UPDATE_EVENT";
 const DELETE_EVENT = "events/DELETE_EVENT";
 
 
-const receiveEvents = events =>({
-    type: RECEIVE_EVENTS,
-    events
+const receiveEvents = events => ({
+  type: RECEIVE_EVENTS,
+  events
 })
 
-const receiveEvent = event =>({
-    type: RECEIVE_EVENT,
-    event
+const receiveEvent = event => ({
+  type: RECEIVE_EVENT,
+  event
 })
 
 const updateEvent = event => ({
@@ -41,24 +41,24 @@ const receiveErrors = errors => ({
 });
 
 export const clearEventErrors = errors => ({
-    type: CLEAR_EVENT_ERRORS,
-    errors
+  type: CLEAR_EVENT_ERRORS,
+  errors
 });
 
 
-export const fetchEvents = () => async dispatch =>{
-    try {
-        const res = await jwtFetch('/api/events');
-        const events = await res.json();
-        dispatch(receiveEvents(events));
-        // console.log(events);
-    } catch (err) {
-      // console.log("hi");
-        const resBody = await err.json();
-        if (resBody.statusCode === 400) {
-        dispatch(receiveErrors(resBody.errors));
-        }
+export const fetchEvents = () => async dispatch => {
+  try {
+    const res = await jwtFetch('/api/events');
+    const events = await res.json();
+    dispatch(receiveEvents(events));
+    // console.log(events);
+  } catch (err) {
+    // console.log("hi");
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
     }
+  }
 }
 
 
@@ -71,7 +71,7 @@ export const composeEvent = data => async dispatch => {
     const event = await res.json();
     dispatch(receiveNewEvent(event));
     return event;
-  } catch(err) {
+  } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       return dispatch(receiveErrors(resBody.errors));
@@ -87,7 +87,7 @@ export const updateEventThunk = (eventId, data) => async dispatch => {
     });
     const event = await res.json();
     dispatch(updateEvent(event));
-  } catch(err) {
+  } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       return dispatch(receiveErrors(resBody.errors));
@@ -101,7 +101,7 @@ export const deleteEventThunk = eventId => async dispatch => {
       method: 'DELETE'
     });
     dispatch(deleteEvent(eventId));
-  } catch(err) {
+  } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       return dispatch(receiveErrors(resBody.errors));
@@ -114,7 +114,7 @@ export const getEventThunk = eventId => async dispatch => {
     const res = await jwtFetch(`/api/events/${eventId}`);
     const event = await res.json();
     dispatch(receiveEvent(event));
-  } catch(err) {
+  } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
       return dispatch(receiveErrors(resBody.errors));
@@ -126,11 +126,11 @@ export const getEventThunk = eventId => async dispatch => {
 const nullErrors = null;
 
 export const eventErrorsReducer = (state = nullErrors, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case RECEIVE_EVENT_ERRORS:
       return action.errors;
     case RECEIVE_NEW_EVENT:
-      return {...state, [action.event._id]: action.event}
+      return { ...state, [action.event._id]: action.event }
     case CLEAR_EVENT_ERRORS:
       return nullErrors;
     default:
@@ -139,18 +139,16 @@ export const eventErrorsReducer = (state = nullErrors, action) => {
 };
 
 const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case RECEIVE_EVENTS:
       const allEventsArray = action.events;
-  
-      // Transform the array into an object with _id as the key
+
       const allEventsObject = allEventsArray.reduce((accumulator, event) => {
         accumulator[event._id] = event;
         return accumulator;
       }, {});
 
       return { ...state, all: allEventsObject, new: undefined };
-      // return { ...state, all: action.events, new: undefined};
     case RECEIVE_NEW_EVENT:
       return { ...state, all: { ...state.all, [action.event._id]: action.event }, new: undefined };
     case UPDATE_EVENT:
