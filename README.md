@@ -11,7 +11,7 @@ The *Pacer* platform helps you connect with people playing your favorite sport a
 [Live Demo](https://pacer-65mk.onrender.com/)
 👈
 <br>
-
+<br>
 ## Features
 1. User Auth
 2. Events (CRUD) w/ Interactive Google Map
@@ -111,13 +111,13 @@ const validateEventInput = [
 ```
 <br>
 
-Dynamic Interactive Google Map:
-- Integrated three Google Maps API endpoints:
+Integrated three Google Maps API endpoints:
 1. Dynamic interactive map on `Events` page.
 2. Static map preview on `Discover` page.
 3. Places API autocomplete search results when selecting an `Event` location.
 
 ![Places-Autocomplete](./frontend/src/icons/places-autocomplete.gif)
+<br>
 
 ```javascript
 <GoogleMap
@@ -151,7 +151,7 @@ Dynamic Interactive Google Map:
   )}
 </GoogleMap>
 ```
-
+<br>
 
 ### Routing with Express.js
 - Three RESTful Express routes for `Users`, `Events`, `Comments`
@@ -179,6 +179,7 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   }
 }); 
 ```
+<br>
 
 ### Main React.js Components
 - `Discover` Page:
@@ -228,14 +229,22 @@ const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) =>
 <br><br>
 
 ## Challenges
-1. New tech stack & three days to learn it
-  - Mainly learning how to use Express.js for backend routes and Mongoose/MongoDB for models and storage within a weekend
+1. Three days to learn the MERN stack
+    - Team was well-versed with React and Node.js however Mongoose, MongoDB, and Express were new technologies for the team.
+    - The minimalism of Mongoose, and Express created a forgiving and flexible application architecture.
+    - Primary learning challenges were Express for backend routes due to it's flexible nature vs. the team's more familiar Rails *convention over configuration* paradigm.
+
 2. Google Maps and parsing location data
-  - Integrating three sub-API queries (dynamic map, static map and places api autocomplete) and integrating into react components
+    - Implementing three different Google Maps API end points proved to be challenging.
+    - (1) Dynamic Interactive Map, (2) Static map image, and (3) Places API search autocomplete suggestions
+    - Each React component required different location data parsing logic to ensure UI loading efficiency across the user experience.
+
 3. Handling bugs
-  - Finding bugs sometimes was difficult but overall, gave us a chance to understand the entire stack more by tracing the bug from the through the whole stack, especially since one request could have multiple bugs along the way, with developers working on different parts of the application at the same time. To trace all the bugs, we would check our backend logs and our frontend console logs for errors, and then check the middle which could've been problems with our reducers or our thunk actions for instance. Doing this multiple times gave us a better idea of how to find our bugs in a fullstack application fairly quickly.
-4. Going from a SQL database (structured tables) to a NoSQL database (document-based)
-5. Learning to work together as a team and splitting workload
+    - Debugging helped us understand the stack better via tracing bugs throughout the application.
+    - Developed a three-tier approach to assess bugs efficiently across a full-stack application:
+        (1) Backend logs
+        (2) Frontend console logs
+        (3) Middleware logic assessment
 
 <br><br>
 
