@@ -111,7 +111,7 @@ const validateEventInput = [
 ```
 <br>
 
-Integrated three Google Maps API endpoints:
+### Integrated three Google Maps API endpoints:
 1. Dynamic interactive map on `Events` page.
 2. Static map preview on `Discover` page.
 3. Places API autocomplete search results when selecting an `Event` location.
@@ -192,6 +192,7 @@ router.post('/', requireUser, validateCommentInput, async (req, res, next) => {
   - Displays `Event` details from Redux state.
   - Attending & Interested buttons with integration to update Redux and MongoDB.
   - `Comments POST` feature to create new `Comments`.
+<br>
 
 ### State Management with Redux
 - Redux implemented for state management enhancing UI load times and reducing unnecessary API calls.
