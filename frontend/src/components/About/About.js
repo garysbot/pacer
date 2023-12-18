@@ -80,13 +80,13 @@ export default function About(){
                             <a href='https://github.com/FrancisCawog' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <GithubIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://www.linkedin.com/in/francis-cawog-958178187/' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <LinkedinIcon className="about-team-url-icon"/>
                             </a>
                             <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <ResumeIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='mailto:franciscawog@gmail.com' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <EmailIcon className="about-team-url-icon"/>
                             </a>
                         </div>

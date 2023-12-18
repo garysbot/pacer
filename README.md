@@ -266,9 +266,9 @@ const eventsReducer = (state = { all: {}, user: {}, new: undefined }, action) =>
 
 ### Francis Cawog
 *Backend Lead*<br>
-[Github](https://github.com/garysbot)<br>
+[Github](https://github.com/FrancisCawog)<br>
 [Website](https://imgaryjiang.com)<br>
-[LinkedIn](https://linkedin.com/in/garyjiang)<br>
+[LinkedIn](https://www.linkedin.com/in/francis-cawog-958178187/)<br>
 
 ### Robert Lee
 *Flex*<br>
