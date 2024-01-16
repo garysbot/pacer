@@ -83,7 +83,7 @@ export default function About(){
                             <a href='https://www.linkedin.com/in/francis-cawog-958178187/' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <LinkedinIcon className="about-team-url-icon"/>
                             </a>
-                            <a href='https://google.com' target="_blank" rel="noopener noreferrer" className="external-link">
+                            <a href='https://franciscawog.com/' target="_blank" rel="noopener noreferrer" className="external-link">
                                 <ResumeIcon className="about-team-url-icon"/>
                             </a>
                             <a href='mailto:franciscawog@gmail.com' target="_blank" rel="noopener noreferrer" className="external-link">
