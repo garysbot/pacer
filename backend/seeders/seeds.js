@@ -187,7 +187,7 @@ events.push(
 const fetch = require('node-fetch').default;
 
 const generateLocation = async () => {
-  const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query="parks+in+New+York+City"&key=AIzaSyCn0VYo0NRNshmbDVYCju91h1LJ4nKBAhU`;
+  const endpoint = `https://maps.googleapis.com/maps/api/place/textsearch/json?query="parks+in+New+York+City"&key=${process.env.REACT_APP_MAPS_API_KEY}`;
   try {
     const response = await fetch(endpoint);
     if (response.ok) {
